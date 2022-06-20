@@ -18,4 +18,23 @@ public class MainController {
 		return "home";
 	}
 	
+	
+	@RequestMapping(value= "/notice.go")
+	public String notice() {
+		return "notice/notice";
+	}
+	
+	@RequestMapping(value= "/noticeWrite.go")
+	public String noticeWrite() {
+		return "notice/noticeWrite";
+	}
+	
+	@RequestMapping(value= "/noticeDetail.go")
+	public String noticeDetail() {
+		return "notice/noticeDetail";
+	}
+	
+	
+	
+	
 }
