@@ -3,7 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -22,6 +24,35 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.gdj.lib" />
+	
+	
+	
+	<!-- (DB)접속 정보 -->
+	<!-- 접속할 DB 계정 id, pw 입력 -->
+	<beans:bean name="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <beans:property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
+	    <beans:property name="url" value="jdbc:mariadb://61.75.28.215:1522/gdj48_semi_lib"/>
+	    <beans:property name="username" value="GDJ48_SEMI_LIB"/>
+	    <beans:property name="password" value="pass"/>
+	</beans:bean>
+	
+	
+	
+	<!-- mybatis 사용 설정 -->
+	<!-- name = 필수요소(이름이 정해져 있음), id = 선택요소(이름이 정해져 있지 않음) -->
+	<!-- 어떤 DB 를 쓸건지에 관한 정보를 제공 -->
+	<!-- 쿼리문이(xml) 어디에 있는지 지정해줘야 한다. -->
+	<!-- 아래 dao path 경로 확인 -->
+	<beans:bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <beans:property name="dataSource" ref="datasource"/>
+	    <beans:property name="mapperLocations" value="classpath:com/gdj/lib/dao/*.xml"/>
+	</beans:bean>
+ 
+ 
+	<!-- 간편 사용 설정 (mybatis 를 사용하는 패키지 범위를 잡아준다.) -->
+	<!-- DB 관련하여 dao 에서 모두 처리할 것이기 때문에 아래와 같이 설정한다. -->
+	<!-- dao 패키지 경로 확인 -->
+	<mybatis-spring:scan base-package="com.gdj.lib.dao"/>
 	
 	
 	
