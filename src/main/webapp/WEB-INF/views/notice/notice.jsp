@@ -41,10 +41,19 @@
                     <td>열람실 이용</td>
                     <td>2022.06.20</td>
                 </tr>
+                <c:forEach items="${notice }" var="dto">
+				<tr>
+					<td><input type="checkbox" id="chk" value=""/></td>
+					<td>${dto.notice_id }</td>
+					<td><a href="detail.do?idx=${dto.notice_id }">${dto.notice_title }</a></td>
+					<td>${dto.notice_date }</td>
+					<!--   <td><a href="del.do?idx=${dto.idx  }">삭제</a></td> -->
+				</tr>
+				</c:forEach>
             </tbody>
         </table>
 
-        <!-- 아래 페이징 처리 -->
+        <!-- 아래 페이징 처리 해야됨-->
 
         <input type="text" id="search" value=""/>
         <button onclick="" id="search_button"><img src="./resources/돋보기.PNG"></button>
