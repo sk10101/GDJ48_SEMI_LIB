@@ -30,18 +30,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><input type="checkbox" id="chk" value=""/></td>
-                    <td>1</td>
-                    <td>열람실 이용</td>
-                    <td>2022.06.20</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" id="chk" value=""/></td>
-                    <td>2</td>
-                    <td>열람실 이용2</td>
-                    <td>2022.06.20</td>
-                </tr>
                 <c:forEach items="${list }" var="dto">
 				<tr>
 					<td><input type="checkbox" id="chk" value=""/></td>

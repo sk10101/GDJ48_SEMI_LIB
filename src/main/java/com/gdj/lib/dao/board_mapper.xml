@@ -5,7 +5,7 @@
 
 	<select id="list" resultType="com.gdj.lib.dto.BoardDTO" >
 		SELECT notice_id, notice_title, notice_date FROM notice
-		ORDER BY notice_id DESC
+		ORDER BY notice_id ASC
 	</select>
 	
 </mapper>
