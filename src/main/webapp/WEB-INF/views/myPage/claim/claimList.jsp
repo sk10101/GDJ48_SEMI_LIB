@@ -103,11 +103,11 @@
 	                </tr>
             	</thead>
             	<tbody>
-            		<c:forEach items="${list}" var="dto">
+            		<c:forEach items="${claimList}" var="dto">
             			<tr>
             				<td>${dto.claim_id}</td>
             				<td>${dto.claim_title}</td>
-            				<td>${dto.claim_status}</td>
+            				<td>${dto.status}</td>
             				<td>${dto.claim_date}</td>
             				<td><a href="#">삭제</a></td>
             			</tr>

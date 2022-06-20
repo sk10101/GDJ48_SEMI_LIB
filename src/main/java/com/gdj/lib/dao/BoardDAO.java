@@ -6,6 +6,8 @@ import com.gdj.lib.dto.BoardDTO;
 
 public interface BoardDAO {
 
-	ArrayList<BoardDTO> list();
+	ArrayList<BoardDTO> claimList();
+
+	int claimWrite(BoardDTO dto);
 
 }

@@ -6,7 +6,7 @@ public class BoardDTO {
 	
 	// 답변 DTO
 	private int reply_id;
-	private int mb_id;
+	private String mb_id;
 	private Date reply_date;
 	private String reply_content;
 	
@@ -16,10 +16,10 @@ public class BoardDTO {
 	public void setReply_id(int reply_id) {
 		this.reply_id = reply_id;
 	}
-	public int getMb_id() {
+	public String getMb_id() {
 		return mb_id;
 	}
-	public void setMb_id(int mb_id) {
+	public void setMb_id(String mb_id) {
 		this.mb_id = mb_id;
 	}
 	public Date getReply_date() {
@@ -42,7 +42,7 @@ public class BoardDTO {
 	private String claim_title;
 	private Date claim_date;
 	private String claim_content;
-	private String claim_status;
+	private String status;
 	
 	public int getClaim_id() {
 		return claim_id;
@@ -68,11 +68,11 @@ public class BoardDTO {
 	public void setClaim_content(String claim_content) {
 		this.claim_content = claim_content;
 	}
-	public String getClaim_status() {
-		return claim_status;
+	public String getStatus() {
+		return status;
 	}
-	public void setClaim_status(String claim_status) {
-		this.claim_status = claim_status;
+	public void setStatus(String claim_status) {
+		this.status = claim_status;
 	}
 	
 	

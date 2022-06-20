@@ -2,14 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdj.lib.dao.BoardDAO">
-	<select id="list" resultType="com.gdj.lib.dto.BoardDTO">
+	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
 			ORDER BY claim_id DESC
 	</select>
-
-	<!--
-	<select id="list" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT mb_id FROM member
-	</select>
-	-->
+	
+	<insert id="claimWrite" 
+		useGeneratedKeys="true"
+		keyColumn="claim_id"
+		keyProperty="claim_id"
+		parameterType="com.gdj.lib.dto.BoardDTO">
+		INSERT INTO claim(claim_title, mb_id, claim_content,status)
+			VALUES(#{claim_title},#{mb_id},#{claim_content},#{status})
+	</insert>
 </mapper>

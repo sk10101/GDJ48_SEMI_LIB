@@ -21,16 +21,16 @@ public class BoardController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired BoardService service;
+	@Autowired BoardService claimService;
 	
 	@RequestMapping(value = "/claimList", method = RequestMethod.GET)
 	public String home(Model model) {
 		
 		// claimList 에 리스트 보내기
 		logger.info("건의사항 리스트 요청");
-		ArrayList<BoardDTO> list = service.list();
-		logger.info("건의사항 게시글의 개수 : " + list.size());
-		model.addAttribute("list",list);
+		ArrayList<BoardDTO> claimList = claimService.claimList();
+		logger.info("건의사항 게시글의 개수 : " + claimList.size());
+		model.addAttribute("claimList",claimList);
 		
 		return "myPage/claim/claimList";
 	}
@@ -39,17 +39,18 @@ public class BoardController {
 	@RequestMapping(value = "/claimWrite.go")
 	public String writeForm(Model model) {
 		logger.info("건의사항 글쓰기 페이지 이동");
+		
 		return "myPage/claim/claimWrite";
 	}
 	
 	
 	// 글쓰기 + 파일 업로드 (MultipartFiel 변수명 input name 과 동일하게 설정)
-	@RequestMapping(value = "/claimWrite.do")
-	public String write(Model model, MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
-		logger.info("글쓰기 요청 : " + params);
-		
-		return service.write(photos, params);
-	}
-	
+		@RequestMapping(value = "/claimWrite.do")
+		public String write(Model model, MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+			logger.info("글쓰기 요청 : " + params);
+			
+			return claimService.claimWrite(photos, params);
+		}
+
 }
 
