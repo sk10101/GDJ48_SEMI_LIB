@@ -41,7 +41,7 @@
                     <td id="image_id">키오스크 파일.png</td>
                 </tr>
         </table>
-        <button onclick="">돌아가기</button>
+        <button onclick="location.href='notice.go'">돌아가기</button>
     </body>
     <script>
         

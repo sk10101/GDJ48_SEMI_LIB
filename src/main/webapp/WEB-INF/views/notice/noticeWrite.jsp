@@ -38,8 +38,9 @@
                     </td>
                 </tr>
         </table>
-        <button onclick="">취소</button>
-       <button onclick="">저장</button>
+        <button onclick="location.href='notice.go'">취소</button>
+        <!-- 저장 설정 변경 해야됨 -->
+       <button onclick="location.href='notice.go'">저장</button>
     </body>
     <script>
         

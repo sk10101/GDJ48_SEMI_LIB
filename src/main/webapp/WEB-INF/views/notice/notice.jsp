@@ -18,7 +18,7 @@
     <body>
        <h3>공지사항</h3>
        <button onclick="">삭제</button>
-       <button onclick="">글쓰기</button>
+       <button onclick="location.href='noticeWrite.go'">글쓰기</button>
        <table>
             <thead>
                 <tr>
