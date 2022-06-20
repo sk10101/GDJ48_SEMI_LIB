@@ -14,6 +14,8 @@ import com.gdj.lib.service.BoardService;
 public class BoardController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-		
+	
+	@Autowired BoardService service;
+	
 	
 }
