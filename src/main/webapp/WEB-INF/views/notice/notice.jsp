@@ -10,7 +10,7 @@
     table {width: 80%}
     table, th, td {border: 1px solid black; border-collapse: collapse;}
     th, td{padding: 5px 10px; text-align: center;}
-    button{margin-bottom: 5px; float: right;}
+    button{margin-bottom: 5px; margin-top: 5px; float: right;}
     #search {width: 20%;}
     #search_button {float: none;}
 </style>
@@ -47,7 +47,7 @@
         <!-- 아래 페이징 처리 -->
 
         <input type="text" id="search" value=""/>
-        <button onclick="" id="search_button"><img src="돋보기.PNG"></button>
+        <button onclick="" id="search_button"><img src="./resources/돋보기.PNG"></button>
     </body>
     <script>
         $('#all').click(function() {
