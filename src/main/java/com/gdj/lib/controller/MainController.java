@@ -18,28 +18,5 @@ public class MainController {
 		return "home";
 	}
 	
-	//공지사항 페이지 이동
-	@RequestMapping(value= "/notice.go")
-	public String notice() {
-		logger.info("공지사항 페이지 이동");
-		return "notice/notice";
-	}
-	
-	//공지사항 작성 페이지 이동
-	@RequestMapping(value= "/noticeWrite.go")
-	public String noticeWrite() {
-		logger.info("공지사항 작성 페이지 이동");
-		return "notice/noticeWrite";
-	}
-	
-	//공지사항 상세보기 페이지 이동
-	@RequestMapping(value= "/noticeDetail.go")
-	public String noticeDetail() {
-		logger.info("공지사항 상세보기 페이지 이동");
-		return "notice/noticeDetail";
-	}
-	
-	
-	
 	
 }
