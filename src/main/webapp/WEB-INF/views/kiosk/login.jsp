@@ -10,7 +10,7 @@
 <style></style>
 </head>
 <body>
-	<form action="main.html">
+	<form action="ki_login.do" method="post">
         <div class="int-area">
             <input type="text" placeholder="ID" name="id" id="id" autocomplete="off" required>
         </div>
