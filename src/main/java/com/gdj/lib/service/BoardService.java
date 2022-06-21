@@ -1,6 +1,7 @@
 package com.gdj.lib.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,29 @@ public class BoardService {
 	@Autowired BoardDAO dao;
 
 	public ArrayList<BoardDTO> noticelist() {
-		logger.info("리스트 서비스 요청");
+		logger.info("공지사항 리스트 서비스 요청");
 		return dao.noticelist();
+	}
+
+	public boolean noticewrite(HashMap<String, String> params) {
+		logger.info("공지사항 글쓰기 서비스");
+		boolean success = false;
+		
+		if(dao.noticewrite(params)>0) {
+			success = true;
+		}
+		
+		return success;
+	}
+
+	public int noticedelete(ArrayList<String> noticedeleteList) {
+		
+		int cnt = 0;
+		
+		for (String notice_id : noticedeleteList) {
+			cnt += dao.noticedelete(notice_id);
+		}
+		
+		return cnt;
 	}
 }

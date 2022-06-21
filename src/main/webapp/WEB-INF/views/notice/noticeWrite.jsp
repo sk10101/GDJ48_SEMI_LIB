@@ -17,6 +17,7 @@
 </style>
 </head>
 <body>
+	<!--   <form action="noticeWrite.do" method="post">-->
        <table class="notice">
                 <tr>
                     <th>제목</th>
@@ -25,12 +26,12 @@
                 <tr>
                     <th>내용</th>
                     <td>
-                        <textarea name="notice_content">키오스크 기기의 위치가변경</textarea>
+                        <textarea name="notice_content"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <td id="image_id">
+                    <td id="photo_id">
                         <!-- 파일 선택 버튼이 오른쪽으로 갈려면 ? -->
                         <form action="upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="uploadFile" />
@@ -38,9 +39,10 @@
                     </td>
                 </tr>
         </table>
-        <button onclick="location.href='notice.go'">취소</button>
+     <!--   </form> -->
+        <button onclick="location.href='noticelist.do'">취소</button>
         <!-- 저장 설정 변경 해야됨 -->
-       <button onclick="location.href='notice.go'">저장</button>
+       <button onclick="location.href='noticelist.do'">저장</button>
     </body>
     <script>
         

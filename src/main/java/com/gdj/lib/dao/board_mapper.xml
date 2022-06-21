@@ -8,4 +8,13 @@
 		ORDER BY notice_id ASC
 	</select>
 	
+	<delete id="noticedelete" parameterType="String">
+		DELETE FROM notice WHERE notice_id = #{notice_id}
+	</delete>
+	
+	<insert id="noticewrite" parameterType="hashmap">
+		INSERT INTO notice(notice_id,mb_id,notice_date,notice_title,notice_content)
+	VALUES(#{notice_id},#{mb_id},Date_FORMAT(now(),'%y-%m-%d'),#{notice_title},#{notice_content});
+	</insert>
+	
 </mapper>

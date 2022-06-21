@@ -17,7 +17,7 @@
 </head>
     <body>
        <h3>공지사항</h3>
-       <button onclick="">삭제</button>
+       <input type="button" value="삭제" onclick="noticedelete()" />
        <button onclick="location.href='noticeWrite.go'">글쓰기</button>
        <form action="noticelist.do" method="POST">
        <table>
@@ -32,7 +32,7 @@
             <tbody>
                 <c:forEach items="${noticelist }" var="dto">
 				<tr>
-					<td><input type="checkbox" id="chk" value=""/></td>
+					<td><input type="checkbox" id="chk" value="${dto.notice_id }"/></td>
 					<td>${dto.notice_id }</td>
 					<td>${dto.notice_title }</td>
 					<td>${dto.notice_date }</td>
@@ -61,11 +61,42 @@
         });
 
         $('input[type="checkbox"]').click(function() {
-            console.log($(this));
+           // console.log($(this).val());
         });
 
         $('#search_button').click(function() {
             console.log($('#search').val());
         });
+        	
+    	function noticedelete() {
+    		
+    		var noticeArray = [];
+    		
+    		$('input[type="checkbox"]:checked').each(function() {
+    			noticeArray.push($(this).val());
+    			
+    			console.log(noticeArray);
+    			
+    			$.ajax({
+    				type: 'POST',
+    				url: '/noticedelete.ajax',
+    				data : {noticedeleteList:noticeArray},
+    				dataType: 'JSON',
+    				success: function(data){
+    					console.log(data);
+    					location.href='/noticelist.do';
+    				},
+    				error: function(e) {
+    					console.log(e);
+    				}
+    				
+    			});
+    			
+    		});
+    			
+    	}	
+        	
+        
+        
     </script>
 </html>
