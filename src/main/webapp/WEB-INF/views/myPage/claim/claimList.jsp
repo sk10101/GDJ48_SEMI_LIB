@@ -105,11 +105,12 @@
             	<tbody>
             		<c:forEach items="${claimList}" var="dto">
             			<tr>
-            				<td>${dto.claim_id}</td>
+            				<td id="claimID">${dto.claim_id}</td>
             				<td><a href="claimDetail?claim_id=${dto.claim_id}">${dto.claim_title}</a></td>
-            				<td>${dto.status}</td>
+            				<td id="claimStatus">${dto.status}</td>
             				<td>${dto.claim_date}</td>
-            				<td><a href="#">삭제</a></td>
+            				<!-- <a href="claimDel.do?claim_id=${dto.claim_id}">삭제</a> -->
+            				<td><button id="delBtn">삭제</button></td>
             			</tr>
             		</c:forEach>
            		</tbody>
@@ -117,5 +118,13 @@
             <input type="search" placeholder="검색"/>
         </div>
 </body>
-<script></script>
+<script>
+	$("#delBtn").on("click",function(e){
+		location.href='/claimDel.do?claim_id=' + $("#claimID").text();
+	});
+	
+	if($("#claimStatus").text() != "미처리") {
+		$("#delBtn").hide();
+	}
+</script>
 </html>

@@ -25,7 +25,7 @@ public class BoardController {
 	
 	// 건의사항 목록 띄우기
 	@RequestMapping(value = "/claimList", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String claimList(Model model) {
 		
 		// claimList 에 리스트 보내기
 		logger.info("건의사항 리스트 요청");
@@ -38,7 +38,7 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "/claimWrite.go")
-	public String writeForm() {
+	public String claimWriteForm() {
 		logger.info("건의사항 글쓰기 페이지 이동");
 		
 		return "myPage/claim/claimWrite";
@@ -47,7 +47,7 @@ public class BoardController {
 	
 	// 건의사항 글쓰기 + 이미지 파일 업로드
 	@RequestMapping(value = "/claimWrite.do")
-	public String write(MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+	public String claimWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
 		logger.info("글쓰기 요청 : " + params);
 		
 		return service.claimWrite(photos, params);
@@ -56,13 +56,44 @@ public class BoardController {
 	
 	// 건의사항 글 상세 보기
 	@RequestMapping(value = "/claimDetail")
-	public String detail(Model model, @RequestParam int claim_id) {
+	public String claimDetail(Model model, @RequestParam int claim_id) {
 		logger.info("상세보기 요청 : " + claim_id);
 		
 		service.claimDetail(model, claim_id);
 		
 		return "myPage/claim/claimDetail";
 	}
+	
+	
+	// 수정 상세 보기
+		@RequestMapping(value = "/claimUpdate.go")
+		public String claimUpdateForm(Model model, @RequestParam int claim_id) {
+			logger.info("수정 상세보기 요청 : " + claim_id);
+			// update 할땐, upHit 을 사용하지 않는 것으로 설정하기위해 아래와 같이 인자값을 추가(detail 에도 추가)
+			service.claimDetail(model, claim_id);
+			
+			return "myPage/claim/claimUpdate";
+		}
+	
+	
+	// 건의사항 수정 상세보기 + 파일 업로드
+	@RequestMapping(value = "/claimUpdate.do")
+	public String claimUpdate(Model model, MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+		logger.info("수정 요청 : " + params);
+		
+		return service.claimUpdate(photos, params);
+	}
+	
+	
+	// 건의사항 삭제 (미처리 일때만)
+		@RequestMapping(value = "/claimDel.do")
+		public String claimDel(Model model, @RequestParam int claim_id) {
+			logger.info("삭제 요청 : " + claim_id);
+			
+			service.claimDel(claim_id);
+			
+			return "redirect:/claimList";
+		}
 
 }
 

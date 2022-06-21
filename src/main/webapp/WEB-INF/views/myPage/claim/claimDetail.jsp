@@ -122,14 +122,16 @@
             <c:if test="${claimList.size()>0}">
             <tr>
                 <th>이미지</th>
-                <c:forEach items="${claimList}" var="path">
-						<p><img src="/photo/${path.newFileName}" width="640"/></p>
+                <td>
+	                <c:forEach items="${claimList}" var="path">
+							<img src="/photo/${path.newFileName}" width="640"/>
 					</c:forEach>
+				</td>
             </tr>
             </c:if>
             <tr>
 				<th colspan="2">
-					<input type="button" value="수정" onclick="location.href='updateForm.go?idx=${bbs.idx}'"/>
+					<input type="button" value="수정" onclick="location.href='claimUpdate.go?claim_id=${claim.claim_id}'"/>
 					<input type="button" value="목록" onclick="location.href='/claimList'"/>
 				</th>
 			</tr>
