@@ -30,6 +30,7 @@
 	<select id="login" resultType="String">
 	SELECT mb_id FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
-		</select>
+	</select>
+	
 	
 	</mapper>

@@ -97,9 +97,11 @@ public class MemberController {
 		@ResponseBody
 		public String pwFind(@RequestParam String id,@RequestParam String email) {
 			
-			logger.info("비밀번호 찾기 : "+id+email);
+			logger.info("비밀번호 찾기 : "+id+"/"+email);
 			return service.pwFind(id,email);
 		}
+		
+		
 		
 		// 로그인 
 		@RequestMapping(value = "member/login.do")
@@ -113,7 +115,7 @@ public class MemberController {
 			
 			if(loginId != null) {
 				session.setAttribute("loginId", loginId);
-				page="test"; // 성공하면 404 떨어질거임
+				page="test"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
 			}else {
 				model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
 			}

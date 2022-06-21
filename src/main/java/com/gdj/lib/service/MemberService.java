@@ -66,6 +66,8 @@ public class MemberService {
 		logger.info("로그인  서비스");
 		return dao.login(id,pw);
 	}
+
+	
 	 
 
 	

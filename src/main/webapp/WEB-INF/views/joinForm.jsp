@@ -56,6 +56,10 @@ body {
  h3{
     text-align: center;
  }
+ 
+ p{
+ 	font-size: 10px;
+ }
 
 
 </style>
@@ -72,7 +76,11 @@ body {
 			</tr>
 			<tr>
 				<th>PW</th>
-				<td><input  class="text-field" type="text" id="pw" placeholder="pw"/></td>
+				<td><input  class="text-field" type="text" id="pw" placeholder="pw"/>
+					<p>※ 4자리 이상 </p>
+					<!-- <p>※영문자+숫자+특수문자 조합으로</p> 
+					<p>8~15자리 사용해야 합니다.</p> -->
+				</td>
 			</tr>
 			<tr>
 				<th>NAME</th>
@@ -80,7 +88,8 @@ body {
 			</tr>
 			<tr>
 				<th>PHONE</th>
-				<td><input class="text-field" type="text" id="phone" placeholder="phone"/></td>
+				<td><input class="text-field" type="text" id="phone" placeholder="phone"/>
+				<p>※(- 제외) 숫자만 입력 가능합니다. </p>
 			</tr>
 			<tr>
 				<th colspan="1">EMAIL</th>
@@ -139,10 +148,11 @@ body {
 			dataType:'JSON',
 			success:function(data){
 				//console.log(data);
-				if(!idChk.test($("#id"))){
+				if(idChk.test($("#id"))){
 				   	alert("아이디는 한글이 불가능합니다.");
-				   	
-				   } 
+				   	return false;
+				}
+				  
 				
 				else if(data.overlay){
 					alert("이미 사용중인 아이디 입니다.");
@@ -150,6 +160,7 @@ body {
 					alert("사용 가능한 아이디 입니다.");
 					overChkId = true;
 				}
+				 
 			},
 			error:function(e){
 				console.log(e);
@@ -199,7 +210,7 @@ body {
 	    	return false; 
 	    }  */
 	    
-	    var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,8}$/;
+	   /*  var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/; */
 	   
 	    var reg = /^[0-9]+/g;
 		
@@ -212,10 +223,12 @@ body {
 			}else if(pw.val() == ""){
 				alert("비밀번호를 입력해 주세요!");
 				pw.focus();
-			}else if(!pwdCheck.test($("#pw"))) {
-			    alert("비밀번호는 영문자+숫자+특수문자 조합으로 4~8자리 사용해야 합니다.");
+			}/* else if(!pwdCheck.test($("#pw"))) {
+			    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~15자리 사용해야 합니다.");
 			    pwd.focus();
 			    return false;
+			  } */ else if(pw.val().length < 4){
+				  alert("비밀번호는 4자 이상입니다.")
 			  }
 			
 			else if(name.val() == ""){
@@ -225,11 +238,11 @@ body {
 				alert("번호를 입력해 주세요!");
 				phone.focus();
 				
-			}else if(!reg.test($("#phone"))){
+			}/* else if(phone.val() == reg){
 				alert("전화번호는 숫자만 입력할 수 있습니다.");
 				phone.focus();
 			    return false;
-			}
+			} */
 			
 			else if(email.val() == ""){
 				alert("이메일을 입력해 주세요!");
@@ -253,7 +266,7 @@ body {
 						
 						if(data.success){
 							alert("회원가입에 성공 했습니다.");
-							location.href='/main';
+							location.href='/member/login';
 						}else{
 							alert("회원가입에 실패 했습니다.");
 						}

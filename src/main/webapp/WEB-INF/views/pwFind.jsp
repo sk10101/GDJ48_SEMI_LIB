@@ -17,13 +17,13 @@
 			<td>EMAIL</td>
 			<th><input type="email" id="email"/></th>
 			</tr>
-			<tr>
-			<!-- <td>새비밀번호</td>
-			<th><input type="text" pw="pw"/></th> -->
-			</tr>
+			<!-- <tr>
+			 <td>새비밀번호</td>
+			<th><input type="text" pw="pw"/></th> 
+			</tr> -->
 			<tr>
 			<th colspan="2">
-			<input type="button" value="비밀번호 찾기" onclick="pwFind()"/>
+			 <input type="button" value="비밀번호 찾기" onclick="pwFind()"/> 
 			<input type="button" value="돌아가기" onclick="location.href='/lib/member/login'"/>
 			</th>
 			</tr>
@@ -31,7 +31,7 @@
 	
 </body>
 <script>
-function pwFind(){
+ function pwFind(){
 	var id = $("#id").val()
 	var email =$("#email").val()	
 	
@@ -56,5 +56,13 @@ function pwFind(){
 		}			
 	});
 }
+
+ 
+
+
+
+
+
+
 </script>
 </html>
