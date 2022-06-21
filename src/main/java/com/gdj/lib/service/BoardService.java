@@ -81,7 +81,7 @@ public class BoardService {
 					
 					try {
 						byte[] arr = photo.getBytes();
-						Path path = Paths.get("./upload/" + newFileName);
+						Path path = Paths.get("C:/upload/" + newFileName);
 						// 같은이름의 파일이 나올 수 없기 떄문에 옵션 설정 안해도된다.
 						Files.write(path, arr);
 						logger.info(newFileName + " SAVE OK");
@@ -96,7 +96,7 @@ public class BoardService {
 			
 		}
 
-
+		
 		public void claimDetail(Model model, int claim_id) {
 			
 			// 건의사항 글 정보
@@ -131,7 +131,7 @@ public class BoardService {
 			// claim 테이블의 데이터 삭제(이때, photo 도 자동으로 지워진다.)
 			if(dao.claimDel(claim_id)>0) {// 성공하면 사진도 삭제
 				for (PhotoDTO photo : claimPhotoList) {
-					File image = new File("./upload/" + photo.getNewFileName());
+					File image = new File("C:/upload/" + photo.getNewFileName());
 					if(image.exists()) {
 						boolean success = image.delete();
 						logger.info(photo.getNewFileName() + " 의 삭제 여부 : " + success);
