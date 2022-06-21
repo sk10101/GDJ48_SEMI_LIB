@@ -15,4 +15,6 @@ public interface BoardDAO {
 
 	BoardDTO noticeDetail(String notice_id);
 
+	void noticeFileWrite(String oriFileName, String newFileName, int notice_id, int i);
+
 }

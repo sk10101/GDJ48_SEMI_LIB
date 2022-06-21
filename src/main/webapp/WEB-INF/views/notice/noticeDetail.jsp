@@ -35,8 +35,11 @@
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <!-- 이미지 카테고리에서  ?-->
-                    <td id="image_id">키오스크 파일.png</td>
+                    <td>
+                    	<c:forEach items="${noticeList}" var="path">
+                    			<img src="/photo/${path.newFileName}" width="500" />
+                    	</c:forEach>
+                    </td>
                 </tr>
         </table>
         <button onclick="location.href='notice.go'">돌아가기</button>

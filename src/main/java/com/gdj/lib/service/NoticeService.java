@@ -1,5 +1,9 @@
 package com.gdj.lib.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dao.BoardDAO;
 import com.gdj.lib.dto.BoardDTO;
+import com.gdj.lib.dto.PhotoDTO;
 
 @Service
 public class NoticeService {
@@ -30,7 +35,7 @@ public class NoticeService {
 		logger.info("공지사항 글쓰기 서비스 요청");
 		
 		BoardDTO dto = new BoardDTO();
-		dto.setMb_id("admin");
+		dto.setMb_id("admin"); //mb_id 를 일단 admin 으로 설정
 		dto.setNotice_title(params.get("notice_title"));
 		dto.setNotice_content(params.get("notice_content"));
 		
@@ -42,11 +47,44 @@ public class NoticeService {
 		logger.info("photos : "+ photos);
 		
 		if(row > 0) {
-			
+			noticeFileSave(photos, notice_id);
 		}
 		
 		return "redirect:/noticeList.do";
 		
+		
+	}
+	
+	
+	
+	
+
+	private void noticeFileSave(MultipartFile[] photos, int notice_id) {
+		for(MultipartFile photo : photos) {
+			String oriFileName = photo.getOriginalFilename();
+			
+			if(!oriFileName.equals("")) {
+				logger.info("업로드 진행");
+				
+				String ext = oriFileName.substring(oriFileName.lastIndexOf(".")).toLowerCase();
+				
+				String newFileName = System.currentTimeMillis() + ext;
+				
+				logger.info(oriFileName+ "===>" + newFileName);
+				
+				
+				try {
+					byte[] arr = photo.getBytes();
+					Path path = Paths.get("C:/upload/" + newFileName);
+					Files.write(path, arr);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				logger.info(newFileName + "저장 완료");
+				dao.noticeFileWrite(oriFileName,newFileName,notice_id,1);
+			}
+			
+		}
 		
 	}
 
