@@ -11,10 +11,10 @@
 <style></style>
 </head>
 <body>
-	<a href="main.html">
+	<a href="ki_main.go">
         <i class="fa-solid fa-angles-left back"></i>
     </a>
-    <a href="login.html">
+    <a href="ki_logout.do">
         <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
     </a>
     <div class="table">

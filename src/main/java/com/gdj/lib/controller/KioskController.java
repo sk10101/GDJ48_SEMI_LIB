@@ -71,4 +71,13 @@ public class KioskController {
 	}
 	
 	
+	
+	// 키오스크 메인 화면 돌아가기
+	@RequestMapping(value = "/ki_main.go")
+	public String kioskMain(Model model) {
+		logger.info("키오스크 메인 페이지");
+		return "kiosk/main";
+	}
+	
+	
 }
