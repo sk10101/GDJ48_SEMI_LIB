@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dto.BoardDTO;
-import com.gdj.lib.service.BoardService;
+import com.gdj.lib.service.NoticeService;
 
 @Controller
-public class BoardController {
+public class NoticeController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired BoardService service;
+	@Autowired NoticeService service;
 	
 		//공지사항 페이지 이동
 		@RequestMapping(value = "/notice.go")
@@ -73,7 +73,7 @@ public class BoardController {
 		public HashMap<String, Object> noticedelete(HttpSession session,
 		@RequestParam(value="noticedeleteList[]") ArrayList<String> noticeDeleteList) {
 			
-			String page = "redirect:/noticeList.do";
+			
 			HashMap<String, Object> noticeMap = new HashMap<String, Object>();
 			logger.info("noticedeleteList : "+noticeDeleteList);
 			

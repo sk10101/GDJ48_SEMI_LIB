@@ -13,7 +13,7 @@ import com.gdj.lib.dao.BoardDAO;
 import com.gdj.lib.dto.BoardDTO;
 
 @Service
-public class BoardService {
+public class NoticeService {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
