@@ -165,6 +165,9 @@ th, td{
     height: 70px;
     padding: 5px 20px;
 }
+#hiddenId{
+	display:none;
+}
 th{
     background-color: #86b049;
     color: #eee;
@@ -192,7 +195,7 @@ input.chkbox + label{
     font-size: 10px;
 }
 input.chkbox:checked + label {
-    background-image: url(check-solid.svg);
+    background-image: url(../img/check-solid.png);
     background-position: center;
     background-repeat: no-repeat;
     color: #333;

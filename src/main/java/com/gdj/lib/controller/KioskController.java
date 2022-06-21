@@ -1,5 +1,7 @@
 package com.gdj.lib.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gdj.lib.dto.KioskDTO;
 import com.gdj.lib.service.KioskService;
 
 @Controller
@@ -31,7 +34,7 @@ public class KioskController {
 	
 	// 키오스크 로그인
 	@RequestMapping(value = "/ki_login.do")	
-	public String kiosklogin(HttpSession session, @RequestParam String id, @RequestParam String pw) {
+	public String kioskLogin(HttpSession session, @RequestParam String id, @RequestParam String pw) {
 		logger.info("키오스크 로그인 요청: {},{}",id,pw);
 		String page="kiosk/loginFail";
 		String loginId = service.login(id,pw);
@@ -42,15 +45,30 @@ public class KioskController {
 		}
 		return page;
 	}
-	
+
 	
 	
 	// 키오스크 로그아웃
 	@RequestMapping(value="/ki_logout.do")
-	public String kiosklogout(HttpSession session) {
+	public String kioskLogout(HttpSession session) {
 		logger.info("로그아웃 요청");
 		session.removeAttribute("loginId");
 		return "kiosk/login";
 	}
+	
+	
+	
+	
+	// 키오스크 대출 신청 페이지
+	@RequestMapping(value="/ki_borrow.go")
+	public String kioskBorrowPage(HttpSession session, Model model) {
+		logger.info("키오스크 대출신청 아이디: "+session.getAttribute("loginId"));
+		String loginId = (String) session.getAttribute("loginId");
+		ArrayList<KioskDTO> list = service.list(loginId);
+		logger.info("list 갯수: "+list.size());
+		model.addAttribute("list", list);
+		return "kiosk/borrow";
+	}
+	
 	
 }

@@ -8,4 +8,10 @@
 			WHERE mb_id = #{param1} AND mb_pw = #{param2}
 	</select>
 	
+	<select id="list" resultType="com.gdj.lib.dto.KioskDTO">
+		SELECT r.b_id, b.b_title FROM book b, reservation r
+			WHERE r.mb_id = #{param} AND r.b_id = b.b_id AND b.b_status='대출가능'
+	</select>
+	
+	
 </mapper>
