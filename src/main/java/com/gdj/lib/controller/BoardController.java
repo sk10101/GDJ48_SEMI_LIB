@@ -26,7 +26,7 @@ public class BoardController {
 		@RequestMapping(value= "/notice.go")
 		public String notice() {
 			logger.info("공지사항 페이지 이동");
-			return "redirect:/list.do";
+			return "redirect:/noticelist.do";
 		}
 		
 		//공지사항 작성 페이지 이동
@@ -44,12 +44,12 @@ public class BoardController {
 		}
 		
 		//공지사항 리스트 요청
-		@RequestMapping(value="/list.do")
-		public String list(Model model, HttpSession session) {
+		@RequestMapping(value="/noticelist.do")
+		public String noticelist(Model model, HttpSession session) {
 			logger.info("리스트 요청");
-			ArrayList<BoardDTO> list = service.list();
-			logger.info("list 갯수 : "+list.size());
-			model.addAttribute("list", list);
+			ArrayList<BoardDTO> noticelist = service.noticelist();
+			logger.info("noticelist 갯수 : "+noticelist.size());
+			model.addAttribute("noticelist", noticelist);
 			return "notice/notice";
 		}
 		

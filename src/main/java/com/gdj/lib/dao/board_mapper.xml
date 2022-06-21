@@ -3,7 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdj.lib.dao.BoardDAO">
 
-	<select id="list" resultType="com.gdj.lib.dto.BoardDTO" >
+	<select id="noticelist" resultType="com.gdj.lib.dto.BoardDTO" >
 		SELECT notice_id, notice_title, notice_date FROM notice
 		ORDER BY notice_id ASC
 	</select>

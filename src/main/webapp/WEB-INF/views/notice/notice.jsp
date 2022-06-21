@@ -19,7 +19,7 @@
        <h3>공지사항</h3>
        <button onclick="">삭제</button>
        <button onclick="location.href='noticeWrite.go'">글쓰기</button>
-       <form action="list.do" method="POST">
+       <form action="noticelist.do" method="POST">
        <table>
             <thead>
                 <tr>
@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${list }" var="dto">
+                <c:forEach items="${noticelist }" var="dto">
 				<tr>
 					<td><input type="checkbox" id="chk" value=""/></td>
 					<td>${dto.notice_id }</td>
