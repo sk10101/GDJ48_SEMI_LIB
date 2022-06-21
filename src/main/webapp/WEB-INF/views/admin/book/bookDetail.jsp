@@ -82,7 +82,6 @@
                     		<input type="button" value="리스트" onclick="location.href='bookList.go' "/>
                     	</td>
                     </tr>
-            		<button type="submit">수정하기</button>
                 </table>
             </form>
             <button onclick="location.href='bookList.go' ">목록보기</button>
