@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.service.BoardService;
@@ -51,27 +52,19 @@ public class BoardController {
 		@RequestMapping(value = "/noticeList.do")
 		public String noticeList(Model model, HttpSession session) {
 			logger.info("리스트 요청");
-			ArrayList<BoardDTO> noticelist = service.noticeList();
-			logger.info("noticeList 갯수 : "+noticelist.size());
-			model.addAttribute("noticelist", noticelist);
+			ArrayList<BoardDTO> noticeList = service.noticeList();
+			logger.info("noticeList 갯수 : "+noticeList.size());
+			model.addAttribute("noticelist", noticeList);
 			return "notice/notice";
 		}
 		
-		//공지사항 글 작성 (미완성 에러남)
+		//공지사항 글 작성 + 이미지 파일 업로드
 		@RequestMapping(value = "/noticeWrite.do")
-		public String noticeWrite(HttpSession session, Model model,
+		public String noticeWrite(MultipartFile[] photos,
 		@RequestParam HashMap<String, String>	params) {
 		
-			String page = "noticeWirte";
-			
-			logger.info("글쓰기 요청");
-			logger.info("params : {}",params);
-			
-			if(service.noticeWrite(params) == true) {
-				page = "redirect:/noticeList.do";
-			}
-			
-			return page;
+			logger.info("공지사항 글쓰기 요청 : "+params);
+			return service.noticeWrite(photos,params);
 		}
 		
 		//공지사항 삭제 서비스

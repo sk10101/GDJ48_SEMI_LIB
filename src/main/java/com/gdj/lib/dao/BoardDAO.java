@@ -9,7 +9,7 @@ public interface BoardDAO {
 
 	ArrayList<BoardDTO> noticeList();
 
-	int noticeWrite(HashMap<String, String> params);
+	int noticeWrite(BoardDTO dto);
 
 	int noticeDelete(String notice_id);
 

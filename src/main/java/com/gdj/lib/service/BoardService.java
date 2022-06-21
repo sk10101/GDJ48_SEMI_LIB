@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dao.BoardDAO;
 import com.gdj.lib.dto.BoardDTO;
@@ -25,7 +26,7 @@ public class BoardService {
 		return dao.noticeList();
 	}
 
-	public boolean noticeWrite(HashMap<String, String> params) {
+	public String noticeWrite(MultipartFile[] photos, HashMap<String, String> params) {
 		logger.info("공지사항 글쓰기 서비스 요청");
 		
 		BoardDTO dto = new BoardDTO();
@@ -33,13 +34,18 @@ public class BoardService {
 		dto.setNotice_title(params.get("notice_title"));
 		dto.setNotice_content(params.get("notice_content"));
 		
-		boolean success = false;
+		int row = dao.noticeWrite(dto);
+		logger.info(row + "공지사항 글 작성 성공");
 		
-		if(dao.noticeWrite(params)>0) {
-			success = true;
+		int notice_id = dto.getNotice_id();
+		logger.info("방금 넣은 글 번호 : "+notice_id);
+		logger.info("photos : "+ photos);
+		
+		if(row > 0) {
+			
 		}
 		
-		return success;
+		return "redirect:/noticeList.do";
 		
 		
 	}
