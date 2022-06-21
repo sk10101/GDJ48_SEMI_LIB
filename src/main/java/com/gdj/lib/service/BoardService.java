@@ -17,6 +17,10 @@ public class BoardService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired BoardDAO dao;
+	
+	@Autowired BoardDTO dto;
+	
+	
 
 	public ArrayList<BoardDTO> noticelist() {
 		logger.info("공지사항 리스트 서비스 요청");
@@ -25,6 +29,8 @@ public class BoardService {
 
 	public boolean noticewrite(HashMap<String, String> params) {
 		logger.info("공지사항 글쓰기 서비스");
+		dto.setMb_id("admin");
+		
 		boolean success = false;
 		
 		if(dao.noticewrite(params)>0) {
