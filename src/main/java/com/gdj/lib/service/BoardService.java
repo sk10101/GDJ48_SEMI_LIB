@@ -18,8 +18,6 @@ public class BoardService {
 	
 	@Autowired BoardDAO dao;
 	
-	@Autowired BoardDTO dto;
-	
 	
 
 	public ArrayList<BoardDTO> noticelist() {
@@ -28,7 +26,9 @@ public class BoardService {
 	}
 
 	public boolean noticewrite(HashMap<String, String> params) {
-		logger.info("공지사항 글쓰기 서비스");
+		logger.info("공지사항 글쓰기 서비스 요청");
+		
+		BoardDTO dto = new BoardDTO();
 		dto.setMb_id("admin");
 		
 		boolean success = false;
@@ -38,6 +38,8 @@ public class BoardService {
 		}
 		
 		return success;
+		
+		
 	}
 
 	public int noticedelete(ArrayList<String> noticedeleteList) {

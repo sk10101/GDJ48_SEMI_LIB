@@ -17,7 +17,8 @@
 </style>
 </head>
 <body>
-	<!--   <form action="noticeWrite.do" method="post">-->
+	<form action="noticeWrite.do" method="post">
+       			<input type="hidden" name="mb_id" />
        <table class="notice">
                 <tr>
                     <th>제목</th>
@@ -39,10 +40,9 @@
                     </td>
                 </tr>
         </table>
-     <!--   </form> -->
-        <button onclick="location.href='noticelist.do'">취소</button>
-        <!-- 저장 설정 변경 해야됨 -->
-       <button onclick="location.href='noticelist.do'">저장</button>
+        <input type="submit" value="저장" />
+       <input type="button" value="취소" onclick="location.href='noticelist.do'">
+     </form>
     </body>
     <script>
         

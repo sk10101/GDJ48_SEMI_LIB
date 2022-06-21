@@ -57,23 +57,24 @@ public class BoardController {
 			return "notice/notice";
 		}
 		
-		//공지사항 글 작성 (일단 보류 'mb_id' cannot be null)
+		//공지사항 글 작성
 		@RequestMapping(value = "/noticeWrite.do")
 		public String noticewrite(HttpSession session, Model model,
 		@RequestParam HashMap<String, String>	params) {
 		
 			String page = "noticeWirte";
 			
+			logger.info("글쓰기 요청");
+			logger.info("params : {}",params);
+			
 			if(service.noticewrite(params) == true) {
 				page = "redirect:/noticelist.do";
-			} else {
-				model.addAttribute("msg", "글쓰기에 실패 했습니다.");
-			}		
+			}
 			
 			return page;
 		}
 		
-		//삭제 서비스
+		//공지사항 삭제 서비스
 		@RequestMapping(value = "/noticedelete.ajax")
 		@ResponseBody
 		public HashMap<String, Object> noticedelete(HttpSession session,
