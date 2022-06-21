@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -29,4 +30,37 @@
 	<insert id="brw">
 		INSERT INTO borrow (b_id,
 	</insert>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdj.lib.dao.BookDAO">
+	
+	<select id="list" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book ORDER BY b_id DESC
+	</select>
+	
+	<select id="detail" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT * FROM book WHERE b_id = #{param1}
+	</select>
+	
+	<update id="bookUpdate" parameterType="hashmap">
+		UPDATE book SET b_title = #{b_title}
+			,writer = #{writer} , publisher = #{publisher}
+			,issue = #{issue} , b_date = #{b_date}
+			,b_status = #{b_status}
+		WHERE b_id = #{b_id}
+	</update>
+	
+	<select id="bookSearch" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status FROM book 
+		WHERE b_title LIKE CONCAT('%', #{bookSearchWord}, '%')
+	</select>
+	
+	<insert id="bookAdd" parameterType="hashmap">
+		INSERT INTO book(b_title, writer, publisher, issue, b_status)
+			VALUES(#{b_title},#{writer},#{publisher},#{issue},"대출가능")
+	</insert>
+	
+>>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 </mapper>

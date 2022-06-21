@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class BookDTO {
 	
+<<<<<<< HEAD
 	// 회원 정보
 	private int mb_id;
 	private String mb_status;
@@ -24,19 +25,37 @@ public class BookDTO {
 	
 	//도서 정보
 	private int b_id;
+=======
+	private int b_id;
+	private Date b_date;
+>>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 	private String b_title;
 	private String writer;
 	private String publisher;
 	private int issue;
 	private String b_status;
+<<<<<<< HEAD
 	private Date b_date;
 
+=======
+	
+	
+>>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 	public int getB_id() {
 		return b_id;
 	}
 	public void setB_id(int b_id) {
 		this.b_id = b_id;
 	}
+<<<<<<< HEAD
+=======
+	public Date getB_date() {
+		return b_date;
+	}
+	public void setB_date(Date b_date) {
+		this.b_date = b_date;
+	}
+>>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 	public String getB_title() {
 		return b_title;
 	}
@@ -67,6 +86,7 @@ public class BookDTO {
 	public void setB_status(String b_status) {
 		this.b_status = b_status;
 	}
+<<<<<<< HEAD
 	public Date getB_date() {
 		return b_date;
 	}
@@ -148,6 +168,8 @@ public class BookDTO {
 	
 	
 	
+=======
+>>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 	
 	
 	
