@@ -13,4 +13,6 @@ public interface BoardDAO {
 
 	int noticedelete(String notice_id);
 
+	BoardDTO noticedetail(String notice_id);
+
 }

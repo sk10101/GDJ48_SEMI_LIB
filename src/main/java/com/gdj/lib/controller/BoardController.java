@@ -57,7 +57,7 @@ public class BoardController {
 			return "notice/notice";
 		}
 		
-		//공지사항 글 작성
+		//공지사항 글 작성 (미완성 에러남)
 		@RequestMapping(value = "/noticeWrite.do")
 		public String noticewrite(HttpSession session, Model model,
 		@RequestParam HashMap<String, String>	params) {
@@ -91,7 +91,19 @@ public class BoardController {
 			
 		}
 		
-		
+		//공지사항 상세보기 서비스
+		@RequestMapping(value= "/noticedetail.do")
+		public String noticedetail(Model model, HttpSession session, @RequestParam String notice_id) {
+			
+			String page = "redirect:/noticelist.do";
+			logger.info("공지사항 상세보기 서비스 요청 : "+notice_id);
+			
+			BoardDTO dto = service.noticedetail(notice_id);
+			model.addAttribute("dto",dto);
+			page = "notice/noticeDetail";
+			
+			return page;
+		}
 		
 		
 		

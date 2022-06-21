@@ -34,7 +34,7 @@
 				<tr>
 					<td><input type="checkbox" id="chk" value="${dto.notice_id }"/></td>
 					<td>${dto.notice_id }</td>
-					<td>${dto.notice_title }</td>
+					<td><a href="noticedetail.do?notice_id=${dto.notice_id }">${dto.notice_title }</a></td>
 					<td>${dto.notice_date }</td>
 				</tr>
 				</c:forEach>

@@ -52,4 +52,12 @@ public class BoardService {
 		
 		return cnt;
 	}
+
+	public BoardDTO noticedetail(String notice_id) {
+		BoardDTO dto = null;
+		logger.info(notice_id+"공지사항 상세보기 서비스 요청");
+		dto = dao.noticedetail(notice_id);
+		logger.info("notice content: "+dto.getNotice_content());
+		return dto;
+	}
 }

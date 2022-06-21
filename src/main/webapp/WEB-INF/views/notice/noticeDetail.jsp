@@ -19,21 +19,19 @@
        <table class="notice">
                 <tr>
                     <th>제목</th>
-                    <td id="notice_title">키오스크 위치 변경 안내</td>
+                    <td>${dto.notice_title}</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td id="mb_id">admin1</td>
+                    <td>${dto.mb_id }</td>
                 </tr>
                 <tr>
                     <th>작성일</th>
-                    <td id="notice_date">2022.06.20</td>
+                    <td>${dto.notice_date }</td>
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td id="notice_content">
-                        키오스크 기기의 위치가변경
-                    </td>
+                    <td>${dto.notice_content}</td>
                 </tr>
                 <tr>
                     <th>첨부파일</th>

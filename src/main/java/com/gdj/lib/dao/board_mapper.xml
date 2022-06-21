@@ -17,4 +17,8 @@
 	VALUES(#{notice_id},#{mb_id},Date_FORMAT(now(),'%y-%m-%d'),#{notice_title},#{notice_content});
 	</insert>
 	
+	<select id="noticedetail" parameterType="String" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT * FROM notice WHERE notice_id = #{notice_id}
+	</select>
+	
 </mapper>
