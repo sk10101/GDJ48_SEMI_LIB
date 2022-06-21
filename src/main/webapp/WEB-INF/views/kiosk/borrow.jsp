@@ -38,8 +38,14 @@
 				</c:forEach>
             </tbody>
         </table>
-        <button class="btn-book" onclick="location.href='borrowDone.html'">대출하기</button>
+        <button class="btn-book" onclick="borrow()">대출하기</button>
     </div>
 </body>
-<script></script>
+<script>
+	
+	function borrow(){
+		
+	}
+	
+</script>
 </html>
