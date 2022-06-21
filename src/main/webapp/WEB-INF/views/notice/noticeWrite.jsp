@@ -17,7 +17,7 @@
 </style>
 </head>
 <body>
-	<form action="noticeWrite.do" method="post">
+	<form action="noticeWrite.do" method="post" enctype="multipart/form-data">
        			<input type="hidden" name="mb_id" />
        <table class="notice">
                 <tr>
@@ -33,15 +33,12 @@
                 <tr>
                     <th>첨부파일</th>
                     <td id="photo_id">
-                        <!-- 파일 선택 버튼이 오른쪽으로 갈려면 ? -->
-                        <form action="upload" method="post" enctype="multipart/form-data">
                             <input type="file" name="uploadFile" />
-                        </form>
                     </td>
                 </tr>
         </table>
         <input type="submit" value="저장" />
-       <input type="button" value="취소" onclick="location.href='noticelist.do'">
+       <input type="button" value="취소" onclick="location.href='noticeList.do'">
      </form>
     </body>
     <script>

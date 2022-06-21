@@ -7,12 +7,12 @@ import com.gdj.lib.dto.BoardDTO;
 
 public interface BoardDAO {
 
-	ArrayList<BoardDTO> noticelist();
+	ArrayList<BoardDTO> noticeList();
 
-	int noticewrite(HashMap<String, String> params);
+	int noticeWrite(HashMap<String, String> params);
 
-	int noticedelete(String notice_id);
+	int noticeDelete(String notice_id);
 
-	BoardDTO noticedetail(String notice_id);
+	BoardDTO noticeDetail(String notice_id);
 
 }

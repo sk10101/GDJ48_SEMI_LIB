@@ -20,20 +20,22 @@ public class BoardService {
 	
 	
 
-	public ArrayList<BoardDTO> noticelist() {
+	public ArrayList<BoardDTO> noticeList() {
 		logger.info("공지사항 리스트 서비스 요청");
-		return dao.noticelist();
+		return dao.noticeList();
 	}
 
-	public boolean noticewrite(HashMap<String, String> params) {
+	public boolean noticeWrite(HashMap<String, String> params) {
 		logger.info("공지사항 글쓰기 서비스 요청");
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setMb_id("admin");
+		dto.setNotice_title(params.get("notice_title"));
+		dto.setNotice_content(params.get("notice_content"));
 		
 		boolean success = false;
 		
-		if(dao.noticewrite(params)>0) {
+		if(dao.noticeWrite(params)>0) {
 			success = true;
 		}
 		
@@ -42,21 +44,21 @@ public class BoardService {
 		
 	}
 
-	public int noticedelete(ArrayList<String> noticedeleteList) {
+	public int noticeDelete(ArrayList<String> noticeDeleteList) {
 		
 		int cnt = 0;
 		
-		for (String notice_id : noticedeleteList) {
-			cnt += dao.noticedelete(notice_id);
+		for (String notice_id : noticeDeleteList) {
+			cnt += dao.noticeDelete(notice_id);
 		}
 		
 		return cnt;
 	}
 
-	public BoardDTO noticedetail(String notice_id) {
+	public BoardDTO noticeDetail(String notice_id) {
 		BoardDTO dto = null;
 		logger.info(notice_id+"공지사항 상세보기 서비스 요청");
-		dto = dao.noticedetail(notice_id);
+		dto = dao.noticeDetail(notice_id);
 		logger.info("notice content: "+dto.getNotice_content());
 		return dto;
 	}

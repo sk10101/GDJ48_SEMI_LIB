@@ -17,9 +17,9 @@
 </head>
     <body>
        <h3>공지사항</h3>
-       <input type="button" value="삭제" onclick="noticedelete()" />
+       <input type="button" value="삭제" onclick="noticeDelete()" />
        <button onclick="location.href='noticeWrite.go'">글쓰기</button>
-       <form action="noticelist.do" method="POST">
+       <form action="noticeList.do" method="POST">
        <table>
             <thead>
                 <tr>
@@ -34,7 +34,7 @@
 				<tr>
 					<td><input type="checkbox" id="chk" value="${dto.notice_id }"/></td>
 					<td>${dto.notice_id }</td>
-					<td><a href="noticedetail.do?notice_id=${dto.notice_id }">${dto.notice_title }</a></td>
+					<td><a href="noticeDetail.do?notice_id=${dto.notice_id }">${dto.notice_title }</a></td>
 					<td>${dto.notice_date }</td>
 				</tr>
 				</c:forEach>
@@ -68,7 +68,7 @@
             console.log($('#search').val());
         });
         	
-    	function noticedelete() {
+    	function noticeDelete() {
     		
     		var noticeArray = [];
     		
@@ -79,12 +79,12 @@
     			
     			$.ajax({
     				type: 'POST',
-    				url: '/noticedelete.ajax',
+    				url: '/noticeDelete.ajax',
     				data : {noticedeleteList:noticeArray},
     				dataType: 'JSON',
     				success: function(data){
     					console.log(data);
-    					location.href='/noticelist.do';
+    					location.href='/noticeList.do';
     				},
     				error: function(e) {
     					console.log(e);
