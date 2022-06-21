@@ -31,20 +31,6 @@
 </head>
 <body>
 	<h3>블랙리스트 기본</h3>
-    <div class="header">
-        <th>***님 환영합니다.</th>
-        <a href="#">로그아웃</a>
-        <a href="#">관리자페이지</a>
-    </div>
-    <br/>
-    <tr>
-        <th colspan="2">
-            <th><a href="detail02.html">대출내역</a></th>
-            <th><a href="detail03.html">이전 대출내역</a></th>
-            <th><a href="#">예약내역</a></th>
-            <td>회원 ID:</td>
-        </th>
-    </tr>
     <table class="bbs">
         <thead>
             <tr>
@@ -55,20 +41,18 @@
                 <td>해제일</td>      
             </tr>
         </thead>
-        <tbody id="list">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
+        <tbody>
+			<c:forEach items="${blackList }" var="dto">
+				<tr>
+					<td><a href="memberDetail.do?mb_id=${dto.mb_id }">${dto.mb_id }</a></td>
+					<td>${dto.admin_start }</td>
+					<td>${dto.black_start }</td>
+					<td>${dto.admin_end }</td>
+					<td>${dto.black_end }</td>
+				</tr>
+			</c:forEach>
+		</tbody>
     </table>
-    <div>
-        <input type="text" placeholder="검색"/>
-        <button type="submit">검색</button>
-    </div>
 </body>
 <script></script>
 </html>

@@ -17,5 +17,7 @@ public interface MemberDAO {
 
 	ArrayList<MemberDTO> memberBrw();
 
+	ArrayList<MemberDTO> blackList();
+
 
 }

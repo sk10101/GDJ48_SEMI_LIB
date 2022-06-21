@@ -101,6 +101,17 @@ public class MemberController {
 		return "admin/member/memberReserve";
 	}
 	
+	@RequestMapping(value = "/blackList.do")
+	public String blackList(Model model) {
+
+		logger.info("블랙리스트 컨트롤러");
+		ArrayList<MemberDTO> blackList = service.blackList();
+		logger.info("회원 리스트 갯수 : "+blackList.size());	
+		model.addAttribute("blackList", blackList);
+
+		return "admin/black/blackList";
+	}
+	
 	
 	
 	

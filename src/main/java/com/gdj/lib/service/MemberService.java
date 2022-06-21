@@ -47,4 +47,9 @@ public class MemberService {
 		return dao.memberBrw();
 	}
 
+	public ArrayList<MemberDTO> blackList() {
+		
+		return dao.blackList();
+	}
+
 }
