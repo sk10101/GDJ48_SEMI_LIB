@@ -43,4 +43,14 @@ public class KioskController {
 		return page;
 	}
 	
+	
+	
+	// 키오스크 로그아웃
+	@RequestMapping(value="/ki_logout.do")
+	public String kiosklogout(HttpSession session) {
+		logger.info("로그아웃 요청");
+		session.removeAttribute("loginId");
+		return "kiosk/login";
+	}
+	
 }
