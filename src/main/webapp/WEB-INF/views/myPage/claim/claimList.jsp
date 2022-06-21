@@ -106,7 +106,7 @@
             		<c:forEach items="${claimList}" var="dto">
             			<tr>
             				<td>${dto.claim_id}</td>
-            				<td>${dto.claim_title}</td>
+            				<td><a href="claimDetail?claim_id=${dto.claim_id}">${dto.claim_title}</a></td>
             				<td>${dto.status}</td>
             				<td>${dto.claim_date}</td>
             				<td><a href="#">삭제</a></td>

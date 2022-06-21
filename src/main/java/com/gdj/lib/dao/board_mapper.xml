@@ -15,4 +15,17 @@
 		INSERT INTO claim(claim_title, mb_id, claim_content,status)
 			VALUES(#{claim_title},#{mb_id},#{claim_content},#{status})
 	</insert>
+	
+	<insert id="claimFileWrite">
+		INSERT INTO photo(oriFileName, newFileName, post_id,category_id)
+			VALUES(#{param1},#{param2},#{param3},#{param4})
+	</insert>
+	
+	<select id="claimDetail" parameterType="int" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT * FROM claim WHERE claim_id = #{claim_id}
+	</select>
+	
+	<select id="claimPhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE post_id = #{post_id}
+	</select>
 </mapper>

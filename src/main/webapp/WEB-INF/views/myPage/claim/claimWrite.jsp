@@ -118,8 +118,8 @@
 	                </tr>
 	                <tr>
 			            <th colspan="2">
-			            <input type="submit" value="저장" style="width: 60px; margin-top: 10px;"/>
-						<input type="button" value="취소" onclick="location.href='/claimList'" style="width: 60px; margin-top: 10px;"/>
+				            <input type="submit" value="저장" style="width: 60px; margin-top: 10px;"/>
+							<input type="button" value="취소" onclick="location.href='/claimList'" style="width: 60px; margin-top: 10px;"/>
 						</th>
 					</tr>			
 	            </table>
