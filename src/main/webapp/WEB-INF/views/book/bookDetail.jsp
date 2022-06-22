@@ -67,9 +67,9 @@ table {
                     <td>예약신청</td>
                 </tr>
                 <tr>
-                   <td>${dto.b_id}</td>
+                   <td id="b_id">${dto.b_id}</td>
                    <td>${dto.b_status}</td>
-                   <td><input type="button" value="대출신청" onclick="location.href='brw.do'"/></td>
+                   <td><input type="button" value="대출신청" onclick="bor()"/></td>
                    <td><input type="button" value="예약신청"></td>
                 </tr>
             </thead>
@@ -86,8 +86,8 @@ table {
 
 
 
-/* function bor() {
-		var b_id = $('b_id')
+function bor() {
+		var b_id = $("#b_id");
 	$.ajax({
 		type:'get',
 		url:'bor.ajax',
@@ -96,7 +96,8 @@ table {
 		},
 		dataType:'JSON',
 		success:function(data) {
-			console.log($('#b_id').val(data.dto.b_id););
+			//console.log(data);
+			console.log(b_id = $("#b_id"));
 			
 		},
 		error:function(e) {
@@ -104,7 +105,7 @@ table {
 		}
 	});
 	
-} */
+}
 
 /* function bookDetail() {
 	console.log("ajax 전송");
