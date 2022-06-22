@@ -60,6 +60,7 @@ public class NoticeService {
 	
 
 	private void noticeFileSave(MultipartFile[] photos, int notice_id) {
+		
 		for(MultipartFile photo : photos) {
 			String oriFileName = photo.getOriginalFilename();
 			
@@ -77,11 +78,11 @@ public class NoticeService {
 					byte[] arr = photo.getBytes();
 					Path path = Paths.get("C:/upload/" + newFileName);
 					Files.write(path, arr);
+					logger.info(newFileName + "저장 완료");
+					dao.noticeFileWrite(oriFileName,newFileName,notice_id,1);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				logger.info(newFileName + "저장 완료");
-				dao.noticeFileWrite(oriFileName,newFileName,notice_id,1);
 			}
 			
 		}

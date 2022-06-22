@@ -32,9 +32,7 @@
                 </tr>
                 <tr>
                     <th>첨부파일</th>
-                    <td id="photo_id">
-                            <input type="file" name="uploadFile" />
-                    </td>
+                    <td><input type="file" name="photos" multiple="multiple" /></td>
                 </tr>
         </table>
         <input type="submit" value="저장" />

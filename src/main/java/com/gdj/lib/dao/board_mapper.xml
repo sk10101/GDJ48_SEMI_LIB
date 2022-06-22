@@ -16,9 +16,14 @@
 	useGeneratedKeys="true"
 	keyColumn="notice_id"
 	keyProperty="notice_id"
-	parameterType="hashmap">
+	parameterType="com.gdj.lib.dto.BoardDTO">
 		INSERT INTO notice(mb_id,notice_title,notice_content)
 	VALUES(#{mb_id},#{notice_title},#{notice_content})
+	</insert>
+	
+	<insert id="noticeFileWrite">
+		INSERT INTO photo(oriFileName, newFileName, post_id, category_id)
+			VALUES(#{param1},#{param2},#{param3},#{param4})
 	</insert>
 	
 	<select id="noticeDetail" parameterType="String" resultType="com.gdj.lib.dto.BoardDTO">
