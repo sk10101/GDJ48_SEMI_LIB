@@ -26,8 +26,12 @@
 			VALUES(#{param1},#{param2},#{param3},#{param4})
 	</insert>
 	
-	<select id="noticeDetail" parameterType="String" resultType="com.gdj.lib.dto.BoardDTO">
+	<select id="noticeDetail" parameterType="int" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT * FROM notice WHERE notice_id = #{notice_id}
+	</select>
+	
+	<select id="noticePhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE post_id = #{post_id}
 	</select>
 	
 </mapper>

@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${noticelist }" var="dto">
+                <c:forEach items="${noticeList}" var="dto">
 				<tr>
 					<td><input type="checkbox" id="chk" value="${dto.notice_id }"/></td>
 					<td>${dto.notice_id }</td>

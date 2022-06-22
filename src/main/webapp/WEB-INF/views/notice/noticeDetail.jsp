@@ -19,20 +19,21 @@
        <table class="notice">
                 <tr>
                     <th>제목</th>
-                    <td>${dto.notice_title}</td>
+                    <td>${notice.notice_title}</td>
                 </tr>
                 <tr>
                     <th>작성자</th>
-                    <td>${dto.mb_id }</td>
+                    <td>${notice.mb_id }</td>
                 </tr>
                 <tr>
                     <th>작성일</th>
-                    <td>${dto.notice_date }</td>
+                    <td>${notice.notice_date }</td>
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td>${dto.notice_content}</td>
+                    <td>${notice.notice_content}</td>
                 </tr>
+                <c:if test="${noticeList.size() >0 }">
                 <tr>
                     <th>첨부파일</th>
                     <td>
@@ -41,6 +42,7 @@
                     	</c:forEach>
                     </td>
                 </tr>
+                </c:if>
         </table>
         <button onclick="location.href='notice.go'">돌아가기</button>
     </body>

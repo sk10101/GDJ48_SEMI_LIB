@@ -54,7 +54,7 @@ public class NoticeController {
 			logger.info("리스트 요청");
 			ArrayList<BoardDTO> noticeList = service.noticeList();
 			logger.info("noticeList 갯수 : "+noticeList.size());
-			model.addAttribute("noticelist", noticeList);
+			model.addAttribute("noticeList", noticeList);
 			return "notice/notice";
 		}
 		
@@ -86,16 +86,12 @@ public class NoticeController {
 		
 		//공지사항 상세보기 서비스
 		@RequestMapping(value= "/noticeDetail.do")
-		public String noticedetail(Model model, HttpSession session, @RequestParam String notice_id) {
+		public String noticedetail(Model model, @RequestParam int notice_id) {
 			
-			String page = "redirect:/noticeList.do";
 			logger.info("공지사항 상세보기 서비스 요청 : "+notice_id);
+			service.noticeDetail(model, notice_id);
 			
-			BoardDTO dto = service.noticeDetail(notice_id);
-			model.addAttribute("dto",dto);
-			page = "notice/noticeDetail";
-			
-			return page;
+			return "notice/noticeDetail";
 		}
 		
 		
