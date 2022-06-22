@@ -37,36 +37,30 @@
 </head>
 <body>
 	<h3>이용정지내역 회원상세보기</h3>
-    <div class="header">
-        <th>***님 환영합니다.</th>
-        <a href="#">로그아웃</a>
-        <a href="#">관리자페이지</a>
-    </div>
-    <br/>
     <table class="bbs">
         <tr>
             <th>회원ID</th>
-            <td></td>
+            <td>${dto.mb_id }</td>
         </tr>
         <tr>
             <th>이름</th>
-            <td></td>
+            <td>${dto.name }</td>
         </tr>
         <tr>
             <th>제한내역</th>
-            <td></td>
+            <td>${dto.penalty_id }</td>
         </tr>
         <tr>
             <th>이용정지날짜</th>
-            <td></td>
+            <td>${dto.penalty_start }</td>
         </tr>
         <tr>
             <th>이용종료날짜</th>
-            <td></td>
+            <td>${dto.penalty_end }</td>
         </tr>
         <tr>
             <th>취소한 관리자ID</th>
-            <td></td>
+            <td>${dto.admin_cancel }</td>
         </tr>
         <tr>
             <th>취소</th>
@@ -74,8 +68,8 @@
         </tr>
         <tr>
             <th colspan="2">
-                <input type="button" value="돌아가기" onclick=""/>
-                <input type="button" value="수정" onclick=""/>
+                <input type="button" value="돌아가기" onclick="location.href='penaltyList.do'"/>
+                <input type="button" value="수정"/>
             </th>
         </tr>
     </table>

@@ -31,28 +31,29 @@
 </head>
 <body>
 	<h3>블랙리스트 기본</h3>
-    <table class="bbs">
-        <thead>
-            <tr>
-                <td>회원ID</td>          
-                <td>지정한 관리자ID</td>           
-                <td>지정일</td>           
-                <td>해제한 관리자ID</td>       
-                <td>해제일</td>      
-            </tr>
-        </thead>
-        <tbody>
-			<c:forEach items="${blackList }" var="dto">
-				<tr>
-					<td><a href="memberDetail.do?mb_id=${dto.mb_id }">${dto.mb_id }</a></td>
-					<td>${dto.admin_start }</td>
-					<td>${dto.black_start }</td>
-					<td>${dto.admin_end }</td>
-					<td>${dto.black_end }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-    </table>
+	    <table class="bbs">
+	        <thead>
+	            <tr>
+	                <td>회원ID</td>          
+	                <td>지정한 관리자ID</td>           
+	                <td>지정일</td>           
+	                <td>해제한 관리자ID</td>       
+	                <td>해제일</td>      
+	            </tr>
+	        </thead>
+	        <tbody>
+				<c:forEach items="${blackList }" var="dto">
+					<tr>
+						<td><a href="memberDetail.do?mb_id=${dto.mb_id }">${dto.mb_id }</a></td>
+						<td>${dto.admin_start }</td>
+						<td>${dto.black_start }</td>
+						<td>${dto.admin_end }</td>
+						<td>${dto.black_end }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+	    </table>
+	<input type="button" value="추가" onclick="location.href='blackAdd.go'">
 </body>
 <script></script>
 </html>

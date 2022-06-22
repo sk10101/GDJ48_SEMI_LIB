@@ -40,8 +40,8 @@
 	<form action="update.do" method="post">
 	    <table class="bbs">
 	        <tr>
-	            <th>회원ID</th>
-	            <td>${dto.mb_id }</td>
+	            <th>회원ID</th><!-- hidden으로 해결,, 올바른 방법인지는 모르겠음 ㅎㅎ -->
+	            <td><input type="hidden" name="mb_id" value="${dto.mb_id}">${dto.mb_id}</td>
 	        </tr>
 	        <tr>
 	            <th>회원등급</th>
@@ -81,7 +81,7 @@
 	                <input type="button" value="대출내역" onclick="location.href='memberBrw.do'"/>
 	                <input type="button" value="예약내역" onclick="location.href='memberReserve.do'"/>
 	                <input type="submit" value="수정"/>
-	                <input type="button" value="목록보기" onclick="location.href='/'"/>
+	                <input type="button" value="목록보기" onclick="location.href='/memberList.do'"/>
 	        </tr>
 	    </table>
     </form>

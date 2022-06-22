@@ -31,33 +31,33 @@
 </head>
 <body>
 	<h3>관리자페이지(회원관리)</h3>
-	    <tr>
-	        <th colspan="2">
-	            <th><a href="#">일반회원</a></th>
-	            <th><a href="/adminList.do">관리자</a></th>
-	    </tr>
     <form action="/memberSearch.do" method="get">
-	            <input type="text" placeholder="회원검색"/>
-	            <input type="submit" value="검색"/>
+		    <tr>
+		        <th colspan="2">
+		            <th><a href="#">일반회원</a></th>
+		            <th><a href="/adminList.do">관리자</a></th>
+		    </tr>
+		            <input type="text" placeholder="회원검색"/>
+		            <input type="submit" value="검색"/>
+	    <table class="bbs">
+	        <thead>
+	            <tr>
+	                <td>회원ID</td>          
+	                <td>회원이름</td>           
+	                <td>회원상태</td>                
+	            </tr>
+	        </thead>
+	        <tbody>
+				<c:forEach items="${memberList }" var="dto">
+					<tr>
+						<td><a href="memberDetail.do?mb_id=${dto.mb_id }">${dto.mb_id }</a></td>
+						<td>${dto.name }</td>
+						<td>${dto.mb_status }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+	    </table>
     </form>
-    <table class="bbs">
-        <thead>
-            <tr>
-                <td>회원ID</td>          
-                <td>회원이름</td>           
-                <td>회원상태</td>                
-            </tr>
-        </thead>
-        <tbody>
-			<c:forEach items="${memberList }" var="dto">
-				<tr>
-					<td><a href="memberDetail.do?mb_id=${dto.mb_id }">${dto.mb_id }</a></td>
-					<td>${dto.name }</td>
-					<td>${dto.mb_status }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-    </table>
 </body>
 <script>
 /*
@@ -79,7 +79,7 @@
         console.log("param page : "+page);
         $.ajax({
             type:'GET',
-            url:'list.ajax',
+            url:'memberPaging.ajax',
             data:{
                 cnt : pagePerNum,
                 page : page

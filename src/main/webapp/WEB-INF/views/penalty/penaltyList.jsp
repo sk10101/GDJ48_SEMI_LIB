@@ -33,13 +33,7 @@
 </style>
 </head>
 <body>
-	<h3>이전정지내역 기본</h3>
-    <div class="header">
-        <th>***님 환영합니다.</th>
-        <a href="#">로그아웃</a>
-        <a href="#">관리자페이지</a>
-    </div>
-    <br/>
+	<h3>이용정지내역 기본</h3>
     <table class="bbs">
         <thead>
             <tr>
@@ -50,15 +44,17 @@
                 <td>취소</td>      
             </tr>
         </thead>
-        <tbody id="list">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
+        <tbody>
+				<c:forEach items="${penaltyList }" var="dto">
+					<tr>
+						<td><a href="penaltyDetail.do">${dto.mb_id }</a></td>
+						<td>${dto.mb_id }</td>
+						<td>${dto.penalty_id}</td>
+						<td>${dto.penalty_end }</td>
+						<td>${dto.cancel }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
     </table>
     <br/>
     <div>
@@ -72,6 +68,7 @@
 </body>
 <script>
 
+/*
 var currPage=1;
 	
     listCall(currPage);
@@ -137,5 +134,6 @@ var currPage=1;
         $('#list').append(content); //tbody에 뿌려줌
         
     }
+    */
 </script>
 </html>

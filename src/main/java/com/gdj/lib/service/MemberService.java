@@ -52,4 +52,6 @@ public class MemberService {
 		return dao.blackList();
 	}
 
+
+
 }

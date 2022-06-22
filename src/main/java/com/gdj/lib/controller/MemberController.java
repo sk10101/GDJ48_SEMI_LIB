@@ -23,7 +23,7 @@ public class MemberController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "/memberList.do")
 	public String memberList( Model model) {
 
 		logger.info("관리자페이지(회원리스트)이동 & 회원리스트 요청");
@@ -40,7 +40,7 @@ public class MemberController {
 
 		logger.info("관리자페이지(관리자리스트)이동 & 관리자리스트 요청");
 		ArrayList<MemberDTO> adminList = service.adminList();
-		logger.info("관리자 리스트 갯수 : "+adminList.size());
+		logger.info("관리자 리스트 수 : "+adminList.size());
 		model.addAttribute("adminList", adminList);
 		
 		return "admin/admin/adminList";
@@ -92,7 +92,6 @@ public class MemberController {
 		return "admin/member/memberBrw";
 	}
 	
-	
 	@RequestMapping(value = "/memberReserve.do")
 	public String memberReserve(Model model) {
 
@@ -110,6 +109,30 @@ public class MemberController {
 		model.addAttribute("blackList", blackList);
 
 		return "admin/black/blackList";
+	}
+	
+	@RequestMapping(value = "/blackAdd.go")
+	public String blackAdd() {
+		logger.info("블랙리스트 추가폼 도착");
+		return "admin/black/blackAdd";
+	}
+	
+	@RequestMapping(value = "/blackAdd.do")
+	public String blackAdd(Model model, HttpSession session) {
+
+		return "admin/black/blackList";
+	}
+	
+	@RequestMapping(value = "/penaltyList.do")
+	public String penaltyList() {
+		logger.info("이용정지리스트 페이지");
+		return "penalty/penaltyList";
+	}
+	
+	@RequestMapping(value = "/penaltyDetail.do")
+	public String penaltyDetail() {
+		logger.info("이용정지리스트 페이지");
+		return "penalty/penaltyDetail";
 	}
 	
 	

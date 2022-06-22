@@ -33,7 +33,7 @@
 	<h3>관리자페이지(회원관리)</h3>
     <tr>
         <th colspan="2">
-            <th><a href="/">일반회원</a></th>
+            <th><a href="/memberList.do">일반회원</a></th>
             <th><a href="#">관리자</a></th>
     </tr>
         <input type="text" placeholder="관리자검색"/>

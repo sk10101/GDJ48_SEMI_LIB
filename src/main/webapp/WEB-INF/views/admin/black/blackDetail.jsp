@@ -31,12 +31,6 @@
 </head>
 <body>
 	<h3>블랙리스트 회원 상세보기</h3>
-    <div class="header">
-        <th>***님 환영합니다.</th>
-        <a href="#">로그아웃</a>
-        <a href="#">관리자페이지</a>
-    </div>
-    <br/>
     <table class="bbs">
         <tr>
             <th>회원ID</th>
