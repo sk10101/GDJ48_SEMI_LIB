@@ -13,7 +13,9 @@ public class BoardDTO {
 	private int notice_id;
 	private String mb_id;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	//shape=JsonFormat.Shape.STRING, 
+	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date notice_date;
 	
 	
