@@ -13,5 +13,17 @@
 			WHERE r.mb_id = #{param} AND r.b_id = b.b_id AND b.b_status='대출가능'
 	</select>
 	
+	<update id="borrow" parameterType="String">						
+		UPDATE book SET b_status='대출중' WHERE b_id = #{param1}
+	</update>
+	
+	<update id="updateR" parameterType="String">
+		UPDATE reservation SET reason='정상' WHERE b_id = #{param1}
+	</update>
+	
+	<insert id="borrowTable" parameterType="String">
+		INSERT INTO borrow(mb_id,b_id,brw_date,renew,return_date,brw_status) VALUES(#{param1},#{param2},now(),'0',adddate(now(),interval 14 day),'대출중')
+	</insert>
+	
 	
 </mapper>

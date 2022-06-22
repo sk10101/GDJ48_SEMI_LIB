@@ -27,4 +27,29 @@ public class KioskService {
 		return dao.list(loginId);
 	}
 
+	public int borrow(ArrayList<String> borrowList) {
+		int cnt = 0;
+		for (String b_id: borrowList) {
+			cnt += dao.borrow(b_id);
+		}
+		return cnt;
+	}
+	
+	public void updateR(ArrayList<String> borrowList) {
+		for (String b_id: borrowList) {
+			dao.updateR(b_id);
+		}
+	}
+
+	public int borrowTable(String loginId, ArrayList<String> borrowList) {
+		logger.info("대출 테이블 추가 서비스");
+		int borrowTable = 0;
+		for(String b_id: borrowList) {
+			borrowTable += dao.borrowTable(loginId, b_id);
+		}
+		return borrowTable;
+		
+	}
+
+
 }

@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-            	<c:forEach items="${list}" var="dto">
+                <c:forEach items="${list}" var="dto">
 				<c:set var="i" value="${i+1 }"></c:set>
 					<tr>
 						<td><input type="checkbox" class="chkbox" name="chkbox" id="chkbox${i }">
@@ -38,50 +38,49 @@
 				</c:forEach>
             </tbody>
         </table>
-        <button class="btn-book" onclick="borrow()">대출하기</button>
+        <button class="btn-book" onclick="return()">반납하기</button>
     </div>
 </body>
 <script>
 
-	function borrow(){
-		
-		var chkArr = new Array();
-		var checkbox = $("input[name=chkbox]:checked");
-		
-		// 체크된 체크박스 값을 가져온다
-		checkbox.each(function(i) {
+function return(){
 	
-			// checkbox.parent() : checkbox의 부모는 <td>이다.
-			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-			var tr = checkbox.parent().parent().eq(i);
-			var td = tr.children();
-			
-			// 체크된 row의 모든 값을 배열에 담는다.
-			
-			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-			var no = td.eq(1).text();
-			
-			// 가져온 값을 배열에 담는다.
-			chkArr.push(no);
-		
-		});
-		
-		console.log("chkArr : "+chkArr);
-		
-		$.ajax({
-			type:'get',
-			url:'borrow.ajax',
-			data:{borrowList:chkArr},
-			dataType:'json',
-			success:function(data){
-				location.href = 'ki_success.go';
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
-	}
+	var chkArr = new Array();
+	var checkbox = $("input[name=chkbox]:checked");
 	
+	// 체크된 체크박스 값을 가져온다
+	checkbox.each(function(i) {
+
+		// checkbox.parent() : checkbox의 부모는 <td>이다.
+		// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+		var tr = checkbox.parent().parent().eq(i);
+		var td = tr.children();
+		
+		// 체크된 row의 모든 값을 배열에 담는다.
+		
+		// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+		var no = td.eq(1).text();
+		
+		// 가져온 값을 배열에 담는다.
+		chkArr.push(no);
 	
+	});
+	
+	console.log("chkArr : "+chkArr);
+	
+	$.ajax({
+		type:'get',
+		url:'return.ajax',
+		data:{borrowList:chkArr},
+		dataType:'json',
+		success:function(data){
+			location.href = 'ki_success.go';
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+}
+
 </script>
 </html>
