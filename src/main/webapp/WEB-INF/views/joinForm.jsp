@@ -77,9 +77,9 @@ body {
 			<tr>
 				<th>PW</th>
 				<td><input  class="text-field" type="text" id="pw" placeholder="pw"/>
-					<p>※ 4자리 이상 </p>
-					<!-- <p>※영문자+숫자+특수문자 조합으로</p> 
-					<p>8~15자리 사용해야 합니다.</p> -->
+					<!-- <p>※ 4자리 이상 </p> -->
+					 <p>※영문자+숫자+특수문자 조합으로</p> 
+					<p>8~15자리 사용해야 합니다.</p> 
 				</td>
 			</tr>
 			<tr>
@@ -140,6 +140,15 @@ body {
 	function overaly(){
 		var id = $("#id").val();
 		var idChk = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g; 
+	      if(idChk.test($("#id").val())){
+	          alert("아이디는 한글이 불가능합니다.");
+	          return false; 
+	       }
+	      
+	      if(id== ""|| id == null){
+	         alert("아이디를 입력해주세요");
+	         return false;
+	      }
 		console.log('아이디 중복 체크 : '+id);		
 		$.ajax({
 			type:'get',
@@ -148,13 +157,7 @@ body {
 			dataType:'JSON',
 			success:function(data){
 				//console.log(data);
-				if(idChk.test($("#id"))){
-				   	alert("아이디는 한글이 불가능합니다.");
-				   	return false;
-				}
-				  
-				
-				else if(data.overlay){
+			 if(data.overlay){
 					alert("이미 사용중인 아이디 입니다.");
 				}else{
 					alert("사용 가능한 아이디 입니다.");
@@ -173,6 +176,10 @@ body {
 
 	function overalys(){
 		var email = $("#email").val();
+		 if(email== ""|| email == null){
+	         alert("이메일을 입력해주세요");
+	         return false;
+	      }
 		console.log('이메일 중복 체크 : '+email);		
 		$.ajax({
 			type:'get',
@@ -204,13 +211,8 @@ body {
 		var name = $('#name');
 		var phone = $('#phone');
 		var email = $('#email');
-		 /* const idCheck = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g; 
-	     if(!idCheck.test($("#id"))){
-	    	alert("아이디는 한글이 불가능합니다.");
-	    	return false; 
-	    }  */
 	    
-	   /*  var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/; */
+	     var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/; 
 	   
 	    var reg = /^[0-9]+/g;
 		
@@ -223,13 +225,13 @@ body {
 			}else if(pw.val() == ""){
 				alert("비밀번호를 입력해 주세요!");
 				pw.focus();
-			}/* else if(!pwdCheck.test($("#pw"))) {
+			} else if(!pwdCheck.test($("#pw").val())) {
 			    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~15자리 사용해야 합니다.");
 			    pwd.focus();
 			    return false;
-			  } */ else if(pw.val().length < 4){
+			  }  /* else if(pw.val().length <= 4){
 				  alert("비밀번호는 4자 이상입니다.")
-			  }
+			  } */
 			
 			else if(name.val() == ""){
 				alert("이름을 입력해 주세요!");
@@ -238,11 +240,11 @@ body {
 				alert("번호를 입력해 주세요!");
 				phone.focus();
 				
-			}/* else if(phone.val() == reg){
+			} else if(!reg.test($("#phone").val)){
 				alert("전화번호는 숫자만 입력할 수 있습니다.");
 				phone.focus();
 			    return false;
-			} */
+			} 
 			
 			else if(email.val() == ""){
 				alert("이메일을 입력해 주세요!");
