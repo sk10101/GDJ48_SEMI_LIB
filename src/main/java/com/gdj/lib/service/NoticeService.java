@@ -141,4 +141,16 @@ public class NoticeService {
 		return noticePageMap;
 		
 	}
+
+	public HashMap<String, Object> noticeSearchList(HashMap<String, String> params) {
+		
+		HashMap<String, Object> noticeSearchMap = new HashMap<String, Object>();
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setNotice_title(params.get("notice_title"));
+		
+		noticeSearchMap.put("noticeSearch", params);
+		
+		return noticeSearchMap;
+	}
 }

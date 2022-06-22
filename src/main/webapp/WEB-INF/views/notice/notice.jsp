@@ -90,6 +90,7 @@
 
         $('#search_button').click(function() {
             console.log($('#search').val());
+            noticeSearch();
         });
         	
     	function noticeDelete() {
@@ -189,7 +190,26 @@
         	$("#notice").append(content);
         }
         
-      
+      function noticeSearch() {
+    	  var noticeSearch = $('#search').val();
+    	  
+    	  $.ajax({
+    		  type:'POST',
+    		  url:'noticeSearch.ajax',
+    		  data : {noticeSearch : noticeSearch},
+    		  dataType: 'JSON',
+    		  success:function(data) {
+    			  console.log(data);
+    			  noticeDrawList(data.noticePageList);
+    		  },
+    		  error:function(e) {
+    			  console.log(e);
+    		  }
+    	  });
+    	  
+    	  
+    	  
+      }
         
     </script>
 </html>

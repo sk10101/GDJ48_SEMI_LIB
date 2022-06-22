@@ -97,6 +97,7 @@ public class NoticeController {
 			return "notice/noticeDetail";
 		}
 		
+		
 		//공지사항 페이징 처리
 		@RequestMapping("/noticeList.ajax")
 		@ResponseBody
@@ -106,7 +107,13 @@ public class NoticeController {
 			return service.noticePageList(params);
 		}
 		
-		
+		//공지사항 검색 기능
+		@RequestMapping("/noticeSearch.ajax")
+		@ResponseBody
+		public HashMap<String, Object> noticeSearchList(@RequestParam HashMap<String, String> params) {
+			logger.info("검색한 내용 : {}",params);
+			return service.noticeSearchList(params);
+		}
 		
 		
 		
