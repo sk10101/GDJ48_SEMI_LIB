@@ -16,4 +16,6 @@ public interface KioskDAO {
 
 	void updateR(String b_id);
 
+	ArrayList<KioskDTO> returnList(String loginId);
+
 }

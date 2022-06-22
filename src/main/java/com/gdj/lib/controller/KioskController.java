@@ -117,9 +117,9 @@ public class KioskController {
 	public String kioskReturnPage(HttpSession session, Model model) {
 		logger.info("키오스크 반납 신청 아이디: "+session.getAttribute("loginId"));
 		String loginId = (String) session.getAttribute("loginId");
-		ArrayList<KioskDTO> list = service.list(loginId);
-		logger.info("list 갯수: "+list.size());
-		model.addAttribute("list", list);
+		ArrayList<KioskDTO> returnList = service.returnList(loginId);
+		logger.info("list 갯수: "+returnList.size());
+		model.addAttribute("list", returnList);
 		return "kiosk/return";
 	}
 }

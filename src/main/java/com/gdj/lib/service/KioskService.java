@@ -51,5 +51,10 @@ public class KioskService {
 		
 	}
 
+	public ArrayList<KioskDTO> returnList(String loginId) {
+		logger.info("키오스크 반납 페이지 리스트 요청");
+		return dao.returnList(loginId);
+	}
+
 
 }
