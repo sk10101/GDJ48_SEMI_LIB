@@ -4,6 +4,8 @@ import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class BoardDTO {
 
 	
@@ -11,6 +13,7 @@ public class BoardDTO {
 	private int notice_id;
 	private String mb_id;
 	
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date notice_date;
 	
 	

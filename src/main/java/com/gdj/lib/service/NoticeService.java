@@ -118,7 +118,6 @@ public class NoticeService {
 		int page = Integer.parseInt(params.get("page"));
 		
 		
-		
 		logger.info("보여줄 페이지 : "+page);
 		
 		int allCnt = dao.allCount();
