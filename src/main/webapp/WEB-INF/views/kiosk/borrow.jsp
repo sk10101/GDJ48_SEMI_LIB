@@ -74,7 +74,7 @@
 			data:{borrowList:chkArr},
 			dataType:'json',
 			success:function(data){
-				location.href = 'ki_success.go';
+				location.href = 'ki_borrowSuccess.go';
 			},
 			error:function(e){
 				console.log(e);

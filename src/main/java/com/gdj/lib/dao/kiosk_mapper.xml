@@ -10,7 +10,7 @@
 	
 	<select id="list" resultType="com.gdj.lib.dto.KioskDTO">
 		SELECT r.b_id, b.b_title FROM book b, reservation r
-			WHERE r.mb_id = #{param1} AND r.b_id = b.b_id AND b.b_status='대출가능'
+			WHERE r.mb_id = #{param1} AND r.b_id = b.b_id AND b.b_status='대출가능' AND r.reason is null
 	</select>
 	
 	<update id="borrow" parameterType="String">						

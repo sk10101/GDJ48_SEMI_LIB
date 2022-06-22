@@ -27,7 +27,7 @@ public class KioskController {
 	
 	// 키오스크 로그인 페이지
 	@RequestMapping(value = "/kiosk.login", method = RequestMethod.GET)
-	public String home(Model model) {
+	public String kioskhome(Model model) {
 		logger.info("키오스크 로그인 페이지");
 		return "kiosk/login";
 	}
@@ -86,7 +86,7 @@ public class KioskController {
 	// 키오스크 대출하기
 	@RequestMapping("/borrow.ajax")
 	@ResponseBody
-	public HashMap<String, Object> borrow(HttpSession session, @RequestParam(value="borrowList[]") ArrayList<String> borrowList){
+	public HashMap<String, Object> kioskborrow(HttpSession session, @RequestParam(value="borrowList[]") ArrayList<String> borrowList){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		logger.info("borrowList : "+borrowList);
 		
@@ -104,10 +104,10 @@ public class KioskController {
 	
 	
 	// 키오스크 성공 페이지 
-	@RequestMapping(value = "/ki_success.go")
+	@RequestMapping(value = "/ki_borrowSuccess.go")
 	public String kioskSuccess(Model model) {
 		logger.info("키오스크 성공 알람 페이지");
-		return "kiosk/success";
+		return "kiosk/borrowSuccess";
 	}
 	
 	
@@ -121,5 +121,25 @@ public class KioskController {
 		logger.info("list 갯수: "+returnList.size());
 		model.addAttribute("list", returnList);
 		return "kiosk/return";
+	}
+	
+	
+	
+	// 키오스크 대출하기
+	@RequestMapping("/return.ajax")
+	@ResponseBody
+	public HashMap<String, Object> kioskReturn(HttpSession session, @RequestParam(value="returnList[]") ArrayList<String> returnList){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		logger.info("returnList : "+returnList);
+		
+		
+		String loginId = (String) session.getAttribute("loginId");
+		int borrowTable = service.borrowTable(loginId, returnList);
+		
+		int cnt = service.borrow(returnList);
+		service.updateR(returnList);
+		map.put("cnt", cnt);
+		return map;
+		
 	}
 }

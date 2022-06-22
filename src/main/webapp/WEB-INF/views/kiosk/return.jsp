@@ -71,7 +71,7 @@ function return(){
 	$.ajax({
 		type:'get',
 		url:'return.ajax',
-		data:{borrowList:chkArr},
+		data:{returnList:chkArr},
 		dataType:'json',
 		success:function(data){
 			location.href = 'ki_success.go';
