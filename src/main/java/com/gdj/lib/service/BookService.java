@@ -1,10 +1,7 @@
 package com.gdj.lib.service;
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 
 import com.gdj.lib.dao.BookDAO;
 import com.gdj.lib.dto.BookDTO;
@@ -25,16 +21,6 @@ public class BookService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired BookDAO dao;
-=======
-import com.gdj.lib.dao.BookDAO;
-import com.gdj.lib.dto.BookDTO;
-
-@Service
-public class BookService {
-	
-	@Autowired BookDAO dao;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
->>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 
 	public ArrayList<BookDTO> list() {
 		logger.info("리스트 서비스 요청");
@@ -67,7 +53,6 @@ public class BookService {
 		logger.info("도서추가 완료:"+row);
 	}
 	
-<<<<<<< HEAD
 //
 //	public void brw(HashMap<String, String> params) {
 //		logger.info("도서대출 서비스 신청"+params.get("b_id"));
@@ -82,8 +67,4 @@ public class BookService {
 	
 	
 
-=======
-	
-	
->>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 }
