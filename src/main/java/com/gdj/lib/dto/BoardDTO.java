@@ -2,11 +2,18 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class BoardDTO {
 
+	
+	
 	private int notice_id;
 	private String mb_id;
+	
 	private Date notice_date;
+	
+	
 	private String notice_title;
 	private String notice_content;
 	

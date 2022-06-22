@@ -109,4 +109,37 @@ public class NoticeService {
 		model.addAttribute("noticeList", noticePhotoList);
 		
 	}
+
+	public HashMap<String, Object> noticePageList(HashMap<String, String> params) {
+		
+		HashMap<String, Object> noticePageMap = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		
+		
+		
+		logger.info("보여줄 페이지 : "+page);
+		
+		int allCnt = dao.allCount();
+		logger.info("allCnt : "+allCnt);
+		int pages = allCnt % cnt> 0 ? (allCnt / cnt)+1 : (allCnt/ cnt);
+		logger.info("pages : "+pages);
+		
+		if(page > pages) {
+			page = pages;
+		}
+		
+		noticePageMap.put("pages", pages); //만들수있는 쵀대 페이지 수
+		noticePageMap.put("currPage", page); //현재 페이지
+		
+		int offset = (page -1) * cnt;
+		
+		logger.info("offset : "+offset);
+		
+		ArrayList<BoardDTO> noticePageList = dao.noticePageList(cnt, offset);
+		noticePageMap.put("noticePageList", noticePageList);
+		return noticePageMap;
+		
+	}
 }

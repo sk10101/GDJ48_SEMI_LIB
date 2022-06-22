@@ -5,7 +5,7 @@
 
 	<select id="noticeList" resultType="com.gdj.lib.dto.BoardDTO" >
 		SELECT notice_id, notice_title, notice_date FROM notice
-		ORDER BY notice_id ASC
+		ORDER BY notice_id DESC
 	</select>
 	
 	<delete id="noticeDelete" parameterType="String">
@@ -32,6 +32,15 @@
 	
 	<select id="noticePhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
 		SELECT * FROM photo WHERE post_id = #{post_id}
+	</select>
+	
+	<select id="noticePageList" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT notice_id,notice_title,notice_date FROM notice
+		ORDER BY notice_id DESC limit #{param1} offset #{param2}
+	</select>
+	
+	<select id="allCount" resultType="Integer">
+		SELECT COUNT(notice_id) FROM notice
 	</select>
 	
 </mapper>

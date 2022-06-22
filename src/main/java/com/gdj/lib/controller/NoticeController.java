@@ -1,5 +1,6 @@
 package com.gdj.lib.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,6 +95,18 @@ public class NoticeController {
 			
 			return "notice/noticeDetail";
 		}
+		
+		//공지사항 페이징 처리
+		@RequestMapping("/noticeList.ajax")
+		@ResponseBody
+		public HashMap<String, Object> noticePageList(@RequestParam HashMap<String, String> params) {
+			logger.info("리스트 요청 : {}",params);
+			
+			return service.noticePageList(params);
+		}
+		
+		
+		
 		
 		
 		
