@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.service.BrwBookService;
@@ -53,18 +53,32 @@ public class BrwBookController {
 	}
 	
 	
-	@RequestMapping(value = "/bor.do")
-	public String write(HttpSession session, Model model,
-			@RequestParam HashMap<String, String> params) {
+	@RequestMapping(value = "/bookbrw.ajax")
+	@ResponseBody
+	public String brw(HttpSession session, Model model,
+			@RequestParam String b_id) {
 		
-		String page = "redirect:/book/bookDetail?b_id="+params.get("b_id");
-		logger.info(params.get("b_id"));
-		service.brw(params);
+		String page = "redirect:/";
+		logger.info("기존 도서 상세보기 페이지"+b_id);
+		service.brw(b_id);
+		
+		return "redirect:/bookDetail?b_id="+b_id;
 	
-		return page;
+		
 	}
 	
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
 

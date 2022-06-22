@@ -4,13 +4,14 @@ package com.gdj.lib.dao;
 import java.util.HashMap;
 
 import com.gdj.lib.dto.BookDTO;
+import com.gdj.lib.service.BrwBookDTO;
 
 public interface BrwBookDAO {
 	
 	BookDTO detail(String b_id);
 
-	int brw(HashMap<String, String> params);
+	void brw(String loginId, String b_id);
 
-
+	
 
 }

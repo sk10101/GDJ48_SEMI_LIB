@@ -4,9 +4,28 @@
 <mapper namespace="com.gdj.lib.dao.BrwBookDAO">
 	
 
-	<select id="detail" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT * FROM book WHERE b_id = #{param1}
+	<select id="detail" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
+	
+	<!-- <insert id="brw" parameterType="hashmap">
+	INSERT INTO borrow (mb_id ,b_id ,brw_date ,renew ,return_date ,brw_status)
+	 VALUES (#{mb_id} ,#{b_id} ,CURRENT_TIMESTAMP ,false ,DATE_ADD(now(), interval +14 day) , "대출불가")
+	</insert>
+ -->
+ 
+ 	<!-- <insert id="brw" parameterType="String">
+ 		INSERT INTO reservation(mb_id,b_id)
+ 			VALUES(#{param1},#{param2})
+ 		
+ 	</insert> -->
+ 	
+ 	<insert id="brw" parameterType="String">
+ 		INSERT INTO reservation(mb_id,b_id)
+ 			VALUES(#{param1},#{param2})
+ 		
+ 	</insert>
+ 	
 	
 	
 </mapper>
