@@ -103,9 +103,9 @@ public class KioskController {
 	
 	
 	
-	// 키오스크 성공 페이지 
+	// 키오스크 대출 성공 페이지 
 	@RequestMapping(value = "/ki_borrowSuccess.go")
-	public String kioskSuccess(Model model) {
+	public String kioskBorrowSuccess(Model model) {
 		logger.info("키오스크 성공 알람 페이지");
 		return "kiosk/borrowSuccess";
 	}
@@ -125,21 +125,26 @@ public class KioskController {
 	
 	
 	
-	// 키오스크 대출하기
+	// 키오스크 반납하기
 	@RequestMapping("/return.ajax")
 	@ResponseBody
 	public HashMap<String, Object> kioskReturn(HttpSession session, @RequestParam(value="returnList[]") ArrayList<String> returnList){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		logger.info("returnList : "+returnList);
 		
-		
 		String loginId = (String) session.getAttribute("loginId");
-		int borrowTable = service.borrowTable(loginId, returnList);
-		
-		int cnt = service.borrow(returnList);
-		service.updateR(returnList);
+		int cnt = service.bookReturn(returnList);
+		service.updateB(returnList);
 		map.put("cnt", cnt);
 		return map;
 		
+	}
+	
+	
+	// 키오스크 대출 성공 페이지 
+	@RequestMapping(value = "/ki_returnSuccess.go")
+	public String kioskReturnSuccess(Model model) {
+		logger.info("키오스크 성공 알람 페이지");
+		return "kiosk/returnSuccess";
 	}
 }

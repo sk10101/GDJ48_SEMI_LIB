@@ -38,49 +38,49 @@
 				</c:forEach>
             </tbody>
         </table>
-        <button class="btn-book" onclick="return()">반납하기</button>
+        <button class="btn-book" onclick="bookReturn()">반납하기</button>
     </div>
 </body>
 <script>
-
-function return(){
 	
-	var chkArr = new Array();
-	var checkbox = $("input[name=chkbox]:checked");
-	
-	// 체크된 체크박스 값을 가져온다
-	checkbox.each(function(i) {
-
-		// checkbox.parent() : checkbox의 부모는 <td>이다.
-		// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
-		var tr = checkbox.parent().parent().eq(i);
-		var td = tr.children();
+	function bookReturn(){
 		
-		// 체크된 row의 모든 값을 배열에 담는다.
+		var chkArr = new Array();
+		var checkbox = $("input[name=chkbox]:checked");
 		
-		// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
-		var no = td.eq(1).text();
+		// 체크된 체크박스 값을 가져온다
+		checkbox.each(function(i) {
+	
+			// checkbox.parent() : checkbox의 부모는 <td>이다.
+			// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+			var tr = checkbox.parent().parent().eq(i);
+			var td = tr.children();
+			
+			// 체크된 row의 모든 값을 배열에 담는다.
+			
+			// td.eq(0)은 체크박스 이므로  td.eq(1)의 값부터 가져온다.
+			var no = td.eq(1).text();
+			
+			// 가져온 값을 배열에 담는다.
+			chkArr.push(no);
 		
-		// 가져온 값을 배열에 담는다.
-		chkArr.push(no);
-	
-	});
-	
-	console.log("chkArr : "+chkArr);
-	
-	$.ajax({
-		type:'get',
-		url:'return.ajax',
-		data:{returnList:chkArr},
-		dataType:'json',
-		success:function(data){
-			location.href = 'ki_success.go';
-		},
-		error:function(e){
-			console.log(e);
-		}
-	});
-}
+		});
+		
+		console.log("chkArr : "+chkArr);
+		
+		$.ajax({
+			type:'get',
+			url:'return.ajax',
+			data:{returnList:chkArr},
+			dataType:'json',
+			success:function(data){
+				location.href = 'ki_returnSuccess.go';
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
 
 </script>
 </html>

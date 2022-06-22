@@ -18,4 +18,8 @@ public interface KioskDAO {
 
 	ArrayList<KioskDTO> returnList(String loginId);
 
+	int bookReturn(String b_id);
+
+	void updateB(String b_id);
+
 }

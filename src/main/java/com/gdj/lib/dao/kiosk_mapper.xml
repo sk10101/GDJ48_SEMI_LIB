@@ -27,8 +27,16 @@
 	
 	<select id="returnList" resultType="com.gdj.lib.dto.KioskDTO">
 		SELECT brw.b_id, b.b_title FROM book b, borrow brw
-			WHERE brw.mb_id = #{param1} AND brw.b_id = b.b_id AND b.b_status='대출중'
+			WHERE brw.mb_id = #{param1} AND brw.b_id = b.b_id AND brw.brw_status='대출'
 	</select>
 	
+	<update id="bookReturn" parameterType="String">
+		UPDATE borrow SET return_finish = now(), brw_status = '반납' WHERE b_id = #{param1} AND brw_status = '대출'
+	</update>
+	
+	<!-- 반납 시 도서 테이블에 도서상태를 도서 준비중으로 update -->
+	<update id="updateB" parameterType="String">
+		UPDATE book SET b_status = '도서준비중' WHERE b_id = #{param1}
+	</update>
 	
 </mapper>
