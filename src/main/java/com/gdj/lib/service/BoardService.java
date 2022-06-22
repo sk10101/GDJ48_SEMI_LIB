@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dao.BoardDAO;
@@ -25,11 +26,44 @@ public class BoardService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired BoardDAO dao;
-	
+	/*
 	public ArrayList<BoardDTO> claimList() {
 		logger.info("리스트 서비스 요청");
 		
 		return dao.claimList();
+	}
+	*/
+	
+	public HashMap<String, Object> claimList(@RequestParam HashMap<String, String> params) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		logger.info("보여줄 페이지 : " + page);
+		
+		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
+		int allCnt = dao.allCount();
+		logger.info("allCnt : " + allCnt);
+		
+		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+		
+		logger.info("pages : " + pages);
+		if (page > pages) {
+			page = pages;
+		}
+		map.put("pages", pages); // 최대 페이지 수
+		
+		int offset = cnt * (page-1);
+		
+		map.put("currPage", page); // 현재 페이지
+		
+		logger.info("offset : "+offset);
+		
+		ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
+		logger.info("건의사항 게시글의 개수 : " +claimList.size());
+		map.put("claimList", claimList);
+		
+		return map;
 	}
 	
 	
@@ -148,17 +182,26 @@ public class BoardService {
 		}
 
 
-		public ArrayList<BoardDTO> claimSearch(String search, String option) {
+		public HashMap<String, Object> claimSearch(@RequestParam HashMap<String, String> params) {
 			logger.info("검색 서비스 접속");
-			ArrayList<BoardDTO> searchList;
+			HashMap<String, Object> searchList;
+			
+			int cnt = Integer.parseInt(params.get("cnt"));
+			int page = Integer.parseInt(params.get("page"));
+			String option = params.get("option");
+			String search = params.get("search");
 			
 			if(option.equals("제목")) {
-				searchList = dao.subjectSearch(search);
+				searchList = dao.subjectSearch(cnt,page,search);
 				logger.info("제목 옵션 설정");
 			} else {
-				searchList = dao.statusSearch(search);
+				searchList = dao.statusSearch(cnt,page,search);
 				logger.info("상태 옵션 설정");
 			}
+			
+			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
+			logger.info("검색결과의 개수 : " +claimList.size());
+			map.put("claimList", claimList);
 			
 			return searchList;
 		}

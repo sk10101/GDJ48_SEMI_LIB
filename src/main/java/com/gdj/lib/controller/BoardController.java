@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dto.BoardDTO;
@@ -23,17 +24,35 @@ public class BoardController {
 	
 	@Autowired BoardService service;
 	
-	// 건의사항 목록 띄우기
+	// 건의사항 목록페이지 이동
 	@RequestMapping(value = "/claimList", method = RequestMethod.GET)
 	public String claimList(Model model) {
 		
 		// claimList 에 리스트 보내기
+		/*
 		logger.info("건의사항 리스트 요청");
 		ArrayList<BoardDTO> claimList = service.claimList();
 		logger.info("건의사항 게시글의 개수 : " + claimList.size());
 		model.addAttribute("claimList",claimList);
-		
+		*/
 		return "myPage/claim/claimList";
+	}
+
+	
+	// 페이징 처리
+	@RequestMapping(value = "/claimList.ajax")
+	public @ResponseBody HashMap<String, Object> claimList(Model model, @RequestParam HashMap<String, String> params) {
+		
+		logger.info("리스트 요청 : {}", params);
+		logger.info("건의사항 리스트 요청");
+		// model.addAttribute("claimList",service.claimListPaging(params));
+		HashMap<String, Object> claimMap = service.claimList(params);
+		/*
+		ArrayList<BoardDTO> claimList = (ArrayList<BoardDTO>) claimMap.get("claimList");
+		model.addAttribute("claimList", claimList);
+		*/
+		
+		return claimMap;
 	}
 	
 	
@@ -96,16 +115,16 @@ public class BoardController {
 	}
 	
 	
+	// 검색 기능 (옵션 추가)
 	@RequestMapping(value = "/claimSearch.do")
-	public String claimSearch(Model model, @RequestParam String search, @RequestParam String option) {
-		logger.info("입력한 검색어 : " + search +" ("+option+")");
+	public @ResponseBody HashMap<String, Object> claimSearch(Model model, @RequestParam HashMap<String, String> params) {
+		logger.info("리스트 검색 : {}", params);
+		logger.info("건의사항 목록 검색");
 		
-		ArrayList<BoardDTO> searchList = service.claimSearch(search,option);
-		logger.info("검색 결과의 수 : " + searchList.size());
-		model.addAttribute("claimList",searchList);
+		HashMap<String, Object> searchList = service.claimSearch(params);
 		
-		return "myPage/claim/claimList";
+		return searchList;
 	}
-
+	
 }
 
