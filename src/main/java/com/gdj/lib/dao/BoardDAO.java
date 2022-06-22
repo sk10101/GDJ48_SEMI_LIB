@@ -21,5 +21,10 @@ public interface BoardDAO {
 	int claimUpdate(HashMap<String, String> params);
 
 	int claimDel(int claim_id);
+	
+	int photoDel(int claim_id);
 
+	ArrayList<BoardDTO> subjectSearch(String search);
+
+	ArrayList<BoardDTO> statusSearch(String search);
 }

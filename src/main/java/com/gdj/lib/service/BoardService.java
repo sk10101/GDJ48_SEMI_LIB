@@ -72,7 +72,7 @@ public class BoardService {
 				// 이미지 파일을 업로드 안했을 때 조건문 처리
 				if(!oriFileName.equals("")) {
 					logger.info("업로드 진행");
-					// 
+					// 확장자 추출
 					String ext = oriFileName.substring(oriFileName.lastIndexOf(".")).toLowerCase();
 					// 새 파일 이름으로 업로드 당시 시간을 붙인다.
 					String newFileName = System.currentTimeMillis() + ext;
@@ -127,19 +127,40 @@ public class BoardService {
 			ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id);
 			logger.info(claim_id + " 번 게시물에 업로드된 사진 수 : " + claimPhotoList.size());
 			
-			logger.info(dao.claimDel(claim_id) + " 건의 건의사항 삭제 완료");
+			int delCount = dao.claimDel(claim_id);
+			// Photo DB 에서도 지우고 싶어용
+			dao.photoDel(claim_id);
+			
+			logger.info(delCount + " 건의 건의사항 삭제 완료");
 			// claim 테이블의 데이터 삭제(이때, photo 도 자동으로 지워진다.)
-			if(dao.claimDel(claim_id)>0) {// 성공하면 사진도 삭제
+			if(delCount>0) {// 성공하면 사진도 삭제
 				for (PhotoDTO photo : claimPhotoList) {
-					File image = new File("C:/upload/" + photo.getNewFileName());
-					if(image.exists()) {
-						boolean success = image.delete();
+					File f = new File("C:/upload/" + photo.getNewFileName());
+					if(f.exists()) {
+						boolean success = f.delete();
 						logger.info(photo.getNewFileName() + " 의 삭제 여부 : " + success);
 					}
 				}
+				// 이미지를 지워도 파일이름이 남아있어서 비워줌
+				claimPhotoList.clear();
+				logger.info(claim_id + " 번 게시물에 업로드된 사진 수 : " + claimPhotoList.size());
 			}
-			// 왜 DB 에서 삭제됐는데 사진 수가 그대로일까? --> DB 에서 삭제도 안됨...
-			logger.info(claim_id + " 번 게시물에 업로드된 사진 수 : " + claimPhotoList.size());
+		}
+
+
+		public ArrayList<BoardDTO> claimSearch(String search, String option) {
+			logger.info("검색 서비스 접속");
+			ArrayList<BoardDTO> searchList;
+			
+			if(option.equals("제목")) {
+				searchList = dao.subjectSearch(search);
+				logger.info("제목 옵션 설정");
+			} else {
+				searchList = dao.statusSearch(search);
+				logger.info("상태 옵션 설정");
+			}
+			
+			return searchList;
 		}
 	
 }

@@ -66,14 +66,14 @@ public class BoardController {
 	
 	
 	// 수정 상세 보기
-		@RequestMapping(value = "/claimUpdate.go")
-		public String claimUpdateForm(Model model, @RequestParam int claim_id) {
-			logger.info("수정 상세보기 요청 : " + claim_id);
-			// update 할땐, upHit 을 사용하지 않는 것으로 설정하기위해 아래와 같이 인자값을 추가(detail 에도 추가)
-			service.claimDetail(model, claim_id);
-			
-			return "myPage/claim/claimUpdate";
-		}
+	@RequestMapping(value = "/claimUpdate.go")
+	public String claimUpdateForm(Model model, @RequestParam int claim_id) {
+		logger.info("수정 상세보기 요청 : " + claim_id);
+		// update 할땐, upHit 을 사용하지 않는 것으로 설정하기위해 아래와 같이 인자값을 추가(detail 에도 추가)
+		service.claimDetail(model, claim_id);
+		
+		return "myPage/claim/claimUpdate";
+	}
 	
 	
 	// 건의사항 수정 상세보기 + 파일 업로드
@@ -85,15 +85,27 @@ public class BoardController {
 	}
 	
 	
-	// 건의사항 삭제 (미처리 일때만)
-		@RequestMapping(value = "/claimDel.do")
-		public String claimDel(Model model, @RequestParam int claim_id) {
-			logger.info("삭제 요청 : " + claim_id);
-			
-			service.claimDel(claim_id);
-			
-			return "redirect:/claimList";
-		}
+	// 건의사항 삭제
+	@RequestMapping(value = "/claimDel.do")
+	public String claimDel(Model model, @RequestParam int claim_id) {
+		logger.info("삭제 요청 : " + claim_id);
+		
+		service.claimDel(claim_id);
+		
+		return "redirect:/claimList";
+	}
+	
+	
+	@RequestMapping(value = "/claimSearch.do")
+	public String claimSearch(Model model, @RequestParam String search, @RequestParam String option) {
+		logger.info("입력한 검색어 : " + search +" ("+option+")");
+		
+		ArrayList<BoardDTO> searchList = service.claimSearch(search,option);
+		logger.info("검색 결과의 수 : " + searchList.size());
+		model.addAttribute("claimList",searchList);
+		
+		return "myPage/claim/claimList";
+	}
 
 }
 

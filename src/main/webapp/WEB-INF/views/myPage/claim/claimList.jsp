@@ -110,21 +110,34 @@
             				<td id="claimStatus">${dto.status}</td>
             				<td>${dto.claim_date}</td>
             				<!-- <a href="claimDel.do?claim_id=${dto.claim_id}">삭제</a> -->
-            				<td><button id="delBtn">삭제</button></td>
+            				<td>
+            					<c:choose>
+            						<c:when test="${dto.status eq '미처리'}"><button id="delBtn">삭제</button></c:when>
+            						<c:otherwise></c:otherwise>
+            					</c:choose>
+            				</td>
             			</tr>
             		</c:forEach>
            		</tbody>
             </table>
-            <input type="search" placeholder="검색"/>
+            <form action="claimSearch.do">
+            	<select name="option">
+            		<option>제목</option>
+            		<option>처리상태</option>
+            	</select>
+            	<input type="search" placeholder="검색" name="search"/>
+            	<input type="submit" value="검색" style="width: 60px; margin-top: 10px;"/>
+            </form>
         </div>
 </body>
 <script>
 	$("#delBtn").on("click",function(e){
 		location.href='/claimDel.do?claim_id=' + $("#claimID").text();
 	});
-	
+	/* 
 	if($("#claimStatus").text() != "미처리") {
 		$("#delBtn").hide();
 	}
+	*/
 </script>
 </html>
