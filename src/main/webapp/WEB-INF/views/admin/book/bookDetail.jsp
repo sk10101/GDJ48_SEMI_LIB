@@ -69,7 +69,7 @@
                     </tr>
                     <tr>
                         <th>도서상태</th>
-                        <td><select name="b_status">
+                        <td><select name="b_status" id="${b_status.count }">
                             <option value="대출가능">대출가능</option>
                             <option value="대출중">대출중</option>
                             <option value="도서준비중">도서준비중</option>

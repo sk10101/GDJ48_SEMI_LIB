@@ -2,11 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdj.lib.dao.BookDAO">
-	
-	<select id="list" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book ORDER BY b_id DESC
+
+<!-- 검색 옵션 쿼리문 시작 (전체옵션 검색 구현 미완..)-->
+	<select id="searchTitle" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status FROM book 
+		WHERE b_title LIKE CONCAT('%', #{param1}, '%') 
+		ORDER BY b_id DESC limit #{param2} offset #{param3}
 	</select>
 	
+	<select id="reserveOK" resultType="com.gdj.lib.dto.BookDTO">
+		select count(b_id) from book 
+		where b_id not in (select b_id from reservation) and b_status = "대출중";
+	</select>
+	
+	<select id="searchWriter" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status FROM book 
+		WHERE writer LIKE CONCAT('%', #{param1}, '%')
+		ORDER BY b_id DESC limit #{param2} offset #{param3}
+	</select>
+	
+	<select id="searchPublisher" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status FROM book 
+		WHERE publisher LIKE CONCAT('%', #{word}, '%')
+		ORDER BY b_id DESC limit #{cnt} offset #{offset}
+	</select>
+<!-- 검색 옵션 쿼리문 끝 -->
+
+<!-- 관리자 도서관리 시작 -->
+	<!-- 도서 목록 페이징 -->	
+	<select id="bookList" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book 
+			ORDER BY b_id DESC limit #{param1} offset #{param2}
+	</select>
+	
+	<select id="allCount" resultType="Integer">
+		SELECT COUNT(b_id) FROM book;
+	</select>
+	<!-- 도서 목록 페이징 끝-->	
+	
+	<select id="detail" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT * FROM book WHERE b_id = #{param1}
+	</select>
 	
 	<update id="bookUpdate" parameterType="hashmap">
 		UPDATE book SET b_title = #{b_title}
@@ -15,12 +51,19 @@
 			,b_status = #{b_status}
 		WHERE b_id = #{b_id}
 	</update>
+	<!-- 도서추가 관리 -->
+	<insert id="bookAdd" 
+		useGeneratedKeys="true"
+		keyColumn="b_id"
+		keyProperty="b_id"
+		parameterType="com.gdj.lib.dto.BookDTO">
+		INSERT INTO book(b_title, writer, publisher, issue, b_status)
+			VALUES(#{b_title},#{writer},#{publisher},#{issue},"대출가능")
+	</insert>
 	
-	<select id="bookSearch" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT b_id, b_title, writer, publisher, b_status FROM book 
-		WHERE b_title LIKE CONCAT('%', #{bookSearchWord}, '%')
-	</select>
-	
-	
-	
+	<insert id="fileWrite" parameterType="String">
+		INSERT INTO photo(category_id, post_id, oriFileName, newFileName)
+			VALUES("4", #{b_id}, #{oriFileName}, #{newFileName})
+	</insert>
+<!-- 관리자 도서관리 끝 -->	
 </mapper>
