@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdj.lib.dto.MemberDTO;
-import com.gdj.lib.service.MemberService;
+import com.gdj.lib.service.MyService;
 
 @Controller
-public class MemberController {
+public class MyController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@Autowired MemberService service;
+	@Autowired MyService service;
 	
 	@RequestMapping(value = "/memberUpdateDetail.go")
 	public String memberUpdateDetail(Model model) {

@@ -12,7 +12,7 @@ import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
 
 @Service
-public class MemberService {
+public class MyService {
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -22,12 +22,12 @@ public class MemberService {
 			
 		logger.info(mb_id+" 의 상세정보 DB 에 요쳥");
 		
-		return dao.memberUpdateDetail(mb_id);
+		return dao.memberUpdateDetailMy(mb_id);
 	}
 
 	public ArrayList<MemberDTO> memberUpdateList() {
 		logger.info("리스트 서비스 요청");
-		return dao.memberUpdateList();
+		return dao.memberUpdateListMy();
 	}
 	
 	
