@@ -115,7 +115,7 @@ public class LoginController {
 			
 			if(loginId != null) {
 				session.setAttribute("loginId", loginId);
-				page="test"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
+				page="main"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
 			}else {
 				model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
 			}

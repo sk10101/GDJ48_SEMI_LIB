@@ -12,6 +12,8 @@ public interface BrwBookDAO {
 
 	void brw(String loginId, String b_id);
 
+	void bookreserve(String loginId, String b_id);
+
 	
 
 }

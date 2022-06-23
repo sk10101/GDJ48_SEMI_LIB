@@ -27,13 +27,7 @@ public class BookService {
 		return dao.list();
 	}
 
-	public BookDTO detail(String b_id) {
-		BookDTO dto = null;
-		logger.info(b_id+"상세보기 서비스 요청");
-		dto = dao.detail(b_id);
-		logger.info("b_title :"+dto.getB_title());
-		return dto;
-	}
+	
 
 	public void bookUpdate(HashMap<String, String> params) {
 		logger.info("도서 관리 수정 서비스 요청");

@@ -7,10 +7,6 @@
 		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book ORDER BY b_id DESC
 	</select>
 	
-	<select id="detail" parameterType="String"
-	resultType="com.gdj.lib.dto.BookDTO">
-		SELECT * FROM book WHERE b_id = #{b_id}
-	</select>
 	
 	<update id="bookUpdate" parameterType="hashmap">
 		UPDATE book SET b_title = #{b_title}
@@ -26,7 +22,5 @@
 	</select>
 	
 	
-	<insert id="brw">
-		INSERT INTO borrow (b_id,
-	</insert>
+	
 </mapper>

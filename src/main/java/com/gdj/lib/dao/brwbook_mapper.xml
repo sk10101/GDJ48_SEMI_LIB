@@ -26,6 +26,12 @@
  		
  	</insert>
  	
+ 	<insert id="bookreserve" parameterType="String">
+ 		INSERT INTO reservation(mb_id,b_id)
+ 			VALUES(#{param1},#{param2})
+ 		
+ 	</insert>
+ 	
 	
 	
 </mapper>

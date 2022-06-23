@@ -11,7 +11,7 @@ public interface BookDAO {
 
 	ArrayList<BookDTO> list();
 
-	BookDTO detail(String b_id);
+	
 
 	int bookUpdate(HashMap<String, String> params);
 

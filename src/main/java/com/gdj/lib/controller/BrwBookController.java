@@ -67,6 +67,20 @@ public class BrwBookController {
 		
 	}
 	
+	@RequestMapping(value = "/bookreserve.ajax")
+	@ResponseBody
+	public String bookreserve(HttpSession session, Model model,
+			@RequestParam String b_id) {
+		
+		String page = "redirect:/";
+		logger.info("기존 도서 상세보기 페이지"+b_id);
+		service.bookreserve(b_id);
+		
+		return "redirect:/bookDetail?b_id="+b_id;
+	
+		
+	}
+	
 	
 	
 }

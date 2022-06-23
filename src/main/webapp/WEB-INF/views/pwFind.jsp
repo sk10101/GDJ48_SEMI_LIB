@@ -46,7 +46,7 @@
 		success:function(data){			
 			if(data){
 				alert("고객님의 비밀번호는 : "+ data + "입니다");
-				 location.href="/lib/member/login"
+				 location.href="/member/login"
 			}else{
 				alert("고객님의 id 또는 email 이 일치하지 않습니다.");				
 			}
