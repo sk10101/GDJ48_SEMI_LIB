@@ -27,10 +27,13 @@ public class SeatController {
 		ArrayList<SeatDTO> list = service.list();
 		logger.info("list 개수: "+list.size());
 		for (int i = 0; i < list.size(); i++) {
-			logger.info(i+1+"번 : "+list.get(i).getSeat_status());
+			logger.info(i+"번 : "+list.get(i).getSeat_status());
+			model.addAttribute("seatNo"+i, list.get(i).getSeat_status());
 		}
-		// logger.info("1번 : "+list.get(0).getSeat_status());
-		model.addAttribute("list", list);
+		model.addAttribute("seat", list.get(0).getSeat_no());
+//		model.addAttribute("seatNo1", list.get(0).getSeat_status());
+//		model.addAttribute("seatNo30", list.get(29).getSeat_status());
+		// model.addAttribute("list", list);
 		return "seat/seat";
 	}
 }
