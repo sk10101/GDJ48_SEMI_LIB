@@ -1,5 +1,6 @@
 package com.gdj.lib.dao;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,5 +27,30 @@ public interface MemberDAO {
 	int blackAdd(MemberDTO dto);
 
 
+=======
+import java.util.HashMap;
+
+public interface MemberDAO {
+
+	int memberjoin(HashMap<String, String> params);
+
+	String memberoverlay(String chkId);
+
+	String memberoverlays(String chkEmail);
+
+	String idFind(String email);
+
+	String pwFind(String id, String email);
+
+	String login(String id, String pw);
+
+	
+
+	
+
+	
+
+	
+>>>>>>> origin/master
 
 }
