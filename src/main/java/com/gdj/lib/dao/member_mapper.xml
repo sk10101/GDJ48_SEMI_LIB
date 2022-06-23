@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
 	
 <mapper namespace="com.gdj.lib.dao.MemberDAO">
 
@@ -40,13 +39,18 @@
 	</insert>
 	
 	
-</mapper>
-=======
-	<mapper namespace="com.gdj.lib.dao.MemberDAO">
-		<insert id="memberjoin" parameterType="hashmap">
-			INSERT INTO member(mb_id,mb_pw,name,phone,email,mb_class)
-			VALUES(#{id},#{pw},#{name},#{phone},#{email},'일반회원')
-		</insert>
+	
+	
+	
+	
+	
+	
+	<!-- ============================================== -->
+	
+	<insert id="memberjoin" parameterType="hashmap">
+		INSERT INTO member(mb_id,mb_pw,name,phone,email,mb_class)
+		VALUES(#{id},#{pw},#{name},#{phone},#{email},'일반회원')
+	</insert>
 		
 	<select id="memberoverlay" parameterType="String" resultType="String">
 		SELECT * FROM member WHERE mb_id = #{chkId}
@@ -72,7 +76,8 @@
 	SELECT mb_id FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
+</mapper>
+
+
 	
 	
-	</mapper>
->>>>>>> origin/master
