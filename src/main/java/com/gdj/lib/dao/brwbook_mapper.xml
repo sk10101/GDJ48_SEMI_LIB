@@ -23,9 +23,20 @@
  	<insert id="brw" parameterType="String">
  		INSERT INTO reservation(mb_id,b_id)
  			VALUES(#{param1},#{param2})
- 		
  	</insert>
  	
+ 	<insert id="reason" parameterType="String">
+ 		INSERT INTO reservation(mb_id,b_id)
+ 			VALUES(#{param1},#{param2})
+ 	</insert>
+ 	
+ 	<select id="brwList" resultType="com.gdj.lib.dto.BookDTO">
+		select * from book b
+		inner join borrow br on b.b_id = br.b_id
+	</select>
+	
+	
+	
 	
 	
 </mapper>

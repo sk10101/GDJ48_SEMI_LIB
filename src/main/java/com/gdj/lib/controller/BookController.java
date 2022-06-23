@@ -26,24 +26,6 @@ public class BookController {
 	
 	@Autowired BookService service;
 	
-	@RequestMapping(value = "/brwHistory")
-	public String brwHistory(Model model) {
-		logger.info("이전 대출내역");
-		return "myPage/bookList/brwHistory";
-	}
-	
-	@RequestMapping(value = "/brwList")
-	public String brwList(Model model) {
-		logger.info("대출내역");
-		return "myPage/bookList/brwHistory";
-	}
-	
-	@RequestMapping(value = "/reserve")
-	public String reserve(Model model) {
-		logger.info("예약내역");
-		return "myPage/bookList/reserve";
-	}	
-	
 	@RequestMapping(value = "/bookList.go")
 	public String bookList(Model model) {
 		
@@ -54,17 +36,7 @@ public class BookController {
 		logger.info("list 갯수 :"+list.size());
 		model.addAttribute("list",list);				
 		return "admin/book/bookList";
-	}
-	
-	@RequestMapping(value = "/bookDetail.do")
-	public String bookDetail(Model model, @RequestParam String b_id) {
-		
-		logger.info("도서 상세보기 요청"); 
-		BookDTO dto = service.detail(b_id);
-		model.addAttribute("dto",dto);
-		
-		return "book/bookDetail";
-	}
+	}	
 	
 	@RequestMapping(value = "/bookUpdate.do")
 	public String bookUpdate(Model model, 
@@ -97,15 +69,7 @@ public class BookController {
 		return "book/bookSearch";
 	}
 	
-//	@RequestMapping(value = "/brw.do")
-//	public String write(HttpSession session, Model model,
-//			@RequestParam HashMap<String, String> params) {
-//		
-//		String page = "redirect:/book/bookDetail?b_id="+params.get("b_id");
-//		service.brw(params);
-//	
-//		return page;
-//	}
+
 	
 	
 	
