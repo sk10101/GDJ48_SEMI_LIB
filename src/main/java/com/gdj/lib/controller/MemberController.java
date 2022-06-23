@@ -31,12 +31,11 @@ public class MemberController {
 		
 		
 		logger.info("회원정보 상세보기 할 아이디 : "+mb_id);
-		MemberDTO dto = new MemberDTO();
-		dto.setMb_id("admin");
-		service.memberDetail(dto);
+		MemberDTO dto = service.memberDetail(mb_id);
 		
 		
 		model.addAttribute("memberDetail", dto);
+		
 		return "myPage/info/memberDetail";
 	}
 	

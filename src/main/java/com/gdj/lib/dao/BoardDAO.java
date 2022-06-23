@@ -8,6 +8,7 @@ import com.gdj.lib.dto.PhotoDTO;
 
 public interface BoardDAO {
 
+
 	ArrayList<BoardDTO> noticeList();
 
 	int noticeWrite(BoardDTO dto);
@@ -25,5 +26,20 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> noticePageList(int cnt, int offset);
 
 	ArrayList<BoardDTO> noticeSearch(HashMap<String, String> params);
+
+	ArrayList<BoardDTO> claimList();
+
+	int claimWrite(BoardDTO dto);
+
+	void claimFileWrite(String oriFileName, String newFileName, int claim_id, int i);
+
+	BoardDTO claimDetail(int claim_id);
+
+	ArrayList<PhotoDTO> claimPhotoList(int claim_id);
+
+	int claimUpdate(HashMap<String, String> params);
+
+	int claimDel(int claim_id);
+
 
 }

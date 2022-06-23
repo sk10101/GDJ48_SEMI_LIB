@@ -3,6 +3,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdj.lib.dao.BoardDAO">
 
+
 	<select id="noticeList" resultType="com.gdj.lib.dto.BoardDTO" >
 		SELECT notice_id, notice_title, notice_date FROM notice
 		ORDER BY notice_id DESC
@@ -47,5 +48,45 @@
 		SELECT notice_id, notice_title, notice_date FROM notice WHERE notice_title LIKE CONCAT('%',#{param1},'%')
 	</select>
 	
+
+	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+			ORDER BY claim_id DESC
+	</select>
 	
+	<insert id="claimWrite" 
+		useGeneratedKeys="true"
+		keyColumn="claim_id"
+		keyProperty="claim_id"
+		parameterType="com.gdj.lib.dto.BoardDTO">
+		INSERT INTO claim(claim_title, mb_id, claim_content,status)
+			VALUES(#{claim_title},#{mb_id},#{claim_content},#{status})
+	</insert>
+	
+	<insert id="claimFileWrite">
+		INSERT INTO photo(oriFileName, newFileName, post_id,category_id)
+			VALUES(#{param1},#{param2},#{param3},#{param4})
+	</insert>
+	
+	<select id="claimDetail" parameterType="int" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT * FROM claim WHERE claim_id = #{claim_id}
+	</select>
+	
+	<select id="claimPhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE post_id = #{post_id}
+	</select>
+	
+	<update id="claimUpdate" parameterType="hashmap">
+		UPDATE claim SET 
+			claim_title =#{claim_title}
+			, claim_content=#{claim_content}
+		WHERE claim_id = #{claim_id}
+	</update>
+	
+	<delete id="claimDel">
+		DELETE FROM claim WHERE claim_id = #{param1}
+		<!-- 이렇게 하면 게시글에 사진이 없는 경우에 삭제가 안됨
+		DELETE c, p FROM claim AS c INNER JOIN photo AS p ON c.claim_id = p.post_id
+		WHERE c.claim_id = #{param1} -->
+	</delete>
 </mapper>

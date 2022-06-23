@@ -18,11 +18,11 @@ public class MemberService {
 	
 	@Autowired MemberDAO dao;
 
-	public MemberDTO memberDetail(MemberDTO dto) {
+	public MemberDTO memberDetail(String mb_id) {
 			
-		logger.info(dto+" 의 상세정보 DB 에 요쳥");
+		logger.info(mb_id+" 의 상세정보 DB 에 요쳥");
 		
-		return dao.memberDetail(dto);
+		return dao.memberDetail(mb_id);
 	}
 	
 	
