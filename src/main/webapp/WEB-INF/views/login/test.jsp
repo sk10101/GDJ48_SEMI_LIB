@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<jsp:include page="./commons/loginBox.jsp"/>
+<jsp:include page="loginBox.jsp"/>
 </body>
 <script></script>
 </html>

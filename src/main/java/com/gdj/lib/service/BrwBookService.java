@@ -48,7 +48,7 @@ public class BrwBookService {
 
 	public String bookreserve(String b_id) {
 		logger.info("도서예약 서비스 신청"+b_id);
-		String loginId = "tester";
+		String loginId = "gustn0055";
 		dao.bookreserve(loginId, b_id);
 		
 		return "redirect:/bookDetail?b_id="+b_id;
