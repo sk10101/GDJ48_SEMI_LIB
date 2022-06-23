@@ -120,7 +120,7 @@ public class NoticeService {
 		
 		logger.info("보여줄 페이지 : "+page);
 		
-		int allCnt = dao.allCount();
+		int allCnt = dao.noticeAllCount();
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt> 0 ? (allCnt / cnt)+1 : (allCnt/ cnt);
 		logger.info("pages : "+pages);
@@ -146,10 +146,16 @@ public class NoticeService {
 		
 		HashMap<String, Object> noticeSearchMap = new HashMap<String, Object>();
 		
-		BoardDTO dto = new BoardDTO();
-		dto.setNotice_title(params.get("notice_title"));
+		BoardDTO noticekeyWord = new BoardDTO();
+		noticekeyWord.setNotice_title(params.get("notice_title"));
 		
-		noticeSearchMap.put("noticeSearch", params);
+		ArrayList<BoardDTO> noticeSearch = dao.noticeSearch(params);
+		
+		logger.info("noticekeyWord : "+noticekeyWord);
+		logger.info("noticeSearch : "+noticeSearch);
+		
+		noticeSearchMap.put("noticeSearch", noticeSearch);
+		noticeSearchMap.put("noticeKeyWord", noticekeyWord);
 		
 		return noticeSearchMap;
 	}

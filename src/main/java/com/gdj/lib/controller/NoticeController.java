@@ -111,7 +111,7 @@ public class NoticeController {
 		@RequestMapping("/noticeSearch.ajax")
 		@ResponseBody
 		public HashMap<String, Object> noticeSearchList(@RequestParam HashMap<String, String> params) {
-			logger.info("검색한 내용 : {}",params);
+			logger.info("검색한 내용 : {}", params);
 			return service.noticeSearchList(params);
 		}
 		

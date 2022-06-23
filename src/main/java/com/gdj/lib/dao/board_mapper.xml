@@ -39,8 +39,13 @@
 		ORDER BY notice_id DESC limit #{param1} offset #{param2}
 	</select>
 	
-	<select id="allCount" resultType="Integer">
+	<select id="noticeAllCount" resultType="Integer">
 		SELECT COUNT(notice_id) FROM notice
 	</select>
+	
+	<select id="noticeSearch" parameterType="String" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT notice_id, notice_title, notice_date FROM notice WHERE notice_title LIKE CONCAT('%',#{param1},'%')
+	</select>
+	
 	
 </mapper>

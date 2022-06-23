@@ -20,8 +20,10 @@ public interface BoardDAO {
 
 	ArrayList<PhotoDTO> noticePhotoList(int notice_id);
 
-	int allCount();
+	int noticeAllCount();
 
 	ArrayList<BoardDTO> noticePageList(int cnt, int offset);
+
+	ArrayList<BoardDTO> noticeSearch(HashMap<String, String> params);
 
 }

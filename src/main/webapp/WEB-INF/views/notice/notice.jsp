@@ -90,7 +90,7 @@
 
         $('#search_button').click(function() {
             console.log($('#search').val());
-            noticeSearch();
+            
         });
         	
     	function noticeDelete() {
@@ -139,6 +139,7 @@
         	var pagePerNum = $("#pagePerNum").val();
         	// console.log("param page : " +page);
         	
+        	
         	$.ajax({
         		type:'POST',
         		url:'noticeList.ajax',
@@ -149,6 +150,11 @@
         		dataType: 'JSON',
         		success:function(data){
         			console.log(data);
+        			
+        			if (!$('#search').val()) {
+        				noticeSearch(data);
+        				} 
+        				
         			noticeDrawList(data.noticePageList);
         			currPage = data.currPage;
         			$("#pagination").twbsPagination({
@@ -161,6 +167,9 @@
         					listCall(page);
         				}
         			});
+        			
+        			
+        			
         		},
         		error:function(e){
         			console.log(e);
@@ -190,26 +199,43 @@
         	$("#notice").append(content);
         }
         
-      function noticeSearch() {
+      function noticeSearch(data) {
+    	  
+    	  
+    	  
+    	    $('#search_button').click(function() {
+                // console.log($('#search').val());
+                
+            
     	  var noticeSearch = $('#search').val();
+    	  var noticeArray = [];
+    	  
+    	  
+    	  
     	  
     	  $.ajax({
     		  type:'POST',
     		  url:'noticeSearch.ajax',
-    		  data : {noticeSearch : noticeSearch},
+    		  data : {
+    			  noticeSearch : noticeSearch,
+				 noticeKeyWord : noticeArray
+    			  },
     		  dataType: 'JSON',
     		  success:function(data) {
     			  console.log(data);
-    			  noticeDrawList(data.noticePageList);
+    			  
     		  },
     		  error:function(e) {
     			  console.log(e);
     		  }
+    		  
+    	 	 });
+    	  
     	  });
     	  
-    	  
-    	  
       }
+      
+  	
         
     </script>
 </html>
