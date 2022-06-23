@@ -47,13 +47,7 @@ public class BookService {
 		logger.info("도서추가 완료:"+row);
 	}
 	
-//
-//	public void brw(HashMap<String, String> params) {
-//		logger.info("도서대출 서비스 신청"+params.get("b_id"));
-//		int row = dao.brw(params);
-//		logger.info("대출한 책 권수"+row);
-//		
-//	}
+
 
 	
 

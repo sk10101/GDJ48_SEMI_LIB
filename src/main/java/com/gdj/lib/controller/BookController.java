@@ -26,8 +26,7 @@ public class BookController {
 	
 	@Autowired BookService service;
 	
-	
-	
+
 	@RequestMapping(value = "/bookList.go")
 	public String bookList(Model model) {
 		
@@ -38,8 +37,8 @@ public class BookController {
 		logger.info("list 갯수 :"+list.size());
 		model.addAttribute("list",list);				
 		return "admin/book/bookList";
-	}
-	
+	}	
+
 	
 	
 	@RequestMapping(value = "/bookUpdate.do")
@@ -73,15 +72,7 @@ public class BookController {
 		return "book/bookSearch";
 	}
 	
-//	@RequestMapping(value = "/brw.do")
-//	public String write(HttpSession session, Model model,
-//			@RequestParam HashMap<String, String> params) {
-//		
-//		String page = "redirect:/book/bookDetail?b_id="+params.get("b_id");
-//		service.brw(params);
-//	
-//		return page;
-//	}
+
 	
 	
 	

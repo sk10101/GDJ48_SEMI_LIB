@@ -4,7 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <style>
 	#header {
             width: 100%;
@@ -13,14 +16,9 @@
             background-color: #b0f592;
         }
 
-        #main_content {
-            width: 1000px;
-            height: 800px;
-        }
-
         #myPage_menu {
             width: 125px;
-            height: 500px;
+            height: 750px;
             background-color: #b0f592;
             text-align: center;
             float: left;
@@ -43,8 +41,9 @@
             padding: 5px;
         }
 
-        th {
+        table th {
             padding: 15px;
+            text-align:center;
         }
 
         #claim_write {
@@ -60,15 +59,7 @@
             text-align: left;
             padding-left: 5px;
         }
-
-        #delete {
-            width: 55px;
-        }
-
-        #date, #status {
-            width: 100px;
-        }
-
+        
         input[type='search'] {
             margin-top: 20px;
             width: 150px;
@@ -80,51 +71,219 @@
 <body>
 	<div id="header">
             <a href="#">도서관 로고 들어갈 위치</a>
-        </div>
-        <div id="myPage_menu">
-            <h3>마이페이지</h3>
-            <hr/>
-            <a href="#">도서내역</a><br/>
-            <br/>
-            <a href="#">건의사항</a><br/>
-            <br/>
-            <a href="#">회원정보</a>
-        </div>
-        <div id="main_content">
-            <button id="claim_write" onclick="location.href='claimWrite.go'">건의사항 작성</button><br/>
-            <table id="claim_table">
-            	<thead>
-	                <tr>
-	                    <th>No</th>
-	                    <th>제목</th>
-	                    <th>처리상태</th>
-	                    <th>작성일</th>
-	                    <th>삭제</th>
-	                </tr>
-            	</thead>
-            	<tbody>
-            		<c:forEach items="${claimList}" var="dto">
-            			<tr>
-            				<td id="claimID">${dto.claim_id}</td>
-            				<td><a href="claimDetail?claim_id=${dto.claim_id}">${dto.claim_title}</a></td>
-            				<td id="claimStatus">${dto.status}</td>
-            				<td>${dto.claim_date}</td>
-            				<!-- <a href="claimDel.do?claim_id=${dto.claim_id}">삭제</a> -->
-            				<td><button id="delBtn">삭제</button></td>
-            			</tr>
-            		</c:forEach>
-           		</tbody>
-            </table>
-            <input type="search" placeholder="검색"/>
-        </div>
+    </div>
+    <div id="myPage_menu">
+        <h3>마이페이지</h3>
+        <hr/>
+        <a href="#">도서내역</a><br/>
+        <br/>
+        <a href="claimList">건의사항</a><br/>
+        <br/>
+        <a href="#">회원정보</a>
+    </div>
+    <button id="claim_write" onclick="location.href='claimWrite.go'">건의사항 작성</button><br/>
+    <table id="claim_table">
+    	<thead>
+	         <tr>
+	             <th>No</th>
+	             <th>제목</th>
+	             <th>처리상태</th>
+	             <th>작성일</th>
+	             <th>삭제</th>
+	         </tr>
+    	</thead>
+    	<tbody id="claimList">
+    	<!-- ajax 로 출력할 거라서 빼놨음
+    		<c:forEach items="${claimList}" var="dto">
+    			<tr>
+    				<td id="claimID">${dto.claim_id}</td>
+    				<td><a href="claimDetail?claim_id=${dto.claim_id}">${dto.claim_title}</a></td>
+    				<td id="claimStatus">${dto.status}</td>
+    				<td>${dto.claim_date}</td>
+    				<td id="delete">
+    					<c:choose>
+    						<c:when test="${dto.status eq '미처리'}"><button id="delBtn">삭제</button></c:when>
+    						<c:otherwise></c:otherwise>
+    					</c:choose>
+    				</td>
+    			</tr>
+    		</c:forEach>
+    	-->
+    	</tbody>
+	    	<tr>
+				<td colspan="5" id="paging">
+					<div class="container">
+						<nav aria-label="Page navigation" style="text-align:center">
+								<ul class="pagination" id="pagination" >
+								</ul>					
+						</nav>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan ="5" id="paging">
+					<form action="claimList">
+				        <select id="pagePerNum">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+						</select>
+				       	<select id="option" name="option">
+				       		<option value="제목">제목</option>
+				       		<option value="처리상태">처리상태</option>
+				       	</select>
+			        	<input id="keyword" type="search" placeholder="검색" name="keyword" value=""/>
+			        	<input id="searchBtn" type="button" onclick="searchList()" value="검색" style="width: 60px; margin-top: 10px;"/>
+					</form>
+				</td>
+			</tr>
+        </table>
 </body>
 <script>
-	$("#delBtn").on("click",function(e){
-		location.href='/claimDel.do?claim_id=' + $("#claimID").text();
+	
+	
+	var currPage = 1;
+	listCall(currPage);
+	
+	// select 의 option 변경
+	$('#pagePerNum').on('change',function(){
+		console.log(currPage);
+		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
+		$("#pagination").twbsPagination('destroy');
+		listCall(currPage);
+	})
+	
+	
+	
+	function listCall(page) {
+		
+		var pagePerNum = $('#pagePerNum').val();
+		console.log("param page : " + page);
+		
+		$.ajax({
+			type:'GET',
+			url:'claimList.ajax',
+			data:{
+				cnt : pagePerNum,
+				page : page
+			},
+			dataType:'JSON',
+			success:function(data){
+				console.log(data);
+				drawList(data.claimList);
+				currPage = data.currPage;
+				// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+				$("#pagination").twbsPagination({
+					startPage: data.currPage, // 시작 페이지
+					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+					onPageClick: function(e, page) {
+						console.log(page); // 사용자가 클릭한 페이지
+						currPage = page;
+						listCall(page);
+					}
+				});
+				
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+	
+	function drawList(claimList) {
+		var content = '';
+		var date = new Date();
+		claimList.forEach(function(item){
+			// console.log(item);
+			content += '	<tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
+			content += '		<td id="claimID">'+item.claim_id+'</td>';
+			content += '		<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+			content += '		<td class="claimStatus">'+item.status+'</td>';
+			content += '		<td>'+item.claim_date+'</td>';
+			content += '		<td class="delete">';
+			content += '			<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
+			content += '		</td>';
+			content += '	</tr>';
+		});
+		// 혹시 모를 상황을 대비해 깨끗하게 비워두고 쌓는다. (append 는 있는 것에 계속해서 이어 붙이는 기능이기 때문)
+		$("#claimList").empty();
+		$("#claimList").append(content);
+	}
+	
+	
+	$('#searchBtn').on('click',function(){
+		console.log(currPage);
+		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	})
+	
+	// 검색 결과 출력
+	function searchList(page) {
+		
+		var pagePerNum = $('#pagePerNum').val();
+		var keyword = $('#keyword').attr("value");
+		var option = $('#option').attr("value");
+		console.log(keyword);
+		
+		$.ajax({
+			type: 'GET',
+			url: 'claimList.ajax',
+			data:{
+				cnt : pagePerNum,
+				page : page
+			},
+			dataType:'JSON',
+			success: function(data){
+				// 테이블 초기화
+				$("#claimList").empty();
+				drawList(data.claimList);
+				currPage = 1;
+				// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+				$("#pagination").twbsPagination({
+					startPage: 1, // 시작 페이지
+					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+					onPageClick: function(e, page) {
+						console.log(page); // 사용자가 클릭한 페이지
+						currPage = page;
+						listCall(page);
+					}
+				});
+			},
+			error:function(e){
+				console.log(e);
+			}
+		})
+	}
+	
+	
+	var status = "";
+	$(document).ready(function() {
+		console.log($("#claim_table").children().eq(1));
 	});
 	
-	if($("#claimStatus").text() != "미처리") {
-		$("#delBtn").hide();
+	
+	// 삭제 버튼 기능구현 (동적으로 생성한 버튼은 javascript 로 구현)
+	function clickEvt(btn) {
+		var claim_id = $(btn).parent().parent().attr("cID");
+		console.log($(btn));
+			location.href='/claimDel.do?claim_id=' + claim_id;
+		
 	}
+	
+	/* 삭제 기능 다른 방법
+	$(document).ready(function() {
+		$("#claim_table").on('click', '.delBtn', function() {
+			console.log($(this));
+			console.log($(this).parent().parent().attr("no"));
+			var claim_id = $(this).parent().parent().attr("no");
+			location.href='/claimDel.do?claim_id='+claim_id;
+		});
+	});
+	*/
 </script>
 </html>

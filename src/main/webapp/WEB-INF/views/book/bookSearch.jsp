@@ -36,11 +36,16 @@
                 <option value="publisher">출판사</option>
             </select>
         </div>
-
+<<<<<<< HEAD
         <tasble>
+        <table>
+=======
+
+        
 
         <table>
 
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
             <thead>
                 <th>책표지</th>
                 <th>제목</th>

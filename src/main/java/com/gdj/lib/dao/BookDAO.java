@@ -11,13 +11,10 @@ public interface BookDAO {
 
 	ArrayList<BookDTO> list();
 
-	
-
 	int bookUpdate(HashMap<String, String> params);
 
 	int bookAdd(HashMap<String, String> params);
 
-	//int brw(HashMap<String, String> params);
 
 
 	

@@ -10,4 +10,16 @@ public interface KioskDAO {
 
 	ArrayList<KioskDTO> list(String loginId);
 
+	int borrow(String b_id);
+
+	int borrowTable(String loginId, String b_id);
+
+	void updateR(String b_id);
+
+	ArrayList<KioskDTO> returnList(String loginId);
+
+	int bookReturn(String b_id);
+
+	void updateB(String b_id);
+
 }
