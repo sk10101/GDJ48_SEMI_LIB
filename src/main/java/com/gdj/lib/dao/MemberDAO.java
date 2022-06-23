@@ -2,6 +2,8 @@ package com.gdj.lib.dao;
 
 
 import com.gdj.lib.dto.MemberDTO;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface MemberDAO {
@@ -19,6 +21,8 @@ public interface MemberDAO {
 	String pwFind(String id, String email);
 
 	String login(String id, String pw);
+
+	ArrayList<MemberDTO> memberList();
 
 	
 

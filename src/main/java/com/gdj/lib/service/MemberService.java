@@ -24,6 +24,11 @@ public class MemberService {
 		
 		return dao.memberDetail(mb_id);
 	}
+
+	public ArrayList<MemberDTO> memberList() {
+		logger.info("리스트 서비스 요청");
+		return dao.memberList();
+	}
 	
 	
 	
