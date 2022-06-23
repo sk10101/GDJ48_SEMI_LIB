@@ -13,11 +13,7 @@
     <header id="main_header">
         <nav>
             <ul class="login_menu">
-<<<<<<< HEAD
                 <li><a href="member/login">로그인</a></li>
-=======
-                <li><a href="/member/login">로그인</a></li>
->>>>>>> origin/master
             </ul>
         </nav>
     </header>

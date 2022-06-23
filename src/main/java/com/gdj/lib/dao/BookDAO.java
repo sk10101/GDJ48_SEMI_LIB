@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.gdj.lib.dto.BookDTO;
+import com.gdj.lib.dto.PhotoDTO;
 
 public interface BookDAO {
 
@@ -17,7 +18,7 @@ public interface BookDAO {
 
 	BookDTO detail(String b_id);
 
-	int bookUpdate(HashMap<String, String> params);
+	int bookUpdate(BookDTO dto);
 
 	int bookAdd(BookDTO dto);
 
@@ -26,6 +27,8 @@ public interface BookDAO {
 	int allCount();
 
 	void fileWrite(String oriFileName, String newFileName, int b_id);
+
+	ArrayList<PhotoDTO> photoList(String b_id);
 
 
 }

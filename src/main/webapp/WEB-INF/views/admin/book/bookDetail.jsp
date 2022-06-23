@@ -37,35 +37,38 @@
     <section>
         <div class="content">
             <form action="bookUpdate.do" method="post">
-                <table>
+                <table class="book">
                     <tr>
                         <th>책ID</th>
-                        <td><input type="hidden" name="b_id" value="${dto.b_id}">${dto.b_id}</td>
+                        <td><input type="hidden" name="b_id" value="${book.b_id}">${book.b_id}</td>
                     </tr>
                     <tr>
-                        <th>책표지</th>
-                        <td><input type="text" name="b_img"/></td>
-                        <td><input type="button" name="b_img" value="파일변경"/></td>
+                        <th>책 표지</th>
+                        <td><input type="file" name="b_img" multiple="multiple"/>
+                        	<c:forEach items="${list}" var="path">
+								<p><img src="/photo/${path.newFileName}" height="200"/></p>
+							</c:forEach>
+                        </td>
                     </tr>
                     <tr>
-                        <th>제목</th>
-                        <td><input type="text" name="b_title" value="${dto.b_title}"></td>
+                        <th>책 제목</th>
+                        <td><input type="text" name="b_title" value="${book.b_title}"></td>
                     </tr>
                     <tr>
                         <th>저자</th>
-                        <td><input type="text" name="writer" value="${dto.writer}"></td>
+                        <td><input type="text" name="writer" value="${book.writer}"></td>
                     </tr>
                     <tr>
                         <th>출판사</th>
-                        <td><input type="text" name="publisher" value="${dto.publisher}"></td>
+                        <td><input type="text" name="publisher" value="${book.publisher}"></td>
                     </tr>
                     <tr>
                         <th>발행년도</th>
-                        <td><input type="text" name="issue" value="${dto.issue}"></td>
+                        <td><input type="text" name="issue" value="${book.issue}"></td>
                     </tr>
                     <tr>
                         <th>등록일자</th>
-                        <td><input type="text" name="b_date" value="${dto.b_date}"></td>
+                        <td><input type="text" name="b_date" value="${book.b_date}"></td>
                     </tr>
                     <tr>
                         <th>도서상태</th>
