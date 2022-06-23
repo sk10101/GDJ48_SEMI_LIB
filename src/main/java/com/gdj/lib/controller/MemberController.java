@@ -132,8 +132,9 @@ public class MemberController {
 				page = "redirect:/blackList.do";
 				model.addAttribute("msg","블랙리스트 목록에 추가되었습니다.");
 			}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
+				logger.info("존재하지 않는 아이디");
 				model.addAttribute("msg","입력한 회원 ID 를 다시 확인해주세요.");
-				page = "admin/black/blackAdd.do";
+				page = "admin/black/blackAdd";
 			}
 		}
 		return page;

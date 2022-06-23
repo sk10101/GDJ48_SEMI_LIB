@@ -22,7 +22,7 @@
 	</update>
 	
 	<select id="blackList" resultType="com.gdj.lib.dto.MemberDTO">
-		SELECT mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
+		SELECT black_id,mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
 	</select>
 	
 	<select id="blackDetail" resultType="com.gdj.lib.dto.MemberDTO">
