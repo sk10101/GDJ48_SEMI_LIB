@@ -20,7 +20,7 @@
             <button id="return" onclick="location.href='ki_return.go'">반납</button>
         </div>
         <div class="study">
-            <button onclick="location.href='seat.html'">열람실</button>
+            <button onclick="location.href='ki_seat.go'">열람실</button>
         </div>
     </div>
 </body>

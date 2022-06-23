@@ -36,4 +36,11 @@ public class SeatController {
 		// model.addAttribute("list", list);
 		return "seat/seat";
 	}
+	
+	
+	// 키오스크 열람실 현황보기
+	@RequestMapping(value = "/ki_seat.go")
+	public String kioskSeat(Model model) {
+		return "seat/kioskSeat";	
+	}
 }
