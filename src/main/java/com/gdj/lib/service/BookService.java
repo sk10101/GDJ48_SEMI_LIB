@@ -2,13 +2,10 @@ package com.gdj.lib.service;
 
 
 
-<<<<<<< HEAD
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-=======
->>>>>>> origin/master
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 
 import com.gdj.lib.dao.BookDAO;
 import com.gdj.lib.dto.BookDTO;
@@ -29,7 +25,6 @@ public class BookService {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired BookDAO dao;
-<<<<<<< HEAD
 	
 	public HashMap<String, Object> bookSearch(HashMap<String, String> params) {
 		
@@ -108,8 +103,6 @@ public class BookService {
 		logger.info("예약여부서비스도착");
 		return dao.reserveOk();
 	}
-=======
->>>>>>> origin/master
 
 // 관리자 도서관리 서비스 시작
 	public HashMap<String, Object> bookList(
@@ -145,7 +138,13 @@ public class BookService {
 		return map;
 	}
 
-	
+	public BookDTO detail(String b_id) {
+		BookDTO dto = null;
+		logger.info(b_id+"상세보기 서비스 요청");
+		dto = dao.detail(b_id);
+		logger.info("b_title :"+dto.getB_title());
+		return dto;
+	}
 
 	public void bookUpdate(HashMap<String, String> params) {
 		logger.info("도서 관리 수정 서비스 요청");
@@ -204,29 +203,10 @@ public class BookService {
 	}
 
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
 // 관리자 도서관리 서비스 끝
-=======
-//
-//	public void brw(HashMap<String, String> params) {
-//		logger.info("도서대출 서비스 신청"+params.get("b_id"));
-//		int row = dao.brw(params);
-//		logger.info("대출한 책 권수"+row);
-//		
-//	}
-=======
-
->>>>>>> origin/master
-
-	
-
->>>>>>> origin/master
 	
 
 	
-	
-
 }
 	
 	

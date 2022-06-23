@@ -26,18 +26,14 @@ public class BookDTO {
 	
 	//도서 정보
 	private int b_id;
-<<<<<<< HEAD
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date b_date;
-=======
->>>>>>> origin/master
 	private String b_title;
 	private String writer;
 	private String publisher;
 	private int issue;
 	private String b_status;
-<<<<<<< HEAD
 	private boolean b_reserve;
 	
 	
@@ -47,10 +43,6 @@ public class BookDTO {
 	public void setB_reserve(boolean b_reserve) {
 		this.b_reserve = b_reserve;
 	}
-=======
-	private Date b_date;
-
->>>>>>> origin/master
 	public int getB_id() {
 		return b_id;
 	}

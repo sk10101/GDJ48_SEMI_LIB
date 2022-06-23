@@ -10,12 +10,12 @@ public interface BookDAO {
 	ArrayList<BookDTO> searchTitle(String word, int cnt, int offset);
 	
 	ArrayList<BookDTO> searchWriter(String word, int cnt, int offset);
-	
-	ArrayList<BookDTO> bookSearch(HashMap<String, String> params);
 
 	ArrayList<BookDTO> searchPublisher(String word, int cnt, int offset);
 
 	ArrayList<BookDTO> bookList(int cnt, int offset);
+
+	BookDTO detail(String b_id);
 
 	int bookUpdate(HashMap<String, String> params);
 
@@ -28,6 +28,4 @@ public interface BookDAO {
 	void fileWrite(String oriFileName, String newFileName, int b_id);
 
 
-
-	
 }
