@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 * {
     margin:0; 
@@ -62,4 +63,70 @@ nav{
     text-align: center;
 }
 
+=======
+@charset "UTF-8";
+* {
+    margin:0; 
+    padding:0; 
+    list-style: none; 
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+body{overflow-x: hidden;}
+
+a {
+    text-decoration: none;
+    text-decoration-color: black;
+}
+
+a:visited{
+    color: black;
+}
+
+header{
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    color: #333
+}
+
+.header-wrap{ /*화면 중앙에 오게끔*/
+    width: 1200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.logo{
+    float: left;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    display: inline;
+    position: relative;
+}
+
+nav{
+    width: 800px;
+    height: 100px;
+    float: right;
+    display: block;
+    top: 0;
+    right: 0;
+    position: relative;
+}
+
+.navi { 
+    width: 600px; height: 30px; 
+    margin: 20px 0 0 350px;
+
+}
+
+.navi > li{
+    float: left; width: 200px; 
+    font-size: 20px;
+    text-align: center;
+}
+
+>>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
 table{border: black solid 1px;}

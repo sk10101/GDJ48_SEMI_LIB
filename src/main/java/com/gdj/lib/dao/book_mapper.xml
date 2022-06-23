@@ -7,9 +7,6 @@
 		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book ORDER BY b_id DESC
 	</select>
 	
-	<select id="detail" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT * FROM book WHERE b_id = #{param1}
-	</select>
 	
 	<update id="bookUpdate" parameterType="hashmap">
 		UPDATE book SET b_title = #{b_title}
@@ -24,9 +21,6 @@
 		WHERE b_title LIKE CONCAT('%', #{bookSearchWord}, '%')
 	</select>
 	
-	<insert id="bookAdd" parameterType="hashmap">
-		INSERT INTO book(b_title, writer, publisher, issue, b_status)
-			VALUES(#{b_title},#{writer},#{publisher},#{issue},"대출가능")
-	</insert>
+	
 	
 </mapper>
