@@ -1,0 +1,94 @@
+@charset "UTF-8";
+*{margin: 0; padding: 0; box-sizing: border-box;}
+#body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80vh;
+}
+.seatSection{
+    width: 1000px;
+}
+.seatLayout{
+    margin: 0 auto;
+    width: 1000px;
+    height: 600px;
+    background-image: url("../img/seatbg.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+}
+.info{
+    width: 120px;
+    height: 600px;
+    text-align: center;
+    
+}
+.seatLayout #door{
+    margin-left: 5px;
+    padding-top: 55px;
+}
+#seatBlueColor{
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background-color: #AFEEEE;
+    border: 1px solid #333;
+    margin-top: 130px;
+}
+#seatBlueMsg{
+}
+#seatPinkColor{
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background-color: #F4C2C2;
+    border: 1px solid #333;
+    margin-top: 10px;
+}
+#seatPinkMsg{
+}
+.seatState{
+    width: 880px;
+    height: 600px;
+    display: flex;
+    flex-direction: row;
+}
+.seatState .section{
+    width: 33.3%;
+    height: 100%;
+}
+.seatState .section .table{
+    width: 80%;
+    height: 90%;
+    margin: 10% auto;
+    display: flex;
+    flex-direction: row;
+}
+.seatState .section .table .Column{
+    width: 50%;
+    height: 100%;
+}
+.seatState .section .table .Column *{
+    width: 100%;
+    height: 20%;
+    border: 1px solid black;
+    background-color: #F4C2C2;
+    text-align: center;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    font-size: 20px;
+}
+.seatState .section .table .Column [class*='가능']{
+    width: 100%;
+    height: 20%;
+    border: 1px solid black;
+    background-color: #AFEEEE;
+    text-align: center;
+    display : flex;
+    justify-content : center;
+    align-items : center;
+    font-size: 20px;
+}

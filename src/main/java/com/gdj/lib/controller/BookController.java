@@ -26,6 +26,11 @@ public class BookController {
 	
 	@Autowired BookService service;
 	
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 	@RequestMapping(value = "/bookList.go")
 	public String bookList(Model model) {
 		
@@ -36,7 +41,13 @@ public class BookController {
 		logger.info("list 갯수 :"+list.size());
 		model.addAttribute("list",list);				
 		return "admin/book/bookList";
+<<<<<<< HEAD
 	}	
+=======
+	}
+	
+	
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 	
 	@RequestMapping(value = "/bookUpdate.do")
 	public String bookUpdate(Model model, 

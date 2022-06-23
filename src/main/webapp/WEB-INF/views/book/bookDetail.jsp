@@ -72,9 +72,10 @@ table {
                     <td>도서상태</td>
                     <td>대출신청</td>
                     <td>예약신청</td>
-                </tr>
+                   
                 <tr>
                    <td id="brw_b_id">${dto.b_id}</td>
+<<<<<<< HEAD
                    <td id="b_status">${dto.b_status}</td>
                    <c:if test="${dto.b_status eq '대출가능'}">
 					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
@@ -84,6 +85,17 @@ table {
 					<td></td>
 					<td id="reason"><button id="reasonBtn" onclick="bookreason()">예약신청</button></td>
 					</c:if>
+=======
+                   <td>${dto.b_status}</td>
+                   <c:if test="${dto.b_status eq '대출가능'}">
+					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
+                   <td></td>
+                   </c:if>
+                   <c:if test="${dto.b_status eq '대출중'}"> 
+                     <td></td>  
+                   <td id="bookreserve"><button  onclick="bookreserve()">예약신청</button></td>
+                 	 </c:if> 
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
                 </tr>
             </thead>
         </table>
@@ -143,29 +155,46 @@ function bookreason() {
 	
 } 
 
-/* function bookDetail() {
-	console.log("ajax 전송");
-	
+
+
+function bookreserve() {
 	$.ajax({
-		type:"get",			//method 와 같다.
-		url:"bookDetail.ajax",		//action과 같다.
-		data:{},				//parameter
-		dataType:"json",		//어떤 형태로 데이터를 주고 받나?
-		success:function(data){
-			console.log(data);
-			$('#b_title').html(data.dto.b_title);
-			$('#writer').html(data.dto.writer);
-			$('#publisher').html(data.dto.publisher);
-			$('#issue').html(data.dto.issue);
+		type:'get',
+		url:'bookreserve.ajax',
+		data:{
+			b_id:$("#brw_b_id").text()
+		},
+		dataType:'JSON',
+		success:function(data) {
 			
-		},	
-		error:function(e){
+		},
+		error:function(e) {
 			console.log(e);
-		}		
+		}
 	});
 	
-}
- */
+} 
+
+$("#brw").on("click",function(){
+	$("#brw").hide();
+	alert("대출신청이 완료되었습니다");
+});
+
+
+$("#bookreserve").on("click",function(){
+	$("#bookreserve").hide();
+	alert("예약이 완료되었습니다");
+});
+
+  /* $(function(){
+	$("bookreserve").click(function(){
+		if($("#bookreserve").css("display") != "none"){
+			$("#bookreserve").hide();
+		}
+	});
+});   */
+
+
 
  	$("#brw").on("click",function(){
 	   $("#brw").hide();

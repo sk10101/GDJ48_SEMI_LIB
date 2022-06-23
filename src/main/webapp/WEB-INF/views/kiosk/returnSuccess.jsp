@@ -11,17 +11,14 @@
 <style></style>
 </head>
 <body>
-	<a href="ki_logout.do">
+	<a href="ki_main.go">
+        <i class="fa-solid fa-house back"></i>
+    </a>
+    <a href="ki_logout.do">
         <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
     </a>
-    <div>
-        <div class="book">
-            <button id="borrow" onclick="location.href='ki_borrow.go'">대출</button>
-            <button id="return" onclick="location.href='ki_return.go'">반납</button>
-        </div>
-        <div class="study">
-            <button onclick="location.href='ki_seat.go'">열람실</button>
-        </div>
+    <div class="alert">
+        반납완료 되었습니다.
     </div>
 </body>
 <script></script>

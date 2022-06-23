@@ -30,7 +30,7 @@ function idFind(){
 		success:function(data){			
 			if(data){
 				alert("고객님의 아이디는 : "+ data + "입니다");
-				 location.href="/lib/member/login"
+				 location.href="/member/login"
 			}else{
 				alert("고객님의 정보를 찾을수 없습니다.");				
 			}

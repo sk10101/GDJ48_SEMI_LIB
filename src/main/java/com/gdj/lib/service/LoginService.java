@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.gdj.lib.dao.MemberDAO;
 
 @Service
-public class MemberService {
+public class LoginService {
 	 Logger logger = LoggerFactory.getLogger(this.getClass());
 	 @Autowired MemberDAO dao;
 	public HashMap<String, Object> memberjoin(HashMap<String, String> params) {

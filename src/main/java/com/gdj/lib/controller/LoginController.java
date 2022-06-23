@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gdj.lib.service.MemberService;
+import com.gdj.lib.service.LoginService;
 
 @Controller
-public class MemberController {
-	@Autowired MemberService service;
+public class LoginController {
+	@Autowired LoginService service;
 	 Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 로그인 페이지
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String memberhome( Model model) {
 		logger.info("로그인 페이지 이동");
-		return "login";
+		return "/login/login";
 	}
 	
 	
@@ -35,7 +35,7 @@ public class MemberController {
 		logger.info("회원가입 페이지 이동");
 		
 		
-		return "joinForm";
+		return "/login/joinForm";
 	}
 	
 	// 회원가입 시도
@@ -74,7 +74,7 @@ public class MemberController {
 		  model) { logger.info("id 찾기 페이지 이동");
 		  
 		  
-		  return "idFind"; }
+		  return "/login/idFind"; }
 		 
 	
 		@RequestMapping(value = "member/pwFind")
@@ -82,7 +82,7 @@ public class MemberController {
 			logger.info("pw 찾기 페이지 이동");
 			
 			
-			return "pwFind";
+			return "/login/pwFind";
 		}
 	
 		@RequestMapping("member/idFind.ajax")
@@ -115,7 +115,7 @@ public class MemberController {
 			
 			if(loginId != null) {
 				session.setAttribute("loginId", loginId);
-				page="test"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
+				page="main"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
 			}else {
 				model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
 			}
@@ -129,7 +129,7 @@ public class MemberController {
 				session.removeAttribute("loginId");
 				model.addAttribute("msg", "로그아웃 되었습니다");
 			
-			return "login"; 
+			return "/login/login"; 
 		}
 	
 }

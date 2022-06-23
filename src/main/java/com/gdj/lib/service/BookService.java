@@ -27,6 +27,10 @@ public class BookService {
 		return dao.list();
 	}
 
+<<<<<<< HEAD
+=======
+	
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 
 	public void bookUpdate(HashMap<String, String> params) {
 		logger.info("도서 관리 수정 서비스 요청");

@@ -7,6 +7,10 @@
 		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book ORDER BY b_id DESC
 	</select>
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 	<update id="bookUpdate" parameterType="hashmap">
 		UPDATE book SET b_title = #{b_title}
 			,writer = #{writer} , publisher = #{publisher}
@@ -21,4 +25,8 @@
 	</select>
 	
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 </mapper>

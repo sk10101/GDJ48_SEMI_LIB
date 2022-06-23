@@ -11,6 +11,11 @@ public interface BookDAO {
 
 	ArrayList<BookDTO> list();
 
+<<<<<<< HEAD
+=======
+	
+
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 	int bookUpdate(HashMap<String, String> params);
 
 	int bookAdd(HashMap<String, String> params);

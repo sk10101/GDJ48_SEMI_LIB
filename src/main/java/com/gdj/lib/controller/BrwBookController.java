@@ -77,6 +77,7 @@ public class BrwBookController {
 		
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/bookreason.ajax")
 	@ResponseBody
 	public String reason(HttpSession session, Model model,
@@ -85,6 +86,16 @@ public class BrwBookController {
 		String page = "redirect:/";
 		logger.info("예약신청 후 페이지"+b_id);
 		service.reason(b_id);
+=======
+	@RequestMapping(value = "/bookreserve.ajax")
+	@ResponseBody
+	public String bookreserve(HttpSession session, Model model,
+			@RequestParam String b_id) {
+		
+		String page = "redirect:/";
+		logger.info("기존 도서 상세보기 페이지"+b_id);
+		service.bookreserve(b_id);
+>>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 		
 		return "redirect:/bookDetail?b_id="+b_id;
 	
