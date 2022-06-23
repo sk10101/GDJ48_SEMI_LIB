@@ -30,7 +30,6 @@ public class BoardController {
 	// 건의사항 목록페이지 이동
 	@RequestMapping(value = "/claimList", method = RequestMethod.GET)
 	public String claimList(Model model) {
-		
 		// claimList 에 리스트 보내기
 		/*
 		logger.info("건의사항 리스트 요청");
@@ -38,7 +37,6 @@ public class BoardController {
 		logger.info("건의사항 게시글의 개수 : " + claimList.size());
 		model.addAttribute("claimList",claimList);
 		*/
-		
 		return "myPage/claim/claimList";
 	}
 
@@ -47,10 +45,11 @@ public class BoardController {
 	@RequestMapping(value = "/claimList.ajax")
 	public @ResponseBody HashMap<String, Object> claimList(@RequestParam HashMap<String, String> params) {
 		
-		logger.info("리스트 요청 : {}", params);
+		logger.info("컨트롤러 리스트 요청 : {}", params);
 		
 		// model.addAttribute("claimList",service.claimListPaging(params));
 		HashMap<String, Object> claimMap = service.claimList(params);
+		logger.info("컨트롤러 체크포인트");
 		/*
 		ArrayList<BoardDTO> claimList = (ArrayList<BoardDTO>) claimMap.get("claimList");
 		model.addAttribute("claimList", claimList);
@@ -59,33 +58,6 @@ public class BoardController {
 		return claimMap;
 	}
 	
-	/*
-	// 검색 목록 페이지 이동
-		@RequestMapping(value = "/searchList", method = RequestMethod.GET)
-		public String searchList(Model model) {
-			
-			logger.info("검색 목록 페이지 이동");
-			return "myPage/claim/searchList";
-		}
-
-		
-	// 검색 목록 페이징 처리
-	@RequestMapping(value = "/searchList.ajax")
-	public @ResponseBody HashMap<String, Object> searchList(@RequestParam HashMap<String, String> params, HttpServletRequest request) {
-		
-		String keyword = request.getParameter("keyword");
-		String option = request.getParameter("option");
-		params.replace(keyword, "처리중");
-		params.replace(option, "처리상태");
-		logger.info("검색결과 목록 요청 : {}", params);
-		logger.info("입력한 검색어 (옵션) : " + keyword+ " (" + option + ")");
-		
-		
-		HashMap<String, Object> claimMap = service.searchList(params);
-		
-		return claimMap;
-	}
-	*/
 	
 	@RequestMapping(value = "/claimWrite.go")
 	public String claimWriteForm() {
