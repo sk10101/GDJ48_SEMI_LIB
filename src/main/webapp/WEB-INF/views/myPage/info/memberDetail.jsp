@@ -22,7 +22,6 @@
                 <th>ID</th>
                 <td>${memberDetail.mb_id}</td>
             </tr>
-            </c:forEach>
             <tr>
                 <th>PW</th>
                 <td>
@@ -52,6 +51,7 @@
                     (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)                    
                 </td>
             </tr>
+            </c:forEach>
         </table>
 
         <br/>

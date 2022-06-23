@@ -27,7 +27,7 @@ public class MemberController {
 	@RequestMapping(value = "/memberDetail.go")
 	public String home(Model model) {
 		
-		return "redirect:/memberDetail.do";
+		return "redirect:/memberList";
 	}
 	
 	@RequestMapping(value = "/memberList")

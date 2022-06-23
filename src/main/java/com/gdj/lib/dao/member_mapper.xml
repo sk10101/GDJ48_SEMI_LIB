@@ -8,7 +8,7 @@
 	</select>
 	
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
-		SELECT mb_id, mb_pw, name, phone, email FROM member
+		SELECT mb_id, mb_pw, name, phone, email FROM member limit 1
 	</select>
 	
 
