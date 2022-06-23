@@ -25,7 +25,7 @@ public class LoginController {
 	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
 	public String memberhome( Model model) {
 		logger.info("로그인 페이지 이동");
-		return "login";
+		return "/login/login";
 	}
 	
 	
@@ -35,7 +35,7 @@ public class LoginController {
 		logger.info("회원가입 페이지 이동");
 		
 		
-		return "joinForm";
+		return "/login/joinForm";
 	}
 	
 	// 회원가입 시도
@@ -74,7 +74,7 @@ public class LoginController {
 		  model) { logger.info("id 찾기 페이지 이동");
 		  
 		  
-		  return "idFind"; }
+		  return "/login/idFind"; }
 		 
 	
 		@RequestMapping(value = "member/pwFind")
@@ -82,7 +82,7 @@ public class LoginController {
 			logger.info("pw 찾기 페이지 이동");
 			
 			
-			return "pwFind";
+			return "/login/pwFind";
 		}
 	
 		@RequestMapping("member/idFind.ajax")
@@ -129,7 +129,7 @@ public class LoginController {
 				session.removeAttribute("loginId");
 				model.addAttribute("msg", "로그아웃 되었습니다");
 			
-			return "login"; 
+			return "/login/login"; 
 		}
 	
 }

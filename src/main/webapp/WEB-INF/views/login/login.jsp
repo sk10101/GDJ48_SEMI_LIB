@@ -19,7 +19,7 @@
   }
    
   .login-form {
-      width: 300px;
+      width: 400px;
       background-color: #69c464;
       margin-right: auto;
       margin-left: auto;
@@ -53,12 +53,34 @@
   h3{
     text-align: center;
   }
+  .logo{
+    font-size: 30px;
+    font-weight: bold;
+    width: 300px;
+    height: 200px;
+    text-align: center; 
+    /* line-height: 120px; */
+    margin-bottom: 70px;
+}
+ section{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+  
   </style>
 <body>
-  <h3>login</h3>
+<section>
+	<div class="logo">
+            <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
+        </div>
+  
   <div class="login-form">
     <form action="login.do" method="POST">
         <table>
+        	
             <input type="text" name="id" class="text-field" placeholder="아이디">
             <input type="password" name="pw" class="text-field" placeholder="비밀번호">
         </table>
@@ -72,7 +94,7 @@
         </form>
        
 				
-	
+	</section>
 </body>
 <script>
 	var msg = "${msg}";
