@@ -14,11 +14,15 @@
 </style>
 </head>
 <body>
+	  <h3>${sessionScope.mb_id }님의 상세 정보</h3>
+	  <from action="memberDetail.do" method="post">
 	 <table>
+	 		<c:forEach items="${memberList}" var="memberDetail">
             <tr>
                 <th>ID</th>
                 <td>${memberDetail.mb_id}</td>
             </tr>
+            </c:forEach>
             <tr>
                 <th>PW</th>
                 <td>
@@ -53,6 +57,7 @@
         <br/>
 
         <table>
+         </from>
             <tr>
                 <th>PW 확인</th>
                 <td><textarea name="notice_content"></textarea></td>

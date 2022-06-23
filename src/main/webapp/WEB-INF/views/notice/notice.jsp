@@ -8,7 +8,54 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="/resources/js/jquery.twbsPagination.js"></script>
+
 <style>
+
+	header{
+    width: 100%;
+    height: 100px;
+    background: #fff;
+    color: #333
+}
+
+.header-wrap{ /*화면 중앙에 오게끔*/
+    width: 1200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.logo{
+    float: left;
+    width: 200px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    display: inline;
+    position: relative;
+}
+
+nav{
+    width: 800px;
+    height: 100px;
+    float: right;
+    display: block;
+    top: 0;
+    right: 0;
+    position: relative;
+}
+
+.navi { 
+    width: 600px; height: 30px; 
+    margin: 20px 0 0 350px;
+
+}
+
+.navi > li{
+    float: left; width: 200px; 
+    font-size: 20px;
+    text-align: center;
+}
+
 	h3 {text-align: left; font-weight: bold; font-size: 40px;}
     table {width: 80%}
     table, th, td {border: 1px solid black; border-collapse: collapse;}
@@ -16,9 +63,24 @@
     button{margin-bottom: 5px; margin-top: 5px; float: right;}
     #search {width: 20%;}
     #search_button {float: none;}
+    
 </style>
 </head>
     <body>
+    	<header>
+    		<div class="header-wrap">
+            <div class="logo">
+                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
+            </div>
+            <nav>
+                <ul class="navi">
+                    <li>***님 환영합니다.</li>
+                    <li><a href="/">로그아웃</a></li>
+                    <li><a href="#">관리자페이지</a></li>
+                </ul>
+            </nav>
+        </div>
+    	</header>
        <h3>공지사항</h3>
        <input type="button" value="삭제" onclick="noticeDelete()" />
        <button onclick="location.href='noticeWrite.go'">글쓰기</button>

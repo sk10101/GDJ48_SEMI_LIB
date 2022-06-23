@@ -1,5 +1,10 @@
 package com.gdj.lib.controller;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +28,24 @@ public class MemberController {
 	public String home(Model model) {
 		
 		return "redirect:/memberDetail.do";
+	}
+	
+	@RequestMapping(value = "/memberList")
+	public String memberList(Model model, HttpServletRequest request) {
+		String page = "main";
+		HttpSession memberSession = request.getSession();
+		
+		if(memberSession.getAttribute("loginId") == null ) {
+			page = "login/login";
+			model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
+		} else {
+			ArrayList<MemberDTO> memberList = service.memberList();
+			logger.info("memberList 갯수 : "+ memberList.size());
+			model.addAttribute("memberList", memberList);
+			page  = "myPage/info/memberDetail";
+		}
+		
+		return page;
 	}
 	
 	
