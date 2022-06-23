@@ -28,9 +28,9 @@ public interface BoardDAO {
 	
 	int photoDel(int claim_id);
 
-	ArrayList<BoardDTO> subjectSearch(int cnt, int offset, String search);
+	ArrayList<BoardDTO> subjectSearch(int cnt, int offset, String keyword);
 
-	ArrayList<BoardDTO> statusSearch(int cnt, int offset, String search);
+	ArrayList<BoardDTO> statusSearch(int cnt, int offset, String keyword);
 
 	
 }

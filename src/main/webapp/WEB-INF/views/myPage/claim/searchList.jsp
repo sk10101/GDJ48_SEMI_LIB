@@ -92,23 +92,7 @@
 	             <th>삭제</th>
 	         </tr>
     	</thead>
-    	<tbody id="claimList">
-    	<!-- ajax 로 출력할 거라서 빼놨음
-    		<c:forEach items="${claimList}" var="dto">
-    			<tr>
-    				<td id="claimID">${dto.claim_id}</td>
-    				<td><a href="claimDetail?claim_id=${dto.claim_id}">${dto.claim_title}</a></td>
-    				<td id="claimStatus">${dto.status}</td>
-    				<td>${dto.claim_date}</td>
-    				<td id="delete">
-    					<c:choose>
-    						<c:when test="${dto.status eq '미처리'}"><button id="delBtn">삭제</button></c:when>
-    						<c:otherwise></c:otherwise>
-    					</c:choose>
-    				</td>
-    			</tr>
-    		</c:forEach>
-    	-->
+    	<tbody id="searchList">
     	</tbody>
 	    	<tr>
 				<td colspan="5" id="paging">
@@ -122,8 +106,8 @@
 			</tr>
 			<tr>
 				<td colspan ="5" id="paging">
-					<form name="search-form" autocomplete="off">
-				        <select id="pagePerNum">
+					<form action="searchList">
+				        <select id="pagePerNum" name="cnt">
 							<option value="5">5</option>
 							<option value="10">10</option>
 							<option value="15">15</option>
@@ -134,13 +118,19 @@
 				       		<option>처리상태</option>
 				       	</select>
 			        	<input type="search" placeholder="검색" name="keyword"/>
-			        	<input type="button" onclick="searchList()" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input type="submit" id="btnSearch" value="검색" style="width: 60px; margin-top: 10px;"/>
 					</form>
 				</td>
 			</tr>
         </table>
 </body>
 <script>
+	/*
+	$(document).on('click','#btnSearch', function(e){
+		e.preventDefault();
+		var url = "${claimList}";
+	});
+	*/
 	
 	// select 의 option 변경
 	$('#pagePerNum').on('change',function(){
@@ -150,16 +140,14 @@
 		listCall(currPage);
 	})
 	
-	
-	
-	function listCall(page) {
+	function listCall(page,keyword,option) {
 		
 		var pagePerNum = $('#pagePerNum').val();
 		console.log("param page : " + page);
 		
 		$.ajax({
 			type:'GET',
-			url:'claimList.ajax',
+			url:'searchList.ajax',
 			data:{
 				cnt : pagePerNum,
 				page : page
@@ -167,7 +155,7 @@
 			dataType:'JSON',
 			success:function(data){
 				console.log(data);
-				drawList(data.claimList);
+				drawList(data.searchList);
 				currPage = data.currPage;
 				// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
 				$("#pagination").twbsPagination({
@@ -189,58 +177,42 @@
 	}
 	
 	
-	function drawList(claimList) {
+	function drawList(searchList) {
 		var content = '';
 		var date = new Date();
-		claimList.forEach(function(item){
+		searchList.forEach(function(item){
 			// console.log(item);
-			content += '	<tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
-			content += '		<td id="claimID">'+item.claim_id+'</td>';
-			content += '		<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
-			content += '		<td class="claimStatus">'+item.status+'</td>';
-			content += '		<td>'+item.claim_date+'</td>';
-			content += '		<td class="delete">';
-			content += '			<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
-			content += '		</td>';
-			content += '	</tr>';
+			content += '<tr no="' + item.claim_id + '">';
+			content += '<td id="claimID">'+item.claim_id+'</td>';
+			content += '<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+			content += '<td class="claimStatus" no="'+item.status+'">'+item.status+'</td>';
+			content += '<td>'+item.claim_date+'</td>';
+			content += '<td class="delete">';
+			content += '<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
+			content += '</td>'
+			content += '</tr>';
+			
 		});
+		
 		// 혹시 모를 상황을 대비해 깨끗하게 비워두고 쌓는다. (append 는 있는 것에 계속해서 이어 붙이는 기능이기 때문)
 		$("#claimList").empty();
 		$("#claimList").append(content);
-	}
-	
-	function searchList(page) {
 		
-		var pagePerNum = $('#pagePerNum').val();
 		
-		$.ajax({
-			type: 'GET',
-			url: ,
-			data:{
-				cnt : pagePerNum,
-				
-			},
-		})
+		
 	}
 	
 	var currPage = 1;
 	listCall(currPage);
 	
-	var status = "";
-	$(document).ready(function() {
-		console.log($("#claim_table").children().eq(1));
-	});
-	
-	
 	// 삭제 버튼 기능구현 (동적으로 생성한 버튼은 javascript 로 구현)
 	function clickEvt(btn) {
-		var claim_id = $(btn).parent().parent().attr("cID");
+		var claim_id = $(btn).parent().parent().attr("no");
 		console.log($(btn));
-			location.href='/claimDel.do?claim_id=' + claim_id;
-		
+		location.href='/claimDel.do?claim_id=' + claim_id;
 	}
-	
-	/* 삭제 기능 다른 방법
+		
+		/* 삭제 기능 다른 방법
 	$(document).ready(function() {
 		$("#claim_table").on('click', '.delBtn', function() {
 			console.log($(this));
@@ -249,6 +221,6 @@
 			location.href='/claimDel.do?claim_id='+claim_id;
 		});
 	});
-	*/
+		*/
 </script>
 </html>

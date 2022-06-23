@@ -18,6 +18,18 @@
 			ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<select id="subjectSearch" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+			WHERE claim_title LIKE CONCAT('%',#{param3},'%')
+				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="statusSearch" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+			WHERE status LIKE CONCAT('%',#{param3},'%')
+				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
 	<insert id="claimWrite" 
 		useGeneratedKeys="true"
 		keyColumn="claim_id"
@@ -57,17 +69,5 @@
 	<delete id="photoDel">
 		DELETE FROM photo WHERE post_id = #{param1}
 	</delete>
-	
-	<select id="subjectSearch" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
-			WHERE claim_title LIKE CONCAT('%',#{param1},'%')
-				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
-	</select>
-	
-	<select id="statusSearch" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
-			WHERE status LIKE CONCAT('%',#{param1},'%')
-				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
-	</select>
 	
 </mapper>

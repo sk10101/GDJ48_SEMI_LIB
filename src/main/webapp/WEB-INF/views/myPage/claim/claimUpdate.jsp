@@ -115,7 +115,7 @@
                 <td>
                 	<input type="file" name="photos" multiple="multiple"/>
                 	<c:forEach items="${claimList}" var="path">
-						<p><img src="/image/${path.newFileName}" width="500"/></p>
+						<p><img src="/photo/${path.newFileName}" width="500"/></p>
 					</c:forEach>
                 </td>
             </tr>

@@ -3,6 +3,9 @@ package com.gdj.lib.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +38,17 @@ public class BoardController {
 		logger.info("건의사항 게시글의 개수 : " + claimList.size());
 		model.addAttribute("claimList",claimList);
 		*/
+		
 		return "myPage/claim/claimList";
 	}
 
 	
 	// 페이징 처리
 	@RequestMapping(value = "/claimList.ajax")
-	public @ResponseBody HashMap<String, Object> claimList(Model model, @RequestParam HashMap<String, String> params) {
+	public @ResponseBody HashMap<String, Object> claimList(@RequestParam HashMap<String, String> params) {
 		
 		logger.info("리스트 요청 : {}", params);
-		logger.info("건의사항 리스트 요청");
+		
 		// model.addAttribute("claimList",service.claimListPaging(params));
 		HashMap<String, Object> claimMap = service.claimList(params);
 		/*
@@ -55,6 +59,33 @@ public class BoardController {
 		return claimMap;
 	}
 	
+	/*
+	// 검색 목록 페이지 이동
+		@RequestMapping(value = "/searchList", method = RequestMethod.GET)
+		public String searchList(Model model) {
+			
+			logger.info("검색 목록 페이지 이동");
+			return "myPage/claim/searchList";
+		}
+
+		
+	// 검색 목록 페이징 처리
+	@RequestMapping(value = "/searchList.ajax")
+	public @ResponseBody HashMap<String, Object> searchList(@RequestParam HashMap<String, String> params, HttpServletRequest request) {
+		
+		String keyword = request.getParameter("keyword");
+		String option = request.getParameter("option");
+		params.replace(keyword, "처리중");
+		params.replace(option, "처리상태");
+		logger.info("검색결과 목록 요청 : {}", params);
+		logger.info("입력한 검색어 (옵션) : " + keyword+ " (" + option + ")");
+		
+		
+		HashMap<String, Object> claimMap = service.searchList(params);
+		
+		return claimMap;
+	}
+	*/
 	
 	@RequestMapping(value = "/claimWrite.go")
 	public String claimWriteForm() {
@@ -114,7 +145,7 @@ public class BoardController {
 		return "redirect:/claimList";
 	}
 	
-	
+	/*
 	// 검색 기능 (옵션 추가)
 	@RequestMapping(value = "/claimSearch.do")
 	public @ResponseBody HashMap<String, Object> claimSearch(Model model, @RequestParam HashMap<String, String> params) {
@@ -125,6 +156,6 @@ public class BoardController {
 		
 		return searchList;
 	}
-	
+	*/
 }
 
