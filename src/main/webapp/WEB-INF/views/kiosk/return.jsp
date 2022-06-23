@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-            	<c:forEach items="${list}" var="dto">
+                <c:forEach items="${list}" var="dto">
 				<c:set var="i" value="${i+1 }"></c:set>
 					<tr>
 						<td><input type="checkbox" class="chkbox" name="chkbox" id="chkbox${i }">
@@ -38,12 +38,12 @@
 				</c:forEach>
             </tbody>
         </table>
-        <button class="btn-book" onclick="borrow()">대출하기</button>
+        <button class="btn-book" onclick="bookReturn()">반납하기</button>
     </div>
 </body>
 <script>
-
-	function borrow(){
+	
+	function bookReturn(){
 		
 		var chkArr = new Array();
 		var checkbox = $("input[name=chkbox]:checked");
@@ -70,18 +70,17 @@
 		
 		$.ajax({
 			type:'get',
-			url:'borrow.ajax',
-			data:{borrowList:chkArr},
+			url:'return.ajax',
+			data:{returnList:chkArr},
 			dataType:'json',
 			success:function(data){
-				location.href = 'ki_borrowSuccess.go';
+				location.href = 'ki_returnSuccess.go';
 			},
 			error:function(e){
 				console.log(e);
 			}
 		});
 	}
-	
-	
+
 </script>
 </html>

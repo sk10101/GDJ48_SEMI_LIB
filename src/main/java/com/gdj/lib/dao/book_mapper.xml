@@ -66,4 +66,5 @@
 			VALUES("4", #{b_id}, #{oriFileName}, #{newFileName})
 	</insert>
 <!-- 관리자 도서관리 끝 -->	
+
 </mapper>

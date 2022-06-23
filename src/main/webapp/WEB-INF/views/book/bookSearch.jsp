@@ -80,6 +80,7 @@
 		 		</tr>       
 	        </table>
         </div>
+<<<<<<< HEAD
     </section>
 </body>
 <script>
@@ -156,23 +157,3 @@ Array.from(selected_rows).forEach(item => console.log(item));
 
 </script>
 </html>
-
-<!-- 
-
-<c:forEach items="${dto}" var="dto">
-					<tr>
-						<td>${dto.b_id}</td>
-						<td><a href="bookDetail.do?b_id=${dto.b_id}">${dto.b_title}</a></td>
-						<td>${dto.writer}</td>
-						<td>${dto.publisher}</td>
-						<td>${dto.b_status}</td>
-						<td id="addList">
-							<c:choose>
-								<c:when test="${dto.b_status eq '대출중'}">Y</c:when>
-								<c:otherwise>N</c:otherwise>
-							</c:choose>
-						</td>
-					</tr>
-				</c:forEach>
-
- -->

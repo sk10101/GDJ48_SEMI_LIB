@@ -2,12 +2,17 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class BoardDTO {
 	
 	// 답변 DTO
 	private int reply_id;
 	private String mb_id;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd" , timezone = "Asia/Seoul")
 	private Date reply_date;
+	
 	private String reply_content;
 	
 	public int getReply_id() {
@@ -40,7 +45,10 @@ public class BoardDTO {
 	// 건의사항 DTO
 	private int claim_id;
 	private String claim_title;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date claim_date;
+	
 	private String claim_content;
 	private String status;
 	
