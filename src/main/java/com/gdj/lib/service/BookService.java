@@ -205,6 +205,7 @@ public class BookService {
 
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 // 관리자 도서관리 서비스 끝
 =======
 //
@@ -214,6 +215,9 @@ public class BookService {
 //		logger.info("대출한 책 권수"+row);
 //		
 //	}
+=======
+
+>>>>>>> origin/master
 
 	
 

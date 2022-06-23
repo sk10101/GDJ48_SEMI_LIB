@@ -17,8 +17,6 @@ public interface BookDAO {
 
 	ArrayList<BookDTO> bookList(int cnt, int offset);
 
-	
-
 	int bookUpdate(HashMap<String, String> params);
 
 	int bookAdd(BookDTO dto);

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -67,4 +68,31 @@
 	</insert>
 <!-- 관리자 도서관리 끝 -->	
 
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdj.lib.dao.BookDAO">
+	
+	<select id="list" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book ORDER BY b_id DESC
+	</select>
+	
+	
+	<update id="bookUpdate" parameterType="hashmap">
+		UPDATE book SET b_title = #{b_title}
+			,writer = #{writer} , publisher = #{publisher}
+			,issue = #{issue} , b_date = #{b_date}
+			,b_status = #{b_status}
+		WHERE b_id = #{b_id}
+	</update>
+	
+	<select id="bookSearch" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status FROM book 
+		WHERE b_title LIKE CONCAT('%', #{bookSearchWord}, '%')
+	</select>
+	
+	
+
+>>>>>>> origin/master
 </mapper>

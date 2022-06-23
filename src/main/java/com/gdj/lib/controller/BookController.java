@@ -33,15 +33,22 @@ public class BookController {
 	@Autowired BookService service;
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// 도서 검색 결과 ---->
 	/*
 	@RequestMapping(value = "/book.go")
 	@ResponseBody
 	public String bookSearch(@RequestParam String option, 
 			@RequestParam String word) {
+=======
+
+	@RequestMapping(value = "/bookList.go")
+	public String bookList(Model model) {
+>>>>>>> origin/master
 		
 		logger.info("도서 검색결과로 이동 :" + option +" / "+ word);
 		
+<<<<<<< HEAD
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		ArrayList<BookDTO> dto = service.bookSearch(option,word);
 		map.put("dto",dto);
@@ -85,6 +92,15 @@ public class BookController {
 		return map;
 	}
 	
+=======
+		logger.info("도서 목록 요청"); 
+		ArrayList<BookDTO> list = service.list();
+		logger.info("list 갯수 :"+list.size());
+		model.addAttribute("list",list);				
+		return "admin/book/bookList";
+	}	
+
+>>>>>>> origin/master
 	
 	//관리자 도서관리 페이지 시작--->
 	
@@ -166,4 +182,11 @@ public class BookController {
 		return "book/bookSearch";
 	}
 	
+<<<<<<< HEAD
+=======
+
+	
+	
+	
+>>>>>>> origin/master
 }
