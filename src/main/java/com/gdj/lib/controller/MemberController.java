@@ -35,10 +35,16 @@ public class MemberController {
 		String page = "main";
 		HttpSession memberSession = request.getSession();
 		
+		if(memberSession.getAttribute("loginId") == null) {
+			page = "login/login";
+			model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
+		} else {
+		
 			ArrayList<MemberDTO> memberList = service.memberList();
 			logger.info("memberList 갯수 : "+ memberList.size());
 			model.addAttribute("memberList", memberList);
 			page  = "myPage/info/memberDetail";
+		}
 		
 		
 		return page;
