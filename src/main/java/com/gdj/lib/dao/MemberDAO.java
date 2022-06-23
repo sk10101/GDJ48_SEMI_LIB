@@ -1,11 +1,18 @@
 package com.gdj.lib.dao;
 
+
+import com.gdj.lib.dto.MemberDTO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.gdj.lib.dto.MemberDTO;
 
 public interface MemberDAO {
+
+
+	MemberDTO memberDetail(String mb_id);
+
 
 	ArrayList<MemberDTO> memberList();
 
@@ -45,8 +52,8 @@ public interface MemberDAO {
 
 	String login(String id, String pw);
 
-	
 
 	
+
 
 }
