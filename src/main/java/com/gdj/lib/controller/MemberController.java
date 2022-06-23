@@ -110,7 +110,7 @@ public class MemberController {
 
 		return "admin/black/blackList";
 	}
-	
+
 	@RequestMapping(value = "/blackAdd.go")
 	public String blackAdd() {
 		logger.info("블랙리스트 추가폼 도착");
@@ -118,9 +118,35 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/blackAdd.do")
-	public String blackAdd(Model model, HttpSession session) {
+	public String blackAdd(Model model, @RequestParam HashMap<String, String> params) {
+		
+		//1. 요청 들어온 회원 id랑 디비에 있는 회원 아이디가 실제 존재하는지 확인.
+		String id = params.get("mb_id");
+		String s_id = service.idget(id);
+		String page = null;
+		
+		//2. 맞는 id라면 그 회원정보랑 블랙리스트 테이블 조인해서 블랙리스트 테이블에 값 넣어주기
+		if(s_id != null) {
+			logger.info("s_id 들어옴 : "+s_id);
+			if (service.blackAdd(params) == true) { 
+				page = "redirect:/blackList.do";
+				model.addAttribute("msg","블랙리스트 목록에 추가되었습니다.");
+			}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
+				model.addAttribute("msg","입력한 회원 ID 를 다시 확인해주세요.");
+				page = "admin/black/blackAdd.do";
+			}
+		}
+		return page;
+	}
+	
+	@RequestMapping(value = "/blackDetail.do")
+	public String blackDetail( Model model, @RequestParam String black_id) {
 
-		return "admin/black/blackList";
+		logger.info("블랙리스트 상세보기 요청 :"+black_id);
+		MemberDTO dto = service.blackDetail(black_id);
+		model.addAttribute("dto",dto);
+		
+		return "admin/black/blackDetail";
 	}
 	
 	@RequestMapping(value = "/penaltyList.do")

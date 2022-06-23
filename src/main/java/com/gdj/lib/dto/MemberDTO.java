@@ -14,6 +14,7 @@ public class MemberDTO {
 	private String mb_class;
 	private Date leave_date;
 	
+	private int black_id;
 	private String admin_start;
 	private Date black_start;
 	private String black_reason;
@@ -156,6 +157,13 @@ public class MemberDTO {
 	public void setLeave_date(Date leave_date) {
 		this.leave_date = leave_date;
 	}
+	public int getBlack_id() {
+		return black_id;
+	}
+	public void setBlack_id(int black_id) {
+		this.black_id = black_id;
+	}
+	
 	
 	
 

@@ -44,7 +44,7 @@
 	        <tbody>
 				<c:forEach items="${blackList }" var="dto">
 					<tr>
-						<td><a href="memberDetail.do?mb_id=${dto.mb_id }">${dto.mb_id }</a></td>
+						<td><a href="blackDetail.do?black_id=${dto.black_id }">${dto.mb_id }</a></td>
 						<td>${dto.admin_start }</td>
 						<td>${dto.black_start }</td>
 						<td>${dto.admin_end }</td>

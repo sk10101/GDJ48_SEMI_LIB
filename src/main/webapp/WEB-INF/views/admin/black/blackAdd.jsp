@@ -31,25 +31,26 @@
 </head>
 <body>
 	<h3>블랙리스트 지정</h3>
-    <div class="header">
-        <th>***님 환영합니다.</th>
-        <a href="#">로그아웃</a>
-        <a href="#">관리자페이지</a>
-    </div>
-    <br/>
-    <table class="bbs">
-        <tr>
-            <td>회원ID</td>          
-            <th><input type="text" value=""/></th>            
-        </tr>
-        <tr>        
-            <td>지정사유</td>
-            <th><input type="text" value=""/></th>                        
-        </tr>
-    </table>
-    <div>
-        <button type="submit">추가</button>
-    </div>
+	<form action="blackAdd.do" method="post">
+	    <table class="bbs">
+	        <tr>
+	            <td>회원ID</td>          
+	            <th><input type="text" name="mb_id" value="${dto.mb_id }"/></th>            
+	        </tr>
+	        <tr>        
+	            <td>지정사유</td>
+	            <th><input type="text"  name="black_reason" value="${dto.black_reason }"/></th>                        
+	        </tr>
+	    </table>
+	    <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
+	    <input type="submit" value="추가"/>
+    </form>
 </body>
-<script></script>
+<script>
+	var msg ="${msg}";
+	
+	if (msg != "") {
+		alert(msg);
+	}
+</script>
 </html>

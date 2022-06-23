@@ -19,5 +19,12 @@ public interface MemberDAO {
 
 	ArrayList<MemberDTO> blackList();
 
+	MemberDTO blackDetail(String black_id);
+
+	String idget(String id);
+
+	int blackAdd(MemberDTO dto);
+
+
 
 }

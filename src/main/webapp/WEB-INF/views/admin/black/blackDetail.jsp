@@ -31,30 +31,31 @@
 </head>
 <body>
 	<h3>블랙리스트 회원 상세보기</h3>
+    <br/>
     <table class="bbs">
         <tr>
             <th>회원ID</th>
-            <td></td>
+            <td>${dto.mb_id }</td>
         </tr>
         <tr>
             <th>이름</th>
-            <td></td>
+            <td>${dto.name }</td>
         </tr>
         <tr>
             <th>관리자ID</th>
-            <td></td>
+            <td>${dto.admin_start }</td>
         </tr>
         <tr>
             <th>지정일자</th>
-            <td></td>
+            <td>${dto.black_start }</td>
         </tr>
         <tr>
             <th>지정사유</th>
-            <td></td>
+            <td>${dto.black_reason }</td>
         </tr>
         <tr>
             <th>해제</th>
-            <td><input type="checkbox" name="b" value="cancel"/></td>
+            <td><input type="checkbox" name="cancel" value="cancel"/></td>
         </tr>
         <tr>
             <th>해제사유</th>
@@ -62,7 +63,7 @@
         </tr>
     </table>
     <div>
-        <button>돌아가기</button>
+        <button onclick="location.href='blackList.do'">돌아가기</button>
         <button>수정</button>
     </div>
 </body>
