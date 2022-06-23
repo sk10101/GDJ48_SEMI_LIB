@@ -2,17 +2,28 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class BookDTO {
 	
 	private int b_id;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date b_date;
 	private String b_title;
 	private String writer;
 	private String publisher;
 	private int issue;
 	private String b_status;
+	private boolean b_reserve;
 	
 	
+	public boolean isB_reserve() {
+		return b_reserve;
+	}
+	public void setB_reserve(boolean b_reserve) {
+		this.b_reserve = b_reserve;
+	}
 	public int getB_id() {
 		return b_id;
 	}

@@ -2,10 +2,17 @@ package com.gdj.lib.dto;
 
 public class PhotoDTO {
 	private int photo_id;
+	private int category_id;
 	private int post_id;
 	private String oriFileName;
 	private String newFileName;
 	
+	public int getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(int category_id) {
+		this.category_id = category_id;
+	}
 	public int getPhoto_id() {
 		return photo_id;
 	}
