@@ -126,7 +126,7 @@
         listCall(currPage);
         
         $("#pagePerNum").on('change',function(){
-        	console.log("currPage : "+currPage);
+        	// console.log("currPage : "+currPage);
         	
         	//페이지당 보여줄 수 변경시 계산된 페이지 적용이 안된다.(플러그인 문제)
         	//페이지당 보여줄 수 변경시 기존 페이징 요소를 없애고 다시 만들어 준다.
@@ -137,7 +137,7 @@
         function listCall(page) {
         	
         	var pagePerNum = $("#pagePerNum").val();
-        	// console.log("param page : " +page);
+        	 // console.log("param page : " +page);
         	
         	
         	$.ajax({

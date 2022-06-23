@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdj.lib.dao.MemberDAO">
+	
+	<select id="memberDetail" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
+		Select mb_id, mb_pw, name, phone, email FROM member WHERE mb_id = #{mb_id}
+	</select>
+	
+</mapper>
