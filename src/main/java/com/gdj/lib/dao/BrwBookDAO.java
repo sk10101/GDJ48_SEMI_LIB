@@ -13,7 +13,6 @@ public interface BrwBookDAO {
 
 	void brw(String loginId, String b_id);
 
-<<<<<<< HEAD
 	void reason(String loginId, String b_id);
 
 	ArrayList<BookDTO> brwList();
@@ -21,9 +20,7 @@ public interface BrwBookDAO {
 
 
 
-=======
 	void bookreserve(String loginId, String b_id);
->>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 
 	
 

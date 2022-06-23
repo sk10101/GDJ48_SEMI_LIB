@@ -39,7 +39,6 @@ public class BrwBookService {
 		return "redirect:/bookDetail?b_id="+b_id;
 	}
 
-<<<<<<< HEAD
 public String reason(String b_id) {
 		
 		logger.info("도서예약 서비스 신청"+b_id);
@@ -62,7 +61,6 @@ public String reason(String b_id) {
 	
 
 
-=======
 
 	public String bookreserve(String b_id) {
 		logger.info("도서예약 서비스 신청"+b_id);
@@ -73,7 +71,6 @@ public String reason(String b_id) {
 		
 	}
 
->>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
 	
 
 
