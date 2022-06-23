@@ -3,11 +3,11 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdj.lib.dao.MemberDAO">
 	
-	<select id="memberDetail" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
+	<select id="memberUpdateDetail" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
 		Select mb_id, mb_pw, name, phone, email FROM member WHERE mb_id = #{mb_id}
 	</select>
 	
-	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
+	<select id="memberUpdateList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, mb_pw, name, phone, email FROM member
 	</select>
 	

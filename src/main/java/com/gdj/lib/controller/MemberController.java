@@ -24,20 +24,20 @@ public class MemberController {
 	
 	@Autowired MemberService service;
 	
-	@RequestMapping(value = "/memberDetail.go")
-	public String home(Model model) {
+	@RequestMapping(value = "/memberUpdateDetail.go")
+	public String memberUpdateDetail(Model model) {
 		
-		return "redirect:/memberList";
+		return "redirect:/memberUpdateList";
 	}
 	
-	@RequestMapping(value = "/memberList")
-	public String memberList(Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/memberUpdateList")
+	public String memberUpdateList(Model model, HttpServletRequest request) {
 		String page = "main";
 		HttpSession memberSession = request.getSession();
 		
-			ArrayList<MemberDTO> memberList = service.memberList();
-			logger.info("memberList 갯수 : "+ memberList.size());
-			model.addAttribute("memberList", memberList);
+			ArrayList<MemberDTO> memberUpdateList = service.memberUpdateList();
+			logger.info("membeUpdateList 갯수 : "+ memberUpdateList.size());
+			model.addAttribute("memberUpdateList", memberUpdateList);
 			page  = "myPage/info/memberDetail";
 		
 		
@@ -45,15 +45,15 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value = "/memberDetail.do")
-	public String memberDetail(Model model, @RequestParam String mb_id) {
+	@RequestMapping(value = "/memberUpdateDetail.do")
+	public String memberUpdateDetail(Model model, @RequestParam String mb_id) {
 		
 		
 		logger.info("회원정보 상세보기 할 아이디 : "+mb_id);
-		MemberDTO dto = service.memberDetail(mb_id);
+		MemberDTO dto = service.memberUpdateDetail(mb_id);
 		
 		
-		model.addAttribute("memberDetail", dto);
+		model.addAttribute("memberUpdateDetail", dto);
 		
 		return "myPage/info/memberDetail";
 	}

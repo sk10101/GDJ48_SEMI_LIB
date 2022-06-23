@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public interface MemberDAO {
 
-	MemberDTO memberDetail(String mb_id);
+	MemberDTO memberUpdateDetail(String mb_id);
 
 	int memberjoin(HashMap<String, String> params);
 
@@ -22,7 +22,7 @@ public interface MemberDAO {
 
 	String login(String id, String pw);
 
-	ArrayList<MemberDTO> memberList();
+	ArrayList<MemberDTO> memberUpdateList();
 
 	
 
