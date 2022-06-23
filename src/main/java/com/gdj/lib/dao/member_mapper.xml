@@ -1,11 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	<mapper namespace="com.gdj.lib.dao.MemberDAO">
-		<insert id="memberjoin" parameterType="hashmap">
-			INSERT INTO member(mb_id,mb_pw,name,phone,email,mb_class)
-			VALUES(#{id},#{pw},#{name},#{phone},#{email},'일반회원')
-		</insert>
+	
+<mapper namespace="com.gdj.lib.dao.MemberDAO">
+
+	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'
+	</select>
+	
+	<select id="detail" parameterType="String" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member WHERE mb_id = #{mb_id}	
+	</select>
+	
+	<select id="adminList" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT mb_id, name, phone FROM member where mb_class = '관리자'
+	</select>
+	
+	<update id="update" parameterType="hashmap">
+		UPDATE member SET mb_class = #{mb_class}
+		WHERE mb_id = #{mb_id}
+	</update>
+	
+	<select id="blackList" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT black_id,mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
+	</select>
+	
+	<select id="blackDetail" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM blacklist WHERE black_id = #{param1}
+	</select>
+	
+	<select id="idget" resultType="String">
+		SELECT mb_id FROM member WHERE mb_id = #{mb_id}
+	</select>
+	
+	<insert id="blackAdd" parameterType="com.gdj.lib.dto.MemberDTO">
+		INSERT INTO blacklist (mb_id,admin_start, black_reason) 
+			VALUES(#{mb_id},#{admin_start},#{black_reason})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- ============================================== -->
+	
+	<insert id="memberjoin" parameterType="hashmap">
+		INSERT INTO member(mb_id,mb_pw,name,phone,email,mb_class)
+		VALUES(#{id},#{pw},#{name},#{phone},#{email},'일반회원')
+	</insert>
 		
 	<select id="memberoverlay" parameterType="String" resultType="String">
 		SELECT * FROM member WHERE mb_id = #{chkId}
@@ -31,6 +76,8 @@
 	SELECT mb_id FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
+</mapper>
+
+
 	
 	
-	</mapper>
