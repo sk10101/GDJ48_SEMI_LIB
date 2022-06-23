@@ -43,6 +43,7 @@ public class BoardService {
 		int page = Integer.parseInt(params.get("page"));
 		String option = params.get("option");
 		String keyword = params.get("keyword");
+		
 		logger.info("보여줄 페이지 : " + page);
 		
 		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
@@ -93,7 +94,6 @@ public class BoardService {
 			map.put("claimList", searchList);
 			
 		}
-		
 		return map;
 	}
 	
@@ -145,7 +145,7 @@ public class BoardService {
 		
 		return map;
 	}
-	*/
+	 */
 	
 	
 	// 건의사항 글쓰기폼 (나중에 로그인했을 때 아이디 받아오는 것 추가해야함)

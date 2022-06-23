@@ -122,25 +122,29 @@
 			</tr>
 			<tr>
 				<td colspan ="5" id="paging">
-					<form name="search-form" autocomplete="off">
+					<form action="claimList">
 				        <select id="pagePerNum">
 							<option value="5">5</option>
 							<option value="10">10</option>
 							<option value="15">15</option>
 							<option value="20">20</option>
 						</select>
-				       	<select name="option">
-				       		<option>제목</option>
-				       		<option>처리상태</option>
+				       	<select id="option" name="option">
+				       		<option value="제목">제목</option>
+				       		<option value="처리상태">처리상태</option>
 				       	</select>
-			        	<input type="search" placeholder="검색" name="keyword"/>
-			        	<input type="button" onclick="searchList()" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input id="keyword" type="search" placeholder="검색" name="keyword" value=""/>
+			        	<input id="searchBtn" type="button" onclick="searchList()" value="검색" style="width: 60px; margin-top: 10px;"/>
 					</form>
 				</td>
 			</tr>
         </table>
 </body>
 <script>
+	
+	
+	var currPage = 1;
+	listCall(currPage);
 	
 	// select 의 option 변경
 	$('#pagePerNum').on('change',function(){
@@ -209,22 +213,53 @@
 		$("#claimList").append(content);
 	}
 	
+	
+	$('#searchBtn').on('click',function(){
+		console.log(currPage);
+		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	})
+	
+	// 검색 결과 출력
 	function searchList(page) {
 		
 		var pagePerNum = $('#pagePerNum').val();
+		var keyword = $('#keyword').attr("value");
+		var option = $('#option').attr("value");
+		console.log(keyword);
 		
 		$.ajax({
 			type: 'GET',
-			url: ,
+			url: 'claimList.ajax',
 			data:{
 				cnt : pagePerNum,
-				
+				page : page
 			},
+			dataType:'JSON',
+			success: function(data){
+				// 테이블 초기화
+				$("#claimList").empty();
+				drawList(data.claimList);
+				currPage = 1;
+				// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+				$("#pagination").twbsPagination({
+					startPage: 1, // 시작 페이지
+					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+					onPageClick: function(e, page) {
+						console.log(page); // 사용자가 클릭한 페이지
+						currPage = page;
+						listCall(page);
+					}
+				});
+			},
+			error:function(e){
+				console.log(e);
+			}
 		})
 	}
 	
-	var currPage = 1;
-	listCall(currPage);
 	
 	var status = "";
 	$(document).ready(function() {
