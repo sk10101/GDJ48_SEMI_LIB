@@ -87,6 +87,7 @@ public class MemberService {
 
 	public MemberDTO blackCancel(String black_id) {
 		
+		logger.info("블랙리스트 해제 서비스");
 		MemberDTO dto = new MemberDTO();
 		dto.setAdmin_end("admin");
 		

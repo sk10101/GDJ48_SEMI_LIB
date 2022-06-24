@@ -6,7 +6,6 @@ import com.gdj.lib.dto.MemberDTO;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.gdj.lib.dto.MemberDTO;
 
 public interface MemberDAO {
 

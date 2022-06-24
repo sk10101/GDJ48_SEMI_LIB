@@ -2,8 +2,6 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class MemberDTO {
 	
 	private String mb_id;
@@ -12,7 +10,8 @@ public class MemberDTO {
 	private String name;
 	private String email;
 	private String phone;
-
+	private Date reg_date;
+	private Date leave_date;
 	private String mb_class;
 		
 	private int black_id;
@@ -169,13 +168,6 @@ public class MemberDTO {
 		this.black_id = black_id;
 	}
 	
-
-@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date reg_date;
-
-@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date leave_date;
-
 	
 
 }
