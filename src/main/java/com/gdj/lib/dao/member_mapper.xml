@@ -3,8 +3,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdj.lib.dao.MemberDAO">
 	
+
+	<select id="memberUpdateDetailMy" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
+		Select mb_id, mb_pw, name, phone, email FROM member WHERE mb_id = #{mb_id}
+	</select>
+	
+	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT mb_id, mb_pw, name, phone, email FROM member
+		
+	</select>
+
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'
+
 	</select>
 	
 	<select id="detail" parameterType="String" resultType="com.gdj.lib.dto.MemberDTO">
@@ -75,6 +86,7 @@
 	SELECT mb_id FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
+	
 </mapper>
 
 
