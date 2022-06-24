@@ -42,8 +42,8 @@ public class BoardService {
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
 		String option = params.get("option");
-		String keyword = params.get("keyword");
-		
+		String word = params.get("word");
+		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : " + page);
 		
 		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
@@ -72,21 +72,21 @@ public class BoardService {
 		map.put("claimList", claimList);
 		*/
 		
-		if(keyword == null) {
+		if(word == null) {
 			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
 			logger.info("건의사항 게시글의 개수 : " +claimList.size());
 			map.put("claimList", claimList);
 		}
 		
-		if(keyword != null) {
-			logger.info("검색어 (옵션) : " + keyword+ " (" + option + ")");
+		if(word != null) {
+			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
 			
 			
 			if(option.equals("제목")) {
-				searchList = dao.subjectSearch(cnt,page,keyword);
+				searchList = dao.subjectSearch(cnt,page,word);
 				logger.info("제목 옵션 설정");
 			} else {
-				searchList = dao.statusSearch(cnt,page,keyword);
+				searchList = dao.statusSearch(cnt,page,word);
 				logger.info("상태 옵션 설정");
 			}
 			
