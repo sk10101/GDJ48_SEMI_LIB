@@ -1,12 +1,16 @@
 package com.gdj.lib.service;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdj.lib.dao.MemberDAO;
@@ -79,10 +83,5 @@ public class MemberService {
 		// 나중에 로그인 기능 추가하면 params 넣을것 (추후 수정)
 		return success;
 	}
-
-
-
-
-
-
 }
+

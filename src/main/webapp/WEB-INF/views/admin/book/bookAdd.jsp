@@ -36,10 +36,10 @@
     </aside>
     <section>
         <div class="content">
-            <form action="bookAdd.do" method="GET">
-                <table>
+            <form action="bookAdd.do" method="post" enctype="multipart/form-data">
+                <table class="book">
                     <tr>
-                        <th>제목</th>
+                        <th>책 제목</th>
                         <td><input type="text" name="b_title"></td>
                     </tr>
                     <tr>
@@ -55,8 +55,8 @@
                         <td><input type="text" name="issue"></td>
                     </tr>
                     <tr>
-                        <th>책표지</th>
-                        <td><input type="text" name="b_img"></td>
+                        <th>책 표지</th>
+                        <td><input type="file" name="b_img"></td>
                     </tr>
                 </table>
                 <input type="button" value="목록보기" onclick="location.href='bookList.go' "/>
