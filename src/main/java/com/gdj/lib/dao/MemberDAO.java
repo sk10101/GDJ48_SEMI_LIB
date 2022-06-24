@@ -10,8 +10,11 @@ import com.gdj.lib.dto.MemberDTO;
 
 public interface MemberDAO {
 
+	MemberDTO memberUpdateDetailMy(String mb_id);
+
 
 	MemberDTO memberDetail(String mb_id);
+
 
 
 	ArrayList<MemberDTO> memberList();
@@ -51,6 +54,9 @@ public interface MemberDAO {
 	String pwFind(String id, String email);
 
 	String login(String id, String pw);
+
+
+	ArrayList<MemberDTO> memberUpdateListMy();
 
 
 	

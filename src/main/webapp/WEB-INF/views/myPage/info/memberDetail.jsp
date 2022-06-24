@@ -15,34 +15,34 @@
 </head>
 <body>
 	  <h3>${sessionScope.mb_id }님의 상세 정보</h3>
-	  <from action="memberDetail.do" method="post">
+	  <from action="myUpdateDetail.do" method="post">
 	 <table>
-	 		<c:forEach items="${memberList}" var="memberDetail">
+	 		<c:forEach items="${myUpdateList}" var="myUpdateDetail">
             <tr>
                 <th>ID</th>
-                <td>${memberDetail.mb_id}</td>
+                <td>${myUpdateDetail.mb_id}</td>
             </tr>
             <tr>
                 <th>PW</th>
                 <td>
-                    <textarea name="">${memberDetail.mb_pw}</textarea>
+                    <textarea name="">${myUpdateDetail.mb_pw}</textarea>
                       ※ 4자리 이상,비밀번호 수정시에만 작성
                 </td>
             </tr>
             <tr>
                 <th>이름</th>
-                <td><textarea name="">${memberDetail.name}</textarea></td>
+                <td><textarea name="">${myUpdateDetail.name}</textarea></td>
             </tr>
             <tr>
                 <th>전화번호</th>
                 <td>
-                    <textarea name="">${memberDetail.phone}</textarea>
+                    <textarea name="">${myUpdateDetail.phone}</textarea>
                     ※ ‘-’ 를 제외하고 입력
                 </td>
             </tr>
             <tr>
                 <th>이메일</th>
-                <td>${memberDetail.email }</td>
+                <td>${myUpdateDetail.email }</td>
             </tr>
             <tr>
                 <th>회원탈퇴신청</th>
