@@ -26,14 +26,16 @@ public class BrwBookController {
 	@Autowired BrwBookService service;
 	
 	@RequestMapping(value = "/brwHistory")
-	public String brwHistory(Model model, HttpSession session) {
+	public String brwHistory(Model model, HttpSession session,
+			@RequestParam HashMap<String, String> params) {
 		
 		
 		logger.info("이전대출 목록"); 
 		
-		ArrayList<BookDTO> brwList = service.brwList();
-		logger.info("list 갯수 :"+brwList);
-		model.addAttribute("이전대출 페이지로 이동");
+		ArrayList<BookDTO> brwList = service.brwList(params);
+		logger.info("list 갯수 :"+brwList.size());
+		model.addAttribute("brwList",brwList);
+		
 
 //		model.addAttribute("list",list);
 //		

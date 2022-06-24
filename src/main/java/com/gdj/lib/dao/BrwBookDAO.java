@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.gdj.lib.dto.BookDTO;
-import com.gdj.lib.service.BrwBookDTO;
+import com.gdj.lib.dto.BrwBookDTO;
 
 public interface BrwBookDAO {
 	
@@ -15,9 +15,7 @@ public interface BrwBookDAO {
 
 	void reason(String loginId, String b_id);
 
-	ArrayList<BookDTO> brwList();
-
-
+	ArrayList<BookDTO> brwList(HashMap<String, String> params);
 
 
 	void bookreserve(String loginId, String b_id);

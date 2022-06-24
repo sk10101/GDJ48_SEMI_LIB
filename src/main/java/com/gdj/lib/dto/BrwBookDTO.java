@@ -1,4 +1,4 @@
-package com.gdj.lib.service;
+package com.gdj.lib.dto;
 
 import java.sql.Date;
 

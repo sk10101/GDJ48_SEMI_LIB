@@ -83,7 +83,7 @@
                                         <th>연장여부</th>
                                     </tr>
                            
-                                    <c:forEach items="${dto}" var="dto">
+                                    <c:forEach items="${brwList}" var="dto">
                                     
                                     	<tr>
                                     		<td>${dto.brw_id}</td>
