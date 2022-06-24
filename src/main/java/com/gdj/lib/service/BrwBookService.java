@@ -3,6 +3,7 @@ package com.gdj.lib.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class BrwBookService {
 		return "redirect:/bookDetail?b_id="+b_id;
 	}
 
-public String reason(String b_id) {
+	public String reason(String b_id) {
 		
 		logger.info("도서예약 서비스 신청"+b_id);
 		String loginId = "admin1";
@@ -49,17 +50,10 @@ public String reason(String b_id) {
 	}
 
 
-	
-
-
-	public ArrayList<BookDTO> brwList() {
+	public ArrayList<BookDTO> brwList(HashMap<String, String> params) {
 		logger.info("도서목록 서비스 요청");
-		return dao.brwList();
+		return dao.brwList(params);
 	}
-
-
-	
-
 
 
 	public String bookreserve(String b_id) {

@@ -1,7 +1,11 @@
 package com.gdj.lib.controller;
 
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.util.HashMap;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +27,7 @@ import com.gdj.lib.service.MemberService;
 
 @Controller
 public class MemberController {
-	
+		
 	@Autowired MemberService service;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -55,7 +63,7 @@ public class MemberController {
 		model.addAttribute("dto",dto);
 		
 		return "admin/member/memberDetail";
-	}
+	}	
 	
 	@RequestMapping(value = "/memberSearch.do")
 	public String memberSearch( Model model, @RequestParam HashMap<String, String> params) {
@@ -178,16 +186,11 @@ public class MemberController {
 	public String penaltyDetail() {
 		logger.info("이용정지리스트 페이지");
 		return "penalty/penaltyDetail";
-	}
+
+	}	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-		
+
 }
+		
 	
+

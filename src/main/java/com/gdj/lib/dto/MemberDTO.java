@@ -2,6 +2,8 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MemberDTO {
 	
 	private String mb_id;
@@ -10,10 +12,9 @@ public class MemberDTO {
 	private String name;
 	private String email;
 	private String phone;
-	private Date reg_date;
+
 	private String mb_class;
-	private Date leave_date;
-	
+		
 	private int black_id;
 	private String admin_start;
 	private Date black_start;
@@ -102,6 +103,7 @@ public class MemberDTO {
 	}
 	public void setEnd_reason(String end_reason) {
 		this.end_reason = end_reason;
+
 	}
 	public String getMb_id() {
 		return mb_id;
@@ -139,18 +141,21 @@ public class MemberDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public Date getReg_date() {
 		return reg_date;
 	}
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
+
 	public String getMb_class() {
 		return mb_class;
 	}
 	public void setMb_class(String mb_class) {
 		this.mb_class = mb_class;
 	}
+
 	public Date getLeave_date() {
 		return leave_date;
 	}
@@ -164,7 +169,13 @@ public class MemberDTO {
 		this.black_id = black_id;
 	}
 	
-	
+
+@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private Date reg_date;
+
+@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
+	private Date leave_date;
+
 	
 
 }

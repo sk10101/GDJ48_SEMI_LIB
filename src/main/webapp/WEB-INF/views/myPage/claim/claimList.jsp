@@ -16,55 +16,55 @@
             background-color: #b0f592;
         }
 
-        #myPage_menu {
-            width: 125px;
-            height: 750px;
-            background-color: #b0f592;
-            text-align: center;
-            float: left;
-            border: 2px solid #999;
-            margin-top: 15px;
-            margin-right: 10px;
-        }
-        a[href='#'] {
-            margin-bottom: 15px;
-        }
+    #myPage_menu {
+        width: 125px;
+        height: 750px;
+        background-color: #b0f592;
+        text-align: center;
+        float: left;
+        border: 2px solid #999;
+        margin-top: 15px;
+        margin-right: 10px;
+    }
+    a[href='#'] {
+        margin-bottom: 15px;
+    }
 
-        #claim_table {
-            width: 800px;
-            text-align: center;
-        }
+    #claim_table {
+        width: 800px;
+        text-align: center;
+    }
 
-        #claim_table, th, td {
-            border: 2px solid #999;
-            border-collapse: collapse;
-            padding: 5px;
-        }
+    #claim_table, th, td {
+        border: 2px solid #999;
+        border-collapse: collapse;
+        padding: 5px;
+    }
 
-        table th {
-            padding: 15px;
-            text-align:center;
-        }
+    table th {
+        padding: 15px;
+        text-align:center;
+    }
 
-        #claim_write {
-            margin-top: 15px;
-            margin-bottom: 10px;
-        }
+    #claim_write {
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
 
-        #claim_no {
-            width: 15px;
-        }
+    #claim_no {
+        width: 15px;
+    }
 
-        #subject {
-            text-align: left;
-            padding-left: 5px;
-        }
-        
-        input[type='search'] {
-            margin-top: 20px;
-            width: 150px;
-            height: 35px;
-            border-radius: 5px;
+    #subject {
+        text-align: left;
+        padding-left: 5px;
+    }
+    
+    input[type='search'] {
+        margin-top: 20px;
+        width: 150px;
+        height: 35px;
+        border-radius: 5px;
         }
 </style>
 </head>
@@ -122,7 +122,6 @@
 			</tr>
 			<tr>
 				<td colspan ="5" id="paging">
-					<form action="claimList">
 				        <select id="pagePerNum">
 							<option value="5">5</option>
 							<option value="10">10</option>
@@ -133,9 +132,8 @@
 				       		<option value="제목">제목</option>
 				       		<option value="처리상태">처리상태</option>
 				       	</select>
-			        	<input id="keyword" type="search" placeholder="검색" name="keyword" value=""/>
+			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
 			        	<input id="searchBtn" type="button" onclick="searchList()" value="검색" style="width: 60px; margin-top: 10px;"/>
-					</form>
 				</td>
 			</tr>
         </table>
@@ -166,7 +164,7 @@
 			url:'claimList.ajax',
 			data:{
 				cnt : pagePerNum,
-				page : page
+				page : page,
 			},
 			dataType:'JSON',
 			success:function(data){
@@ -197,14 +195,16 @@
 		var content = '';
 		var date = new Date();
 		claimList.forEach(function(item){
-			// console.log(item);
+			//console.log(item.status);
 			content += '	<tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
 			content += '		<td id="claimID">'+item.claim_id+'</td>';
 			content += '		<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
-			content += '		<td class="delete">';
-			content += '			<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
+			content += '		<td class="delete" style="height:39px">';
+			if(item.status=="미처리") {
+				content += '			<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
+			}
 			content += '		</td>';
 			content += '	</tr>';
 		});
@@ -213,7 +213,8 @@
 		$("#claimList").append(content);
 	}
 	
-	
+	var keyword = "";
+	var option = "";
 	$('#searchBtn').on('click',function(){
 		console.log(currPage);
 		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
@@ -223,18 +224,19 @@
 	
 	// 검색 결과 출력
 	function searchList(page) {
-		
+		word = $('#word').val();
+		option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
-		var keyword = $('#keyword').attr("value");
-		var option = $('#option').attr("value");
-		console.log(keyword);
+		console.log(pagePerNum + keyword);
 		
 		$.ajax({
 			type: 'GET',
 			url: 'claimList.ajax',
 			data:{
 				cnt : pagePerNum,
-				page : page
+				page : page,
+				word : word,
+				option : option
 			},
 			dataType:'JSON',
 			success: function(data){
@@ -260,19 +262,11 @@
 		})
 	}
 	
-	
-	var status = "";
-	$(document).ready(function() {
-		console.log($("#claim_table").children().eq(1));
-	});
-	
-	
 	// 삭제 버튼 기능구현 (동적으로 생성한 버튼은 javascript 로 구현)
 	function clickEvt(btn) {
 		var claim_id = $(btn).parent().parent().attr("cID");
 		console.log($(btn));
 			location.href='/claimDel.do?claim_id=' + claim_id;
-		
 	}
 	
 	/* 삭제 기능 다른 방법
