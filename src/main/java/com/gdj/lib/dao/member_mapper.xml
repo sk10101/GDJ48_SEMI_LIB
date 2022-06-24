@@ -38,6 +38,12 @@
 			VALUES(#{mb_id},#{admin_start},#{black_reason})
 	</insert>
 	
+	<update id="blackCancel" parameterType="hashmap">
+		UPDATE blacklist SET admin_end = #{admin_end}
+			,black_end = #{black_end}
+		WHERE black_id = #{black_id}
+	</update>
+	
 	
 	
 	

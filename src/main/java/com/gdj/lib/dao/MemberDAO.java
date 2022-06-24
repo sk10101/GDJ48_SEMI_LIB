@@ -45,6 +45,8 @@ public interface MemberDAO {
 
 	String login(String id, String pw);
 
+	MemberDTO blackCancel(String black_id);
+
 	
 
 	

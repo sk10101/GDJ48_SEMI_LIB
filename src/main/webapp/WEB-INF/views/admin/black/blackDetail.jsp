@@ -59,13 +59,38 @@
         </tr>
         <tr>
             <th>해제사유</th>
-            <td><input type="text" name="a" value=""/></td>
+            <td><input type="text" name="reason" value=""/></td>
         </tr>
     </table>
     <div>
         <button onclick="location.href='blackList.do'">돌아가기</button>
-        <button>수정</button>
+        <button type=button onclick="blackCancel()">수정</button>
     </div>
 </body>
-<script></script>
+<script>
+	function blackCancel(){
+		 var chk=[];
+	    console.log( '체크박스 값 : '+$(":input:checkbox[name=cancel]:checked").val() );
+	 
+	    $("input[name=cancel]:checked").each(function() { 
+	        chk.push($(this).val());
+	    });
+	    
+	    console.log('chk 값 :'+chk);
+	    
+        $.ajax({
+        	type:'post',
+        	url:'blackCancel.ajax',
+        	data:{cn:chk},
+        	dataType:'json',
+        	success:function(data){
+        		console.log(data);
+        	},
+        	error:function(e){
+        		console.log(e);
+        	}
+        });
+	 
+	}
+</script>
 </html>

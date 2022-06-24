@@ -80,6 +80,14 @@ public class MemberService {
 		return success;
 	}
 
+	public MemberDTO blackCancel(String black_id) {
+		
+		MemberDTO dto = new MemberDTO();
+		dto.setAdmin_end("admin");
+		
+		return dao.blackCancel(black_id);
+	}
+
 
 
 

@@ -1,4 +1,4 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -75,7 +75,6 @@ table {
                    
                 <tr>
                    <td id="brw_b_id">${dto.b_id}</td>
-<<<<<<< HEAD
                    <td id="b_status">${dto.b_status}</td>
                    <c:if test="${dto.b_status eq '대출가능'}">
 					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
@@ -85,7 +84,6 @@ table {
 					<td></td>
 					<td id="reason"><button id="reasonBtn" onclick="bookreason()">예약신청</button></td>
 					</c:if>
-=======
                    <td>${dto.b_status}</td>
                    <c:if test="${dto.b_status eq '대출가능'}">
 					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
@@ -94,8 +92,7 @@ table {
                    <c:if test="${dto.b_status eq '대출중'}"> 
                      <td></td>  
                    <td id="bookreserve"><button  onclick="bookreserve()">예약신청</button></td>
-                 	 </c:if> 
->>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
+                 	 </c:if>
                 </tr>
             </thead>
         </table>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdj.lib.dto.MemberDTO;
 import com.gdj.lib.service.MemberService;
@@ -148,6 +149,23 @@ public class MemberController {
 		model.addAttribute("dto",dto);
 		
 		return "admin/black/blackDetail";
+	}
+	
+	@RequestMapping("/blackCancel.ajax") 
+	@ResponseBody
+	public HashMap<String, Object> blackCancel(@RequestParam String black_id,
+			@RequestParam (value="cn[]") ArrayList<String> cn) {
+		logger.info("여기까지는 올까");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		logger.info("cn : "+cn);
+		
+		if(cn != null) {
+			service.blackCancel(black_id);
+			
+
+		}
+		
+		return null;
 	}
 	
 	@RequestMapping(value = "/penaltyList.do")
