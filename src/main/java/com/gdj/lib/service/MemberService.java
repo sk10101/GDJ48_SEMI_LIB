@@ -83,7 +83,7 @@ public class MemberService {
 		// 나중에 로그인 기능 추가하면 params 넣을것 (추후 수정)
 		return success;
 	}
-<<<<<<< HEAD
+
 
 	public MemberDTO blackCancel(String black_id) {
 		
@@ -96,9 +96,5 @@ public class MemberService {
 
 
 
-
-
-=======
->>>>>>> origin/master
 }
 

@@ -32,6 +32,7 @@ public interface MemberDAO {
 
 	int blackAdd(MemberDTO dto);
 
+	MemberDTO blackCancel(String black_id);
 	
 	
 	
@@ -52,12 +53,9 @@ public interface MemberDAO {
 
 	String login(String id, String pw);
 
-<<<<<<< HEAD
-	MemberDTO blackCancel(String black_id);
+
 
 	
-=======
->>>>>>> origin/master
 
 	
 
