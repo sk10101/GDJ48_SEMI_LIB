@@ -6,17 +6,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dao.BookDAO;
 import com.gdj.lib.dto.BookDTO;
+import com.gdj.lib.dto.PhotoDTO;
 
 
 @Service
@@ -138,46 +143,42 @@ public class BookService {
 		return map;
 	}
 
-	public BookDTO detail(String b_id) {
-		BookDTO dto = null;
-		logger.info(b_id+"상세보기 서비스 요청");
-		dto = dao.detail(b_id);
-		logger.info("b_title :"+dto.getB_title());
-		return dto;
-	}
-
-	public void bookUpdate(HashMap<String, String> params) {
-		logger.info("도서 관리 수정 서비스 요청");
-		int row = dao.bookUpdate(params);
-		logger.info("수정완료 : "+row);
+	public void detail(Model model, String b_id) {
 		
+		BookDTO dto = dao.detail(b_id); //book 정보 가져옴
+		ArrayList<PhotoDTO> list = dao.photoList(b_id); //photo 정보 가져옴
+		model.addAttribute("book", dto);
+		model.addAttribute("list", list);
+
+		logger.info("b_title :"+dto.getB_title());
 	}
 
-	public String bookAdd(MultipartFile[] photos, HashMap<String, String> params) {
-		logger.info("도서 추가 서비스 요청");
+	public String bookAdd(MultipartFile[] b_img, HashMap<String, String> params) {
+		logger.info("도서 추가 서비스 요청 도착");
 		BookDTO dto = new BookDTO();
 		dto.setB_title(params.get("b_title"));
 		dto.setWriter(params.get("writer"));
 		dto.setPublisher(params.get("publisher"));
+		dto.setIssue(Integer.parseInt((params.get("issue"))));
 				
 		int row = dao.bookAdd(dto);
 		
 		int b_id = dto.getB_id();		
 		logger.info("도서추가 완료:"+b_id);
 		
-		/*
 		if (row > 0) {
-			fileSave(photos,b_id);
-		}*/
+			fileSave(b_img, b_id);
+		}
 		return "admin/book/bookList";
 	}
 
-	private void fileSave(MultipartFile[] photos, int b_id) {
-		
-		for(MultipartFile photo : photos) {
+	private void fileSave(MultipartFile[] b_img, int b_id) {
+		// 3. 파일 업로드
+		logger.info("확인 {}",b_id);
+		for(MultipartFile photo : b_img) {
 			String oriFileName = photo.getOriginalFilename();
 			if(!oriFileName.equals("")) {
-				logger.info("업로드 진행");
+				logger.info("이미지 업로드 진행");
 				// 3-2. 확장자 분리
 				String ext = oriFileName.substring(oriFileName.lastIndexOf(".")).toLowerCase();
 				// 3-3. 새 이름 만들기
@@ -199,6 +200,30 @@ public class BookService {
 				}				
 			}
 		}
+		
+	}
+	
+	public void bookUpdate(MultipartFile[] b_img, HashMap<String, String> params) {
+		logger.info("도서 관리 수정 서비스 요청");
+		BookDTO dto = new BookDTO();
+		dto.setB_id(Integer.parseInt(params.get("b_id")));
+		dto.setB_title(params.get("b_title"));
+		dto.setWriter(params.get("writer"));
+		dto.setPublisher(params.get("publisher"));
+		dto.setIssue(Integer.parseInt((params.get("issue"))));
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.KOREA);
+		//LocalDate date = LocalDate.parse(string, formatter);
+		//dto.setB_date(params.get("b_date"));
+		dto.setB_status(params.get("b_status"));
+				
+		int row = dao.bookUpdate(dto);
+		int b_id = dto.getB_id();		
+		logger.info("도서수정 완료:"+b_id);
+		
+		if (row > 0) {
+			fileSave(b_img, b_id);
+		}
+		//return "admin/book/bookList";
 		
 	}
 

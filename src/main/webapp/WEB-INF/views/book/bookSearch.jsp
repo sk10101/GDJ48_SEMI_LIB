@@ -32,7 +32,7 @@
         </div>
     </header>
     <!-- header end -->
-    <section>
+   <section>
         <form class="search" action="bookSearch.go" method="get">
             <select name="bookSearchOption">
                 <option value="all" selected>전체</option>
@@ -52,8 +52,9 @@
 				 	<option value="10">10</option>
 				 	<option value="15">15</option>
 				 	<option value="20">20</option>
-				 </select> 
-			</div>       
+				 </select>
+			</div> 
+		 </div>       
 	        <table>
 	            <thead>
 	            	<tr>
@@ -79,42 +80,7 @@
 			 		</td>
 		 		</tr>       
 	        </table>
-        </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        <tasble>
-        <table>
-=======
-
-        
-
-        <table>
-
->>>>>>> de7789817d72ed16e56bc3d046f0a0516b7140d7
-            <thead>
-                <th>책표지</th>
-                <th>제목</th>
-                <th>저자</th>
-                <th>출판사</th>
-                <th>도서상태</th>
-                <th>예약가능여부</th>
-            </thead>
-            <tbody>
-				<c:forEach items="${dto}" var="dto">
-					<tr>
-						<td>${dto.b_id}</td>
-						<td><a href="bookDetail.do?b_id=${dto.b_id}">${dto.b_title}</a></td>
-						<td>${dto.writer}</td>
-						<td>${dto.publisher}</td>
-						<td>${dto.b_status}</td>
-						<td>${dto.publisher}</td>
-					</tr>
-				</c:forEach>
-            </tbody>
-        </table>
->>>>>>> origin/master
-    </section>
+   </section>
 </body>
 <script>
 var currPage = 1;

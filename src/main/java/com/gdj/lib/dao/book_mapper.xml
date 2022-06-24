@@ -40,8 +40,12 @@
 	</select>
 	<!-- 도서 목록 페이징 끝-->	
 	
-	<select id="detail" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT * FROM book WHERE b_id = #{param1}
+	<select id="detail" parameterType="String" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT * FROM book WHERE b_id = #{b_id}
+	</select>
+	
+	<select id="photoList" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
 	<update id="bookUpdate" parameterType="hashmap">
@@ -61,9 +65,9 @@
 			VALUES(#{b_title},#{writer},#{publisher},#{issue},"대출가능")
 	</insert>
 	
-	<insert id="fileWrite" parameterType="String">
-		INSERT INTO photo(category_id, post_id, oriFileName, newFileName)
-			VALUES("4", #{b_id}, #{oriFileName}, #{newFileName})
+	<insert id="fileWrite" >
+		INSERT INTO photo(category_id, oriFileName, newFileName, post_id)
+			VALUES("4", #{param1}, #{param2}, #{param3})
 	</insert>
 <!-- 관리자 도서관리 끝 -->	
 </mapper>

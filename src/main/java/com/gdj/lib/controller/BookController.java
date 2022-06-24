@@ -1,6 +1,5 @@
 package com.gdj.lib.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -98,25 +96,12 @@ public class BookController {
 		return service.bookList(params);
 	}
 	
-	@RequestMapping(value = "/bookDetail.do")
+	@RequestMapping(value = "/AdbookDetail.do")
 	public String bookDetail(Model model, @RequestParam String b_id) {
 		
-		logger.info("도서 상세보기 요청"); 
-		BookDTO dto = service.detail(b_id);
-		model.addAttribute("dto",dto);
-		
+		logger.info("도서 상세보기 요청 : "+b_id);
+		service.detail(model, b_id);
 		return "admin/book/bookDetail";
-	}
-	
-	@RequestMapping(value = "/bookUpdate.do")
-	public String bookUpdate(Model model, 
-			@RequestParam HashMap<String, String> params) {
-		
-		logger.info("params : {}",params); 
-		String page = "redirect:/bookDetail.do?b_id="+params.get("b_id");
-		logger.info(page);
-		service.bookUpdate(params);
-		return page;
 	}
 	
 	@RequestMapping(value = "/bookAdd.go")
@@ -127,12 +112,21 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/bookAdd.do")
-	public String bookAddForm(Model model,  MultipartFile[] photos,
+	public String bookAddForm(Model model,  MultipartFile[] b_img,
 			@RequestParam HashMap<String, String> params) {
-		logger.info("도서추가요청 : {}", params);
-		service.bookAdd(photos,params);
+		logger.info("도서추가요청 : {} / {}", params, b_img);
+		service.bookAdd(b_img,params);
 		//String page = "redirect:/bookList.go";
 		return "redirect:/bookList.go";
+	}
+	
+	@RequestMapping(value = "/bookUpdate.do")
+	public String bookUpdate(Model model, MultipartFile[] b_img,
+			@RequestParam HashMap<String, String> params) {
+		logger.info("도서정보 수정 요청 : {} / {}",params, b_img);
+		service.bookUpdate(b_img, params);
+		String page = "redirect:/AdbookDetail.do?b_id="+params.get("b_id");
+		return page;
 	}
 	
 }
