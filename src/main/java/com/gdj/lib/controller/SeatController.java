@@ -28,12 +28,8 @@ public class SeatController {
 		logger.info("list 개수: "+list.size());
 		for (int i = 0; i < list.size(); i++) {
 			logger.info(i+"번 : "+list.get(i).getSeat_status());
-			model.addAttribute("seatNo"+i, list.get(i).getSeat_status());
+			model.addAttribute("seatStatus"+i, list.get(i).getSeat_status());
 		}
-		model.addAttribute("seat", list.get(0).getSeat_no());
-//		model.addAttribute("seatNo1", list.get(0).getSeat_status());
-//		model.addAttribute("seatNo30", list.get(29).getSeat_status());
-		// model.addAttribute("list", list);
 		return "seat/seat";
 	}
 	
@@ -41,6 +37,13 @@ public class SeatController {
 	// 키오스크 열람실 현황보기
 	@RequestMapping(value = "/ki_seat.go")
 	public String kioskSeat(Model model) {
+		logger.info("키오스크 열람실 페이지 이동");
+		ArrayList<SeatDTO> list = service.list();
+		logger.info("list 개수: "+list.size());
+		for (int i = 0; i < list.size(); i++) {
+			logger.info(i+"번 : "+list.get(i).getSeat_status());
+			model.addAttribute("seatStatus"+i, list.get(i).getSeat_status());
+		}
 		return "seat/kioskSeat";	
 	}
 }
