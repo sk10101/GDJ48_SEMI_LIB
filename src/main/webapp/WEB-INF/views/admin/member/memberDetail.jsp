@@ -47,8 +47,8 @@
 	            <th>회원등급</th>
 	            <td>
 	                <select name="mb_class">
-	                    <option value="일반회원">일반회원</option>
-	                    <option value="관리자">관리자</option>
+	                    <option value="일반회원" ${dto.mb_class == '일반회원' ? 'selected="selected" ' : '' }>일반회원</option>
+	                    <option value="관리자" ${dto.mb_class == '관리자' ? 'selected="selected" ' : '' } >관리자</option>
 	                </select>
 	            </td>
 	        </tr>

@@ -36,7 +36,7 @@
     </aside>
     <section>
         <div class="content">
-            <form action="bookUpdate.do" method="post">
+            <form action="bookUpdate.do" method="post" enctype="multipart/form-data">
                 <table class="book">
                     <tr>
                         <th>책ID</th>
@@ -44,9 +44,9 @@
                     </tr>
                     <tr>
                         <th>책 표지</th>
-                        <td><input type="file" name="b_img" multiple="multiple"/>
+                        <td><input type="file" name="b_img"/>
                         	<c:forEach items="${list}" var="path">
-								<p><img src="/photo/${path.newFileName}" height="200"/></p>
+								<p><img src="/image/${path.newFileName}" height="200"/>
 							</c:forEach>
                         </td>
                     </tr>
@@ -72,11 +72,11 @@
                     </tr>
                     <tr>
                         <th>도서상태</th>
-                        <td><select name="b_status" id="${b_status.count }">
-                            <option value="대출가능">대출가능</option>
-                            <option value="대출중">대출중</option>
-                            <option value="도서준비중">도서준비중</option>
-                            <option value="대출불가">대출불가</option>
+                        <td><select name="b_status" id="selectBox">
+                            <option value="대출가능" ${book.b_status == '대출가능' ? 'selected="selected" ' : '' } >대출가능</option>
+                            <option value="대출중" ${book.b_status == '대출중' ? 'selected="selected" ' : '' } >대출중</option>
+                            <option value="도서준비중" ${book.b_status == '도서준비중' ? 'selected="selected" ' : '' } >도서준비중</option>
+                            <option value="대출불가" ${book.b_status == '대출불가' ? 'selected="selected" ' : '' } >대출불가</option>
                         </select></td>
                     </tr>
                     <tr>
@@ -91,5 +91,7 @@
         </div>
     </section>
 </body>
-<script></script>
+<script>
+	
+</script>
 </html>

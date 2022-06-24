@@ -8,11 +8,11 @@ import com.gdj.lib.dto.PhotoDTO;
 
 public interface BookDAO {
 
-	ArrayList<BookDTO> searchTitle(String word, int cnt, int offset);
+	ArrayList<BookDTO> searchTitle(String word);
 	
-	ArrayList<BookDTO> searchWriter(String word, int cnt, int offset);
+	ArrayList<BookDTO> searchWriter(String word);
 
-	ArrayList<BookDTO> searchPublisher(String word, int cnt, int offset);
+	ArrayList<BookDTO> searchPublisher(String word);
 
 	ArrayList<BookDTO> bookList(int cnt, int offset);
 
@@ -29,6 +29,8 @@ public interface BookDAO {
 	void fileWrite(String oriFileName, String newFileName, int b_id);
 
 	ArrayList<PhotoDTO> photoList(String b_id);
+
+	void fileUpdate(String oriFileName, String newFileName, int b_id);
 
 
 }

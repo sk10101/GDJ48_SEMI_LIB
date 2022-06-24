@@ -1,5 +1,6 @@
 package com.gdj.lib.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -24,56 +25,17 @@ public class BookController {
 	@Autowired BookService service;
 	
 	// 도서 검색 결과 ---->
-	/*
-	@RequestMapping(value = "/book.go")
-	@ResponseBody
-	public String bookSearch(@RequestParam String option, 
-			@RequestParam String word) {
-		
-		logger.info("도서 검색결과로 이동 :" + option +" / "+ word);
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		ArrayList<BookDTO> dto = service.bookSearch(option,word);
-		map.put("dto",dto);
-		logger.info("dto :"+dto);
-		return "book/bookSearch";
-	}*/
-	
-	@RequestMapping("/bookSearch.ajax")
-	public String searchList(HttpSession session,
-			@RequestParam String option, @RequestParam String word
-			) {		
-		session.setAttribute("option", option);
-		session.setAttribute("word", word);
-		logger.info("리스트 요청 : {}",option +"/"+word);
-		return "/bookSearch.go";
-	}
-	
-	@RequestMapping("/bookSearch.go")
-	public String detailPage(HttpSession session) {
-		
-		return "book/bookSearch";
-	}
-	
-	@RequestMapping("/searchList.ajax")
-	@ResponseBody
-	public HashMap<String, Object> searchList(HttpSession session,
+	@RequestMapping(value = "/bookSearch.do")
+	public String bookSearch(Model model, 
 			@RequestParam HashMap<String, String> params) {
-		logger.info("검색 도서 목록 요청 :{}",params);
-		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		String option = (String)session.getAttribute("option");
-		String word = (String)session.getAttribute("word");
-		params.put("option", option);
-		params.put("word", word);
-		//session.removeAttribute("option");
-		//session.removeAttribute("word");
-		
-		HashMap<String, Object> searchList = service.bookSearch(params);
-		map.put("searchList", searchList);
-		logger.info("검색완성 : "+map.size());
-		return map;
+		logger.info("도서 목록 요청 : {}",params); 
+		ArrayList<BookDTO> dto = service.bookSearch(params);
+		logger.info("list 갯수 :"+dto.size());
+		model.addAttribute("dto",dto);				
+		return "book/bookSearch";
 	}
+	
 	
 	
 	//관리자 도서관리 페이지 시작--->
@@ -114,7 +76,7 @@ public class BookController {
 	@RequestMapping(value = "/bookAdd.do")
 	public String bookAddForm(Model model,  MultipartFile[] b_img,
 			@RequestParam HashMap<String, String> params) {
-		logger.info("도서추가요청 : {} / {}", params, b_img);
+		logger.info("도서추가요청 : {} / {}", b_img, params);
 		service.bookAdd(b_img,params);
 		//String page = "redirect:/bookList.go";
 		return "redirect:/bookList.go";
@@ -123,7 +85,7 @@ public class BookController {
 	@RequestMapping(value = "/bookUpdate.do")
 	public String bookUpdate(Model model, MultipartFile[] b_img,
 			@RequestParam HashMap<String, String> params) {
-		logger.info("도서정보 수정 요청 : {} / {}",params, b_img);
+		logger.info("도서정보 수정 요청 : {} / {}",b_img, params);
 		service.bookUpdate(b_img, params);
 		String page = "redirect:/AdbookDetail.do?b_id="+params.get("b_id");
 		return page;

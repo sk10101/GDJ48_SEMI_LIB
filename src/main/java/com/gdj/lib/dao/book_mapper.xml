@@ -7,25 +7,24 @@
 	<select id="searchTitle" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
 		SELECT b_id, b_title, writer, publisher, b_status FROM book 
 		WHERE b_title LIKE CONCAT('%', #{param1}, '%') 
-		ORDER BY b_id DESC limit #{param2} offset #{param3}
-	</select>
-	
-	<select id="reserveOK" resultType="com.gdj.lib.dto.BookDTO">
-		select count(b_id) from book 
-		where b_id not in (select b_id from reservation) and b_status = "대출중";
 	</select>
 	
 	<select id="searchWriter" resultType="com.gdj.lib.dto.BookDTO">
 		SELECT b_id, b_title, writer, publisher, b_status FROM book 
 		WHERE writer LIKE CONCAT('%', #{param1}, '%')
-		ORDER BY b_id DESC limit #{param2} offset #{param3}
 	</select>
 	
 	<select id="searchPublisher" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
 		SELECT b_id, b_title, writer, publisher, b_status FROM book 
 		WHERE publisher LIKE CONCAT('%', #{word}, '%')
-		ORDER BY b_id DESC limit #{cnt} offset #{offset}
 	</select>
+	
+	<!--  
+	<select id="reserveOK" resultType="com.gdj.lib.dto.BookDTO">
+		select count(b_id) from book 
+		where b_id not in (select b_id from reservation) and b_status = "대출중";
+	</select>
+	-->
 <!-- 검색 옵션 쿼리문 끝 -->
 
 <!-- 관리자 도서관리 시작 -->
@@ -48,13 +47,6 @@
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
-	<update id="bookUpdate" parameterType="hashmap">
-		UPDATE book SET b_title = #{b_title}
-			,writer = #{writer} , publisher = #{publisher}
-			,issue = #{issue} , b_date = #{b_date}
-			,b_status = #{b_status}
-		WHERE b_id = #{b_id}
-	</update>
 	<!-- 도서추가 관리 -->
 	<insert id="bookAdd" 
 		useGeneratedKeys="true"
@@ -69,5 +61,20 @@
 		INSERT INTO photo(category_id, oriFileName, newFileName, post_id)
 			VALUES("4", #{param1}, #{param2}, #{param3})
 	</insert>
+	
+	<!-- 도서 업데이트 -->
+	<update id="bookUpdate" parameterType="com.gdj.lib.dto.BookDTO">
+		UPDATE book SET b_title = #{b_title}
+			,writer = #{writer} , publisher = #{publisher}
+			,issue = #{issue} , b_date = now()
+			,b_status = #{b_status}
+		WHERE b_id = #{b_id}
+	</update>
+	
+	<update id="fileUpdate" >
+		Update photo SET oriFileName = #{param1}
+			, newFileName = #{param2}
+		WHERE category_id = "4" AND post_id = #{param3};
+	</update>
 <!-- 관리자 도서관리 끝 -->	
 </mapper>
