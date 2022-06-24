@@ -15,11 +15,12 @@
 </head>
 <body>
 	  <h3>${sessionScope.loginId }님의 상세 정보</h3>
-
+	  <h3>리스트 보기</h3>
 	 <table>
+	 		<c:forEach items="${myUpdateList}" var="myUpdateDetail">
             <tr>
                 <th>ID</th>
-                <td>${myUpdateDetail.mb_id}</td>
+                <td><a href="myUpdateDetail?mb_id=${myUpdateDetail.mb_id}">${myUpdateDetail.mb_id}</a></td>
             </tr>
             <tr>
                 <th>PW</th>
@@ -50,6 +51,7 @@
                     (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)                    
                 </td>
             </tr>
+            </c:forEach>
         </table>
 
         <br/>

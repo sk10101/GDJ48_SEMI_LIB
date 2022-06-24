@@ -8,7 +8,7 @@
 		Select mb_id, mb_pw, name, phone, email FROM member WHERE mb_id = #{mb_id}
 	</select>
 	
-	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO">
+	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
 		SELECT mb_id, mb_pw, name, phone, email FROM member
 		
 	</select>

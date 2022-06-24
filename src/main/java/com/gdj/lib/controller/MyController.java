@@ -31,33 +31,39 @@ public class MyController {
 	}
 	
 	@RequestMapping(value = "/myUpdateList")
-	public String myUpdateList(Model model, HttpServletRequest request) {
-		String page = "main";
-		HttpSession memberSession = request.getSession();
-		
+	public String myUpdateList(Model model, HttpServletRequest request,  String mb_id) {
+			String page = "main";
+			HttpSession memberSession = request.getSession();
+			if(memberSession.getAttribute("loginId") == null) {
+				page = "login/login";
+				model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
+			} else {
 			ArrayList<MemberDTO> myUpdateList = service.myUpdateList();
-			logger.info("membeUpdateList 갯수 : "+ myUpdateList.size());
+			logger.info("memberList 갯수 : "+ myUpdateList.size());
+			logger.info("세션 확인 : "+memberSession.getAttribute("loginId"));
+			mb_id = (String) memberSession.getAttribute("loginId");
 			model.addAttribute("myUpdateList", myUpdateList);
-			page  = "myPage/info/memberDetail";
-		
+			page = "redirect:/myUpdateDetail?mb_id="+mb_id;
+			}
 		
 		return page;
 	}
 	
 	
-	@RequestMapping(value = "/myUpdateDetail.do")
+	@RequestMapping(value = "/myUpdateDetail")
 	public String myUpdateDetail(Model model, @RequestParam String mb_id) {
 		
 		
 		logger.info("회원정보 상세보기 할 아이디 : "+mb_id);
-		MemberDTO dto = service.myUpdateDetail(mb_id);
+		MemberDTO myUpdateDetail = service.myUpdateDetail(mb_id);
 		
 		
-		model.addAttribute("myUpdateDetail", dto);
+		model.addAttribute("myUpdateDetail", myUpdateDetail);
 		
 		return "myPage/info/memberDetail";
 	}
 	
+
 	
 	
 	

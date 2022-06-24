@@ -13,6 +13,9 @@
     <header id="main_header">
         <nav>
             <ul class="login_menu">
+            <div>
+            	${sessionScope.loginId} 님, 반갑습니다. 
+            </div>
                 <li><a href="member/login">로그인</a></li>
             </ul>
         </nav>
@@ -38,7 +41,7 @@
                     <a href="/notice.go"><img src="../resources/img/mypage.png"/><br/>공지사항</a>
                 </li>
                 <li><!-- href 나중에 변경해야함 (임시.)-->
-                    <a href="/bookList.go"><img src="../resources/img/mypage.png"/><br/>마이페이지</a>
+                    <a href=""><img src="../resources/img/mypage.png"/><br/>마이페이지</a>
                 </li>
                 <li>
                     <a href="#"><img src="../resources/img/mypage.png"/><br/>도서반납연기</a>
@@ -52,6 +55,16 @@
             </ul>
         </div>
     </section>
+    
+    <table>
+    <tr>
+    	<td>ID</td>
+    </tr>
+    	<tr>
+    	<td><a href="/myUpdateList">회원정보 수정 가기</a></td>
+    	</tr>
+    </table>
+    
 </body>
 <script>
 
