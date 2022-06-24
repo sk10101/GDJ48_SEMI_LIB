@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -14,23 +14,30 @@ table {
 		border: 1px solid black;
 		border-collapse: collapse;
 		padding: 5px;	
-		}
+	}
+	
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    width: 200px;
+    height: 120px;
+    text-align: center;
+    /* line-height: 120px; */
+    margin-bottom: 70px;
+}
 </style>
 </head>
 <body>
 
-  <div>로고</div>
+   		<div class="logo">
+            <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
+        </div>
         <nav>
             <ul>
-                <li>
-                    000 님 반갑습니다.
-                </li>
-                <li>
-                    로그아웃
-                </li>
-                <li>
-                    마이페이지
-                </li>
+                <li>${sessionScope.loginId}님 반갑습니다.</li>
+                <li><a href="member/logout.do">로그아웃</a></li>
+                <li><a href="/brwHistory">마이페이지</a></li>
             </ul>
         </nav>
         <div class="image">
@@ -68,19 +75,19 @@ table {
                    
                 <tr>
                    <td id="brw_b_id">${dto.b_id}</td>
-                   <td>${dto.b_status}</td>
+                   <td id="b_status">${dto.b_status}</td>
                    <c:if test="${dto.b_status eq '대출가능'}">
 					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
-                   <td></td>
-                   </c:if>
-                   <c:if test="${dto.b_status eq '대출중'}"> 
-                     <td></td>  
-                   <td id="bookreserve"><button  onclick="bookreserve()">예약신청</button></td>
-                 	 </c:if> 
+					<td></td>
+					</c:if>
+					<c:if test="${dto.b_status eq '대출중'}">
+					<td></td>
+					<td id="reason"><button id="reasonBtn" onclick="bookreason()">예약신청</button></td>
+					</c:if>
                 </tr>
             </thead>
         </table>
-        <input type="button" value="돌아가기" onclick=/>
+        <a href="/bookSearch.do"><input type="button" value="돌아가기" onclick=/></a>
 
 
     </body>
@@ -97,10 +104,31 @@ table {
 	$("#brw").hide();
 } */
 
+	
+
+
 function bookbrw() {
 	$.ajax({
 		type:'get',
 		url:'bookbrw.ajax',
+		data:{
+			b_id:$("#brw_b_id").text()
+		},
+		dataType:'JSON',
+		success:function(data) {
+			
+		},
+		error:function(e) {
+			console.log(e);
+		}
+	});
+	
+}
+
+function bookreason() {
+	$.ajax({
+		type:'get',
+		url:'bookreason.ajax',
 		data:{
 			b_id:$("#brw_b_id").text()
 		},
@@ -156,7 +184,16 @@ $("#bookreserve").on("click",function(){
 
 
 
+ 	$("#brw").on("click",function(){
+	   $("#brw").hide();
+	   alert("대출신청이 완료되었습니다");
+	});
 
+
+	$("#reasonBtn").on("click",function(){
+	   $("#reasonBtn").hide();
+	   alert("예약이 완료되었습니다");
+	});
 
 </script>
 </html>

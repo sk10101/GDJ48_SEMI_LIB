@@ -22,16 +22,16 @@
         <div class="logo">
             <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
-        <form class="search" action="bookSearch.do" method="get">
-            <select name="bookSearchOption">
+        <div class="search">
+            <select id="bookSearchOption">
                 <option value="all" selected>전체</option>
                 <option value="b_title">제목</option>
                 <option value="writer">저자</option>
                 <option value="publisher">출판사</option>
             </select>
-            <input type="text" name="bookSearchWord" placeholder="도서 검색">
-            <button type="submit" class="btn_search"></button>
-        </form>
+            <input type="text" id="bookSearchWord" placeholder="도서 검색">
+            <input type="button" class="btn_search" value=" " onclick="bookSearch()"/>
+        </div>
         <div class="menu">
             <ul class="icons">
                 <li>
@@ -53,5 +53,30 @@
         </div>
     </section>
 </body>
-<script></script>
+<script>
+
+function bookSearch() {
+	var option=$('#bookSearchOption').val();
+	var word=$('#bookSearchWord').val();
+	console.log(option, word);
+	
+	$.ajax({
+		type:'post',
+		url:'bookSearch.ajax',
+		data:{
+			option : option,
+			word : word
+		},
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+	
+}
+
+</script>
 </html>

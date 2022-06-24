@@ -1,7 +1,9 @@
 package com.gdj.lib.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +37,22 @@ public class BrwBookService {
 		String loginId = "gustn0055";
 		dao.brw(loginId, b_id);
 		
-//		
-//		BrwBookDTO dto = new BrwBookDTO();
-//		//맴버 아이디
-//		dto.setMb_id("admin1");
-//		int row = dao.brw(dto);
-//		logger.info(row+ "번의 책 대출");
-//		
 		return "redirect:/bookDetail?b_id="+b_id;
+	}
+
+	public String reason(String b_id) {
+		
+		logger.info("도서예약 서비스 신청"+b_id);
+		String loginId = "admin1";
+		dao.reason(loginId, b_id);
+		
+		return "redirect:/bookDetail?b_id="+b_id;
+	}
+
+
+	public ArrayList<BookDTO> brwList(HashMap<String, String> params) {
+		logger.info("도서목록 서비스 요청");
+		return dao.brwList(params);
 	}
 
 
@@ -56,6 +66,16 @@ public class BrwBookService {
 	}
 
 	
+
+
+//	public ArrayList<BookDTO> list() {
+//		logger.info("도서목록 서비스 요청");
+//		return dao.list();
+//	}
+
+
+	
+
 
 	
 
