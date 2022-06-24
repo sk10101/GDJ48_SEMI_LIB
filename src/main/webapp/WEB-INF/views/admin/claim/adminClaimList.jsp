@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지 / 건의사항</title>
+<title>관리자 페이지 / 건의사항</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -73,20 +73,24 @@
             <a href="#">도서관 로고 들어갈 위치</a>
     </div>
     <div id="myPage_menu">
-        <h3>마이페이지</h3>
+        <h3>관리자 페이지</h3>
         <hr/>
-        <a href="#">도서내역</a><br/>
+        <a href="#">회원관리</a><br/>
+        <br/>
+        <a href="#">도서관리</a><br/>
         <br/>
         <a href="claimList">건의사항</a><br/>
         <br/>
-        <a href="#">회원정보</a>
+        <a href="#">블랙리스트</a><br/>
+        <br/>
+        <a href="#">이용정지내역</a>
     </div>
-    <button id="claim_write" onclick="location.href='claimWrite.go'">건의사항 작성</button><br/>
     <table id="claim_table">
     	<thead>
 	         <tr>
 	             <th>No</th>
 	             <th>제목</th>
+	             <th>작성자</th>
 	             <th>처리상태</th>
 	             <th>작성일</th>
 	             <th>삭제</th>
@@ -96,7 +100,7 @@
     	
     	</tbody>
 	    	<tr>
-				<td colspan="5" id="paging">
+				<td colspan="6" id="paging">
 					<div class="container">
 						<nav aria-label="Page navigation" style="text-align:center">
 								<ul class="pagination" id="pagination" >
@@ -106,7 +110,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan ="5" id="paging">
+				<td colspan ="6" id="paging">
 				        <select id="pagePerNum">
 							<option value="5">5</option>
 							<option value="10">10</option>
@@ -115,6 +119,7 @@
 						</select>
 				       	<select id="option" name="option">
 				       		<option value="제목">제목</option>
+				       		<option value="작성자">작성자</option>
 				       		<option value="처리상태">처리상태</option>
 				       	</select>
 			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
@@ -191,6 +196,7 @@
 			content += '	<tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
 			content += '		<td id="claimID">'+item.claim_id+'</td>';
 			content += '		<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+			content += '		<td class="mbID">'+item.mb_id+'</td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
 			content += '		<td class="delete" style="height:39px">';

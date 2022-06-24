@@ -60,19 +60,25 @@
 	 
 	 <!-- 페이징 처리한 목록 -->
 	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+		SELECT * FROM claim
 			ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="subjectSearch" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+		SELECT * FROM claim
 			WHERE claim_title LIKE CONCAT('%',#{param3},'%')
 				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="statusSearch" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+		SELECT * FROM claim
 			WHERE status LIKE CONCAT('%',#{param3},'%')
+				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="writerSearch" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT * FROM claim
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%')
 				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	

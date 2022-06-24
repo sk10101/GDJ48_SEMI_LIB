@@ -129,5 +129,16 @@ public class BoardController {
 		return searchList;
 	}
 	*/
+	
+	
+	
+	// ================== 아래부터 관리자 건의사항 페이지 ============================
+	
+	// 관리자 건의사항 목록페이지 이동
+	@RequestMapping(value = "/adminClaimList", method = RequestMethod.GET)
+	public String adminClaimList() {
+		
+		return "admin/claim/adminClaimList";
+	}
 }
 

@@ -28,8 +28,10 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> noticeSearch(HashMap<String, String> params);
 
 
+	
+	
+	
 	/*
->>>>>>> origin/master
 	ArrayList<BoardDTO> claimList();
 	*/
 	ArrayList<BoardDTO> claimList(int cnt, int offset);
@@ -53,6 +55,8 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> subjectSearch(int cnt, int offset, String word);
 
 	ArrayList<BoardDTO> statusSearch(int cnt, int offset, String word);
+
+	ArrayList<BoardDTO> writerSearch(int cnt, int page, String word);
 
 
 }

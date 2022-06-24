@@ -72,28 +72,30 @@ public class BoardService {
 		map.put("claimList", claimList);
 		*/
 		
-		if(word == null) {
+		if(word == null || word.equals("")) {
 			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
-			logger.info("건의사항 게시글의 개수 : " +claimList.size());
+			
 			map.put("claimList", claimList);
-		}
-		
-		if(word != null) {
+		} else {
 			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
 			
-			
+			// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
 			if(option.equals("제목")) {
 				searchList = dao.subjectSearch(cnt,page,word);
 				logger.info("제목 옵션 설정");
-			} else {
+			} else if(option.equals("처리상태")) {
 				searchList = dao.statusSearch(cnt,page,word);
-				logger.info("상태 옵션 설정");
+				logger.info("처리상태 옵션 설정");			
+			} else {
+				searchList = dao.writerSearch(cnt,page,word);
+				logger.info("작성자 옵션 설정");	
 			}
 			
 			logger.info("검색결과 건수 : " +searchList.size());
 			map.put("claimList", searchList);
 			
 		}
+		logger.info("서비스 체크포인트");
 		return map;
 	}
 	
@@ -197,7 +199,7 @@ public class BoardService {
 				
 				try {
 					byte[] arr = photo.getBytes();
-					Path path = Paths.get("C:/upload/" + newFileName);
+					Path path = Paths.get("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" + newFileName);
 					// 같은이름의 파일이 나올 수 없기 떄문에 옵션 설정 안해도된다.
 					Files.write(path, arr);
 					logger.info(newFileName + " SAVE OK");
@@ -251,7 +253,7 @@ public class BoardService {
 		// claim 테이블의 데이터 삭제(이때, photo 도 자동으로 지워진다.)
 		if(delCount>0) {// 성공하면 사진도 삭제
 			for (PhotoDTO photo : claimPhotoList) {
-				File f = new File("C:/upload/" + photo.getNewFileName());
+				File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" + photo.getNewFileName());
 				if(f.exists()) {
 					boolean success = f.delete();
 					logger.info(photo.getNewFileName() + " 의 삭제 여부 : " + success);
