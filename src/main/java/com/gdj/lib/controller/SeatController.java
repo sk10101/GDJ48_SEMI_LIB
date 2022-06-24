@@ -54,28 +54,12 @@ public class SeatController {
 	}
 	
 	
-//	// 키오스크 대출하기
-//		@RequestMapping("/borrow.ajax")
-//		@ResponseBody
-//		public HashMap<String, Object> kioskborrow(HttpSession session, @RequestParam(value="borrowList[]") ArrayList<String> borrowList){
-//			HashMap<String, Object> map = new HashMap<String, Object>();
-//			logger.info("borrowList : "+borrowList);
-//			
-//			
-//			String loginId = (String) session.getAttribute("loginId");
-//			int borrowTable = service.borrowTable(loginId, borrowList);
-//			
-//			int cnt = service.borrow(borrowList);
-//			service.updateR(borrowList);
-//			map.put("cnt", cnt);
-//			return map;
-//			
-//		}
+	
 	// 키오스크 열람실 시간 선택 페이지
-	@RequestMapping("/selectTime.ajax")
-	@ResponseBody
-	public String kioskSelectTime(@RequestParam String seatNo) {
-		logger.info("키오스크 시간 선택 페이지 요청 : "+seatNo);
+	@RequestMapping("/ki_selectTime.go")
+	public String kioskSelectTime(@RequestParam String seatNo, Model model) {
+		logger.info("키오스크 시간 선택 페이지 요청: "+seatNo);
+		model.addAttribute("seatNo", seatNo);
 		
 		return "seat/kioskSelectTime";
 	}

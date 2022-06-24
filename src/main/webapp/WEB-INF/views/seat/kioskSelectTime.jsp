@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.Date"%>
+<% Date now = new Date(); 
+	int hour = now.getHours();
+	int minutes = now.getMinutes();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,47 +23,44 @@
     </a>
     <div class="useSection">
         <div class="selectSeatNo">
-            좌석번호<br>1
+            좌석번호<br>${seatNo}
         </div>
         <div class="nowTime" id="nowTime">
-            **시 **분 ~
+            <%=hour%>시 <%=minutes%>분 ~
         </div>
         <div class="selectTime">
             <div class="row" id="row1">
-                <button id="30min">30분</button>
-                <button id="60min">1시간</button>
-                <button id="90min">1시간 30분</button>
-                <button id="120min">2시간</button>
+                <button id="30">30분</button>
+                <button id="60">1시간</button>
+                <button id="90">1시간 30분</button>
+                <button id="120">2시간</button>
             </div>
             <div class="row" id="row2">
-                <button id="150min">2시간 30분</button>
-                <button id="180min">3시간</button>
-                <button id="210min">3시간 30분</button>
-                <button id="240min">4시간</button>
+                <button id="150">2시간 30분</button>
+                <button id="180">3시간</button>
+                <button id="210">3시간 30분</button>
+                <button id="240">4시간</button>
             </div>
         </div>
-        <button id="btn-seatUse" onclick="location.href='main.html'">좌석사용</button>
+        <button id="btn-seatUse" onclick="seatUse()">좌석사용</button>
     </div>
 </body>
 <script>
-
-	var Target = document.getElementById("nowTime");
-	function clock() {
-	    var time = new Date();
-	
-	    var hours = time.getHours();
-	    var minutes = time.getMinutes();
-	    
-	    Target.innerText = `${hours}시 ${minutes}분 ~`;
-	        
-	}
-	clock();
-	setInterval(clock, 60000); // 1분마다 실행
-	
+		
+	var useTime;	
+		
 	$('.row button').on('click',function(){
-	    var useTime = $(this).attr('id');
-	    console.log(useTime);
+		useTime = $(this).attr('id');
+		console.log(useTime);
 	});
+	
+	
+	function seatUse(){
+		
+		console.log("선택한 시간: "+useTime);
+		
+	}
+	
 	
 </script>
 </html>

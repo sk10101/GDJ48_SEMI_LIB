@@ -88,19 +88,7 @@
 	    var seatNo = $(this).attr('id');
 	    console.log(seatNo);
 	    
-	    $.ajax({
-	    	type:'get',
-	    	url:'selectTime.ajax',
-	    	data:{seatNo:seatNo},
-	    	dataType:'json',
-	    	success:function(data){
-	    		console.log(data);
-	    		location.href='';
-	    	},
-	    	error:function(e){
-	    		console.log(e);
-	    	}
-	    });
+	    location.href='/ki_selectTime.go?seatNo='+seatNo;
 	});
 </script>
 </html>
