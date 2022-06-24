@@ -2,6 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdj.lib.dao.BoardDAO">
+
+	<select id="noticeList" resultType="com.gdj.lib.dto.BoardDTO" >
+		SELECT notice_id, notice_title, notice_date FROM notice
+		ORDER BY notice_id DESC
+	</select>
+	
+	<delete id="noticeDelete" parameterType="String">
+		DELETE FROM notice WHERE notice_id = #{notice_id}
+	</delete>
+	
+	<insert id="noticeWrite" 
+	useGeneratedKeys="true"
+	keyColumn="notice_id"
+	keyProperty="notice_id"
+	parameterType="com.gdj.lib.dto.BoardDTO">
+		INSERT INTO notice(mb_id,notice_title,notice_content)
+	VALUES(#{mb_id},#{notice_title},#{notice_content})
+	</insert>
+	
+	<insert id="noticeFileWrite">
+		INSERT INTO photo(oriFileName, newFileName, post_id, category_id)
+			VALUES(#{param1},#{param2},#{param3},#{param4})
+	</insert>
+	
+	<select id="noticeDetail" parameterType="int" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT * FROM notice WHERE notice_id = #{notice_id}
+	</select>
+	
+	<select id="noticePhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE post_id = #{post_id}
+	</select>
+	
+	<select id="noticePageList" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT notice_id,notice_title,notice_date FROM notice
+		ORDER BY notice_id DESC limit #{param1} offset #{param2}
+	</select>
+	
+	<select id="noticeAllCount" resultType="Integer">
+		SELECT COUNT(notice_id) FROM notice
+	</select>
+	
+	<select id="noticeSearch" parameterType="String" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT notice_id, notice_title, notice_date FROM notice WHERE notice_title LIKE CONCAT('%',#{param1},'%')
+	</select>
+	
+
 	<!--
 	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim

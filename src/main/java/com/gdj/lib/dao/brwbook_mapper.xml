@@ -23,13 +23,32 @@
  	<insert id="brw" parameterType="String">
  		INSERT INTO reservation(mb_id,b_id)
  			VALUES(#{param1},#{param2})
- 		
  	</insert>
  	
+ 	<insert id="reason" parameterType="String">
+ 		INSERT INTO reservation(mb_id,b_id)
+ 			VALUES(#{param1},#{param2})
+ 	</insert>
+ 	
+ 	<select id="brwList" resultType="com.gdj.lib.dto.BookDTO">
+		select brw_id, b.b_title, brw_date, return_date, brw_status, renew from borrow br, book b
+			where b.b_id  = br.b_id
+	</select>
+	
+	<!-- <select id="brwList" resultType="com.gdj.lib.dto.BookDTO">
+		select * from member
+	</select> -->
+	
+	<!-- <select id="brwList" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT * FROM member m2
+		union all * FROM borrow b 
+		union all * FROM book b2
+	</select>  -->
+	
+	
  	<insert id="bookreserve" parameterType="String">
  		INSERT INTO reservation(mb_id,b_id)
  			VALUES(#{param1},#{param2})
- 		
  	</insert>
  	
 	

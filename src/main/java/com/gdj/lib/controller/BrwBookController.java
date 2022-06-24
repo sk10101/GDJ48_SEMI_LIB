@@ -1,6 +1,7 @@
 package com.gdj.lib.controller;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -25,15 +26,26 @@ public class BrwBookController {
 	@Autowired BrwBookService service;
 	
 	@RequestMapping(value = "/brwHistory")
-	public String brwHistory(Model model) {
-		logger.info("이전 대출내역");
+	public String brwHistory(Model model, HttpSession session,
+			@RequestParam HashMap<String, String> params) {
+		
+		
+		logger.info("이전대출 목록"); 
+		
+		ArrayList<BookDTO> brwList = service.brwList(params);
+		logger.info("list 갯수 :"+brwList.size());
+		model.addAttribute("brwList",brwList);
+		
+
+//		model.addAttribute("list",list);
+//		
 		return "myPage/bookList/brwHistory";
 	}
 	
 	@RequestMapping(value = "/brwList")
 	public String brwList(Model model) {
 		logger.info("대출내역");
-		return "myPage/bookList/brwHistory";
+		return "myPage/bookList/brwList";
 	}
 	
 	@RequestMapping(value = "/reserve")
@@ -67,6 +79,17 @@ public class BrwBookController {
 		
 	}
 	
+	@RequestMapping(value = "/bookreason.ajax")
+	@ResponseBody
+	public String reason(HttpSession session, Model model,
+			@RequestParam String b_id) {
+		
+		String page = "redirect:/";
+		logger.info("예약신청 후 페이지"+b_id);
+		service.reason(b_id);
+		return "redirect:/bookDetail?b_id="+b_id;
+	}
+		
 	@RequestMapping(value = "/bookreserve.ajax")
 	@ResponseBody
 	public String bookreserve(HttpSession session, Model model,

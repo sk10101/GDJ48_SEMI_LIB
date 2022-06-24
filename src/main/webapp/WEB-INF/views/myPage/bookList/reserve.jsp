@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="layout.css">
+<link rel="stylesheet" href="../resources/css/bookList.css">
 <style>
 	table {
 		width: 100%;
@@ -25,15 +25,11 @@
                 <span>
                     <nav>
                         <ul>
-                            <li>
-                                000 님 반갑습니다.
-                            </li>
-                            <li>
-                                로그아웃
-                            </li>
-                            <li>
-                                마이페이지
-                            </li>
+                           <ul>
+                            <li>${sessionScope.loginId}님 반갑습니다.</li>
+                            <li>로그아웃</li>
+                            <li>마이페이지</li>
+                        </ul>
                         </ul>
                     </nav>
                 </span>
@@ -45,14 +41,14 @@
                     <span>
                         <table>
                             <thead>
-                                <tr>
+                                 <tr>
                                     <th>마이페이지</th>
                                 </tr>
                                 <tr>
-                                    <th>도서내역</th>
+                                    <th><a href="/brwHistory">도서내역</a></th>
                                 </tr>
                                 <tr>
-                                    <th>건의사항</th>
+                                    <th><a href="/claimList">건의사항</a></th>
                                 </tr>
                                 <tr>
                                     <th>회원정보</th>
@@ -67,9 +63,9 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th><a href="borrowList.html">대출내역</a></th>
-                                        <th><a href="beforeReservationLsit.html">이전대출내역</a></th>
-                                        <th><a href="reservationLsit.html">예약내역</a></th>
+                                     <th><a href="/brwHistory">대출내역</a></th>
+                                        <th><a href="/brwList">이전대출내역</a></th>
+                                        <th><a href="/reserve">예약내역</a></th>
                                     </tr>
                                 </thead>
                             </table>
@@ -81,9 +77,10 @@
                                 <thead id="head">
                                     <tr>
                                         <th>예약번호</th>
-                                        <th>도서목록</th>
-                                        <th>예약종료 사유</th>
-                                        <th>대출신청</th>                            
+                                        <th>도서제목</th>
+                                        <th>신청기간</th>
+                                        <th>예약종료 사유</th>                            
+                                        <th>대출신청</th>
                                         <th>취소</th>
                                     </tr>
                                 </thead>
