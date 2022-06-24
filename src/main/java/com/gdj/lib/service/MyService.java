@@ -18,14 +18,14 @@ public class MyService {
 	
 	@Autowired MemberDAO dao;
 
-	public MemberDTO memberUpdateDetail(String mb_id) {
+	public MemberDTO myUpdateDetail(String mb_id) {
 			
 		logger.info(mb_id+" 의 상세정보 DB 에 요쳥");
 		
 		return dao.memberUpdateDetailMy(mb_id);
 	}
 
-	public ArrayList<MemberDTO> memberUpdateList() {
+	public ArrayList<MemberDTO> myUpdateList() {
 		logger.info("리스트 서비스 요청");
 		return dao.memberUpdateListMy();
 	}
