@@ -15,7 +15,7 @@
 <style></style>
 </head>
 <body>
-	<a href="ki_logout.do">
+	<a href="ki_seat.go">
         <i class="fa-solid fa-angles-left back"></i>
     </a>
     <a href="ki_logout.do">
@@ -48,16 +48,32 @@
 <script>
 		
 	var useTime;	
+	var seatNo = ${seatNo};
 		
 	$('.row button').on('click',function(){
 		useTime = $(this).attr('id');
 		console.log(useTime);
 	});
 	
-	
 	function seatUse(){
 		
-		console.log("선택한 시간: "+useTime);
+		console.log("좌석 번호:"+seatNo);
+		console.log("최종 선택 시간: "+useTime);
+		
+		$.ajax({
+			type:'get',
+			url:'seatUse.ajax',
+			data:{
+				seatNo:seatNo,
+				useTime:useTime},
+			success:function(data){
+				console.log(data);
+				location.href='ki_seat.go';
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
 		
 	}
 	

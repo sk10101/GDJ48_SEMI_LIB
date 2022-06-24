@@ -66,4 +66,19 @@ public class SeatController {
 	
 	
 	
+	// 키오스크 열람실 좌석 사용
+	@RequestMapping("/seatUse.ajax")
+	@ResponseBody
+	public String kioskSeatUse(@RequestParam String useTime, @RequestParam String seatNo, HttpSession session) {
+		logger.info("선택 좌석번호: "+seatNo);
+		logger.info("선택 사용시간: "+useTime);
+		logger.info("사용자 id: "+session.getAttribute("loginId"));
+		String loginId = (String) session.getAttribute("loginId");
+		service.seatUse(loginId, seatNo, useTime);
+		return null;
+	}
+	
+	
+	
+	
 }

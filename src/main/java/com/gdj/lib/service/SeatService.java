@@ -22,4 +22,9 @@ public class SeatService {
 		return dao.list();
 	}
 
+	public void seatUse(String loginId, String seatNo, String useTime) {
+		logger.info(loginId+"/"+seatNo+"/"+useTime);
+		dao.seatUse(loginId,seatNo,useTime);
+	}
+
 }

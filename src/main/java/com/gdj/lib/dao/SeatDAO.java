@@ -8,4 +8,6 @@ public interface SeatDAO {
 
 	ArrayList<SeatDTO> list();
 
+	void seatUse(String loginId, String seatNo, String useTime);
+
 }
