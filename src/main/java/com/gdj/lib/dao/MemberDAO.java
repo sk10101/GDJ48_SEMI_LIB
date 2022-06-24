@@ -9,8 +9,11 @@ import java.util.HashMap;
 
 public interface MemberDAO {
 
+	MemberDTO memberUpdateDetailMy(String mb_id);
+
 
 	MemberDTO memberDetail(String mb_id);
+
 
 
 	ArrayList<MemberDTO> memberList();
@@ -53,8 +56,13 @@ public interface MemberDAO {
 	String login(String id, String pw);
 
 
+<<<<<<< HEAD
 
 	
+=======
+	ArrayList<MemberDTO> memberUpdateListMy();
+
+>>>>>>> origin/master
 
 	
 
