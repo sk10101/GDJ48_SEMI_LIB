@@ -34,7 +34,7 @@ i{
 
 
 
-/* login.html */
+/* login.jsp */
 .int-area{width: 800px; padding: 5px;}
 .int-area input{
     width: 100%;
@@ -65,7 +65,7 @@ i{
 
 
 
-/* loginFail.html */
+/* loginFail.jsp */
 .alert{
     width: 900px; 
     padding: 200px 5px;
@@ -97,7 +97,7 @@ i{
 
 
 
-/* main.html */
+/* main.jsp */
 .book{
     margin: 0 auto;
     width: 1000px;
@@ -144,7 +144,7 @@ i{
 
 
 
-/* borrow.html, return.html */
+/* borrow.jsp, return.jsp */
 .table{
     width: 1000px;
     text-align: center;
@@ -221,12 +221,12 @@ input.chkbox:checked + label {
 }
 
 
-/* seat.html */
+/* seat.jsp */
 .seatLayout{
     margin: 0 auto;
     width: 1000px;
     height: 600px;
-    background-image: url(seatbg.png);
+    background-image: url("../img/seatbg.png");
     background-size: cover;
     display: flex;
     flex-direction: row;
@@ -306,7 +306,7 @@ input.chkbox:checked + label {
 }
 
 
-/* seatUse.html */
+/* seatUse.jsp */
 .useSection{
     width: 1000px;
     height: 800px;

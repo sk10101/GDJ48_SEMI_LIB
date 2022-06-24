@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/seat.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style></style>
 </head>
 <body>
