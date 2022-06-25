@@ -34,6 +34,7 @@ public class SeatService {
 	}
 
 	public void seatTime() {
+		logger.info("열람실 좌석 업데이트");
 		dao.seatTime();
 	}
 
