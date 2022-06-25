@@ -64,7 +64,27 @@ public class MyController {
 	}
 	
 
-	
+	@RequestMapping(value = "/myUpdate")
+	public String myUpdate(Model model, HttpServletRequest request, String mb_id,
+			@RequestParam String mb_pw, @RequestParam String phone, @RequestParam String name) {
+		
+		HttpSession memberSession = request.getSession();
+		
+		mb_id = (String) memberSession.getAttribute("loginId");
+		name = (String) memberSession.getAttribute("name");
+		mb_pw = (String) memberSession.getAttribute("mb_pw");
+		phone = (String) memberSession.getAttribute("phone");
+		
+		logger.info("수정할 아이디 : "+mb_id);
+		logger.info("수정할 아이디 : "+name);
+		logger.info("수정할 비번 : "+mb_pw);
+		logger.info("수정할 이메일 : "+phone);
+		
+		
+		service.myUpdate(mb_id,mb_pw,name,phone);
+		
+		return "redirect:/myUpdateDetail?mb_id="+mb_id;
+	}
 	
 	
 	

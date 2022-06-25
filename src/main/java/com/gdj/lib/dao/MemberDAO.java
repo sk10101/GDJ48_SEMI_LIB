@@ -59,6 +59,9 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> memberUpdateListMy();
 
 
+	Object myUpdate(String mb_id, String mb_pw, String name,String phone);
+
+
 	
 
 

@@ -29,6 +29,12 @@ public class MyService {
 		logger.info("리스트 서비스 요청");
 		return dao.memberUpdateListMy();
 	}
+
+	public Object myUpdate(String mb_id, String mb_pw, String name ,String phone) {
+		logger.info(mb_id+ " 의 수정 DB 에 요청");
+		
+		return dao.myUpdate(mb_id,mb_pw,name,phone);
+	}
 	
 	
 	

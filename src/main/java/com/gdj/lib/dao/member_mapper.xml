@@ -12,6 +12,14 @@
 		SELECT mb_id, mb_pw, name, phone, email FROM member
 		
 	</select>
+	
+	<update id="myUpdate" parameterType="String">
+		UPDATE member SET
+			pw = #{mb_pw}
+			,phone = #{phone}
+			,name = {name}
+		WHERE id = {mb_id}
+	</update>
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'

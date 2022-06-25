@@ -15,7 +15,6 @@
 </head>
 <body>
 	  <h3>${sessionScope.loginId }님의 상세 정보</h3>
-
 	 <table>
             <tr>
                 <th>ID</th>
@@ -62,7 +61,7 @@
         </table>
 
         <br/>
-        <input type="button" value="수정" onclick="location.href='memberDetailUpdate.do'">
+        <input type="button" value="수정" onclick="location.href='myUpdate'">
 </body>
 <script></script>
 </html>
