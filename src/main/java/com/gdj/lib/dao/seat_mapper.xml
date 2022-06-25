@@ -7,4 +7,13 @@
 		SELECT seat_no, seat_status FROM seat
 	</select>
 	
+	<insert id="seatUse" parameterType="String">
+		INSERT INTO seat_use(mb_id, seat_no, end_time) VALUES(#{param1},#{param2},adddate(now(),interval #{param3} minute))
+	</insert>
+	
+	<update id="updateSeat" parameterType="String">
+		UPDATE seat SET seat_status = concat(date_format(now(),'%H:%i'),'~',date_format(adddate(now(),interval #{param2} minute),'%H:%i')) 
+			WHERE seat_no = #{param1}
+	</update>
+	
 </mapper>

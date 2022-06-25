@@ -23,8 +23,14 @@ public class SeatService {
 	}
 
 	public void seatUse(String loginId, String seatNo, String useTime) {
-		logger.info(loginId+"/"+seatNo+"/"+useTime);
+		logger.info(loginId+" / "+seatNo+" / "+useTime);
 		dao.seatUse(loginId,seatNo,useTime);
+	}
+
+	public void updateSeat(String seatNo, String useTime) {
+		logger.info(seatNo+" / "+useTime);
+		dao.updateSeat(seatNo,useTime);
+		
 	}
 
 }

@@ -10,4 +10,6 @@ public interface SeatDAO {
 
 	void seatUse(String loginId, String seatNo, String useTime);
 
+	void updateSeat(String seatNo, String useTime);
+
 }

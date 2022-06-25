@@ -75,6 +75,7 @@ public class SeatController {
 		logger.info("사용자 id: "+session.getAttribute("loginId"));
 		String loginId = (String) session.getAttribute("loginId");
 		service.seatUse(loginId, seatNo, useTime);
+		service.updateSeat(seatNo,useTime);
 		return null;
 	}
 	
