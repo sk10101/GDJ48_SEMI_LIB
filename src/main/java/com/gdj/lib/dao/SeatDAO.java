@@ -12,4 +12,6 @@ public interface SeatDAO {
 
 	void updateSeat(String seatNo, String useTime);
 
+	void seatTime();
+
 }

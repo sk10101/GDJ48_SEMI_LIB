@@ -33,4 +33,8 @@ public class SeatService {
 		
 	}
 
+	public void seatTime() {
+		dao.seatTime();
+	}
+
 }
