@@ -17,7 +17,6 @@ public class BoardDTO {
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date notice_date;
 	
-	
 	private String notice_title;
 	private String notice_content;
 	
@@ -26,6 +25,25 @@ public class BoardDTO {
 	}
 	public void setNotice_id(int notice_id) {
 		this.notice_id = notice_id;
+	}
+	
+	public Date getNotice_date() {
+		return notice_date;
+	}
+	public void setNotice_date(Date notice_date) {
+		this.notice_date = notice_date;
+	}
+	public String getNotice_title() {
+		return notice_title;
+	}
+	public void setNotice_title(String notice_title) {
+		this.notice_title = notice_title;
+	}
+	public String getNotice_content() {
+		return notice_content;
+	}
+	public void setNotice_content(String notice_content) {
+		this.notice_content = notice_content;
 	}
 	
 	// 답변 DTO
@@ -50,24 +68,6 @@ public class BoardDTO {
 		this.mb_id = mb_id;
 	}
 
-	public Date getNotice_date() {
-		return notice_date;
-	}
-	public void setNotice_date(Date notice_date) {
-		this.notice_date = notice_date;
-	}
-	public String getNotice_title() {
-		return notice_title;
-	}
-	public void setNotice_title(String notice_title) {
-		this.notice_title = notice_title;
-	}
-	public String getNotice_content() {
-		return notice_content;
-	}
-	public void setNotice_content(String notice_content) {
-		this.notice_content = notice_content;
-	}
 
 	public Date getReply_date() {
 		return reply_date;

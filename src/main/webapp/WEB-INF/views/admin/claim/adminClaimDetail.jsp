@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지 / 건의사항 / 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
         #header {
@@ -93,19 +93,27 @@
         <a href="#">도서관 로고 들어갈 위치</a>
     </div>
     <div id="myPage_menu">
-        <h3>마이페이지</h3>
+        <h3>관리자 페이지</h3>
         <hr/>
-        <a href="#">도서내역</a><br/>
+        <a href="#">회원관리</a><br/>
         <br/>
-        <a href="#">건의사항</a><br/>
+        <a href="#">도서관리</a><br/>
         <br/>
-        <a href="#">회원정보</a>
+        <a href="claimList">건의사항</a><br/>
+        <br/>
+        <a href="#">블랙리스트</a><br/>
+        <br/>
+        <a href="#">이용정지내역</a>
     </div>
     <div id="main_content">
+    	<form action="adminClaimUpdate.do" method="post" enctype="multipart/form-data">
         <table id="claim_detail">
             <tr>
                 <th>제목</th>
-                <td>${claim.claim_title}</td>
+                <td>
+                	<input type="hidden" name="claim_id" value="${claim.claim_id}"/>
+                	${claim.claim_title}
+                </td>
             </tr>
             <tr>
                 <th>작성일</th>
@@ -113,60 +121,93 @@
             </tr>
             <tr>
                 <th>처리상태</th>
-                <td>${claim.status}</td>
+                <td>
+                	<select id="status" status="${claim.status}" name="status">
+                		<option class="status" value="미처리">미처리</option>
+			       		<option class="status" value="처리중">처리중</option>
+			       		<option class="status" value="처리완료">처리완료</option>
+                	</select>
+                </td>
             </tr>
             <tr>
                 <th style="height: 300px;">내용</th>
                 <td style="vertical-align: top;">${claim.claim_content}</td>
             </tr>
             <c:if test="${claimList.size()>0}">
-            <tr>
-                <th>이미지</th>
-                <td>
-	                <c:forEach items="${claimList}" var="path">
-							<img src="/image/${path.newFileName}" width="640"/>
-					</c:forEach>
-				</td>
-            </tr>
+	            <tr>
+	                <th>이미지</th>
+	                <td>
+		                <c:forEach items="${claimList}" var="path">
+								<img src="/image/${path.newFileName}" width="640"/>
+						</c:forEach>
+					</td>
+	            </tr>
             </c:if>
             <tr>
 				<th colspan="2">
-					<input type="button" value="수정" onclick="location.href='claimUpdate.go?claim_id=${claim.claim_id}'"/>
-					<input type="button" value="목록" onclick="location.href='/claimList'"/>
+					<!-- onclick="location.href='adminClaimUpdate.do?claim_id=${claim.claim_id}'" -->
+					<input type="submit" value="처리상태 수정"/>
+					<input type="button" value="목록" onclick="location.href='/adminClaimList'"/>
 				</th>
 			</tr>
         </table>
+        </form>
         <br/>
         <hr/>
         <br/>
-        <table id="claim_reply">
-            <tr>
-                <th>관리자</th>
-                <td>admin1</td>
-            </tr>
-            <tr>
-                <th>작성일</th>
-                <td>2022.06.17</td>
-            </tr>
-            <tr>
-                <th style="height: 150px;">답변내용</th>
-                <td style="vertical-align: top;">안녕하세요. 관리자입니다. 문의하신 내용은 아래와 같이 처리하였습니다.
-                    <br>
-                    <br>
-                    - 2022.06.15 부러진 의자 수거 후 임시로 다른 의자를 배치
-                    <br>
-                    - 2022.06.15 새 의자 주문 (22일 도착 예정)
-                    <br>
-                    <br>
-                    불편을 드려 죄송합니다. 최대한 빠르게 처리할 수 있도록 하겠습니다.
-                </td>
-            </tr>
-            <tr>
-                <th>이미지</th>
-                <td><img src="" alt="이미지가 들어갈 위치"/></td>
-            </tr>
-        </table>
+		<form action="replyWrite.go" method="post" enctype="multipart/form-data">
+	        <table id="claim_reply">
+	            <tr>
+	                <th>관리자</th>
+	                <td>
+	                	<input type="hidden" name="claim_id" value="${claim.claim_id}"/>
+	                	<input type="hidden" name="reply_id" value="${reply.reply_id}"/>
+	                	${reply.mb_id}
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>작성일</th>
+	                <td>${reply.reply_date}</td>
+	            </tr>
+	            <tr>
+	                <th style="height: 300px;">답변 내용</th>
+	                <td style="vertical-align:top">${reply.reply_content}</td>
+	            </tr>
+	            <c:if test="${replyList.size()>0}">
+		            <tr>
+		                <th>이미지</th>
+		                <td>
+			                <c:forEach items="${replyList}" var="pathR">
+								<img src="/image/${pathR.newFileName}" width="640"/>
+							</c:forEach>
+						</td>
+		            </tr>
+	            </c:if>
+	            <tr>
+					<th colspan="2">
+						<!-- onclick="location.href='adminClaimUpdate.do?claim_id=${claim.claim_id}'" -->
+						<c:choose>
+							<c:when test="${reply.reply_id eq null}">
+								<input type="submit" value="답변하기"/>
+							</c:when>
+							<c:otherwise>
+								<input type="button" value="수정" onclick="location.href='replyUpdate.go?reply_id=${reply.reply_id}&claim_id=${claim.claim_id}'"/>
+							</c:otherwise>
+						</c:choose>
+					</th>
+				</tr>
+	        </table>
+		</form>
     </div>
 </body>
-<script></script>
+<script>
+
+	// 현재 건의사항 작성글의 처리상태를 옵션 목록에서 바로 보여주기
+	$(document).ready(function(){
+		var status = $("select").attr("status");
+		console.log(status);
+		$("option[value='"+status+"']").prop("selected",true);
+	});
+	
+</script>
 </html>

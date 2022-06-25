@@ -66,12 +66,9 @@ public class BoardService {
 		map.put("currPage", page); // 현재 페이지
 		
 		logger.info("offset : "+offset);
-		/*
-		ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
-		logger.info("건의사항 게시글의 개수 : " +claimList.size());
-		map.put("claimList", claimList);
-		*/
 		
+		
+		// 검색 관련 설정하는 조건문
 		if(word == null || word.equals("")) {
 			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
 			
@@ -99,56 +96,6 @@ public class BoardService {
 		return map;
 	}
 	
-	/*
-	// 검색 목록 리스트
-	public HashMap<String, Object> searchList(HashMap<String, String> params) {
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		int cnt = Integer.parseInt(params.get("cnt"));
-		int page = Integer.parseInt(params.get("page"));
-		// String option = params.get("option");
-		String option = "처리상태";
-		// String keyword = params.get("keyword");
-		String keyword = "처리중";
-		logger.info("보여줄 페이지 : " + page);
-		
-		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
-		
-		// cnt, page 입력후 allCnt 와 pages 구하기
-		map = claimList(params);
-		int offset = (int) map.get("offset");
-		logger.info("검색후 offset : "+offset);
-		
-		if(keyword != null) {
-			logger.info("검색어 (옵션) : " + keyword+ " (" + option + ")");
-			
-			
-			if(option.equals("제목")) {
-				searchList = dao.subjectSearch(cnt,page,keyword);
-				logger.info("제목 옵션 설정");
-			} else {
-				searchList = dao.statusSearch(cnt,page,keyword);
-				logger.info("상태 옵션 설정");
-			}
-			
-			logger.info("검색결과 건수 : " +searchList.size());
-			map.put("searchList", searchList);
-			
-		} else {
-			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
-			logger.info("건의사항 게시글의 개수 : " +claimList.size());
-			map.put("claimList", claimList);
-		}
-		
-		logger.info("검색결과 건수 : " +searchList.size());
-		map.put("claimList", searchList);
-			
-		
-		
-		return map;
-	}
-	 */
-	
 	
 	// 건의사항 글쓰기폼 (나중에 로그인했을 때 아이디 받아오는 것 추가해야함)
 	public String claimWrite(MultipartFile[] photos, HashMap<String, String> params) {
@@ -174,20 +121,23 @@ public class BoardService {
 		// 파일을 올리지 않아도 fileSave 가 진행되는 것을 방지하는 조건문
 		
 		if(row > 0) {
-			claimFileSave(photos, claim_id);
+			claimFileSave(photos, claim_id, 2);
 		}
 		// 일단 리스트로 보내고 나중에 detail 로 변경 ==========================
 		// return "redirect:/claimDetail?claim_id="+claim_id;
 		return "redirect:/claimList";
 	}
 	
-	public void claimFileSave(MultipartFile[] photos, int claim_id) {
+	public void claimFileSave(MultipartFile[] photos, int post_id, int category_id) {
+		
+		// 카테고리 번호 전달(1. 공지사항, 2. 건의사항, 3. 답변)
+		int category = category_id;
 		
 		// 이미지 파일 업로드
 		for (MultipartFile photo : photos) {
 			String oriFileName = photo.getOriginalFilename();
 			
-			// 이미지 파일을 업로드 안했을 때 조건문 처리
+			// 이미지 파일을 업로드 안했을 때를 제외하기 위한 조건문 처리
 			if(!oriFileName.equals("")) {
 				logger.info("업로드 진행");
 				// 확장자 추출
@@ -204,7 +154,7 @@ public class BoardService {
 					Files.write(path, arr);
 					logger.info(newFileName + " SAVE OK");
 					// 4. 업로드 후 photo 테이블에 데이터 입력
-					dao.claimFileWrite(oriFileName,newFileName,claim_id,2);
+					dao.claimFileWrite(oriFileName,newFileName,post_id,category);
 					
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -219,6 +169,7 @@ public class BoardService {
 		
 		// 건의사항 글 정보
 		BoardDTO dto = dao.claimDetail(claim_id);
+		// 답변 글 정보
 		// 건의사항 글에 올려진 이미지 정보
 		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id);
 		model.addAttribute("claim", dto);
@@ -229,13 +180,22 @@ public class BoardService {
 	public String claimUpdate(MultipartFile[] photos, HashMap<String, String> params) {
 		
 		int claim_id = Integer.parseInt(params.get("claim_id"));
-		int row = dao.claimUpdate(params);
+		String status = params.get("status");
+		int row = 0;
+		String page = "";
 		
+		if(status==null) {
+			row = dao.claimUpdate(params);
+			page = "redirect:/claimDetail?claim_id="+claim_id;
+		} else {
+			row = dao.adminClaimUpdate(status, claim_id);
+			page = "redirect:/adminClaimDetail?claim_id="+claim_id;
+		}
 		if(row > 0) {
-			claimFileSave(photos, claim_id);
+			claimFileSave(photos, claim_id, 2);
 		}
 		
-		return "redirect:/claimDetail?claim_id="+claim_id;
+		return page;
 	}
 
 
@@ -246,7 +206,7 @@ public class BoardService {
 		logger.info(claim_id + " 번 게시물에 업로드된 사진 수 : " + claimPhotoList.size());
 		
 		int delCount = dao.claimDel(claim_id);
-		// Photo DB 에서도 지우고 싶어용
+		// Photo DB 에서도 지워준다.
 		dao.photoDel(claim_id);
 		
 		logger.info(delCount + " 건의 건의사항 삭제 완료");
@@ -265,28 +225,66 @@ public class BoardService {
 		}
 	}
 
+	
+	// ================= 아래부터 답변 게시글 기능=============================
+	
+	
+	
+	public void replyDetail(Model model, int claim_id) {
+		// 답변 글 정보
+		BoardDTO dto = dao.replyDetail(claim_id);
+		// 작성된 답변이 있다면 아래와 같이 실행
+		if(dto!=null) {
+			dto.setReply_id(dao.getReplyId(claim_id));
+			// 답변 글에 올려진 이미지 정보
+			ArrayList<PhotoDTO> replyPhotoList = dao.replyPhotoList(dto.getReply_id());
+			model.addAttribute("reply", dto);
+			model.addAttribute("replyList", replyPhotoList);
+		}
+	}
 
 
-	/*
-	public HashMap<String, Object> claimSearch(@RequestParam HashMap<String, String> params) {
-		logger.info("검색 서비스 접속");
-		HashMap<String, Object> searchList;
+	public String replyWrite(MultipartFile[] photos, HashMap<String, String> params) {
+
+		BoardDTO dto = new BoardDTO();
+		dto.setMb_id("admin");
+		dto.setClaim_id(Integer.parseInt(params.get("claim_id")));
+		// claimDto.setMb_id(params.get("mb_id")); ==========================
+		// 일단 임시로 tester 계정 사용 ==========================
+		dto.setReply_content(params.get("reply_content"));
 		
-		int cnt = Integer.parseInt(params.get("cnt"));
-		int page = Integer.parseInt(params.get("page"));
-		String option = params.get("option");
-		String search = params.get("search");
+		// 건의사항 글 작성 성공여부 확인
+		int row = dao.replyWrite(dto);
+		logger.info(row + "개의 답변 작성 성공");
 		
-		if(option.equals("제목")) {
-			searchList = dao.subjectSearch(cnt,page,search);
-			logger.info("제목 옵션 설정");
-		} else {
-			searchList = dao.statusSearch(cnt,page,search);
-			logger.info("상태 옵션 설정");
+		// 실행 후 Parameter 에 담긴 reply_id 추출
+		int reply_id = dto.getReply_id();
+		int claim_id = dto.getClaim_id();
+		logger.info("방금 넣은 글 번호 : " + reply_id);
+		logger.info("photos : " + photos);
+		
+		// 파일을 올리지 않아도 fileSave 가 진행되는 것을 방지하는 조건문
+		if(row > 0) {
+			claimFileSave(photos, reply_id, 3);
+		}
+		// 일단 리스트로 보내고 나중에 detail 로 변경 ==========================
+		// return "redirect:/claimDetail?claim_id="+claim_id;
+		return "redirect:/adminClaimDetail?claim_id="+claim_id;
+	}
+
+
+	public String replyUpdate(MultipartFile[] photos, HashMap<String, String> params) {
+		int claim_id = Integer.parseInt(params.get("claim_id"));
+		int reply_id = Integer.parseInt(params.get("reply_id"));
+		int row = 0;
+		
+		row = dao.replyUpdate(params);
+		
+		if(row > 0) {
+			claimFileSave(photos, reply_id, 3);
 		}
 		
-		return searchList;
+		return "redirect:/adminClaimDetail?claim_id="+claim_id;
 	}
-	*/
-	
+
 }

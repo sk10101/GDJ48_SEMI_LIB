@@ -47,8 +47,8 @@
 		SELECT notice_id, notice_title, notice_date FROM notice WHERE notice_title LIKE CONCAT('%',#{param1},'%')
 	</select>
 	
-
-	<!--
+	
+	<!-- 여기서부터 건의사항 관련 쿼리문 ==========================================
 	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
 			ORDER BY claim_id DESC
@@ -111,6 +111,12 @@
 		WHERE claim_id = #{claim_id}
 	</update>
 	
+	<update id="adminClaimUpdate">
+		UPDATE claim SET 
+			status=#{param1}
+		WHERE claim_id = #{param2}
+	</update>
+	
 	<delete id="claimDel">
 		DELETE FROM claim WHERE claim_id = #{param1}
 		<!-- 이렇게 하면 게시글에 사진이 없는 경우에 삭제가 안됨
@@ -121,5 +127,36 @@
 	<delete id="photoDel">
 		DELETE FROM photo WHERE post_id = #{param1}
 	</delete>
+	
+	
+	
+	<!-- 여기서 부터 답변 관련 ============================================== -->
+	<select id="replyDetail" parameterType="int" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT * FROM reply WHERE claim_id = #{claim_id}
+	</select>
+	
+	<select id="replyPhotoList" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE post_id = #{param1}
+	</select>
+	
+	<insert id="replyWrite" 
+		useGeneratedKeys="true"
+		keyColumn="reply_id"
+		keyProperty="reply_id"
+		parameterType="com.gdj.lib.dto.BoardDTO">
+		INSERT INTO reply(mb_id,claim_id, reply_content)
+			VALUES(#{mb_id},#{claim_id},#{reply_content})
+	</insert>
+	
+	<update id="replyUpdate" parameterType="hashmap">
+		UPDATE reply SET 
+			reply_content =#{reply_content}
+		WHERE reply_id = #{reply_id}
+	</update>
+	
+	<select id="getReplyId" resultType="Integer">
+		SELECT reply_id from reply
+			WHERE claim_id = #{param1}
+	</select>
 	
 </mapper>

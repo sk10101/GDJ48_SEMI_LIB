@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이 페이지 / 건의사항 / 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
         #header {
@@ -131,7 +131,13 @@
             </c:if>
             <tr>
 				<th colspan="2">
-					<input type="button" value="수정" onclick="location.href='claimUpdate.go?claim_id=${claim.claim_id}'"/>
+					<c:choose>
+						<c:when test="${claim.status eq '미처리'}">
+							<input type="button" value="수정" onclick="location.href='claimUpdate.go?claim_id=${claim.claim_id}'"/>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+					</c:choose>
 					<input type="button" value="목록" onclick="location.href='/claimList'"/>
 				</th>
 			</tr>
@@ -140,32 +146,33 @@
         <hr/>
         <br/>
         <table id="claim_reply">
-            <tr>
-                <th>관리자</th>
-                <td>admin1</td>
-            </tr>
-            <tr>
-                <th>작성일</th>
-                <td>2022.06.17</td>
-            </tr>
-            <tr>
-                <th style="height: 150px;">답변내용</th>
-                <td style="vertical-align: top;">안녕하세요. 관리자입니다. 문의하신 내용은 아래와 같이 처리하였습니다.
-                    <br>
-                    <br>
-                    - 2022.06.15 부러진 의자 수거 후 임시로 다른 의자를 배치
-                    <br>
-                    - 2022.06.15 새 의자 주문 (22일 도착 예정)
-                    <br>
-                    <br>
-                    불편을 드려 죄송합니다. 최대한 빠르게 처리할 수 있도록 하겠습니다.
-                </td>
-            </tr>
-            <tr>
-                <th>이미지</th>
-                <td><img src="" alt="이미지가 들어갈 위치"/></td>
-            </tr>
-        </table>
+	            <tr>
+	                <th>관리자</th>
+	                <td>
+	                	<input type="hidden" name="claim_id" value="${claim.claim_id}"/>
+	                	<input type="hidden" name="reply_id" value="${reply.reply_id}"/>
+	                	${reply.mb_id}
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>작성일</th>
+	                <td>${reply.reply_date}</td>
+	            </tr>
+	            <tr>
+	                <th style="height: 300px;">답변 내용</th>
+	                <td style="vertical-align:top">${reply.reply_content}</td>
+	            </tr>
+	            <c:if test="${replyList.size()>0}">
+		            <tr>
+		                <th>이미지</th>
+		                <td>
+			                <c:forEach items="${replyList}" var="pathR">
+								<img src="/image/${pathR.newFileName}" width="640"/>
+							</c:forEach>
+						</td>
+		            </tr>
+	            </c:if>
+	        </table>
     </div>
 </body>
 <script></script>

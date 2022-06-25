@@ -40,7 +40,7 @@ public interface BoardDAO {
 	
 	int claimWrite(BoardDTO dto);
 
-	void claimFileWrite(String oriFileName, String newFileName, int claim_id, int i);
+	void claimFileWrite(String oriFileName, String newFileName, int claim_id, int category_id);
 
 	BoardDTO claimDetail(int claim_id);
 
@@ -48,6 +48,8 @@ public interface BoardDAO {
 
 	int claimUpdate(HashMap<String, String> params);
 
+	int adminClaimUpdate(String status, int claim_id);
+	
 	int claimDel(int claim_id);
 	
 	int photoDel(int claim_id);
@@ -57,6 +59,16 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> statusSearch(int cnt, int offset, String word);
 
 	ArrayList<BoardDTO> writerSearch(int cnt, int page, String word);
+
+	BoardDTO replyDetail(int claim_id);
+
+	ArrayList<PhotoDTO> replyPhotoList(int reply_id);
+
+	int replyWrite(BoardDTO dto);
+
+	int replyUpdate(HashMap<String, String> params);
+
+	int getReplyId(int claim_id);
 
 
 }

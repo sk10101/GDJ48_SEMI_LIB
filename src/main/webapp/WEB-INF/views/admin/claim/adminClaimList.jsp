@@ -195,7 +195,7 @@
 			//console.log(item.status);
 			content += '	<tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
 			content += '		<td id="claimID">'+item.claim_id+'</td>';
-			content += '		<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+			content += '		<td><a href="adminClaimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
 			content += '		<td class="mbID">'+item.mb_id+'</td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
