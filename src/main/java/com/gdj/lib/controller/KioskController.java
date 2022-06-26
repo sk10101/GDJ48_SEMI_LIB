@@ -125,7 +125,8 @@ public class KioskController {
 	@RequestMapping(value = "/ki_borrowSuccess.go")
 	public String kioskBorrowSuccess(Model model) {
 		logger.info("키오스크 성공 알람 페이지");
-		return "kiosk/borrowSuccess";
+		model.addAttribute("msg", "대출");
+		return "kiosk/success";
 	}
 	
 	
@@ -159,10 +160,11 @@ public class KioskController {
 	}
 	
 	
-	// 키오스크 대출 성공 페이지 
+	// 키오스크 반납 성공 페이지 
 	@RequestMapping(value = "/ki_returnSuccess.go")
 	public String kioskReturnSuccess(Model model) {
 		logger.info("키오스크 성공 알람 페이지");
-		return "kiosk/returnSuccess";
+		model.addAttribute("msg", "반납");
+		return "kiosk/success";
 	}
 }
