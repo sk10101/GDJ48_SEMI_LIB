@@ -110,7 +110,9 @@
 	                </tr>
 	                <tr>
 	                    <th style="height: 300px;">내용</th>
-	                    <td><input type="text" name="claim_content" value="내용을 입력하세요. 모양만 잡아놓은것" style="height: 300px;"/></td>
+	                    <td>
+	                    	<textarea name="claim_content" style="height: 273px; width: 614px;"></textarea>
+	                    </td>
 	                </tr>
 	                <tr>
 	                    <th>이미지</th>

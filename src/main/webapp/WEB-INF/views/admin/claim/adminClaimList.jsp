@@ -113,7 +113,7 @@
 				<td colspan ="6" id="paging">
 				        <select id="pagePerNum">
 							<option value="5">5</option>
-							<option value="10">10</option>
+							<option value="10" selected="selected">10</option>
 							<option value="15">15</option>
 							<option value="20">20</option>
 						</select>
@@ -174,9 +174,15 @@
 					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
 					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
 					onPageClick: function(e, page) {
-						console.log(page); // 사용자가 클릭한 페이지
+						console.log("클릭한 페이지 : "+page); // 사용자가 클릭한 페이지
+						console.log("입력한 검색어 : "+word);
 						currPage = page;
-						listCall(page);
+						
+						if(word==null){
+							listCall(page);
+						} else {
+							searchList(page);
+						}
 					}
 				});
 				

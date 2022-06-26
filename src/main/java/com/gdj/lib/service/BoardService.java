@@ -78,13 +78,13 @@ public class BoardService {
 			
 			// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
 			if(option.equals("제목")) {
-				searchList = dao.subjectSearch(cnt,page,word);
+				searchList = dao.subjectSearch(cnt,offset,word);
 				logger.info("제목 옵션 설정");
 			} else if(option.equals("처리상태")) {
-				searchList = dao.statusSearch(cnt,page,word);
+				searchList = dao.statusSearch(cnt,offset,word);
 				logger.info("처리상태 옵션 설정");			
 			} else {
-				searchList = dao.writerSearch(cnt,page,word);
+				searchList = dao.writerSearch(cnt,offset,word);
 				logger.info("작성자 옵션 설정");	
 			}
 			

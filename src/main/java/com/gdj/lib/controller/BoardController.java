@@ -143,7 +143,7 @@ public class BoardController {
 	}
 	
 	
-	// 관리자 건의사항 글 수정상세 보기
+	// 관리자 건의사항 수정 상세보기
 	@RequestMapping(value = "/adminClaimDetail")
 	public String adminClaimDetail(Model model, @RequestParam int claim_id) {
 		logger.info("상세보기 요청 : " + claim_id);
@@ -155,7 +155,7 @@ public class BoardController {
 	}
 	
 	
-	// 관리자 건의사항 상세보기(처리상태만 수정가능)
+	// 관리자 건의사항 수정(처리상태만 수정가능)
 	@RequestMapping(value = "/adminClaimUpdate.do")
 	public String adminClaimUpdate(Model model, MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
 		logger.info("건의사항 수정 요청 : " + params);
@@ -174,7 +174,7 @@ public class BoardController {
 	}
 	
 	
-	// 관리자 답변 작성 (수정 포함)
+	// 관리자 답변 작성
 	@RequestMapping(value = "/replyWrite.do")
 	public String replyWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
 		logger.info("답변 글쓰기 : " + params);
@@ -183,7 +183,7 @@ public class BoardController {
 	}
 	
 	
-	// 관리자 건의사항 수정 상세보기(답변 수정)
+	// 관리자 답변 수정
 	@RequestMapping(value = "/replyUpdate.go")
 	public String replyUpdateForm(Model model, @RequestParam int claim_id, @RequestParam int reply_id) {
 		logger.info("답변 수정 요청 : " + reply_id);

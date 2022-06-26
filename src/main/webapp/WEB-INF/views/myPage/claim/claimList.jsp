@@ -109,7 +109,7 @@
 				<td colspan ="5" id="paging">
 				        <select id="pagePerNum">
 							<option value="5">5</option>
-							<option value="10">10</option>
+							<option value="10" selected="selected">10</option>
 							<option value="15">15</option>
 							<option value="20">20</option>
 						</select>
@@ -136,18 +136,17 @@
 		console.log(word);
 		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
 		$("#pagination").twbsPagination('destroy');
-		if(word==null || word==""){
+		// 검색어가 들어갔을 때와 아닐때를 구분
+		if(word=='null' || word==""){
 			listCall(currPage);
 		} else {
 			searchList(currPage)
 		}
 		
-	})
-	
+	});
 	
 	
 	function listCall(page) {
-		
 		var pagePerNum = $('#pagePerNum').val();
 		console.log("param page : " + page);
 		
@@ -169,9 +168,15 @@
 					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
 					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
 					onPageClick: function(e, page) {
-						console.log(page); // 사용자가 클릭한 페이지
+						console.log("클릭한 페이지 : "+page); // 사용자가 클릭한 페이지
+						console.log("입력한 검색어 : "+word);
 						currPage = page;
-						listCall(page);
+						
+						if(word==null){
+							listCall(page);
+						} else {
+							searchList(page);
+						}
 					}
 				});
 				
@@ -205,21 +210,40 @@
 		$("#claimList").append(content);
 	}
 	
+	
+	// 페이지 변경할 때 검색어를 저장하기위한 시도
 	/*
-	$('#searchBtn').on('click',function(){
-		console.log(currPage);
-		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
-		$("#pagination").twbsPagination('destroy');
-		searchList(currPage);
-	})
+	$('.page-item active > a.page-link').on('click',function(){
+		console.log("페이지가 변경됐습니다.")
+		if(sessionStorage.getItem("word")!=null) {
+			$(this).text() = currPage;
+			searchList(currPage);
+		}
+	});
 	*/
 	
+	
+	// 새로고침하면 세션에 저장된 검색어와 검색옵션 값을 비운다.
+	/*
+	function sessionClear() {
+		    window.onbeforereload = function (e) {
+		    	sessionStorage.removeItem("word");
+		    	sessionStorage.removeItem("option");
+		    };
+		}
+	*/
 	
 	// 검색 결과 출력
 	function searchList(page) {
 		var word = $('#word').val();
 		var option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
+		
+		// 검색어 저장
+		/*
+		sessionStorage.setItem("word",word);
+		sessionStorage.setItem("option",option);
+		*/
 		
 		$.ajax({
 			type: 'GET',
