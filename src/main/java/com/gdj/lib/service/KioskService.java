@@ -77,4 +77,8 @@ public class KioskService {
 		}
 	}
 
+	public String loginSeat(String id) {
+		return dao.loginSeat(id);
+	}
+
 }

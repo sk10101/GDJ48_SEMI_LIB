@@ -1,6 +1,8 @@
 package com.gdj.lib.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -36,13 +38,29 @@ public class KioskController {
 	
 	// 키오스크 로그인
 	@RequestMapping(value = "/ki_login.do")	
-	public String kioskLogin(HttpSession session, @RequestParam String id, @RequestParam String pw) {
+	public String kioskLogin(HttpSession session, @RequestParam String id, @RequestParam String pw, Model model) {
 		logger.info("키오스크 로그인 요청: {},{}",id,pw);
 		String page="kiosk/loginFail";
 		String loginId = service.login(id,pw);
+		String loginIdSeat = service.loginSeat(id);
+		// logger.info(loginIdSeat);
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String nowTime = sdf.format(now);
+		// logger.info(nowTime);
+		
+		long val1 = Long.parseLong(loginIdSeat);
+		long val2 = Long.parseLong(nowTime);
+		// System.out.println(val1);
+		// System.out.println(val2);
 		
 		if (loginId != null) {
 			session.setAttribute("loginId", loginId);
+			if (val2 > val1) {
+				model.addAttribute("msg", "열람실");
+			} else {
+				model.addAttribute("msg", "퇴실하기");
+			}
 			page = "kiosk/main";
 		}
 		return page;

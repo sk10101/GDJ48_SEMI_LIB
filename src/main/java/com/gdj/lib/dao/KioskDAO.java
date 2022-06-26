@@ -22,4 +22,6 @@ public interface KioskDAO {
 
 	void updateB(String b_id);
 
+	String loginSeat(String id);
+
 }
