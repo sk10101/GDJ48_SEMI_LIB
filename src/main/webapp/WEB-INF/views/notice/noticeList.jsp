@@ -82,7 +82,7 @@
         <a href="#">회원정보</a>
     </div>
     <input type="button" value="삭제" onclick="noticeDelete()" />
-    <button id="notice_write" onclick="location.href='noticeWrite.go'">건의사항 작성</button><br/>
+    <button id="notice_write" onclick="location.href='noticeWrite.go'">공지사항 작성</button><br/>
     <table id="notice_table">
     	<thead>
 	         <tr>
@@ -158,7 +158,7 @@
 				dataType: 'JSON',
 				success: function(data){
 					console.log(data);
-					location.href='/notice.go';
+					location.href='/noticeList';
 				},
 				error: function(e) {
 					console.log(e);

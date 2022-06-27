@@ -31,20 +31,20 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td><textarea>${notice.notice_content}</textarea></td>
+                    <td style="vertical-align:top">${notice.notice_content}</td>
                 </tr>
                 <c:if test="${noticeList.size() >0 }">
                 <tr>
                     <th>첨부파일</th>
                     <td>
                     	<c:forEach items="${noticeList}" var="path">
-                    			<img src="/photo/${path.newFileName}" width="500" />
+                    			<img src="/image/${path.newFileName}" width="500" />
                     	</c:forEach>
                     </td>
                 </tr>
                 </c:if>
         </table>
-        <button onclick="location.href='notice.go'">돌아가기</button>
+        <button onclick="location.href='noticeList'">돌아가기</button>
     </body>
     <script>
         
