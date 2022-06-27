@@ -18,7 +18,7 @@
         <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
     </a>
     <div class="alert">
-        반납완료 되었습니다.
+        ${msg}완료 되었습니다.
     </div>
 </body>
 <script></script>
