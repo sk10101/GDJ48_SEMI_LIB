@@ -35,7 +35,7 @@
         <div class="menu">
             <ul class="icons">
                 <li>
-                    <a href="/notice.go"><img src="../resources/img/mypage.png"/><br/>공지사항</a>
+                    <a href="/noticeList"><img src="../resources/img/mypage.png"/><br/>공지사항</a>
                 </li>
                 <li><!-- href 나중에 변경해야함 (임시.)-->
                     <a href="/bookList.go"><img src="../resources/img/mypage.png"/><br/>마이페이지</a>

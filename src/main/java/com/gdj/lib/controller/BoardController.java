@@ -82,6 +82,7 @@ public class BoardController {
 		logger.info("상세보기 요청 : " + claim_id);
 		
 		service.claimDetail(model, claim_id);
+		service.replyDetail(model, claim_id);
 		
 		return "myPage/claim/claimDetail";
 	}
@@ -91,7 +92,6 @@ public class BoardController {
 	@RequestMapping(value = "/claimUpdate.go")
 	public String claimUpdateForm(Model model, @RequestParam int claim_id) {
 		logger.info("수정 상세보기 요청 : " + claim_id);
-		// update 할땐, upHit 을 사용하지 않는 것으로 설정하기위해 아래와 같이 인자값을 추가(detail 에도 추가)
 		service.claimDetail(model, claim_id);
 		
 		return "myPage/claim/claimUpdate";
@@ -112,6 +112,7 @@ public class BoardController {
 	public String claimDel(Model model, @RequestParam int claim_id) {
 		logger.info("삭제 요청 : " + claim_id);
 		
+		// 관리자가 삭제하면 관리자 건의사항 페이지로 이동하도록 수정(후에 id 기능 넣을때) ================================================
 		service.claimDel(claim_id);
 		
 		return "redirect:/claimList";
@@ -129,5 +130,77 @@ public class BoardController {
 		return searchList;
 	}
 	*/
+	
+	
+	
+	// ================== 아래부터 관리자 건의사항 페이지 ============================
+	
+	// 관리자 건의사항 목록페이지 이동
+	@RequestMapping(value = "/adminClaimList", method = RequestMethod.GET)
+	public String adminClaimList() {
+		
+		return "admin/claim/adminClaimList";
+	}
+	
+	
+	// 관리자 건의사항 수정 상세보기
+	@RequestMapping(value = "/adminClaimDetail")
+	public String adminClaimDetail(Model model, @RequestParam int claim_id) {
+		logger.info("상세보기 요청 : " + claim_id);
+		
+		service.claimDetail(model, claim_id);
+		service.replyDetail(model, claim_id);
+		
+		return "admin/claim/adminClaimDetail";
+	}
+	
+	
+	// 관리자 건의사항 수정(처리상태만 수정가능)
+	@RequestMapping(value = "/adminClaimUpdate.do")
+	public String adminClaimUpdate(Model model, MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+		logger.info("건의사항 수정 요청 : " + params);
+		
+		return service.claimUpdate(photos, params);
+	}
+	
+	
+	// 답변 쓰기 페이지 이동
+	@RequestMapping(value = "/replyWrite.go")
+	public String replyWriteForm(Model model, @RequestParam int claim_id) {
+		logger.info("건의사항 답변 글쓰기 페이지 이동");
+		model.addAttribute("claim_id",claim_id);
+		
+		return "admin/claim/replyWrite";
+	}
+	
+	
+	// 관리자 답변 작성
+	@RequestMapping(value = "/replyWrite.do")
+	public String replyWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+		logger.info("답변 글쓰기 : " + params);
+		
+		return service.replyWrite(photos, params);
+	}
+	
+	
+	// 관리자 답변 수정
+	@RequestMapping(value = "/replyUpdate.go")
+	public String replyUpdateForm(Model model, @RequestParam int claim_id, @RequestParam int reply_id) {
+		logger.info("답변 수정 요청 : " + reply_id);
+		service.claimDetail(model, claim_id);
+		service.replyDetail(model, claim_id);
+		
+		// return "admin/claim/replyUpdate?reply_id="+reply_id+"&claim_id="+claim_id;
+		return "admin/claim/replyUpdate";
+	}
+	
+	
+	// 답변 수정 상세보기 + 파일 업로드
+	@RequestMapping(value = "/replyUpdate.do")
+	public String replyUpdate(Model model, MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+		logger.info("답변 수정 요청 : " + params);
+		
+		return service.replyUpdate(photos, params);
+	}
 }
 
