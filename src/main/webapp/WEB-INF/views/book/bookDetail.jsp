@@ -80,7 +80,7 @@ table {
                    <td id="brw">
                    <c:choose>
 						<c:when test="${brwdto.b_status eq '대출중'}">
-						<input type="hidden">
+						<button id="brwBtn" disabled="disabled">대출신청</button>
 						</c:when>
 						<c:when test="${brwdto.b_status eq '대출가능'}">                        				
 						<button id="brwBtn" onclick="bookbrw()">대출신청</button>								

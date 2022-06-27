@@ -5,6 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<%@ page import="java.util.Date" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <style>
     .detail {
         right: 0;
@@ -59,7 +62,14 @@
                  			</c:otherwise>
             			</c:choose>
 						<td>${dto.penalty_start}</td>
-						<td>${dto.penalty_end }</td>
+						<c:choose>
+                 			<c:when test="${dto.category_id eq '5'}">
+                     			<td>${dto.penalty_end }</td>
+                 			</c:when>
+                 			<c:otherwise>
+                      			<td>${penalty_start}</td>
+                 			</c:otherwise>
+            			</c:choose>						
 						<c:choose>
                  			<c:when test="${dto.cancel eq 'true'}">
                      			<td>Y</td>

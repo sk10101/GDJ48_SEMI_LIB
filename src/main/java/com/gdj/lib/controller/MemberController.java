@@ -1,6 +1,10 @@
 package com.gdj.lib.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -157,7 +161,7 @@ public class MemberController {
 	      }
 	      
 	      if(params.get("clear") != null) {
-	    	  params.put("end_reason", "");
+	    	  params.put("end_reason", params.get("clear"));
 	    	  
 	      
 	      }
@@ -172,11 +176,12 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/penaltyList.do")
-	public String penaltyList(Model model) {
+	public String penaltyList(Model model) throws ParseException {
 		logger.info("이용정지리스트 페이지");
 		ArrayList<MemberDTO> penaltyList = service.penaltyList();
 		logger.info("이용정지 회원 리스트 갯수 : "+penaltyList.size());	
 		model.addAttribute("penaltyList", penaltyList);
+		
 		return "penalty/penaltyList";
 	}
 	
