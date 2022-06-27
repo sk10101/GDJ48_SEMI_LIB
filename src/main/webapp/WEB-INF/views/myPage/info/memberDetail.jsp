@@ -104,7 +104,8 @@
 	function mySecession() {
 		
 		if("#chk").prop("checked", false) {
-			
+		
+			/*
 			$.ajax({
 				type : 'POST',
 				url: '/CancelMySecession.ajax',
@@ -119,9 +120,13 @@
 				
 			});
 			
+			*/
+			
 		}
 		
 		else {
+			
+			/*
 			
 			$.ajax({
 				type: 'POST',
@@ -136,6 +141,8 @@
 				}
 				
 			});
+			
+			*/
 		
 		}
 				
