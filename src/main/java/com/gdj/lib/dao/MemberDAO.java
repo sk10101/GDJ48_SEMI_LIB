@@ -59,6 +59,27 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> memberUpdateListMy();
 
 
+	ArrayList<MemberDTO> penaltyList();
+
+
+	MemberDTO penaltyDetail(String penalty_id);
+
+
+	void penaltyUpdate(HashMap<String, String> params);
+
+
+	void blackUpdate(HashMap<String, String> params);
+
+
+	
+
+
+
+
+
+	
+
+
 	
 
 
