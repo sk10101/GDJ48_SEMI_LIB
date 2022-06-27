@@ -63,7 +63,7 @@
         </table>
 
         <br/>
-        <input type="submit" value="수정" >
+        <input type="submit" value="수정" id="myUpdateButton">
         </form>
 </body>
 <script>
@@ -81,23 +81,63 @@
 				
 				if(confirm("※ 정말로 탈퇴 하시겠습니까?  ") == true){
 					alert ("회원탈퇴는 신청후 7일뒤 처리 됩니다. 회원탈퇴 처리가 완료되면 해당 아이디는 재사용이 불가 합니다. ");
+					
 				} else {
 					$("#chk").prop("checked" , false);
 					return ;
 				}
 				  
 			}else{            
-				alert("회원 탈퇴가 취소 되었습니다.");        
+				alert("회원 탈퇴가 취소 되었습니다.");
+				        
 			}  
 				  
 		});
 	
 	});
 	
+	$('#myUpdateButton').on("click", function() {
+		mySecession();
+	});
 	
 	
 	function mySecession() {
 		
+		if("#chk").prop("checked", false) {
+			
+			$.ajax({
+				type : 'POST',
+				url: '/CancelMySecession.ajax',
+				data : {},
+				dataType : 'JSON',
+				success: function(data) {
+					console.log(data);
+				},
+				error: function(e) {
+					console.log(e);
+				}
+				
+			});
+			
+		}
+		
+		else {
+			
+			$.ajax({
+				type: 'POST',
+				url: '/MySecession.ajax',
+				data : {},
+				dataType : {},
+				success: function(data) {
+					console.log(data);		
+				},
+				error: function(e) {
+					console.log(e);
+				}
+				
+			});
+		
+		}
 				
 		
 	}

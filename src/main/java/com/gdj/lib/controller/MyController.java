@@ -1,6 +1,7 @@
 package com.gdj.lib.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdj.lib.dto.MemberDTO;
 import com.gdj.lib.service.MyService;
@@ -111,6 +113,22 @@ public class MyController {
 		
 		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
+	
+	@RequestMapping(value = "/CancelMySecession.ajax")
+	@ResponseBody
+	public HashMap<String, Object> CancelMySecession() {
+		
+		return null;
+	}
+	
+	
+	@RequestMapping(value = "/MySecession.ajax")
+	@ResponseBody
+	public HashMap<String, Object> MySecession() {
+		
+		return null;
+	}
+	
 	
 	
 	
