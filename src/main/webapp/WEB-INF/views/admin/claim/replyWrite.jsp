@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>관리자 페이지 / 답변 글쓰기</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<style>
 	        #header {
@@ -33,12 +33,12 @@
 	            margin-bottom: 15px;
 	        }
 	
-	        #claim_writeForm {
+	        #reply_writeForm {
 	            width: 800px;
 	            text-align: center;
 	        }
 	
-	        #claim_writeForm, th, td {
+	        #reply_writeForm, th, td {
 	            border: 2px solid #999;
 	            border-collapse: collapse;
 	            padding: 5px;
@@ -89,44 +89,29 @@
 	</style>
 </head>
 <body>
-        <div id="header">
-            <a href="#">도서관 로고 들어갈 위치</a>
-        </div>
-        <div id="myPage_menu">
-            <h3>마이페이지</h3>
-            <hr/>
-            <a href="#">도서내역</a><br/>
-            <br/>
-            <a href="#">건의사항</a><br/>
-            <br/>
-            <a href="#">회원정보</a>
-        </div>
-        <div id="main_content">
-        	<form action="claimWrite.do" method="post" enctype="multipart/form-data">
-	            <table id="claim_writeForm">
-	                <tr>
-	                    <th>제목</th>
-	                    <td><input type="text" name="claim_title" value="제목을 입력하세요."/></td>
-	                </tr>
-	                <tr>
-	                    <th style="height: 300px;">내용</th>
-	                    <td>
-	                    	<textarea name="claim_content" style="height: 273px; width: 614px;"></textarea>
-	                    </td>
-	                </tr>
-	                <tr>
-	                    <th>이미지</th>
-	                    <td><input type="file" name="photos" multiple="multiple"/></td>
-	                </tr>
-	                <tr>
-			            <th colspan="2">
-				            <input type="submit" value="저장" style="width: 60px; margin-top: 10px;"/>
-							<input type="button" value="취소" onclick="location.href='/claimList'" style="width: 60px; margin-top: 10px;"/>
-						</th>
-					</tr>			
-	            </table>
-            </form>
-        </div>
-    </body>
+    <div id="main_content">
+    	<form action="replyWrite.do" method="post" enctype="multipart/form-data">
+         <table id="reply_writeForm">
+             <tr>
+                 <th style="height: 300px;">내용</th>
+                 <td>
+	                 <input type="text" name="claim_id" value="${claim_id}"/>
+	                 <textarea name="reply_content" style="height: 273px; width: 614px;">${reply.reply_content}</textarea>
+                 </td>
+             </tr>
+             <tr>
+                 <th>이미지</th>
+                 <td><input type="file" name="photos" multiple="multiple"/></td>
+             </tr>
+             <tr>
+	           <th colspan="2">
+		            <input type="submit" value="저장" style="width: 60px; margin-top: 10px;"/>
+					<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim.claim_id}'"/>
+				</th>
+			</tr>			
+         </table>
+        </form>
+    </div>
+</body>
 <script></script>
 </html>
