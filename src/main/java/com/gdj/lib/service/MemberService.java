@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
 
@@ -46,6 +47,7 @@ public class MemberService {
 
 	public ArrayList<MemberDTO> memberBrw() {
 		
+		logger.info("관리자 > 회원 도서내역 서비스 도착");
 		return dao.memberBrw();
 	}
 
@@ -82,8 +84,17 @@ public class MemberService {
 	}
 
 
+<<<<<<< HEAD
 	
 	
+=======
+	public ArrayList<BrwBookDTO> brwList(String mb_id) {
+		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
+		return dao.brwList(mb_id);
+	}
+
+	
+>>>>>>> origin/master
 	public ArrayList<MemberDTO> penaltyList() {
 		return dao.penaltyList();
 	}
@@ -105,7 +116,10 @@ public class MemberService {
 	}
 
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/master
 
 }
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
 import com.gdj.lib.service.MemberService;
 
@@ -81,27 +82,7 @@ public class MemberController {
 
 		return page;
 	}
-	
-	@RequestMapping(value = "/memberBrw.do")
-	public String memberBrw(Model model) {
-
-		logger.info("관리자페이지 대출내역 요청");
 		
-		ArrayList<MemberDTO> memberBrw = service.memberBrw();
-		logger.info("회원 리스트 갯수 : "+memberBrw.size());	
-		model.addAttribute("memberBrw", memberBrw);
-		
-		return "admin/member/memberBrw";
-	}
-	
-	@RequestMapping(value = "/memberReserve.do")
-	public String memberReserve(Model model) {
-
-		logger.info("관리자페이지 예약내역 요청");
-
-		return "admin/member/memberReserve";
-	}
-	
 	@RequestMapping(value = "/blackList.do")
 	public String blackList(Model model) {
 
@@ -204,6 +185,31 @@ public class MemberController {
 
 	}	
 	
+	
+//	관리자 > 회원의 도서내역
+	
+	@RequestMapping("/memberBrw.go")
+	public String memberBook(@RequestParam String mb_id, HttpSession session) {
+
+		logger.info("관리자페이지 예약내역 요청 :"+mb_id);
+		session.setAttribute("mb_id", mb_id);
+		return "admin/member/memberBrw";
+	}
+	
+	@RequestMapping("/memberBrw.ajax")
+	@ResponseBody
+	public HashMap<String, Object> memberBrw(HttpSession session) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String mb_id = (String) session.getAttribute("mb_id");
+		logger.info("회원의 대출내역 목록 요청 :"+mb_id);
+		ArrayList<BrwBookDTO> list = service.brwList(mb_id);
+		map.put("list", list);
+		logger.info("완료:"+list);
+		return map;
+	}
+
 	@RequestMapping(value = "/penaltyUpdate.do")
 	   public String penaltyUpdate(Model model,
 	         @RequestParam HashMap<String, String> params) {
@@ -236,8 +242,7 @@ public class MemberController {
 	 * }
 	 */
 	 
-	
-	
+
 
 }
 		

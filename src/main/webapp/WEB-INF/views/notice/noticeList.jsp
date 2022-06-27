@@ -71,6 +71,7 @@
 <body>
 	<div id="header">
             <a href="#">도서관 로고 들어갈 위치</a>
+            ${sessionScope.loginId} (${sessionScope.mb_class}) 님 환영합니다.
     </div>
     <div id="myPage_menu">
         <h3>마이페이지</h3>
@@ -81,12 +82,26 @@
         <br/>
         <a href="#">회원정보</a>
     </div>
-    <input type="button" value="삭제" onclick="noticeDelete()" />
-    <button id="notice_write" onclick="location.href='noticeWrite.go'">공지사항 작성</button><br/>
+    <c:choose>
+		<c:when test="${sessionScope.loginId eq null || sessionScope.mb_class eq '일반회원'}">
+		</c:when>
+		<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+		    <input type="button" value="삭제" onclick="noticeDelete()" />
+		    <button id="notice_write" onclick="location.href='noticeWrite.go'">공지사항 작성</button><br/>
+		</c:when>
+		<c:otherwise>
+		</c:otherwise>
+    </c:choose>
     <table id="notice_table">
     	<thead>
 	         <tr>
-                 <th><input type="checkbox" id="all" /></th>
+	         	<c:choose>
+	         		<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+		                 <th><input type="checkbox" id="all" /></th>
+	         		</c:when>
+	         		<c:otherwise>
+					</c:otherwise>
+	         	</c:choose>
                  <th>번호</th>
                  <th>제목</th>
                  <th>날짜</th>
@@ -234,12 +249,18 @@
 	
 	
 	function drawList(noticeList) {
+		var mb_class = "${sessionScope.mb_class}";
+		console.log(mb_class);
 		var content = '';
 		var date = new Date();
 		noticeList.forEach(function(item){
 			//console.log(item.status);
-			content += '	<tr nID="' + item.notice_id + '" nSt="' + item.status + '">';
-			content += '		<td><input type="checkbox" id="chk" value="'+item.notice_id+'"/></td>';
+			content += '	<tr nID="' + item.notice_id + '">';
+			if(mb_class == "관리자") {
+				content += '		<td><input type="checkbox" id="chk" value="'+item.notice_id+'"/></td>';
+			} else {
+				
+			}
 			content += '		<td id="noticeID">'+item.notice_id+'</td>';
 			content += '		<td><a href="noticeDetail.do?notice_id='+item.notice_id+'">'+item.notice_title+'</a></td>';
 			content += '		<td>'+item.notice_date+'</td>';
@@ -335,5 +356,11 @@
 		});
 	});
 	*/
+	
+	// 메세지를 받았을 때 이를 처리한다.
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
 </script>
 </html>

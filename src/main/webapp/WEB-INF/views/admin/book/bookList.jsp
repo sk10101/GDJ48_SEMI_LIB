@@ -33,7 +33,7 @@
         <h1>관리자페이지</h1>
         <hr/>
         <ul class="admin_menu">
-            <li><a href="#">회원관리</a></li>
+            <li><a href="/memberList.do">회원관리</a></li>
             <li><a href="#">도서관리</a></li>
             <li><a href="#">건의사항</a></li>
             <li><a href="#">블랙리스트</a></li>

@@ -13,7 +13,16 @@
     <header id="main_header">
         <nav>
             <ul class="login_menu">
-                <li><a href="member/login">로그인</a></li>
+                <li>
+                <c:choose>
+					<c:when test="${sessionScope.loginId eq null}">
+						<a href="member/login">로그인</a>
+					</c:when>
+					<c:otherwise>
+						<div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="member/logout.do">로그아웃</a></div>
+					</c:otherwise>
+                </c:choose>
+                </li>
             </ul>
         </nav>
     </header>
@@ -22,29 +31,29 @@
         <div class="logo">
             <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
-        <div class="search">
-            <select id="bookSearchOption">
+        <form class="search" action="bookSearch.do" method="get">
+            <select name="option">
                 <option value="all" selected>전체</option>
                 <option value="b_title">제목</option>
                 <option value="writer">저자</option>
                 <option value="publisher">출판사</option>
             </select>
-            <input type="text" id="bookSearchWord" placeholder="도서 검색">
-            <input type="button" class="btn_search" value=" " onclick="bookSearch()"/>
-        </div>
+            <input type="text" name="word" placeholder="도서 검색"/>
+            <input type="submit" class="btn_search"/>
+        </form>
         <div class="menu">
             <ul class="icons">
                 <li>
                     <a href="/noticeList"><img src="../resources/img/mypage.png"/><br/>공지사항</a>
                 </li>
                 <li><!-- href 나중에 변경해야함 (임시.)-->
-                    <a href="/bookList.go"><img src="../resources/img/mypage.png"/><br/>마이페이지</a>
+                    <a href="#"><img src="../resources/img/mypage.png"/><br/>마이페이지</a>
                 </li>
                 <li>
                     <a href="#"><img src="../resources/img/mypage.png"/><br/>도서반납연기</a>
                 </li>
                 <li>
-                    <a href="#"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
+                    <a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
                 </li>
                 <li>
                     <a href="seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
@@ -52,9 +61,19 @@
             </ul>
         </div>
     </section>
+    
+    <table>
+    <tr>
+    	<td>ID</td>
+    </tr>
+    	<tr>
+    	<td><a href="/myUpdateList">회원정보 수정 가기</a></td>
+    	</tr>
+    </table>
+    
 </body>
 <script>
-
+/*
 function bookSearch() {
 	var option=$('#bookSearchOption').val();
 	var word=$('#bookSearchWord').val();
@@ -77,6 +96,6 @@ function bookSearch() {
 	});
 	
 }
-
+*/
 </script>
 </html>

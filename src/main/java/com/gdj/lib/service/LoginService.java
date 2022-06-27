@@ -67,6 +67,11 @@ public class LoginService {
 		return dao.login(id,pw);
 	}
 
+	public String getMbClass(String id, String pw) {
+		
+		return dao.getMbClass(id,pw);
+	}
+
 	
 	 
 

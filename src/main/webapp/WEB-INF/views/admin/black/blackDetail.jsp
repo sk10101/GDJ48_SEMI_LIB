@@ -62,9 +62,9 @@
         <tr>
             <th>해제사유</th>
              <td><input type="text" id="clear" name="clear" <c:if test="${dto.end_reason eq '' || dto.end_reason eq null}">
-             <script type="text/javascript">
+             <!-- <script type="text/javascript">
              alert('해제사유를 입력해주세요');
-             </script>
+             </script> -->
              </c:if> 
              value="${dto.end_reason} "/></td>
          

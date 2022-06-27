@@ -2,6 +2,8 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class BrwBookDTO {
 
 	// 회원 정보
@@ -80,10 +82,15 @@ public class BrwBookDTO {
 		
 		//대출 정보
 		
+		
+
+
 		private int brw_id;
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		private Date brw_date;
 		private boolean renew;
-		private Date retrun_date;
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+		private Date return_date;
 		private Date return_finish;
 		private String brw_status;
 
@@ -93,23 +100,32 @@ public class BrwBookDTO {
 		public void setBrw_id(int brw_id) {
 			this.brw_id = brw_id;
 		}
-		public Date getBrw_date() {
-			return brw_date;
-		}
-		public void setBrw_date(Date brw_date) {
-			this.brw_date = brw_date;
-		}
+		
 		public boolean isRenew() {
 			return renew;
 		}
 		public void setRenew(boolean renew) {
 			this.renew = renew;
 		}
-		public Date getRetrun_date() {
-			return retrun_date;
+		public Date getBrw_date() {
+			return brw_date;
 		}
-		public void setRetrun_date(Date retrun_date) {
-			this.retrun_date = retrun_date;
+		public void setBrw_date(Date brw_date) {
+			this.brw_date = brw_date;
+		}
+		
+		public Date getReturn_date() {
+			return return_date;
+		}
+		public void setReturn_date(Date return_date) {
+		}
+		
+		public Date getreturn_date() {
+			return return_date;
+		}
+		public void setreturn_date(Date return_date) {
+
+			this.return_date = return_date;
 		}
 		public Date getReturn_finish() {
 			return return_finish;
