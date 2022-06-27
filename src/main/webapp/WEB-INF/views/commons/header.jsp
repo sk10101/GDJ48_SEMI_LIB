@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="resources/css/header.css">
 <div class="container">
 	<header>
-		<a href=""><img id="logo" src="resources/img/logo.png" alt=""></a>
+		<a href="/"><img id="logo" src="resources/img/logo.png" alt=""></a>
 		<nav>
 			<ul>
 				<li style="margin-left:150px">*** 님 안녕하세요</li>

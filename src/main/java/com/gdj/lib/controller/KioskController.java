@@ -1,6 +1,8 @@
 package com.gdj.lib.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -36,14 +38,35 @@ public class KioskController {
 	
 	// 키오스크 로그인
 	@RequestMapping(value = "/ki_login.do")	
-	public String kioskLogin(HttpSession session, @RequestParam String id, @RequestParam String pw) {
+	public String kioskLogin(HttpSession session, @RequestParam String id, @RequestParam String pw, Model model) {
 		logger.info("키오스크 로그인 요청: {},{}",id,pw);
 		String page="kiosk/loginFail";
 		String loginId = service.login(id,pw);
+		String loginIdSeat = service.loginSeat(id);
+		// logger.info(loginIdSeat);
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String nowTime = sdf.format(now);
+		// logger.info(nowTime);
+		
+		
+		// System.out.println(val1);
+		// System.out.println(val2);
 		
 		if (loginId != null) {
 			session.setAttribute("loginId", loginId);
-			page = "kiosk/main";
+			if (loginIdSeat == null) {
+				page = "kiosk/main";				
+			} else {
+				long val1 = Long.parseLong(loginIdSeat);
+				long val2 = Long.parseLong(nowTime);
+				
+				if (val1 > val2) {
+					page = "kiosk/mainSeatOut";
+				} else {
+					page = "kiosk/main";
+				}
+			}
 		}
 		return page;
 	}
@@ -107,7 +130,8 @@ public class KioskController {
 	@RequestMapping(value = "/ki_borrowSuccess.go")
 	public String kioskBorrowSuccess(Model model) {
 		logger.info("키오스크 성공 알람 페이지");
-		return "kiosk/borrowSuccess";
+		model.addAttribute("msg", "대출");
+		return "kiosk/success";
 	}
 	
 	
@@ -133,18 +157,42 @@ public class KioskController {
 		logger.info("returnList : "+returnList);
 		
 		String loginId = (String) session.getAttribute("loginId");
+		
+		// 대출 테이블에 대출상태를 반납으로
 		int cnt = service.bookReturn(returnList);
-		service.updateB(returnList);
 		map.put("cnt", cnt);
+		
+		// 도서 테이블에 도서상태를 도서준비중으로
+		service.updateB(returnList);
+		
+		// 연체 확인 위해 대출테이블에 회원아이디를 이용해 남은 대출 조회
+		int notReturn = service.notReturn(loginId);
+		System.out.println("미반납: "+notReturn);
+		
+		// 책을 모두 반납했을 때
+		if (notReturn == 0) {
+			// 가장 마지막 반납 정보
+			long returnDate = service.returnDate(loginId);
+			// System.out.println("반납 예정일 : "+returnDate);
+			long returnFinish = service.returnFinish(loginId);
+			// System.out.println("반납 완료일 : "+returnFinish);
+			
+			// 반납완료일이 반납예정일보다 크면(연체라면)
+			if (returnFinish > returnDate) {
+				service.penaltyEndDate(loginId);
+			}
+		}
+		
 		return map;
 		
 	}
 	
 	
-	// 키오스크 대출 성공 페이지 
+	// 키오스크 반납 성공 페이지 
 	@RequestMapping(value = "/ki_returnSuccess.go")
 	public String kioskReturnSuccess(Model model) {
 		logger.info("키오스크 성공 알람 페이지");
-		return "kiosk/returnSuccess";
+		model.addAttribute("msg", "반납");
+		return "kiosk/success";
 	}
 }

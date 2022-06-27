@@ -103,7 +103,7 @@ body {
 			<tr>
 				<th colspan="2">
 					<input class="submit-btn" type="button" value="회원가입" onclick="join()"/>
-					<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='/lib/member/login'"/>
+					<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='/member/login'"/>
 				</th>
 			</tr>
 		</table>

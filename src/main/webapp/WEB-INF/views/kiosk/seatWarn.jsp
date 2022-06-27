@@ -18,7 +18,7 @@
         <i class="fa-solid fa-arrow-right-from-bracket logout"></i>
     </a>
     <div class="alert">
-        대출완료 되었습니다.
+        오늘은 열람실을 이미 사용하셨습니다.
     </div>
 </body>
 <script></script>
