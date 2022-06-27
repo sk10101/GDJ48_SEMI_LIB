@@ -39,9 +39,20 @@ public class NoticeController {
 		
 		//공지사항 작성 페이지 이동
 		@RequestMapping(value = "/noticeWrite.go")
-		public String noticeWriteForm() {
-			logger.info("공지사항 작성 페이지 이동");
-			return "notice/noticeWrite";
+		public String noticeWriteForm(Model model, HttpSession session) {
+			
+			String page = "login/login";
+			if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+				logger.info("공지사항 작성 페이지 이동 (관리자만 가능)");
+				page = "notice/noticeWrite";
+			} else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+				page = "notice/noticeList";
+			} else {
+				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			}
+			
+			return page;
 		}
 		
 		//공지사항 상세보기 페이지 이동

@@ -91,6 +91,7 @@
 <body>
     <div id="header">
         <a href="#">도서관 로고 들어갈 위치</a>
+        ${sessionScope.loginId} 관리자님 환영합니다.
     </div>
     <div id="myPage_menu">
         <h3>관리자 페이지</h3>
