@@ -89,7 +89,7 @@
                                     		<td>${dto.brw_id}</td>
                                     		<td>${dto.b_title}</td>
                                     		<td>${dto.brw_date}</td>
-                                    		<td>${dto.retrun_date}</td>
+                                    		<td>${dto.return_date}</td>
                                     		<td>${dto.brw_status}</td>
                                     		<td>Y</td>
                                     		<td>${dto.renew}</td>
