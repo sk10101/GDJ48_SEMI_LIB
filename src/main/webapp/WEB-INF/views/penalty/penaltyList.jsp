@@ -37,6 +37,7 @@
     <table class="bbs">
         <thead>
             <tr>
+            	<td>No</td>
                 <td>회원ID</td>          
                 <td>제한내역</td>           
                 <td>이용정지날짜</td>           
@@ -45,13 +46,28 @@
             </tr>
         </thead>
         <tbody>
-				<c:forEach items="${penaltyList }" var="dto">
+				<c:forEach items="${penaltyList}" var="dto">
 					<tr>
-						<td><a href="penaltyDetail.do">${dto.mb_id }</a></td>
-						<td>${dto.mb_id }</td>
 						<td>${dto.penalty_id}</td>
+						<td><a href="penaltyDetail.do?penalty_id=${dto.penalty_id}">${dto.mb_id }</a></td>
+						<c:choose>
+                 			<c:when test="${dto.category_id eq '5'}">
+                     			<td>대출연체</td>
+                 			</c:when>
+                 			<c:otherwise>
+                      			<td>예약만료</td>
+                 			</c:otherwise>
+            			</c:choose>
+						<td>${dto.penalty_start}</td>
 						<td>${dto.penalty_end }</td>
-						<td>${dto.cancel }</td>
+						<c:choose>
+                 			<c:when test="${dto.cancel eq 'true'}">
+                     			<td>Y</td>
+                 			</c:when>
+                 			<c:otherwise>
+                      			<td>N</td>
+                 			</c:otherwise>
+            			</c:choose>
 					</tr>
 				</c:forEach>
 			</tbody>

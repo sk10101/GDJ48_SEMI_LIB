@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이 페이지 / 건의사항</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -93,22 +93,7 @@
 	         </tr>
     	</thead>
     	<tbody id="claimList">
-    	<!-- ajax 로 출력할 거라서 빼놨음
-    		<c:forEach items="${claimList}" var="dto">
-    			<tr>
-    				<td id="claimID">${dto.claim_id}</td>
-    				<td><a href="claimDetail?claim_id=${dto.claim_id}">${dto.claim_title}</a></td>
-    				<td id="claimStatus">${dto.status}</td>
-    				<td>${dto.claim_date}</td>
-    				<td id="delete">
-    					<c:choose>
-    						<c:when test="${dto.status eq '미처리'}"><button id="delBtn">삭제</button></c:when>
-    						<c:otherwise></c:otherwise>
-    					</c:choose>
-    				</td>
-    			</tr>
-    		</c:forEach>
-    	-->
+    	
     	</tbody>
 	    	<tr>
 				<td colspan="5" id="paging">
@@ -124,7 +109,7 @@
 				<td colspan ="5" id="paging">
 				        <select id="pagePerNum">
 							<option value="5">5</option>
-							<option value="10">10</option>
+							<option value="10" selected="selected">10</option>
 							<option value="15">15</option>
 							<option value="20">20</option>
 						</select>
@@ -133,7 +118,7 @@
 				       		<option value="처리상태">처리상태</option>
 				       	</select>
 			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList()" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
 				</td>
 			</tr>
         </table>
@@ -146,16 +131,22 @@
 	
 	// select 의 option 변경
 	$('#pagePerNum').on('change',function(){
+		var word = $('#word').val();
 		console.log(currPage);
+		console.log(word);
 		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
 		$("#pagination").twbsPagination('destroy');
-		listCall(currPage);
-	})
-	
+		// 검색어가 들어갔을 때와 아닐때를 구분
+		if(word==null || word==""){
+			listCall(currPage);
+		} else {
+			searchList(currPage)
+		}
+		
+	});
 	
 	
 	function listCall(page) {
-		
 		var pagePerNum = $('#pagePerNum').val();
 		console.log("param page : " + page);
 		
@@ -176,10 +167,17 @@
 					startPage: data.currPage, // 시작 페이지
 					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
 					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+					// 페이지 클릭했을 때
 					onPageClick: function(e, page) {
-						console.log(page); // 사용자가 클릭한 페이지
+						console.log("클릭한 페이지 : "+page); // 사용자가 클릭한 페이지
+						console.log("입력한 검색어 : "+word);
 						currPage = page;
-						listCall(page);
+						
+						if(word==null){
+							listCall(page);
+						} else {
+							searchList(page);
+						}
 					}
 				});
 				
@@ -213,21 +211,40 @@
 		$("#claimList").append(content);
 	}
 	
-	var keyword = "";
-	var option = "";
-	$('#searchBtn').on('click',function(){
-		console.log(currPage);
-		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
-		$("#pagination").twbsPagination('destroy');
-		searchList(currPage);
-	})
+	
+	// 페이지 변경할 때 검색어를 저장하기위한 시도
+	/*
+	$('.page-item active > a.page-link').on('click',function(){
+		console.log("페이지가 변경됐습니다.")
+		if(sessionStorage.getItem("word")!=null) {
+			$(this).text() = currPage;
+			searchList(currPage);
+		}
+	});
+	*/
+	
+	
+	// 새로고침하면 세션에 저장된 검색어와 검색옵션 값을 비운다.
+	/*
+	function sessionClear() {
+		    window.onbeforereload = function (e) {
+		    	sessionStorage.removeItem("word");
+		    	sessionStorage.removeItem("option");
+		    };
+		}
+	*/
 	
 	// 검색 결과 출력
 	function searchList(page) {
-		word = $('#word').val();
-		option = $('#option').val();
+		var word = $('#word').val();
+		var option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
-		console.log(pagePerNum + keyword);
+		
+		// 검색어 저장
+		/*
+		sessionStorage.setItem("word",word);
+		sessionStorage.setItem("option",option);
+		*/
 		
 		$.ajax({
 			type: 'GET',
@@ -252,7 +269,7 @@
 					onPageClick: function(e, page) {
 						console.log(page); // 사용자가 클릭한 페이지
 						currPage = page;
-						listCall(page);
+						searchList(page);
 					}
 				});
 			},

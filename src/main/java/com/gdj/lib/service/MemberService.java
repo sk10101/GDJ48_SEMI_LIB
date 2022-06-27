@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
 
@@ -49,6 +50,7 @@ public class MemberService {
 
 	public ArrayList<MemberDTO> memberBrw() {
 		
+		logger.info("관리자 > 회원 도서내역 서비스 도착");
 		return dao.memberBrw();
 	}
 
@@ -83,5 +85,35 @@ public class MemberService {
 		// 나중에 로그인 기능 추가하면 params 넣을것 (추후 수정)
 		return success;
 	}
+
+
+	public ArrayList<BrwBookDTO> brwList(String mb_id) {
+		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
+		return dao.brwList(mb_id);
+	}
+
+	
+	public ArrayList<MemberDTO> penaltyList() {
+		return dao.penaltyList();
+	}
+
+	public MemberDTO penaltyDetail(String penalty_id) {
+		logger.info("이용정지 리스트 상세보기 서비스 : "+penalty_id);
+		return dao.penaltyDetail(penalty_id);
+	}
+
+	public void penaltyUpdate(HashMap<String, String> params) {
+	      logger.info("이용정지리스트 수정 서비스");
+	      dao.penaltyUpdate(params);
+	   }
+
+	public void blackUpdate(HashMap<String, String> params) {
+		logger.info("블랙리스트 수정 서비스");
+	      dao.blackUpdate(params);
+		
+	}
+
+	
+
 }
 

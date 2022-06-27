@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
 import com.gdj.lib.service.MemberService;
 
@@ -87,27 +89,7 @@ public class MemberController {
 
 		return page;
 	}
-	
-	@RequestMapping(value = "/memberBrw.do")
-	public String memberBrw(Model model) {
-
-		logger.info("관리자페이지 대출내역 요청");
 		
-		ArrayList<MemberDTO> memberBrw = service.memberBrw();
-		logger.info("회원 리스트 갯수 : "+memberBrw.size());	
-		model.addAttribute("memberBrw", memberBrw);
-		
-		return "admin/member/memberBrw";
-	}
-	
-	@RequestMapping(value = "/memberReserve.do")
-	public String memberReserve(Model model) {
-
-		logger.info("관리자페이지 예약내역 요청");
-
-		return "admin/member/memberReserve";
-	}
-	
 	@RequestMapping(value = "/blackList.do")
 	public String blackList(Model model) {
 
@@ -158,19 +140,115 @@ public class MemberController {
 		return "admin/black/blackDetail";
 	}
 	
+	@RequestMapping(value = "/blackUpdate.do")
+	   public String blackUpdate(Model model,
+	         @RequestParam HashMap<String, String> params) {
+	  
+		
+	      logger.info("params : {}", params);
+	      if(params.get("black_cancel") == null) {
+	         params.put("black_cancel", "false");  
+	        
+	      }else {
+	    	 
+	         params.put("admin_end", "tester");  
+	         
+	         
+	      }
+	      
+	      if(params.get("clear") != null) {
+	    	  params.put("end_reason", "");
+	    	  
+	      
+	      }
+	      
+	      service.blackUpdate(params);
+	      String page = "redirect:/blackDetail.do?black_id="+params.get("black_id");
+
+	      return page;
+	   }
+	
+	
+	
+	
 	@RequestMapping(value = "/penaltyList.do")
-	public String penaltyList() {
+	public String penaltyList(Model model) {
 		logger.info("이용정지리스트 페이지");
+		ArrayList<MemberDTO> penaltyList = service.penaltyList();
+		logger.info("이용정지 회원 리스트 갯수 : "+penaltyList.size());	
+		model.addAttribute("penaltyList", penaltyList);
 		return "penalty/penaltyList";
 	}
 	
 	@RequestMapping(value = "/penaltyDetail.do")
-	public String penaltyDetail() {
-		logger.info("이용정지리스트 페이지");
+	public String penaltyDetail(Model model ,@RequestParam String penalty_id) {
+		
+		logger.info(penalty_id+"번 이용정지리스트 상세보기 요청 :");
+		
+		MemberDTO dto = service.penaltyDetail(penalty_id);
+		model.addAttribute("dto", dto);
 		return "penalty/penaltyDetail";
 
 	}	
 	
+	
+//	관리자 > 회원의 도서내역
+	
+	@RequestMapping("/memberBrw.go")
+	public String memberBook(@RequestParam String mb_id, HttpSession session) {
+
+		logger.info("관리자페이지 예약내역 요청 :"+mb_id);
+		session.setAttribute("mb_id", mb_id);
+		return "admin/member/memberBrw";
+	}
+	
+	@RequestMapping("/memberBrw.ajax")
+	@ResponseBody
+	public HashMap<String, Object> memberBrw(HttpSession session) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		String mb_id = (String) session.getAttribute("mb_id");
+		logger.info("회원의 대출내역 목록 요청 :"+mb_id);
+		ArrayList<BrwBookDTO> list = service.brwList(mb_id);
+		map.put("list", list);
+		logger.info("완료:"+list);
+		return map;
+	}
+
+	@RequestMapping(value = "/penaltyUpdate.do")
+	   public String penaltyUpdate(Model model,
+	         @RequestParam HashMap<String, String> params) {
+	       
+	      logger.info("params : {}", params);
+	      if(params.get("cancel") == null) {
+	         params.put("cancel", "false");       
+	      }else {
+	         params.put("admin_cancel", "tester");  
+	         
+	      }
+	      
+	      service.penaltyUpdate(params);
+	      String page = "redirect:/penaltyDetail.do?penalty_id="+params.get("penalty_id");
+
+	      return page;
+	   }
+	
+	
+	
+	
+	/*
+	 * @RequestMapping(value = "/penaltyUpdate.do") public String
+	 * penaltyUpdateForm(Model model ,@RequestParam ) {
+	 * 
+	 * logger.info("수정 요청"+params); service.penaltyUpdate(params);
+	 * 
+	 * return "penalty/penaltyList";
+	 * 
+	 * }
+	 */
+	 
+
 
 }
 		

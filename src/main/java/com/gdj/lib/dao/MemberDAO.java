@@ -1,6 +1,7 @@
 package com.gdj.lib.dao;
 
 
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
 
 import java.util.ArrayList;
@@ -59,10 +60,31 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> memberUpdateListMy();
 
 
+<<<<<<< HEAD
 	int myUpdate(String mb_id, String mb_pw, String name,String phone);
 
 
 	int myUpdateTwo(String mb_id, String name, String phone);
+=======
+
+	ArrayList<BrwBookDTO> brwList(String mb_id);
+
+	ArrayList<MemberDTO> penaltyList();
+
+
+	MemberDTO penaltyDetail(String penalty_id);
+
+
+	void penaltyUpdate(HashMap<String, String> params);
+
+
+	void blackUpdate(HashMap<String, String> params);
+
+
+	
+
+
+>>>>>>> origin/master
 
 
 	

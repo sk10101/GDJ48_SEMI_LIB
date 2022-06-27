@@ -37,6 +37,8 @@
 </head>
 <body>
 	<h3>이용정지내역 회원상세보기</h3>
+	<form action="penaltyUpdate.do" method="get">
+	<input type ="hidden" id ="penalty_id" name = "penalty_id" value = "${param.penalty_id}"/>
     <table class="bbs">
         <tr>
             <th>회원ID</th>
@@ -44,18 +46,25 @@
         </tr>
         <tr>
             <th>이름</th>
-            <td>${dto.name }</td>
+            <td>${dto.name}</td>
         </tr>
         <tr>
             <th>제한내역</th>
-            <td>${dto.penalty_id }</td>
+            <c:choose>
+       			<c:when test="${dto.category_id eq '5'}">
+                     <td>대출연체</td>
+         		</c:when>
+                <c:otherwise>
+                     <td>예약만료</td>
+                </c:otherwise>
+   			</c:choose>
         </tr>
         <tr>
             <th>이용정지날짜</th>
             <td>${dto.penalty_start }</td>
         </tr>
         <tr>
-            <th>이용종료날짜</th>
+            <th>이용정지종료날짜</th>
             <td>${dto.penalty_end }</td>
         </tr>
         <tr>
@@ -64,15 +73,20 @@
         </tr>
         <tr>
             <th>취소</th>
-            <td><input type="checkbox" name="b" value="cancel"/></td>
+            <td> <input type="checkbox" id='cancel' name="cancel"<c:if test = "${dto.cancel}"> checked </c:if> value="true"/>
+</td> 
+			
         </tr>
         <tr>
             <th colspan="2">
                 <input type="button" value="돌아가기" onclick="location.href='penaltyList.do'"/>
-                <input type="button" value="수정"/>
+                <input type="submit" value="수정"/>
             </th>
         </tr>
     </table>
+    </form>
 </body>
-<script></script>
+<script>
+
+</script>
 </html>

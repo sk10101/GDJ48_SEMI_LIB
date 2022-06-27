@@ -31,78 +31,21 @@ public class BookService {
 	
 	@Autowired BookDAO dao;
 	
-	public HashMap<String, Object> bookSearch(HashMap<String, String> params) {
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		logger.info("params :{}",params);
-		
-		int cnt = Integer.parseInt(params.get("cnt"));
-		int page = Integer.parseInt(params.get("page"));
+	public ArrayList<BookDTO> bookSearch(HashMap<String, String> params) {
 		String option = params.get("option");
 		String word = params.get("word");
-		logger.info("보여줄 페이지 : "+page+option+word);
-		
-		int allCnt = dao.allCount();
-		logger.info("allCnt : "+allCnt);		
-		int pages = allCnt%cnt > 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
-		logger.info("pages : "+pages);
-		
-		if(page > pages) {
-			page = pages;
-		}
-		
-		map.put("pages", pages); // 만들 수 있는 최대 페이지 수
-		map.put("currPage", page); // 현재 페이지
-		
-		int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
-		logger.info("offset : " + offset);
 		
 		if (option.equals("writer")){
 			logger.info("선택 옵션 :"+option +"/"+word);
-			ArrayList<BookDTO> searchList = dao.searchWriter(word,cnt,offset);
-			map.put("searchList", searchList);
+			return dao.searchWriter(word);
 		} else if (option.equals("publisher")) {
 			logger.info("선택 옵션 :"+option);
-			ArrayList<BookDTO> searchList = dao.searchPublisher(word,cnt,offset);
-			map.put("searchList", searchList);
+			return dao.searchPublisher(word);
 		} else {
 			logger.info("선택 옵션 :"+option);
-			ArrayList<BookDTO> searchList = dao.searchTitle(word,cnt,offset);
-			map.put("searchList", searchList);
+			return dao.searchTitle(word);
 		}
-		return map;
 	}
-	
-	/*
-	public HashMap<String, Object> bookSearch(
-			HashMap<String, String> params) {
-				
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		int cnt = Integer.parseInt(params.get("cnt"));
-		int page = Integer.parseInt(params.get("page"));
-		logger.info("보여줄 페이지 : "+page);
-		
-		// 총갯수(allCnt) / 페이지당 보여줄 갯수(cnt) = 생성가능한 페이지(pages)
-		int allCnt = dao.allCount();
-		logger.info("allCnt : "+allCnt);		
-		int pages = allCnt%cnt > 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
-		logger.info("pages : "+pages);
-		
-		if(page > pages) {
-			page = pages;
-		}
-		
-		map.put("pages", pages); // 만들 수 있는 최대 페이지 수
-		map.put("currPage", page); // 현재 페이지
-		
-		int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
-		logger.info("offset : " + offset);
-		
-		
-		
-		return null;	
-	} */
 	
 	public ArrayList<BookDTO> reserveOK() {
 		logger.info("예약여부서비스도착");
@@ -189,7 +132,7 @@ public class BookService {
 				// 3-4. 파일 받아서 저장하기
 				try {
 					byte[] arr = photo.getBytes();
-					Path path = Paths.get("D:/upload/"+newFileName);
+					Path path = Paths.get("D:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\"+newFileName);
 					Files.write(path,arr);
 					logger.info(newFileName+" - save ok");
 					// 4. 업로드 후 photo 테이블에 데이터 입력
@@ -211,19 +154,51 @@ public class BookService {
 		dto.setWriter(params.get("writer"));
 		dto.setPublisher(params.get("publisher"));
 		dto.setIssue(Integer.parseInt((params.get("issue"))));
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.KOREA);
-		//LocalDate date = LocalDate.parse(string, formatter);
-		//dto.setB_date(params.get("b_date"));
 		dto.setB_status(params.get("b_status"));
-				
+		
 		int row = dao.bookUpdate(dto);
-		int b_id = dto.getB_id();		
+		int b_id = dto.getB_id();
+		int chk = dao.photoChk(dto);
+		logger.info("파일체크 :" +chk);
 		logger.info("도서수정 완료:"+b_id);
 		
 		if (row > 0) {
-			fileSave(b_img, b_id);
+			if (chk > 0) {
+				fileUpdate(b_img, b_id);
+			} else {
+				fileSave(b_img, b_id);
+			}
 		}
-		//return "admin/book/bookList";
+	}
+	
+	private void fileUpdate(MultipartFile[] b_img, int b_id) {
+		// 3. 파일 업로드
+		logger.info("수정 {}",b_id);
+		for(MultipartFile photo : b_img) {
+			String oriFileName = photo.getOriginalFilename();
+			if(!oriFileName.equals("")) {
+				logger.info("이미지 업로드 진행");
+				// 3-2. 확장자 분리
+				String ext = oriFileName.substring(oriFileName.lastIndexOf(".")).toLowerCase();
+				// 3-3. 새 이름 만들기
+				String newFileName = System.currentTimeMillis()+ext;
+				
+				logger.info(oriFileName + "=>" + newFileName); 
+				
+				// 3-4. 파일 받아서 저장하기
+				try {
+					byte[] arr = photo.getBytes();
+					Path path = Paths.get("D:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\"+newFileName);
+					Files.write(path,arr);
+					logger.info(newFileName+" - save ok");
+					// 4. 업로드 후 photo 테이블에 데이터 입력
+					dao.fileUpdate(oriFileName, newFileName, b_id);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}				
+			}
+		}
 		
 	}
 

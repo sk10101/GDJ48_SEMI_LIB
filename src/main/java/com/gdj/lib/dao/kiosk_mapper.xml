@@ -8,6 +8,10 @@
 			WHERE mb_id = #{param1} AND mb_pw = #{param2}
 	</select>
 	
+	<select id="loginSeat" resultType="String">
+		SELECT end_time +0 FROM seat_use su WHERE mb_id = #{param1} ORDER BY end_time DESC limit 1
+	</select>
+	
 	<select id="list" resultType="com.gdj.lib.dto.KioskDTO">
 		SELECT r.b_id, b.b_title FROM book b, reservation r
 			WHERE r.mb_id = #{param1} AND r.b_id = b.b_id AND b.b_status='대출가능' AND r.reason is null
@@ -37,6 +41,22 @@
 	<!-- 반납 시 도서 테이블에 도서상태를 도서 준비중으로 update -->
 	<update id="updateB" parameterType="String">
 		UPDATE book SET b_status = '도서준비중' WHERE b_id = #{param1}
+	</update>
+	
+	<select id="notReturn" parameterType="String" resultType="int">
+		SELECT COUNT(brw_id) from borrow WHERE mb_id = #{param1} AND brw_status = '대출'
+	</select>
+	
+	<select id="returnDate" parameterType="String" resultType="long">
+		SELECT date_format(return_date,'%Y%m%d') FROM borrow WHERE mb_id = #{param1} ORDER BY return_finish DESC limit 1
+	</select>
+	
+	<select id="returnFinish" parameterType="String" resultType="long">
+		SELECT date_format(return_finish,'%Y%m%d') FROM borrow WHERE mb_id = #{param1} ORDER BY return_finish DESC limit 1
+	</select>
+	
+	<update id="penaltyEndDate">
+		UPDATE penalty SET penalty_end = adddate(now(),interval 7 day) WHERE category_id = '5' AND penalty_end IS NULL
 	</update>
 	
 </mapper>

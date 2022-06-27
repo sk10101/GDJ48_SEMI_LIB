@@ -77,4 +77,26 @@ public class KioskService {
 		}
 	}
 
+	public String loginSeat(String id) {
+		return dao.loginSeat(id);
+	}
+
+	public int notReturn(String loginId) {
+		int cnt = 0;
+		cnt = dao.notReturn(loginId);
+		return cnt;
+	}
+
+	public long returnDate(String loginId) {
+		return dao.returnDate(loginId);
+	}
+
+	public long returnFinish(String loginId) {
+		return dao.returnFinish(loginId);
+	}
+
+	public void penaltyEndDate(String loginId) {
+		dao.penaltyEndDate(loginId);
+	}
+
 }

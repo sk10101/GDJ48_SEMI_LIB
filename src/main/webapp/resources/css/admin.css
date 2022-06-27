@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @charset "UTF-8";
 * {
     margin:0; 
@@ -63,6 +62,12 @@ nav{
     text-align: center;
 }
 
+.book_menu > li {
+	float: left;
+    font-size: 16px;
+    text-align: center;
+}
+
 #menu{
     width: 200px;
     height: 500px;
@@ -73,6 +78,7 @@ nav{
 }
 h1{margin:20px auto; padding-top: 20px;}
 hr{width: 80%; margin-left: 10%;}
+
 .admin_menu li{
     margin-top: 30px;
 }
@@ -112,142 +118,11 @@ table{
     width: 100%;
 }
 
-td{text-align: center;}
-
-.search{  
-    position: absolute;
-    left: 0;
-    bottom: 0;
-}
-
-input{
-    height: 25px;
-    border: #cfcdc3 solid 2px;
-}
-.btn_bookSearch{
-    position: absolute;
-    right: 1px;
-    bottom: 2px;
-    width: 25px;
-    height: 20px;
-    background-image: url("img/search.png");
-    background-color: #fff;
-    background-size: 20px;
-    background-repeat: no-repeat;
-    border: none;
-}
-
-=======
-@charset "UTF-8";
-* {
-    margin:0; 
-    padding:0; 
-    list-style: none; 
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-body{overflow-x: hidden;}
-
-a:link {
-    text-decoration: none;
-    text-decoration-color: black;
-}
-
-a:visited{
-    color: black;
-}
-
-header{
-    width: 100%;
-    height: 100px;
-    background: #fff;
-    color: #333
-}
-
-.header-wrap{ /*화면 중앙에 오게끔*/
-    width: 1200px;
-    display: block;
-    margin: 0 auto;
-}
-
-.logo{
-    float: left;
-    width: 200px;
-    height: 100px;
-    text-align: center;
-    line-height: 100px;
-    display: inline;
-    position: relative;
-}
-
-nav{
-    width: 800px;
-    height: 100px;
-    float: right;
-    display: block;
-    top: 0;
-    right: 0;
-    position: relative;
-}
-
-.navi { 
-    width: 600px; height: 30px; 
-    margin: 20px 0 0 350px;
-
-}
-
-.navi > li{
-    float: left; width: 200px; 
-    font-size: 20px;
-    text-align: center;
-}
-
-#menu{
-    width: 200px;
-    height: 500px;
-    text-align: center;
-    display: relative;
-    margin: 50px 50px;
-    background-color: azure;
-}
-h1{margin:20px auto; padding-top: 20px;}
-hr{width: 80%; margin-left: 10%;}
-.admin_menu li{
-    margin-top: 30px;
-}
-
-section{
-    position: absolute;
-    left: 310px;
-    top: 150px;
-    background-color: rgb(252, 252, 244);
-    width: 75%; height: 500px;
-}
-
-button {
-    width: 100px; height: 30px;
-    background-color: #eeece1;
-    border: #cfcdc3 solid 1px;
-    border-radius: 5px;
-}
-
-input [type=button] , input [type=submit]{
-    width: 100px; height: 30px;
-    background-color: #eeece1;
-    border: #cfcdc3 solid 1px;
-    border-radius: 5px;
-}
-
-.btn_bookAdd{
-    position: absolute;
-    right: 0;	
-}
-
-table{
-    border: 1px solid black;
+.brw_table {
+	border: 1px solid black;
     position: absolute;
     right: 0;
-    top: 50px;
+    top: 70px;
     width: 100%;
 }
 
@@ -275,5 +150,3 @@ input{
     background-repeat: no-repeat;
     border: none;
 }
-
->>>>>>> a1d146dffe57cad6b7cd1eac211aa25b84e992b9
