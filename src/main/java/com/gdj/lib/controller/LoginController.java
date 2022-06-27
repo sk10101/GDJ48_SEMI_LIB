@@ -107,7 +107,7 @@ public class LoginController {
 		@RequestMapping(value = "member/login.do")
 		public String login(Model model,HttpSession session ,@RequestParam String id, @RequestParam String pw) {
 			logger.info("로그인 요청 :{},{}",id,pw);
-			String page="login"; 
+			String page="login/login"; 
 			
 			String loginId =service.login(id,pw); 
 			

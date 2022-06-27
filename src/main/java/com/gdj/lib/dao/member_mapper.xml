@@ -15,10 +15,17 @@
 	
 	<update id="myUpdate" parameterType="String">
 		UPDATE member SET
-			pw = #{mb_pw}
-			,phone = #{phone}
-			,name = {name}
-		WHERE id = {mb_id}
+			mb_pw = #{param2}
+			,name = #{param3}
+			,phone = #{param4}
+		WHERE mb_id = #{param1}
+	</update>
+	
+	<update id="myUpdateTwo" parameterType="String">
+		UPDATE member SET
+			name = #{param2}
+			,phone = #{param3}
+		WHERE mb_id = #{param1}
 	</update>
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">

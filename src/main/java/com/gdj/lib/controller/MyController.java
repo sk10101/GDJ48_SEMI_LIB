@@ -60,35 +60,59 @@ public class MyController {
 		
 		model.addAttribute("myUpdateDetail", myUpdateDetail);
 		
+		logger.info("mb_id : "+myUpdateDetail.getMb_id());
+		logger.info("mb_pw : "+myUpdateDetail.getMb_pw());
+		logger.info("name : "+myUpdateDetail.getName());
+		logger.info("phone : "+myUpdateDetail.getPhone());
+		
+		model.addAttribute("myUpdateDetail", myUpdateDetail);
+		
 		return "myPage/info/memberDetail";
 	}
 	
 
 	@RequestMapping(value = "/myUpdate")
-	public String myUpdate(Model model, HttpServletRequest request, String mb_id,
-			@RequestParam String mb_pw, @RequestParam String phone, @RequestParam String name) {
+	public String myUpdate(Model model, HttpServletRequest request, String Oripw_chk) {
 		
-		HttpSession memberSession = request.getSession();
+	
 		
-		mb_id = (String) memberSession.getAttribute("loginId");
-		name = (String) memberSession.getAttribute("name");
-		mb_pw = (String) memberSession.getAttribute("mb_pw");
-		phone = (String) memberSession.getAttribute("phone");
+		
+		String mb_id = request.getParameter("mb_id");
+		String mb_pw = request.getParameter("mb_pw");
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		
+		String pw_chk = request.getParameter("pw_chk");
+		
+		
 		
 		logger.info("수정할 아이디 : "+mb_id);
-		logger.info("수정할 아이디 : "+name);
+		logger.info("수정할 이름 : "+name);
 		logger.info("수정할 비번 : "+mb_pw);
-		logger.info("수정할 이메일 : "+phone);
+		logger.info("수정할 전화번호 : "+phone);
+		
+		logger.info("PW 확인 : "+pw_chk);
+		logger.info("원래 비밀 번호 : "+Oripw_chk);
 		
 		
-		service.myUpdate(mb_id,mb_pw,name,phone);
+		 if(pw_chk.equals(Oripw_chk)) {
+			
+			 if(mb_pw == "") {
+				 service.myUpdateTwo(mb_id,name,phone);
+			 } else {
+				 service.myUpdate(mb_id,mb_pw,name,phone);
+			 }
+				
+		} else {
+			// 알림창이 안뜸
+			model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
+		}
+		
+			
+		
 		
 		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
-	
-	
-	
-	
 	
 	
 	
