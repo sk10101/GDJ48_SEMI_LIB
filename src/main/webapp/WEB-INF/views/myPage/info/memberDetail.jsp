@@ -45,7 +45,7 @@
             </tr>
             <tr>
                 <th>회원탈퇴신청</th>
-                <td><input type="checkbox" name="chk"  onclick="mysecession()" />
+                <td><input type="checkbox" id="chk"  onclick="">
                     ※ 체크하신 후 수정버튼을 누르시면 탈퇴신청이 접수됩니다.<br/>
                     (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)                    
                 </td>
@@ -73,7 +73,32 @@
 	}
 	
 	
-	function mymysecession() {
+	$(document).ready(function(){    
+		
+		$("#chk").change(function(){       
+			
+			 if($("#chk").is(":checked")){           
+				
+				if(confirm("※ 정말로 탈퇴 하시겠습니까?  ") == true){
+					alert ("회원탈퇴는 신청후 7일뒤 처리 됩니다. 회원탈퇴 처리가 완료되면 해당 아이디는 재사용이 불가 합니다. ");
+				} else {
+					$("#chk").prop("checked" , false);
+					return ;
+				}
+				  
+			}else{            
+				alert("회원 탈퇴가 취소 되었습니다.");        
+			}  
+				  
+		});
+	
+	});
+	
+	
+	
+	function mySecession() {
+		
+				
 		
 	}
 	

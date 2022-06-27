@@ -108,8 +108,6 @@ public class MyController {
 			model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
 		}
 		
-			
-		
 		
 		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
