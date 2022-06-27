@@ -83,5 +83,17 @@ public class SeatController {
 	
 	
 	
+	// 키오스크 열람실 퇴실하기
+	@RequestMapping(value = "/ki_seatOut.do")
+	public String kioskSeatOut(Model model, HttpSession session) {
+		logger.info("키오스크 열람실 퇴실하기");
+		String loginId = (String) session.getAttribute("loginId");
+		logger.info("퇴실요청 아이디:"+loginId);
+		service.seatOut(loginId);
+		return "kiosk/main";	
+	}
+	
+	
+	
 	
 }

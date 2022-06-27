@@ -38,4 +38,10 @@ public class SeatService {
 		dao.seatTime();
 	}
 
+	public void seatOut(String loginId) {
+		logger.info("열람실 퇴실 서비스");
+		dao.seatOut(loginId);
+		
+	}
+
 }

@@ -49,17 +49,23 @@ public class KioskController {
 		String nowTime = sdf.format(now);
 		// logger.info(nowTime);
 		
-		long val1 = Long.parseLong(loginIdSeat);
-		long val2 = Long.parseLong(nowTime);
+		
 		// System.out.println(val1);
 		// System.out.println(val2);
 		
 		if (loginId != null) {
 			session.setAttribute("loginId", loginId);
-			if (val2 > val1) {
+			if (loginIdSeat == null) {
 				page = "kiosk/main";				
 			} else {
-				page = "kiosk/mainSeatOut";
+				long val1 = Long.parseLong(loginIdSeat);
+				long val2 = Long.parseLong(nowTime);
+				
+				if (val1 > val2) {
+					page = "kiosk/mainSeatOut";
+				} else {
+					page = "kiosk/main";
+				}
 			}
 		}
 		return page;

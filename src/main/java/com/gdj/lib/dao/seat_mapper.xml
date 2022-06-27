@@ -23,4 +23,10 @@
 			WHERE seat_no = #{param1}
 	</update>
 	
+	<update id="seatOut" parameterType="String">
+		<![CDATA[
+			UPDATE seat_use SET end_time = now() WHERE mb_id = #{param1} AND end_time > now()
+		]]> 
+	</update>
+	
 </mapper>

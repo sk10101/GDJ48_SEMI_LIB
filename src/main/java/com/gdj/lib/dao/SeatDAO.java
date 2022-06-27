@@ -14,4 +14,6 @@ public interface SeatDAO {
 
 	void seatTime();
 
+	void seatOut(String loginId);
+
 }
