@@ -79,7 +79,22 @@
                                         <th>대출일</th>
                                         <th>반납일</th>
                                         <th>연체여부</th>
+                                        <th>도서상태</th>
                                     </tr>
+                                    
+                                    <c:forEach items="${bookList}" var="brwdto">
+                                    
+                                    	<tr>
+                                    		<td>${brwdto.brw_id}</td>
+                                    		<td>${brwdto.b_title}</td>
+                                    		<td>${brwdto.brw_date}</td>
+                                    		<td>${brwdto.return_date}</td>
+                                    		<td>${brwdto.return_finish}</td>
+                                    		<td>${brwdto.brw_status}</td>
+                                    	<tr>
+                                    	
+                                    </c:forEach>
+                                    
                                 </thead>
                             </table>
                         </span>
