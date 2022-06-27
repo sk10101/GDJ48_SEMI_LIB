@@ -152,19 +152,6 @@ public class MemberController {
 		return "admin/black/blackDetail";
 	}
 	
-<<<<<<< HEAD
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
 	@RequestMapping(value = "/blackUpdate.do")
 	   public String blackUpdate(Model model,
 	         @RequestParam HashMap<String, String> params) {
@@ -192,7 +179,7 @@ public class MemberController {
 
 	      return page;
 	   }
->>>>>>> origin/master
+
 	
 	
 	

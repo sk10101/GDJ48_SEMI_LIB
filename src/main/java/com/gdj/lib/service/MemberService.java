@@ -81,24 +81,9 @@ public class MemberService {
 		return success;
 	}
 
-<<<<<<< HEAD
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-	
-
-
-=======
 	public ArrayList<MemberDTO> penaltyList() {
 		return dao.penaltyList();
 	}
@@ -121,6 +106,6 @@ public class MemberService {
 
 	
 	
->>>>>>> origin/master
+
 }
 

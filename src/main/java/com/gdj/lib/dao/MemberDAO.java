@@ -65,6 +65,8 @@ public interface MemberDAO {
 
 	void blackUpdate(HashMap<String, String> params);
 
+	ArrayList<MemberDTO> memberUpdateListMy();
+
 
 	
 
