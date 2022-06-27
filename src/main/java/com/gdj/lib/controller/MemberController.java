@@ -158,18 +158,90 @@ public class MemberController {
 		return "admin/black/blackDetail";
 	}
 	
+	@RequestMapping(value = "/blackUpdate.do")
+	   public String blackUpdate(Model model,
+	         @RequestParam HashMap<String, String> params) {
+	  
+		
+	      logger.info("params : {}", params);
+	      if(params.get("black_cancel") == null) {
+	         params.put("black_cancel", "false");  
+	        
+	      }else {
+	    	 
+	         params.put("admin_end", "tester");  
+	         
+	         
+	      }
+	      
+	      if(params.get("clear") != null) {
+	    	  params.put("end_reason", "");
+	    	  
+	      
+	      }
+	      
+	      service.blackUpdate(params);
+	      String page = "redirect:/blackDetail.do?black_id="+params.get("black_id");
+
+	      return page;
+	   }
+	
+	
+	
+	
 	@RequestMapping(value = "/penaltyList.do")
-	public String penaltyList() {
+	public String penaltyList(Model model) {
 		logger.info("이용정지리스트 페이지");
+		ArrayList<MemberDTO> penaltyList = service.penaltyList();
+		logger.info("이용정지 회원 리스트 갯수 : "+penaltyList.size());	
+		model.addAttribute("penaltyList", penaltyList);
 		return "penalty/penaltyList";
 	}
 	
 	@RequestMapping(value = "/penaltyDetail.do")
-	public String penaltyDetail() {
-		logger.info("이용정지리스트 페이지");
+	public String penaltyDetail(Model model ,@RequestParam String penalty_id) {
+		
+		logger.info(penalty_id+"번 이용정지리스트 상세보기 요청 :");
+		
+		MemberDTO dto = service.penaltyDetail(penalty_id);
+		model.addAttribute("dto", dto);
 		return "penalty/penaltyDetail";
 
 	}	
+	
+	@RequestMapping(value = "/penaltyUpdate.do")
+	   public String penaltyUpdate(Model model,
+	         @RequestParam HashMap<String, String> params) {
+	       
+	      logger.info("params : {}", params);
+	      if(params.get("cancel") == null) {
+	         params.put("cancel", "false");       
+	      }else {
+	         params.put("admin_cancel", "tester");  
+	         
+	      }
+	      
+	      service.penaltyUpdate(params);
+	      String page = "redirect:/penaltyDetail.do?penalty_id="+params.get("penalty_id");
+
+	      return page;
+	   }
+	
+	
+	
+	
+	/*
+	 * @RequestMapping(value = "/penaltyUpdate.do") public String
+	 * penaltyUpdateForm(Model model ,@RequestParam ) {
+	 * 
+	 * logger.info("수정 요청"+params); service.penaltyUpdate(params);
+	 * 
+	 * return "penalty/penaltyList";
+	 * 
+	 * }
+	 */
+	 
+	
 	
 
 }

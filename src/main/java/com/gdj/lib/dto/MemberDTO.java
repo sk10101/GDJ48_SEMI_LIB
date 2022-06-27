@@ -23,6 +23,16 @@ public class MemberDTO {
 	private Date black_end;
 	private String end_reason;
 	
+	private boolean black_cancel;
+	
+	public boolean isBlack_cancel() {
+		return black_cancel;
+	}
+	public void setBlack_cancel(boolean black_cancel) {
+		this.black_cancel = black_cancel;
+	}
+
+
 	private int penalty_id;
 	private int category_id;
 	private Date penalty_start;
