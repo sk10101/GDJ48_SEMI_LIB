@@ -68,7 +68,7 @@
 				useTime:useTime},
 			success:function(data){
 				console.log(data);
-				location.href='ki_seat.go';
+				location.href='ki_main.go';
 			},
 			error:function(e){
 				console.log(e);

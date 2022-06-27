@@ -9,7 +9,9 @@
 	
 	<update id="seatTime">
 		<![CDATA[
-			UPDATE seat s, seat_use su SET s.seat_status = '이용가능' WHERE s.seat_no = su.seat_no AND su.end_time < now()
+			UPDATE seat s, (SELECT seat_no, max(end_time) as maxtime FROM seat_use GROUP BY seat_no) as su 
+			SET s.seat_status = '이용가능'
+			WHERE s.seat_no = su.seat_no AND su.maxtime < now()
 		]]> 
 	</update>
 	
