@@ -24,4 +24,12 @@ public interface KioskDAO {
 
 	String loginSeat(String id);
 
+	int notReturn(String loginId);
+
+	long returnDate(String loginId);
+
+	long returnFinish(String loginId);
+
+	void penaltyEndDate(String loginId);
+
 }

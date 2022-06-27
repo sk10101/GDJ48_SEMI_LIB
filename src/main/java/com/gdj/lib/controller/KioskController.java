@@ -157,9 +157,32 @@ public class KioskController {
 		logger.info("returnList : "+returnList);
 		
 		String loginId = (String) session.getAttribute("loginId");
+		
+		// 대출 테이블에 대출상태를 반납으로
 		int cnt = service.bookReturn(returnList);
-		service.updateB(returnList);
 		map.put("cnt", cnt);
+		
+		// 도서 테이블에 도서상태를 도서준비중으로
+		service.updateB(returnList);
+		
+		// 연체 확인 위해 대출테이블에 회원아이디를 이용해 남은 대출 조회
+		int notReturn = service.notReturn(loginId);
+		System.out.println("미반납: "+notReturn);
+		
+		// 책을 모두 반납했을 때
+		if (notReturn == 0) {
+			// 가장 마지막 반납 정보
+			long returnDate = service.returnDate(loginId);
+			// System.out.println("반납 예정일 : "+returnDate);
+			long returnFinish = service.returnFinish(loginId);
+			// System.out.println("반납 완료일 : "+returnFinish);
+			
+			// 반납완료일이 반납예정일보다 크면(연체라면)
+			if (returnFinish > returnDate) {
+				service.penaltyEndDate(loginId);
+			}
+		}
+		
 		return map;
 		
 	}
