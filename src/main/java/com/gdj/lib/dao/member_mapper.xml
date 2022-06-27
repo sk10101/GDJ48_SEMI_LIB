@@ -35,9 +35,6 @@
 		SELECT black_id,mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
 	</select>
 	
-	<select id="blackDetail" resultType="com.gdj.lib.dto.MemberDTO">
-		SELECT * FROM blacklist WHERE black_id = #{param1}
-	</select>
 	
 	<select id="idget" resultType="String">
 		SELECT mb_id FROM member WHERE mb_id = #{mb_id}
@@ -47,14 +44,7 @@
 		INSERT INTO blacklist (mb_id,admin_start, black_reason) 
 			VALUES(#{mb_id},#{admin_start},#{black_reason})
 	</insert>
-	
-	<update id="blackCancel" parameterType="hashmap">
-		UPDATE blacklist SET admin_end = #{admin_end}
-			,black_end = #{black_end}
-		WHERE black_id = #{black_id}
-	</update>
-	
-	
+
 	
 	
 	
@@ -70,14 +60,10 @@
 		
 	<select id="memberoverlay" parameterType="String" resultType="String">
 		SELECT * FROM member WHERE mb_id = #{chkId}
-			
-			
 	</select>
 	
 	<select id="memberoverlays" parameterType="String" resultType="String">
 	SELECT * FROM member WHERE email = #{chkEmail}
-			
-			
 	</select>
 	
 	<select id="idFind" resultType="String" parameterType="String">
@@ -92,6 +78,15 @@
 	SELECT mb_id FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
+
+	<update id="blackCancel" parameterType="hashmap">
+		UPDATE blacklist SET 
+			admin_end=#{admin_end}, 
+			black_end=now(), 
+			end_reason=#{end_reason}
+		WHERE black_id = #{black_id};
+	</update>
+
 	
 </mapper>
 

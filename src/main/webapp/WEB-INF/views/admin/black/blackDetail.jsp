@@ -32,65 +32,45 @@
 <body>
 	<h3>블랙리스트 회원 상세보기</h3>
     <br/>
-    <table class="bbs">
-        <tr>
-            <th>회원ID</th>
-            <td>${dto.mb_id }</td>
-        </tr>
-        <tr>
-            <th>이름</th>
-            <td>${dto.name }</td>
-        </tr>
-        <tr>
-            <th>관리자ID</th>
-            <td>${dto.admin_start }</td>
-        </tr>
-        <tr>
-            <th>지정일자</th>
-            <td>${dto.black_start }</td>
-        </tr>
-        <tr>
-            <th>지정사유</th>
-            <td>${dto.black_reason }</td>
-        </tr>
-        <tr>
-            <th>해제</th>
-            <td><input type="checkbox" name="cancel" value="cancel"/></td>
-        </tr>
-        <tr>
-            <th>해제사유</th>
-            <td><input type="text" name="reason" value=""/></td>
-        </tr>
-    </table>
-    <div>
-        <button onclick="location.href='blackList.do'">돌아가기</button>
-        <button type=button onclick="blackCancel()">수정</button>
-    </div>
+     <input type ="hidden" id ="black_cancel" name = "black_cancel" value = "${dto.black_cancel}"/>
+     
+	    <table class="bbs">
+	        <tr>
+	            <th>회원ID</th>
+	            <td>${dto.mb_id }</td>
+	        </tr>
+	        <tr>
+	            <th>이름</th>
+	            <td>${dto.name }</td>
+	        </tr>
+	        <tr>
+	            <th>관리자ID</th>
+	            <td>${dto.admin_start }</td>
+	        </tr>
+	        <tr>
+	            <th>지정일자</th>
+	            <td>${dto.black_start }</td>
+	        </tr>
+	        <tr>
+	            <th>지정사유</th>
+	            <td>${dto.black_reason }</td>
+	        </tr>
+	        <tr>
+	            <th>해제</th>
+	             
+	        </tr>
+	        <tr>
+	            <th>해제사유</th>
+	            <td><input type="text" id="reason" value="${dto.end_reason }"/></td>
+	        </tr>
+	    </table>
+	    <div>
+	        <button onclick="location.href='blackList.do'">돌아가기</button>
+	        <input type=submit value="수정"/>
+	    </div>
+    
 </body>
 <script>
-	function blackCancel(){
-		 var chk=[];
-	    console.log( '체크박스 값 : '+$(":input:checkbox[name=cancel]:checked").val() );
-	 
-	    $("input[name=cancel]:checked").each(function() { 
-	        chk.push($(this).val());
-	    });
-	    
-	    console.log('chk 값 :'+chk);
-	    
-        $.ajax({
-        	type:'post',
-        	url:'blackCancel.ajax',
-        	data:{cn:chk},
-        	dataType:'json',
-        	success:function(data){
-        		console.log(data);
-        	},
-        	error:function(e){
-        		console.log(e);
-        	}
-        });
-	 
-	}
+
 </script>
 </html>

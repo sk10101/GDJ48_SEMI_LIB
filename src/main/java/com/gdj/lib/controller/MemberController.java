@@ -2,12 +2,7 @@ package com.gdj.lib.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-
 import java.util.HashMap;
-
-
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -138,8 +131,8 @@ public class MemberController {
 		if(s_id != null) {
 			logger.info("s_id 들어옴 : "+s_id);
 			if (service.blackAdd(params) == true) { 
-				page = "redirect:/blackList.do";
 				model.addAttribute("msg","블랙리스트 목록에 추가되었습니다.");
+				page = "redirect:/blackList.do";
 			}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
 				logger.info("존재하지 않는 아이디");
 				model.addAttribute("msg","입력한 회원 ID 를 다시 확인해주세요.");
@@ -159,22 +152,20 @@ public class MemberController {
 		return "admin/black/blackDetail";
 	}
 	
-	@RequestMapping("/blackCancel.ajax") 
-	@ResponseBody
-	public HashMap<String, Object> blackCancel(@RequestParam String black_id,
-			@RequestParam (value="cn[]") ArrayList<String> cn) {
-		logger.info("여기까지는 올까");
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		logger.info("cn : "+cn);
-		
-		if(cn != null) {
-			service.blackCancel(black_id);
-			
 
-		}
-		
-		return null;
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/penaltyList.do")
 	public String penaltyList() {

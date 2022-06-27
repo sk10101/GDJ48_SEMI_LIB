@@ -9,9 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
@@ -85,16 +82,19 @@ public class MemberService {
 	}
 
 
-	public MemberDTO blackCancel(String black_id) {
-		
-		logger.info("블랙리스트 해제 서비스");
-		MemberDTO dto = new MemberDTO();
-		dto.setAdmin_end("admin");
-		
-		return dao.blackCancel(black_id);
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
+	
 
 
 }
