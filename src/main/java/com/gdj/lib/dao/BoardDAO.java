@@ -23,11 +23,16 @@ public interface BoardDAO {
 
 	int noticeAllCount();
 
-	ArrayList<BoardDTO> noticePageList(int cnt, int offset);
+	ArrayList<BoardDTO> noticeList(int cnt, int offset);
 
-	ArrayList<BoardDTO> noticeSearch(HashMap<String, String> params);
-
-
+	ArrayList<BoardDTO> subjectNoticeSearch(int cnt, int offset, String word);
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -69,6 +74,8 @@ public interface BoardDAO {
 	int replyUpdate(HashMap<String, String> params);
 
 	int getReplyId(int claim_id);
+
+	
 
 
 }

@@ -31,7 +31,7 @@
                 </tr>
                 <tr>
                     <th>내용</th>
-                    <td>${notice.notice_content}</td>
+                    <td><textarea>${notice.notice_content}</textarea></td>
                 </tr>
                 <c:if test="${noticeList.size() >0 }">
                 <tr>

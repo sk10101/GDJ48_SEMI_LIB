@@ -36,7 +36,7 @@
                 </tr>
         </table>
         <input type="submit" value="저장" />
-       <input type="button" value="취소" onclick="location.href='noticeList.do'">
+       <input type="button" value="취소" onclick="location.href='notice.go'">
      </form>
     </body>
     <script>

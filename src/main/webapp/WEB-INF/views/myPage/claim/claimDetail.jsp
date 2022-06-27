@@ -145,34 +145,34 @@
         <br/>
         <hr/>
         <br/>
-        <table id="claim_reply">
-	            <tr>
-	                <th>관리자</th>
-	                <td>
-	                	<input type="hidden" name="claim_id" value="${claim.claim_id}"/>
-	                	<input type="hidden" name="reply_id" value="${reply.reply_id}"/>
-	                	${reply.mb_id}
-	                </td>
-	            </tr>
-	            <tr>
-	                <th>작성일</th>
-	                <td>${reply.reply_date}</td>
-	            </tr>
-	            <tr>
-	                <th style="height: 300px;">답변 내용</th>
-	                <td style="vertical-align:top">${reply.reply_content}</td>
-	            </tr>
-	            <c:if test="${replyList.size()>0}">
-		            <tr>
-		                <th>이미지</th>
-		                <td>
-			                <c:forEach items="${replyList}" var="pathR">
-								<img src="/image/${pathR.newFileName}" width="640"/>
-							</c:forEach>
-						</td>
-		            </tr>
-	            </c:if>
-	        </table>
+		<table id="claim_reply">
+		    <tr>
+		        <th>관리자</th>
+		        <td>
+		        	<input type="hidden" name="claim_id" value="${claim.claim_id}"/>
+		        	<input type="hidden" name="reply_id" value="${reply.reply_id}"/>
+		        	${reply.mb_id}
+		        </td>
+		    </tr>
+		    <tr>
+		        <th>작성일</th>
+		        <td>${reply.reply_date}</td>
+		    </tr>
+		    <tr>
+		        <th style="height: 300px;">답변 내용</th>
+		        <td style="vertical-align:top">${reply.reply_content}</td>
+		    </tr>
+		    <c:if test="${replyList.size()>0}">
+			     <tr>
+			         <th>이미지</th>
+			         <td>
+			          	<c:forEach items="${replyList}" var="pathR">
+						<img src="/image/${pathR.newFileName}" width="640"/>
+						</c:forEach>
+					</td>
+		        </tr>
+	       </c:if>
+		</table>
     </div>
 </body>
 <script></script>

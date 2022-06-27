@@ -31,10 +31,10 @@ public class NoticeController {
 	@Autowired NoticeService service;
 	
 		//공지사항 페이지 이동
-		@RequestMapping(value = "/notice.go")
+		@RequestMapping(value = "/noticeList")
 		public String notice() {
 			logger.info("공지사항 페이지 이동");
-			return "redirect:/noticeList.do";
+			return "notice/noticeList";
 		}
 		
 		//공지사항 작성 페이지 이동
@@ -50,7 +50,7 @@ public class NoticeController {
 			logger.info("공지사항 상세보기 페이지 이동");
 			return "notice/noticeDetail";
 		}
-		
+		/*
 		//공지사항 리스트 요청
 		@RequestMapping(value = "/noticeList.do")
 		public String noticeList(Model model, HttpSession session) {
@@ -60,6 +60,7 @@ public class NoticeController {
 			model.addAttribute("noticeList", noticeList);
 			return "notice/notice";
 		}
+		*/
 		
 		//공지사항 글 작성 + 이미지 파일 업로드
 		@RequestMapping(value = "/noticeWrite.do")
@@ -104,15 +105,10 @@ public class NoticeController {
 		public HashMap<String, Object> noticePageList(@RequestParam HashMap<String, String> params) {
 			logger.info("리스트 요청 : {}",params);
 			
-			return service.noticePageList(params);
-		}
-		
-		//공지사항 검색 기능
-		@RequestMapping("/noticeSearch.ajax")
-		@ResponseBody
-		public HashMap<String, Object> noticeSearchList(@RequestParam HashMap<String, String> params) {
-			logger.info("검색한 내용 : {}", params);
-			return service.noticeSearchList(params);
+			HashMap<String, Object> noticeMap = service.noticePageList(params);
+			logger.info("컨트롤러 체크포인트");
+			
+			return noticeMap;
 		}
 		
 		
