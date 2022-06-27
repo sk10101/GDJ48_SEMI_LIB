@@ -35,8 +35,15 @@ public class BookDTO {
 	private int issue;
 	private String b_status;
 	private boolean b_reserve;
+	private String newFileName;
 	
 	
+	public String getNewFileName() {
+		return newFileName;
+	}
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
+	}
 	public boolean isB_reserve() {
 		return b_reserve;
 	}

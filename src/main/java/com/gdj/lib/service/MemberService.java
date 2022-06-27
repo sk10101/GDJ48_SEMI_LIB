@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
 
@@ -49,6 +50,7 @@ public class MemberService {
 
 	public ArrayList<MemberDTO> memberBrw() {
 		
+		logger.info("관리자 > 회원 도서내역 서비스 도착");
 		return dao.memberBrw();
 	}
 
@@ -84,6 +86,13 @@ public class MemberService {
 		return success;
 	}
 
+
+	public ArrayList<BrwBookDTO> brwList(String mb_id) {
+		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
+		return dao.brwList(mb_id);
+	}
+
+	
 	public ArrayList<MemberDTO> penaltyList() {
 		return dao.penaltyList();
 	}
@@ -105,6 +114,6 @@ public class MemberService {
 	}
 
 	
-	
+
 }
 

@@ -8,10 +8,25 @@
 		Select mb_id, mb_pw, name, phone, email FROM member WHERE mb_id = #{mb_id}
 	</select>
 	
-	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO">
+	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
 		SELECT mb_id, mb_pw, name, phone, email FROM member
 		
 	</select>
+	
+	<update id="myUpdate" parameterType="String">
+		UPDATE member SET
+			mb_pw = #{param2}
+			,name = #{param3}
+			,phone = #{param4}
+		WHERE mb_id = #{param1}
+	</update>
+	
+	<update id="myUpdateTwo" parameterType="String">
+		UPDATE member SET
+			name = #{param2}
+			,phone = #{param3}
+		WHERE mb_id = #{param1}
+	</update>
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'
@@ -115,6 +130,31 @@
 	SELECT mb_id FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
+	
+	
+	
+	
+	
+	
+	
+	<!-- ============================================== -->
+	
+	<select id="brwList" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status
+		FROM borrow brw, book b 
+		WHERE brw.b_id = b.b_id AND mb_id=#{mb_id}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>
 
