@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지 / 건의사항</title>
+<title>관리자 페이지 / 건의사항</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -73,20 +73,24 @@
             <a href="#">도서관 로고 들어갈 위치</a>
     </div>
     <div id="myPage_menu">
-        <h3>마이페이지</h3>
+        <h3>관리자 페이지</h3>
         <hr/>
-        <a href="#">도서내역</a><br/>
+        <a href="#">회원관리</a><br/>
+        <br/>
+        <a href="#">도서관리</a><br/>
         <br/>
         <a href="claimList">건의사항</a><br/>
         <br/>
-        <a href="#">회원정보</a>
+        <a href="#">블랙리스트</a><br/>
+        <br/>
+        <a href="#">이용정지내역</a>
     </div>
-    <button id="claim_write" onclick="location.href='claimWrite.go'">건의사항 작성</button><br/>
     <table id="claim_table">
     	<thead>
 	         <tr>
 	             <th>No</th>
 	             <th>제목</th>
+	             <th>작성자</th>
 	             <th>처리상태</th>
 	             <th>작성일</th>
 	             <th>삭제</th>
@@ -96,7 +100,7 @@
     	
     	</tbody>
 	    	<tr>
-				<td colspan="5" id="paging">
+				<td colspan="6" id="paging">
 					<div class="container">
 						<nav aria-label="Page navigation" style="text-align:center">
 								<ul class="pagination" id="pagination" >
@@ -106,7 +110,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan ="5" id="paging">
+				<td colspan ="6" id="paging">
 				        <select id="pagePerNum">
 							<option value="5">5</option>
 							<option value="10" selected="selected">10</option>
@@ -115,6 +119,7 @@
 						</select>
 				       	<select id="option" name="option">
 				       		<option value="제목">제목</option>
+				       		<option value="작성자">작성자</option>
 				       		<option value="처리상태">처리상태</option>
 				       	</select>
 			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
@@ -136,17 +141,18 @@
 		console.log(word);
 		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
 		$("#pagination").twbsPagination('destroy');
-		// 검색어가 들어갔을 때와 아닐때를 구분
 		if(word==null || word==""){
 			listCall(currPage);
 		} else {
 			searchList(currPage)
 		}
 		
-	});
+	})
+	
 	
 	
 	function listCall(page) {
+		
 		var pagePerNum = $('#pagePerNum').val();
 		console.log("param page : " + page);
 		
@@ -167,7 +173,6 @@
 					startPage: data.currPage, // 시작 페이지
 					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
 					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
-					// 페이지 클릭했을 때
 					onPageClick: function(e, page) {
 						console.log("클릭한 페이지 : "+page); // 사용자가 클릭한 페이지
 						console.log("입력한 검색어 : "+word);
@@ -196,7 +201,8 @@
 			//console.log(item.status);
 			content += '	<tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
 			content += '		<td id="claimID">'+item.claim_id+'</td>';
-			content += '		<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+			content += '		<td><a href="adminClaimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+			content += '		<td class="mbID">'+item.mb_id+'</td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
 			content += '		<td class="delete" style="height:39px">';
@@ -211,40 +217,21 @@
 		$("#claimList").append(content);
 	}
 	
-	
-	// 페이지 변경할 때 검색어를 저장하기위한 시도
 	/*
-	$('.page-item active > a.page-link').on('click',function(){
-		console.log("페이지가 변경됐습니다.")
-		if(sessionStorage.getItem("word")!=null) {
-			$(this).text() = currPage;
-			searchList(currPage);
-		}
-	});
+	$('#searchBtn').on('click',function(){
+		console.log(currPage);
+		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	})
 	*/
 	
-	
-	// 새로고침하면 세션에 저장된 검색어와 검색옵션 값을 비운다.
-	/*
-	function sessionClear() {
-		    window.onbeforereload = function (e) {
-		    	sessionStorage.removeItem("word");
-		    	sessionStorage.removeItem("option");
-		    };
-		}
-	*/
 	
 	// 검색 결과 출력
 	function searchList(page) {
 		var word = $('#word').val();
 		var option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
-		
-		// 검색어 저장
-		/*
-		sessionStorage.setItem("word",word);
-		sessionStorage.setItem("option",option);
-		*/
 		
 		$.ajax({
 			type: 'GET',
@@ -269,7 +256,7 @@
 					onPageClick: function(e, page) {
 						console.log(page); // 사용자가 클릭한 페이지
 						currPage = page;
-						searchList(page);
+						listCall(page);
 					}
 				});
 			},

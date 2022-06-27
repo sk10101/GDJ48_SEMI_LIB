@@ -106,7 +106,6 @@
 			</tr>
 			<tr>
 				<td colspan ="5" id="paging">
-					<form action="searchList">
 				        <select id="pagePerNum" name="cnt">
 							<option value="5">5</option>
 							<option value="10">10</option>
@@ -119,7 +118,6 @@
 				       	</select>
 			        	<input type="search" placeholder="검색" name="keyword"/>
 			        	<input type="submit" id="btnSearch" value="검색" style="width: 60px; margin-top: 10px;"/>
-					</form>
 				</td>
 			</tr>
         </table>

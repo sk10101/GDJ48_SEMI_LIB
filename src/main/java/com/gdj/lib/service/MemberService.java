@@ -81,6 +81,7 @@ public class MemberService {
 		return success;
 	}
 
+<<<<<<< HEAD
 
 	
 	
@@ -97,5 +98,29 @@ public class MemberService {
 	
 
 
+=======
+	public ArrayList<MemberDTO> penaltyList() {
+		return dao.penaltyList();
+	}
+
+	public MemberDTO penaltyDetail(String penalty_id) {
+		logger.info("이용정지 리스트 상세보기 서비스 : "+penalty_id);
+		return dao.penaltyDetail(penalty_id);
+	}
+
+	public void penaltyUpdate(HashMap<String, String> params) {
+	      logger.info("이용정지리스트 수정 서비스");
+	      dao.penaltyUpdate(params);
+	   }
+
+	public void blackUpdate(HashMap<String, String> params) {
+		logger.info("블랙리스트 수정 서비스");
+	      dao.blackUpdate(params);
+		
+	}
+
+	
+	
+>>>>>>> origin/master
 }
 
