@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="blackDetail" resultType="com.gdj.lib.dto.MemberDTO">
-		SELECT * FROM blacklist WHERE black_id = #{param1}
+      SELECT *FROM blackList b ,member m WHERE b.mb_id = m.mb_id and black_id= #{param1}
 	</select>
 	
 	<select id="idget" resultType="String">
@@ -47,6 +47,35 @@
 		INSERT INTO blacklist (mb_id,admin_start, black_reason) 
 			VALUES(#{mb_id},#{admin_start},#{black_reason})
 	</insert>
+	
+	<select id="penaltyList" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT penalty_id,mb_id,category_id,penalty_start,penalty_end,cancel  FROM penalty
+	</select>
+	
+	<select id="penaltyDetail" resultType="com.gdj.lib.dto.MemberDTO">
+      <!-- SELECT *FROM penalty WHERE penalty_id= #{param1} -->
+      SELECT *FROM penalty p ,member m WHERE p.mb_id = m.mb_id and penalty_id= #{param1}
+   </select>
+   
+	
+	  <update id="penaltyUpdate" parameterType="hashmap">
+      UPDATE penalty SET cancel  = #{cancel} 
+      , admin_cancel = #{admin_cancel}
+      ,penalty_end = now()
+      WHERE penalty_id = #{penalty_id}
+   </update>
+   
+   
+    <update id="blackUpdate" parameterType="hashmap">
+      UPDATE blacklist SET black_cancel  = #{black_cancel} 
+      , admin_end = #{admin_end}
+      , end_reason = #{end_reason}
+      ,black_end = now()
+      WHERE black_id = #{black_id}
+   </update>
+   
+   
+   
 	
 	
 	

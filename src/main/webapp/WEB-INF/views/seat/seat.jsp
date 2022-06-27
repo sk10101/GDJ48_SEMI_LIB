@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/seat.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style></style>
 </head>
 <body>
@@ -29,54 +30,54 @@
 	                <div class="section" id="section1">
 	                    <div class="table" id="table1">
 	                        <div class="Column" id="Column1">
-	                            <div class=${seatNo0} id="1">1<br><br>${seatNo0}</div>
-	                            <div class=${seatNo1} id="2">2<br><br>${seatNo1}</div>
-	                            <div class=${seatNo2} id="3">3<br><br>${seatNo2}</div>
-	                            <div class=${seatNo3} id="4">4<br><br>${seatNo3}</div>
-	                            <div class=${seatNo4} id="5">5<br><br>${seatNo4}</div>
+	                            <div class=${seatStatus0} id="1">1<br><br>${seatStatus0}</div>
+	                            <div class=${seatStatus1} id="2">2<br><br>${seatStatus1}</div>
+	                            <div class=${seatStatus2} id="3">3<br><br>${seatStatus2}</div>
+	                            <div class=${seatStatus3} id="4">4<br><br>${seatStatus3}</div>
+	                            <div class=${seatStatus4} id="5">5<br><br>${seatStatus4}</div>
 	                        </div>
 	                        <div class="Column" id="Column2">
-	                            <div class=${seatNo5} id="6">6<br><br>${seatNo5}</div>
-	                            <div class=${seatNo6} id="7">7<br><br>${seatNo6}</div>
-	                            <div class=${seatNo7} id="8">8<br><br>${seatNo7}</div>
-	                            <div class=${seatNo8} id="9">9<br><br>${seatNo8}</div>
-	                            <div class=${seatNo9} id="10">10<br><br>${seatNo9}</div>
+	                            <div class=${seatStatus5} id="6">6<br><br>${seatStatus5}</div>
+	                            <div class=${seatStatus6} id="7">7<br><br>${seatStatus6}</div>
+	                            <div class=${seatStatus7} id="8">8<br><br>${seatStatus7}</div>
+	                            <div class=${seatStatus8} id="9">9<br><br>${seatStatus8}</div>
+	                            <div class=${seatStatus9} id="10">10<br><br>${seatStatus9}</div>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="section" id="section2">
 	                    <div class="table" id="table2">
 	                        <div class="Column" id="Column3">
-	                            <div class=${seatNo10} id="11">11<br><br>${seatNo10}</div>
-	                            <div class=${seatNo11} id="12">12<br><br>${seatNo11}</div>
-	                            <div class=${seatNo12} id="13">13<br><br>${seatNo12}</div>
-	                            <div class=${seatNo13} id="14">14<br><br>${seatNo13}</div>
-	                            <div class=${seatNo14} id="15">15<br><br>${seatNo14}</div>
+	                            <div class=${seatStatus10} id="11">11<br><br>${seatStatus10}</div>
+	                            <div class=${seatStatus11} id="12">12<br><br>${seatStatus11}</div>
+	                            <div class=${seatStatus12} id="13">13<br><br>${seatStatus12}</div>
+	                            <div class=${seatStatus13} id="14">14<br><br>${seatStatus13}</div>
+	                            <div class=${seatStatus14} id="15">15<br><br>${seatStatus14}</div>
 	                        </div>
 	                        <div class="Column" id="Column4">
-	                            <div class=${seatNo15} id="16">16<br><br>${seatNo15}</div>
-	                            <div class=${seatNo16} id="17">17<br><br>${seatNo16}</div>
-	                            <div class=${seatNo17} id="18">18<br><br>${seatNo17}</div>
-	                            <div class=${seatNo18} id="19">19<br><br>${seatNo18}</div>
-	                            <div class=${seatNo19} id="20">20<br><br>${seatNo19}</div>
+	                            <div class=${seatStatus15} id="16">16<br><br>${seatStatus15}</div>
+	                            <div class=${seatStatus16} id="17">17<br><br>${seatStatus16}</div>
+	                            <div class=${seatStatus17} id="18">18<br><br>${seatStatus17}</div>
+	                            <div class=${seatStatus18} id="19">19<br><br>${seatStatus18}</div>
+	                            <div class=${seatStatus19} id="20">20<br><br>${seatStatus19}</div>
 	                        </div>
 	                    </div>
 	                </div>
 	                <div class="section" id="section3">
 	                    <div class="table" id="table3">
 	                        <div class="Column" id="Column5">
-	                            <div class=${seatNo20} id="21">21<br><br>${seatNo20}</div>
-	                            <div class=${seatNo21} id="22">22<br><br>${seatNo21}</div>
-	                            <div class=${seatNo22} id="23">23<br><br>${seatNo22}</div>
-	                            <div class=${seatNo23} id="24">24<br><br>${seatNo23}</div>
-	                            <div class=${seatNo24} id="25">25<br><br>${seatNo24}</div>
+	                            <div class=${seatStatus20} id="21">21<br><br>${seatStatus20}</div>
+	                            <div class=${seatStatus21} id="22">22<br><br>${seatStatus21}</div>
+	                            <div class=${seatStatus22} id="23">23<br><br>${seatStatus22}</div>
+	                            <div class=${seatStatus23} id="24">24<br><br>${seatStatus23}</div>
+	                            <div class=${seatStatus24} id="25">25<br><br>${seatStatus24}</div>
 	                        </div>
 	                        <div class="Column" id="Column6">
-	                            <div class=${seatNo25} id="26">26<br><br>${seatNo25}</div>
-	                            <div class=${seatNo26} id="27">27<br><br>${seatNo26}</div>
-	                            <div class=${seatNo27} id="28">28<br><br>${seatNo27}</div>
-	                            <div class=${seatNo28} id="29">29<br><br>${seatNo28}</div>
-	                            <div class=${seatNo29} id="30">30<br><br>${seatNo29}</div>
+	                            <div class=${seatStatus25} id="26">26<br><br>${seatStatus25}</div>
+	                            <div class=${seatStatus26} id="27">27<br><br>${seatStatus26}</div>
+	                            <div class=${seatStatus27} id="28">28<br><br>${seatStatus27}</div>
+	                            <div class=${seatStatus28} id="29">29<br><br>${seatStatus28}</div>
+	                            <div class=${seatStatus29} id="30">30<br><br>${seatStatus29}</div>
 	                        </div>
 	                    </div>
 	                </div>

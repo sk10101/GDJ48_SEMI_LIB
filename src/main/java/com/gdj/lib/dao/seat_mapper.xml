@@ -7,4 +7,32 @@
 		SELECT seat_no, seat_status FROM seat
 	</select>
 	
+	<update id="seatTime">
+		<![CDATA[
+			UPDATE seat s, (SELECT seat_no, max(end_time) as maxtime FROM seat_use GROUP BY seat_no) as su 
+			SET s.seat_status = '이용가능'
+			WHERE s.seat_no = su.seat_no AND su.maxtime < now()
+		]]> 
+	</update>
+	
+	<select id="seatChk" resultType="String" parameterType="String">
+		SELECT date_format(start_time,'%Y%m%d') FROM seat_use su WHERE mb_id=#{param1} ORDER BY use_id DESC limit 1
+	</select>
+	
+	
+	<insert id="seatUse" parameterType="String">
+		INSERT INTO seat_use(mb_id, seat_no, end_time) VALUES(#{param1},#{param2},adddate(now(),interval #{param3} minute))
+	</insert>
+	
+	<update id="updateSeat" parameterType="String">
+		UPDATE seat SET seat_status = concat(date_format(now(),'%H:%i'),'~',date_format(adddate(now(),interval #{param2} minute),'%H:%i')) 
+			WHERE seat_no = #{param1}
+	</update>
+	
+	<update id="seatOut" parameterType="String">
+		<![CDATA[
+			UPDATE seat_use SET end_time = now() WHERE mb_id = #{param1} AND end_time > now()
+		]]> 
+	</update>
+	
 </mapper>

@@ -22,4 +22,30 @@ public class SeatService {
 		return dao.list();
 	}
 
+	public void seatUse(String loginId, String seatNo, String useTime) {
+		logger.info(loginId+" / "+seatNo+" / "+useTime);
+		dao.seatUse(loginId,seatNo,useTime);
+	}
+
+	public void updateSeat(String seatNo, String useTime) {
+		logger.info(seatNo+" / "+useTime);
+		dao.updateSeat(seatNo,useTime);
+		
+	}
+
+	public void seatTime() {
+		logger.info("열람실 좌석 업데이트");
+		dao.seatTime();
+	}
+
+	public void seatOut(String loginId) {
+		logger.info("열람실 퇴실 서비스");
+		dao.seatOut(loginId);
+		
+	}
+
+	public String seatChk(String loginId) {
+		return dao.seatChk(loginId);
+	}
+
 }
