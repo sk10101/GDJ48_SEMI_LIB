@@ -57,11 +57,10 @@ public class KioskController {
 		if (loginId != null) {
 			session.setAttribute("loginId", loginId);
 			if (val2 > val1) {
-				model.addAttribute("msg", "열람실");
+				page = "kiosk/main";				
 			} else {
-				model.addAttribute("msg", "퇴실하기");
+				page = "kiosk/mainSeatOut";
 			}
-			page = "kiosk/main";
 		}
 		return page;
 	}
