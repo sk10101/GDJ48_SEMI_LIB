@@ -157,11 +157,17 @@ public class BookService {
 		dto.setB_status(params.get("b_status"));
 		
 		int row = dao.bookUpdate(dto);
-		int b_id = dto.getB_id();		
+		int b_id = dto.getB_id();
+		int chk = dao.photoChk(dto);
+		logger.info("파일체크 :" +chk);
 		logger.info("도서수정 완료:"+b_id);
 		
 		if (row > 0) {
-			fileUpdate(b_img, b_id);
+			if (chk > 0) {
+				fileUpdate(b_img, b_id);
+			} else {
+				fileSave(b_img, b_id);
+			}
 		}
 	}
 	

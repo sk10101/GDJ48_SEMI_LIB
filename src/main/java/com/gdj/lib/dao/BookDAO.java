@@ -32,5 +32,7 @@ public interface BookDAO {
 
 	void fileUpdate(String oriFileName, String newFileName, int b_id);
 
+	int photoChk(BookDTO dto);
+
 
 }

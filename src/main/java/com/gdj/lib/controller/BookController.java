@@ -35,9 +35,7 @@ public class BookController {
 		model.addAttribute("dto",dto);				
 		return "book/bookSearch";
 	}
-	
-	
-	
+		
 	//관리자 도서관리 페이지 시작--->
 	
 		//도서목록

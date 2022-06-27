@@ -56,7 +56,7 @@
              </select>
          </div> 
        </div>       
-           <table>
+           <table border="1">
                <thead>
                   <tr>
                       <td>책표지</td>
@@ -70,12 +70,14 @@
                <tbody>
 				<c:forEach items="${dto}" var="dto">
 					<tr>
-						<td>${dto.b_id}</td>
+						<td>
+							<p><img src="/image/${dto.newFileName}" height="200"/>
+						</td>	
 						<td><a href="bookDetail.do?b_id=${dto.b_id}">${dto.b_title}</a></td>
 						<td>${dto.writer}</td>
 						<td>${dto.publisher}</td>
 						<td>${dto.b_status}</td>
-						<td>${dto.publisher}</td>
+						<td>미정</td>
 					</tr>
 				</c:forEach>
             </tbody>

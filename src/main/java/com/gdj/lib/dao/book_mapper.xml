@@ -5,13 +5,15 @@
 
 <!-- 검색 옵션 쿼리문 시작 (전체옵션 검색 구현 미완..)-->
 	<select id="searchTitle" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT b_id, b_title, writer, publisher, b_status FROM book 
+		SELECT p.newFileName, b_id, b_title, writer, publisher, b_status FROM book b JOIN photo p
+		ON p.post_id = b.b_id
 		WHERE b_title LIKE CONCAT('%', #{param1}, '%') 
 	</select>
 	
 	<select id="searchWriter" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT b_id, b_title, writer, publisher, b_status FROM book 
-		WHERE writer LIKE CONCAT('%', #{param1}, '%')
+		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status FROM book b,
+			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
+		WHERE writer LIKE CONCAT('%', #{param1}, '%') AND p.post_id = b.b_id;
 	</select>
 	
 	<select id="searchPublisher" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
@@ -70,6 +72,10 @@
 			,b_status = #{b_status}
 		WHERE b_id = #{b_id}
 	</update>
+	
+	<select id="photoChk" resultType="Integer">
+		SELECT count(p.post_id) FROM photo p, book b WHERE p.post_id = #{b_id} AND p.category_id ="4";
+	</select>
 	
 	<update id="fileUpdate" >
 		Update photo SET oriFileName = #{param1}
