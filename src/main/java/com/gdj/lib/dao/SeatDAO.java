@@ -16,4 +16,6 @@ public interface SeatDAO {
 
 	void seatOut(String loginId);
 
+	String seatChk(String loginId);
+
 }

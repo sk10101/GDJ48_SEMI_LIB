@@ -13,6 +13,10 @@
 		]]> 
 	</update>
 	
+	<select id="seatChk" resultType="String" parameterType="String">
+		SELECT date_format(start_time,'%Y%m%d') FROM seat_use su WHERE mb_id=#{param1} ORDER BY use_id DESC limit 1
+	</select>
+	
 	
 	<insert id="seatUse" parameterType="String">
 		INSERT INTO seat_use(mb_id, seat_no, end_time) VALUES(#{param1},#{param2},adddate(now(),interval #{param3} minute))

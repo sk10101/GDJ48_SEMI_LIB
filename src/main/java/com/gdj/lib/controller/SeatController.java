@@ -1,7 +1,8 @@
 package com.gdj.lib.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -43,8 +43,32 @@ public class SeatController {
 	
 	// 키오스크 열람실 현황보기
 	@RequestMapping(value = "/ki_seat.go")
-	public String kioskSeat(Model model) {
+	public String kioskSeat(Model model, HttpSession session) {
 		logger.info("키오스크 열람실 페이지 이동");
+		String loginId = (String) session.getAttribute("loginId");
+		String page = "seat/kioskSeat";
+		
+		// 열람실 하루이용 제한
+		String seatChk = service.seatChk(loginId);
+		logger.info("마지막 이용 날짜: "+seatChk);
+		
+		if (seatChk != null) {
+		 
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String nowDay = sdf.format(now);
+			
+			long today = Long.parseLong(nowDay);
+			long seatDate = Long.parseLong(seatChk);
+//			System.out.println(today);
+//			System.out.println(seatDate);
+	
+			if (today == seatDate) {
+				page = "kiosk/seatWarn";
+			}
+		}
+			
+		
 		ArrayList<SeatDTO> list = service.list();
 		service.seatTime();
 		logger.info("list 개수: "+list.size());
@@ -52,7 +76,8 @@ public class SeatController {
 			logger.info(i+"번 : "+list.get(i).getSeat_status());
 			model.addAttribute("seatStatus"+i, list.get(i).getSeat_status());
 		}
-		return "seat/kioskSeat";	
+		
+		return page;			
 	}
 	
 	

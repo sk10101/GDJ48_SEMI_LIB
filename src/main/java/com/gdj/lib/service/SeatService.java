@@ -44,4 +44,8 @@ public class SeatService {
 		
 	}
 
+	public String seatChk(String loginId) {
+		return dao.seatChk(loginId);
+	}
+
 }
