@@ -41,14 +41,14 @@
 	    <table class="bbs">
 	        <tr>
 	            <th>회원ID</th><!-- hidden으로 해결,, 올바른 방법인지는 모르겠음 ㅎㅎ -->
-	            <td><input type="hidden" name="mb_id" value="${dto.mb_id}">${dto.mb_id}</td>
+	            <td><input type="hidden" name="mb_id"  id="mb_id" value="${dto.mb_id}">${dto.mb_id}</td>
 	        </tr>
 	        <tr>
 	            <th>회원등급</th>
 	            <td>
 	                <select name="mb_class">
-	                    <option value="일반회원">일반회원</option>
-	                    <option value="관리자">관리자</option>
+	                    <option value="일반회원" ${dto.mb_class == '일반회원' ? 'selected="selected" ' : '' }>일반회원</option>
+	                    <option value="관리자" ${dto.mb_class == '관리자' ? 'selected="selected" ' : '' } >관리자</option>
 	                </select>
 	            </td>
 	        </tr>
@@ -78,8 +78,8 @@
 	        </tr>
 	        <tr>
 	            <th colspan="2">
-	                <input type="button" value="대출내역" onclick="location.href='memberBrw.do'"/>
-	                <input type="button" value="예약내역" onclick="location.href='memberReserve.do'"/>
+	                <input type="button" value="대출내역" onclick="brwList()"/>
+	                <input type="button" value="예약내역" onclick="reserveList()"/>
 	                <input type="submit" value="수정"/>
 	                <input type="button" value="목록보기" onclick="location.href='/memberList.do'"/>
 	        </tr>
@@ -87,10 +87,17 @@
     </form>
 </body>
 <script>
-	var msg = ${msg};
-	
-	if(msg != "") {
-		alert(msg);
-	}
+function brwList() {
+	var mb_id = $('#mb_id').val();
+	console.log(mb_id);
+	location.href = 'memberBrw.go?mb_id='+mb_id;
+}
+
+function reserveList() {
+	var mb_id = $('#mb_id').val();
+	console.log(mb_id);
+	location.href = 'memberBrw.go?mb_id='+mb_id; // 도서내역페이지로 가서 예약내역 바로 보여주는??
+}
+
 </script>
 </html>

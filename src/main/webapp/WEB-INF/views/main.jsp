@@ -22,16 +22,16 @@
         <div class="logo">
             <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
-        <div class="search">
-            <select id="bookSearchOption">
+        <form class="search" action="bookSearch.do" method="get">
+            <select name="option">
                 <option value="all" selected>전체</option>
                 <option value="b_title">제목</option>
                 <option value="writer">저자</option>
                 <option value="publisher">출판사</option>
             </select>
-            <input type="text" id="bookSearchWord" placeholder="도서 검색">
-            <input type="button" class="btn_search" value=" " onclick="bookSearch()"/>
-        </div>
+            <input type="text" name="word" placeholder="도서 검색"/>
+            <input type="submit" class="btn_search"/>
+        </form>
         <div class="menu">
             <ul class="icons">
                 <li>
@@ -54,7 +54,7 @@
     </section>
 </body>
 <script>
-
+/*
 function bookSearch() {
 	var option=$('#bookSearchOption').val();
 	var word=$('#bookSearchWord').val();
@@ -77,6 +77,6 @@ function bookSearch() {
 	});
 	
 }
-
+*/
 </script>
 </html>

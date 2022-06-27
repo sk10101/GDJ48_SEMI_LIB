@@ -22,15 +22,16 @@
 	<div class="container">
             <!-- TOP -->
             <div class="top">
-                <span>
                     <nav>
+
                         <ul> 
+
+                        <ul>
                             <li>${sessionScope.loginId}님 반갑습니다.</li>
                             <li>로그아웃</li>
                             <li>마이페이지</li>
                         </ul>
                     </nav>
-                </span>
             </div>
             <!--MIDDLE-->
             <div class="middle">
@@ -115,8 +116,11 @@
                     
             </div>
         </div>
+
         </div>
         
+	
+
 </body>
 <script>
 

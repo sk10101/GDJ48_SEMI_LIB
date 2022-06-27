@@ -2,6 +2,8 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class BrwBookDTO {
 
 	// 회원 정보
@@ -84,9 +86,11 @@ public class BrwBookDTO {
 
 
 		private int brw_id;
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		private Date brw_date;
-		private Date return_date;
 		private boolean renew;
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+		private Date return_date;
 		private Date return_finish;
 		private String brw_status;
 
@@ -114,6 +118,13 @@ public class BrwBookDTO {
 			return return_date;
 		}
 		public void setReturn_date(Date return_date) {
+		}
+		
+		public Date getreturn_date() {
+			return return_date;
+		}
+		public void setreturn_date(Date return_date) {
+
 			this.return_date = return_date;
 		}
 		public Date getReturn_finish() {

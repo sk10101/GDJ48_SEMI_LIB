@@ -5,60 +5,94 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="../resources/css/admin.css">
 <style>
-    .detail {
-        right: 0;
-    }
-    table.bbs {
-		width: 50%;
-	}
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th, td {
-		padding: 10px 10px;
-	}
-	textarea {
-		width: 100%;
-		height: 150px;
-		resize: none;
-	}
-    a:link {
-        text-decoration: none;
-    }
 </style>
 </head>
 <body>
-	<h3>대출내역</h3>
-    <tr>
-        <th colspan="2"/>
-            <th><a href="#">대출내역</a></th>
-            <th><a href="/memberHis.do">이전 대출내역</a></th>
-            <th><a href="/memberReserve.do">예약내역</a></th>
-            <td>회원 ID:</td>
-    </tr>
-    <table class="bbs">
-        <thead>
-            <tr>
-                <td>대출번호</td>          
-                <td>도서제목</td>           
-                <td>대출일</td>           
-                <td>반납예정일</td>       
-                <td>대출상태</td>      
-                <td>연장여부</td>
-            </tr>
-        </thead>
-        <tbody>
-			<c:forEach items="${memberBrw }" var="dto">
-				<tr>
-					<td><a href="memberDetail.do?mb_id=${dto.mb_id }">${dto.mb_id }</a></td>
-					<td>${dto.name }</td>
-					<td>${dto.phone }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-    </table>
+    <header>
+        <div class="header-wrap">
+            <div class="logo">
+                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
+            </div>
+            <nav>
+                <ul class="navi">
+                    <li>***님 환영합니다.</li>
+                    <li><a href="#">로그아웃</a></li>
+                    <li><a href="#">관리자페이지</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <aside id="menu">
+        <h1>관리자페이지</h1>
+        <hr/>
+        <ul class="admin_menu">
+            <li><a href="#">회원관리</a></li>
+            <li><a href="#">도서관리</a></li>
+            <li><a href="#">건의사항</a></li>
+            <li><a href="#">블랙리스트</a></li>
+            <li><a href="#">이용정지내역</a></li>
+        </ul>
+    </aside>
+	<section>
+		<h3>대출내역</h3>
+		<ul class="book_menu">
+			<li><a href="#">대출내역</a></li>
+			<li><a href="/memberHis.go">이전 대출내역</a></li>
+			<li><a href="/memberReserve.go">예약내역</a></li>
+			<li id="mb_id"></li>
+		</ul>
+	    <table class="brw_table">
+	        <thead>
+	            <tr>
+	                <td>대출번호</td>          
+	                <td>도서제목</td>           
+	                <td>대출일</td>           
+	                <td>반납예정일</td>       
+	                <td>대출상태</td>      
+	                <td>연장여부</td>
+	            </tr>
+	        </thead>
+	        <tbody id="brwList">
+
+			</tbody>
+	    </table>
+	</section>
 </body>
-<script></script>
+<script>
+listCall();
+
+function listCall() {
+	$.ajax({
+		type:'get',
+		url:'memberBrw.ajax',
+		data: {},
+		dataType:'json',
+		success:function(data){
+			drawList(data.list);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+}
+
+function drawList(brwList) {
+	var content='';
+	brwList.forEach(function(item,idx){
+		console.log(item);
+		content += '<tr>';
+		content += '<td>' +item.brw_id+ '</td>';
+		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
+		content += '<td>' +item.brw_date+ '</td>';
+		content += '<td>'+item.return_date+'</td>';
+		content += '<td>'+item.brw_status+'</td>';
+		content += '<td>'+item.renew+'</td>';
+		content += '</tr>';
+	});
+	$('#brwList').append(content);
+}
+
+</script>
 </html>

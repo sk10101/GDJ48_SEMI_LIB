@@ -86,6 +86,7 @@
                                     <c:forEach items="${history}" var="brwdto">
                                     
                                     	<tr>
+
                                     		<td id="extension_id">${brwdto.brw_id}</td>
                                     		<td>${brwdto.b_title}</td>
                                     		<td>${brwdto.brw_date}</td>
@@ -116,6 +117,15 @@
 	                                    		</c:choose>
                                     		</td>
                                     		
+
+                                    		<td>${dto.brw_id}</td>
+                                    		<td>${dto.b_title}</td>
+                                    		<td>${dto.brw_date}</td>
+                                    		<td>${dto.return_date}</td>
+                                    		<td>${dto.brw_status}</td>
+                                    		<td>Y</td>
+                                    		<td>${dto.renew}</td>
+
                                     	<tr>
                                     	
                                     	</c:forEach>
