@@ -103,7 +103,7 @@
 	
 	function mySecession() {
 		
-		if("#chk").prop("checked", false) {
+		if(("#chk").prop("checked", false)) {
 		
 			/*
 			$.ajax({
