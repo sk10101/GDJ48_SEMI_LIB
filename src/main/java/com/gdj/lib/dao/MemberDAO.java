@@ -81,6 +81,9 @@ public interface MemberDAO {
 	void blackUpdate(HashMap<String, String> params);
 
 
+	String getMbClass(String id, String pw);
+
+
 	
 
 
