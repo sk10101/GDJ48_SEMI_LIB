@@ -78,7 +78,7 @@ public class BrwBookController {
 		BrwBookDTO dto = service.detail(b_id);
 		model.addAttribute("dto",dto);
 		
-		return "redirect:/bookDetail.do?b_id="+b_id;
+		return "book/bookDetail";
 	}
 	
 	
