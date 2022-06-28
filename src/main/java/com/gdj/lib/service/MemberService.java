@@ -84,17 +84,14 @@ public class MemberService {
 	}
 
 
-<<<<<<< HEAD
-	
-	
-=======
+
 	public ArrayList<BrwBookDTO> brwList(String mb_id) {
 		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
 		return dao.brwList(mb_id);
 	}
 
 	
->>>>>>> origin/master
+
 	public ArrayList<MemberDTO> penaltyList() {
 		return dao.penaltyList();
 	}
@@ -116,10 +113,6 @@ public class MemberService {
 	}
 
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/master
 
 }
 
