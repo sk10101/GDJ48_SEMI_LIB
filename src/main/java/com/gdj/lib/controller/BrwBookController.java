@@ -112,11 +112,27 @@ public class BrwBookController {
 	@RequestMapping(value = "/bookreserve.ajax")
 	@ResponseBody
 	public String bookreserve(HttpSession session, Model model,
-			@RequestParam String b_id) {
+			@RequestParam String b_id,@RequestParam String mb_id) {
 		
 		String page = "redirect:/";
 		logger.info("기존 도서 상세보기 페이지"+b_id);
 		service.bookreserve(b_id);
+		
+		// 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회
+		int reserveCheck = service.reserveCheck(mb_id);
+		logger.info("예약한 수: "+reserveCheck);
+		if(reserveCheck == 1) {
+			long expiry = service.expiry(mb_id);
+			// 예약 만료일 
+			long overExpiry = service.overExpiry(mb_id);
+			// 만료일이 지났을 경우
+			if(expiry>overExpiry) {
+				service.penaltyDate(mb_id);
+			}
+		}
+		
+		// 예약 기간이 지났는데 반납을 안한 경우
+		
 		
 		return "redirect:/bookDetail?b_id="+b_id;
 	

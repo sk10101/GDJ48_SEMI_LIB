@@ -31,6 +31,14 @@ public interface BrwBookDAO {
 
 	void bookStatusUpdate(String string);
 
+	int reserveCheck(String mb_id);
+
+	long expiry(String mb_id);
+
+	long overExpiry(String mb_id);
+
+	Object penaltyDate(String mb_id);
+
 	
 
 	

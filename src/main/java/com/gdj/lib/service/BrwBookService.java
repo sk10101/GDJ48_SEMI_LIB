@@ -4,16 +4,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import com.gdj.lib.dao.BookDAO;
 import com.gdj.lib.dao.BrwBookDAO;
-import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 
 
@@ -113,6 +109,29 @@ public class BrwBookService {
 		dao.reserveBookBrw(params.get("reserve_id"));
 		dao.bookStatusUpdate(params.get("b_id"));
 		return "redirect:/reserve";
+		
+	}
+
+
+	public int reserveCheck(String mb_id) {
+		int cnt =0;
+		cnt = dao.reserveCheck(mb_id);
+		return cnt;
+	}
+
+
+	public long expiry(String mb_id) {
+		return dao.expiry(mb_id);
+	}
+
+
+	public long overExpiry(String mb_id) {
+		return dao.overExpiry(mb_id);
+	}
+
+
+	public void penaltyDate(String mb_id) {
+		 dao.penaltyDate(mb_id);
 		
 	}
 

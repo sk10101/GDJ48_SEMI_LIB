@@ -67,7 +67,7 @@
                      			<td>${dto.penalty_end }</td>
                  			</c:when>
                  			<c:otherwise>
-                      			<td>${penalty_start}</td>
+                      			<td>${dto.penalty_end}</td>
                  			</c:otherwise>
             			</c:choose>						
 						<c:choose>

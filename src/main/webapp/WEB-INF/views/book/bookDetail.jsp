@@ -80,7 +80,7 @@ table {
                    <td id="brw">
                    <c:choose>
 						<c:when test="${brwdto.b_status eq '대출중'}">
-						<button id="brwBtn" disabled="disabled">대출신청</button>
+						<button id="brwBtn">대출신청</button>
 						</c:when>
 						<c:when test="${brwdto.b_status eq '대출가능'}">                        				
 						<button id="brwBtn" onclick="bookbrw()">대출신청</button>								
@@ -178,7 +178,7 @@ function bookreserve() {
 	
 } 
 
-$("#brw").on("click",function(){
+/* $("#brw").on("click",function(){
 	$("#brw").hide();
 	alert("대출신청이 완료되었습니다");
 });
@@ -188,7 +188,7 @@ $("#bookreserve").on("click",function(){
 	$("#bookreserve").hide();
 	alert("예약이 완료되었습니다");
 });
-
+ */
   /* $(function(){
 	$("bookreserve").click(function(){
 		if($("#bookreserve").css("display") != "none"){

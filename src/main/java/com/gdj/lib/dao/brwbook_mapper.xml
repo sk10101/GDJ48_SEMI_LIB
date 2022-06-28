@@ -4,7 +4,7 @@
 <mapper namespace="com.gdj.lib.dao.BrwBookDAO">
 	
 
-	<select id="detail" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="detail" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
@@ -97,6 +97,13 @@
  	<update id="bookStatusUpdate" parameterType="hashmap">
  		update book set b_status = "대출불가" where b_id = #{b_id} 		
  	</update>
+ 	
+ 	<select id="reserveCheck" parameterType="String" resultType="int">
+		SELECT COUNT(reserve_id) from reservation WHERE mb_id = #{param1} AND reason = 'null'
+	</select>
+ 	
+ 	
+ 	
  	<!-- <update id="reserveBtn" parameterType="String">						
 		UPDATE book SET return_finish = DATE_ADD(return_finish(), interval +7 day) WHERE b_id = #{param1}
 	</update> -->
