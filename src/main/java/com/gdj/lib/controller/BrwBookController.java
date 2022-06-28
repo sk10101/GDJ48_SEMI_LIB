@@ -70,17 +70,32 @@ public class BrwBookController {
 		
 	}
 	
-	
 	@RequestMapping(value = "/bookDetail.do")
-	public String bookDetail(Model model, @RequestParam String b_id) {
+	public String bookDetail(Model model, HttpSession session,
+			@RequestParam HashMap<String, String> params) {
 		
-		logger.info("도서 상세보기 요청 : "+ b_id); 
-		BrwBookDTO dto = service.detail(b_id);
-		model.addAttribute("dto",dto);
 		
+		
+		logger.info("이전대출 목록" + params); 
+		ArrayList<BrwBookDTO> detail = service.detail(params);
+		model.addAttribute("detail",detail);
+			
 		return "book/bookDetail";
+		
 	}
 	
+	
+	
+//	@RequestMapping(value = "/bookDetail.do")
+//	public String bookDetail(Model model, @RequestParam String b_id) {
+//		
+//		logger.info("도서 상세보기 요청 : "+ b_id); 
+//		BrwBookDTO dto = service.detail(b_id);
+//		model.addAttribute("dto",dto);
+//		
+//		return "book/bookDetail";
+//	}
+//	
 	
 	@RequestMapping(value = "/bookbrw.ajax")
 	@ResponseBody
@@ -98,16 +113,7 @@ public class BrwBookController {
 	
 	
 	
-	@RequestMapping(value = "/bookreason.ajax")
-	@ResponseBody
-	public String reason(HttpSession session, Model model,
-			@RequestParam String b_id) {
-		
-		String page = "redirect:/";
-		logger.info("예약신청 후 페이지"+b_id);
-		service.reason(b_id);
-		return "redirect:/bookDetail?b_id="+b_id;
-	}
+	
 		
 	@RequestMapping(value = "/bookreserve.ajax")
 	@ResponseBody
@@ -168,19 +174,33 @@ public class BrwBookController {
 		
 	}
 	
-	
-	@RequestMapping(value = "/bookBrwDetail.ajax")
+	@RequestMapping(value = "/bookreason.ajax")
 	@ResponseBody
-	public String bookBrwDetail(HttpSession session, Model model,
-			@RequestParam String b_id) {
+	public String bookreason(HttpSession session, Model model, 
+			@RequestParam HashMap<String, String> params) {
 		
-		String page = "redirect:/myPage/bookList/reserve";
-		logger.info("대출신청 : "+b_id);
-		service.bookBrwDetail(b_id);
+		String page = "redirect:/";
+		logger.info("받아온 책번호 : "+ params );
+		service.bookreason(params);
+		return "book/bookDetail";
 		
-		return "redirect:/reserve";
 		
 	}
+	
+	
+	//brwList 페이징 처리
+	@RequestMapping("/myPageBrwList.ajax")
+	@ResponseBody
+	public HashMap<String, Object> myPageBrwList(
+			@RequestParam HashMap<String, String> params) {
+		logger.info("리스트 요청 : {}",params);
+		
+		HashMap<String, Object> brwList = service.myPageBrwList(params);
+		logger.info("컨트롤러 체크포인트");
+		
+		return brwList;
+	}
+
 	
 	
 	
