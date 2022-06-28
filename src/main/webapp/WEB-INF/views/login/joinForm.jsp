@@ -4,52 +4,46 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="../resources/css/login.css">
 <link rel="icon" href="../resources/img/favicon.png">
 </head>
 <style>
-table, th, td{
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-
-th, td{
-	padding: 5px 10px;
-}
 </style>
 <body>
-    <h3>회원가입</h3>
-	<div class="login-form">
+    <h3 id="joinTitle">회원가입</h3>
+	<div class="join-form">
 		<table>
 			<tr>
-				<th>ID</th>
-				<td><input class="text-field" type="text"  id="id" placeholder="id"/></td>
-				<td><button onclick="overaly()">아이디 중복 체크</button></td>
+				<th class="col1">ID</th>
+				<td class="col2"><input class="text-field" type="text"  id="id"/></td>
+				<td class="col3"><button class="chkBtn" onclick="overaly()">중복 확인</button></td>
 			</tr>
 			<tr>
-				<th>PW</th>
-				<td><input  class="text-field" type="text" id="pw" placeholder="pw"/></td>
-				<td>※한글을 제외한 4글자 이상</td>
+				<th class="col1">PW</th>
+				<td class="col2"><input  class="text-field" type="text" id="pw"/></td>
+				<td class="col3">※ 4글자 이상 (한글 제외)</td>
 			</tr>
 			<tr>
-				<th>NAME</th>
-				<td><input class="text-field" type="text" id="name" placeholder="name"/></td>
+				<th class="col1">이름</th>
+				<td class="col2"><input class="text-field" type="text" id="name"/></td>
 			</tr>
 			<tr>
-				<th>PHONE</th>
-				<td><input class="text-field" type="text" id="phone" placeholder="phone"/></td>
-				<td>※숫자만 입력하세요.</td>
+				<th class="col1">전화번호</th>
+				<td class="col2"><input class="text-field" type="text" id="phone"/></td>
+				<td class="col3">※ 숫자만 입력하세요.</td>
 			</tr>
 			<tr>
-				<th>EMAIL</th>
-				<td><input class="text-field" type="text" id="email" placeholder="email"/></td>
-				<td><button onclick="overalys()">이메일 중복 체크</button></td>
+				<th class="col1">이메일</th>
+				<td class="col2"><input class="text-field" type="text" id="email"/></td>
+				<td class="col3"><button class="chkBtn" onclick="overalys()">중복 확인</button></td>
 			</tr>
 		</table>
+		<div class="joinBtn-area">
 			<input class="submit-btn" type="button" value="회원가입" onclick="join()"/>
 			<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='/member/login'"/>
+		</div>
     </div>
 </body>
 <script>

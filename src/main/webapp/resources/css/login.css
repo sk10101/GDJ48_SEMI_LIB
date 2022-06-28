@@ -13,6 +13,10 @@ body{
     height: 100vh;
     flex-direction: column;
 }
+
+
+
+/*login.jsp*/
 .logo{
 	width: 350px;
 	height: auto;
@@ -29,7 +33,6 @@ body{
 	border-radius: 10px;
 	font-size: 20px;
 	font-weight:700;
-	
 }
 .btn-area{
 	width:100%;
@@ -64,4 +67,68 @@ body{
 }
 .links a{
 	text-decoration-line:none;
+}
+
+
+
+/*joinForm.jsp*/
+table, th, td{
+	border: 1px solid #333;
+	border-collapse: collapse;
+}
+
+th, td{
+	padding: 5px 10px;
+}
+#joinTitle{
+	font-size: 40px;
+	font-weight:700;
+	color:#333;
+	padding-bottom:30px;
+}
+.join-form input{
+	font-size: 18px;
+	background-color:#fff;
+	border: 1px solid #333;
+	border-radius: 5px;
+}
+.col1{
+	background-color: #86b049;
+	color:#fff;
+	height:35px;
+}
+.col2{
+	border-right:none;
+}
+.col3{
+	border-left:none;
+	font-size:13px;
+}
+.join-form .chkBtn{
+	background-color:#eeece1;
+	border: 1px solid #333;
+	border-radius: 5px;
+	width: 75px;
+	height:23.6px;
+}
+.join-form .chkBtn:hover{
+	cursor:pointer;
+}
+.joinBtn-area{
+	text-align:center;
+	padding: 20px;
+}
+.joinBtn-area .submit-btn{
+	background-color: #86b049;
+	color: #fff;
+	font-size:18px;
+	font-weight:700;
+	width:100px;
+	height:35px;
+	margin:0 5px;
+	border:none;
+	
+}
+.joinBtn-area .submit-btn:hover{
+	cursor:pointer;
 }
