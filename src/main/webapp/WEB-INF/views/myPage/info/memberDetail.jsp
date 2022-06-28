@@ -45,9 +45,13 @@
             </tr>
             <tr>
                 <th>회원탈퇴신청</th>
-                <td><input type="checkbox" id="chk"  name="secession">
+                <td>
+                <div>
+                <input type="checkbox" id="chk"  name="secession"  <c:if test = "${myUpdateDetail.mb_status eq '탈퇴신청' || myUpdateDetail.mb_status eq '탈퇴완료'}"> checked </c:if> value="true" />
+                <input type="hidden" id="chk" name="secession" value="false" />
                     ※ 체크하신 후 수정버튼을 누르시면 탈퇴신청이 접수됩니다.<br/>
-                    (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)                    
+                    (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)
+                 </div>                
                 </td>
             </tr>
         </table>
@@ -63,7 +67,7 @@
         </table>
 
         <br/>
-        <input type="submit" value="수정" id="myUpdateButton">
+        <input type="submit" value="수정" >
         </form>
 </body>
 <script>
@@ -75,13 +79,18 @@
 	
 	$(document).ready(function(){    
 		
+	
+	if(!$("#chk").val("true")) {
+		$("#chk").prop("checked" , false);
+	}
+		
 		$("#chk").change(function(){       
 			
 			 if($("#chk").is(":checked")){           
 				
 				if(confirm("※ 정말로 탈퇴 하시겠습니까?  ") == true){
 					alert ("회원탈퇴는 신청후 7일뒤 처리 됩니다. 회원탈퇴 처리가 완료되면 해당 아이디는 재사용이 불가 합니다. ");
-					
+
 				} else {
 					$("#chk").prop("checked" , false);
 					return ;
@@ -89,34 +98,14 @@
 				  
 			}else{            
 				alert("회원 탈퇴가 취소 되었습니다.");
-				        
+			    $(this).val("false");
 			}  
 				  
 		});
 	
 	});
 	
-	$('#myUpdateButton').on("click", function() {
-		mySecession();
-	});
-	
-	
-	function mySecession() {
-		
-		if(("#chk").prop("checked", false)) {
-		
-			location.href= "/cancelMySecession";
-			
-		}
-		
-		else {
-			
-			location.href= "/mySecession";
-		
-		}
-				
-		
-	}
+
 	
 	
 </script>

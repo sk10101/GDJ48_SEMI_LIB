@@ -66,6 +66,7 @@ public class MyController {
 		logger.info("mb_pw : "+myUpdateDetail.getMb_pw());
 		logger.info("name : "+myUpdateDetail.getName());
 		logger.info("phone : "+myUpdateDetail.getPhone());
+		logger.info("회원 상태 : "+myUpdateDetail.getMb_status());
 		
 		model.addAttribute("myUpdateDetail", myUpdateDetail);
 		
@@ -76,9 +77,6 @@ public class MyController {
 	@RequestMapping(value = "/myUpdate")
 	public String myUpdate(Model model, HttpServletRequest request, String Oripw_chk) {
 		
-	
-		
-		
 		String mb_id = request.getParameter("mb_id");
 		String mb_pw = request.getParameter("mb_pw");
 		String name = request.getParameter("name");
@@ -86,7 +84,7 @@ public class MyController {
 		
 		String pw_chk = request.getParameter("pw_chk");
 		
-		
+		String secession = request.getParameter("secession");
 		
 		logger.info("수정할 아이디 : "+mb_id);
 		logger.info("수정할 이름 : "+name);
@@ -96,9 +94,22 @@ public class MyController {
 		logger.info("PW 확인 : "+pw_chk);
 		logger.info("원래 비밀 번호 : "+Oripw_chk);
 		
+		//기본값 false 체크시 true 로 바뀜
+		logger.info("회원탈퇴 체크 : "+secession);
 		
+		if(secession.equals("true")) {
+			 service.MySecession(mb_id);
+		} 
+		
+		
+		if (secession.equals("false")) {
+			service.cancelMySecession(mb_id);
+		}
+		 
+		
+		// pw 확인 if 문
 		 if(pw_chk.equals(Oripw_chk)) {
-			
+			// 비밀번호가 공백일때 if 문
 			 if(mb_pw == "") {
 				 service.myUpdateTwo(mb_id,name,phone);
 			 } else {
@@ -106,7 +117,7 @@ public class MyController {
 			 }
 				
 		} else {
-			// 알림창이 안뜸
+			// 알림창이 안뜸 해결해야됨
 			model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
 		}
 		
@@ -114,30 +125,7 @@ public class MyController {
 		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
 	
-	@RequestMapping(value = "/cancelMySecession")
-	public String CancelMySecession(Model model, HttpServletRequest request, String mb_id) {
-		
-		mb_id = request.getParameter("mb_id");
-		logger.info("회원 탈퇴 취소 아이디 : "+mb_id);
-		
-		service.cancelMySecession(mb_id);
-		
-		return "redirect:/myUpdateDetail?mb_id="+mb_id;
-	}
-	
-	
-	@RequestMapping(value = "/mySecession")
-	public String MySecession(Model model, HttpServletRequest request, String mb_id) {
-		
-		 mb_id = request.getParameter("mb_id");
-		 logger.info("회원 탈퇴할 아이디 : "+mb_id);
-		 
-		 service.MySecession(mb_id);
-		
-		return "redirect:/myUpdateDetail?mb_id="+mb_id;
-	}
-	
-	
+
 	
 	
 }

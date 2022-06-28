@@ -53,6 +53,7 @@ public class MyService {
 	public void MySecession(String mb_id) {
 		logger.info(mb_id+" 의 회원탈퇴 요청");
 		dao.MySecession(mb_id);
+		dao.MySecessionTwo(mb_id);
 	}
 
 

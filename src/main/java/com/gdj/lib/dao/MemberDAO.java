@@ -87,6 +87,9 @@ public interface MemberDAO {
 	void MySecession(String mb_id);
 
 
+	void MySecessionTwo(String mb_id);
+
+
 	
 
 
