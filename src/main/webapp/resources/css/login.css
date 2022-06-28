@@ -13,7 +13,20 @@ body{
     height: 100vh;
     flex-direction: column;
 }
+table, th, td{
+	border: 1px solid #333;
+	border-collapse: collapse;
+}
 
+th, td{
+	padding: 5px 10px;
+}
+#title{
+	font-size: 40px;
+	font-weight:700;
+	color:#333;
+	padding-bottom:30px;
+}
 
 
 /*login.jsp*/
@@ -72,20 +85,6 @@ body{
 
 
 /*joinForm.jsp*/
-table, th, td{
-	border: 1px solid #333;
-	border-collapse: collapse;
-}
-
-th, td{
-	padding: 5px 10px;
-}
-#joinTitle{
-	font-size: 40px;
-	font-weight:700;
-	color:#333;
-	padding-bottom:30px;
-}
 .join-form input{
 	font-size: 18px;
 	background-color:#fff;
@@ -127,8 +126,43 @@ th, td{
 	height:35px;
 	margin:0 5px;
 	border:none;
-	
 }
 .joinBtn-area .submit-btn:hover{
+	cursor:pointer;
+}
+
+
+
+/*idFind.jsp*/
+idFindTable{
+	width:370px;
+}
+.idFindCol2{
+	width:300px;
+}
+.idFindCol2 #email{
+	width:100%;
+	font-size:16px;
+	background-color:#fff;
+	border:1px solid #333;
+	border-radius:5px;
+}
+.idFindBtn-area{
+	width:370px;
+	margin-top:20px;
+	text-align:right;
+}
+.idFindBtn-area .idFindBtn{
+	background-color: #86b049;
+	color:#fff;
+	font-size:16px;
+	font-weight:700;
+	width:70px;
+	height:30px;
+	margin-left:10px;
+	border:none;
+	border-radius:5px;
+}
+.idFindBtn-area .idFindBtn:hover{
 	cursor:pointer;
 }

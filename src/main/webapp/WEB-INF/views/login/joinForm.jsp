@@ -12,7 +12,7 @@
 <style>
 </style>
 <body>
-    <h3 id="joinTitle">회원가입</h3>
+    <h3 id="title">회원가입</h3>
 	<div class="join-form">
 		<table>
 			<tr>
