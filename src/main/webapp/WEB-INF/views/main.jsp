@@ -64,9 +64,9 @@
                 	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
                 		<a href="/adminClaimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
                 	</c:when>
-                	<c:when test="${sessionScope.loginId ne null || sessionScope.mb_class eq '일반회원'}">
-	                    <a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
-                	</c:when>
+                	<c:otherwise>
+                		<a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
+                	</c:otherwise>
                 </c:choose>
                 </li>
                 <li>
