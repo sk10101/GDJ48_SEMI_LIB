@@ -118,15 +118,9 @@ public class BrwBookDTO {
 			return return_date;
 		}
 		public void setReturn_date(Date return_date) {
-		}
-		
-		public Date getreturn_date() {
-			return return_date;
-		}
-		public void setreturn_date(Date return_date) {
-
 			this.return_date = return_date;
 		}
+		
 		public Date getReturn_finish() {
 			return return_finish;
 		}
