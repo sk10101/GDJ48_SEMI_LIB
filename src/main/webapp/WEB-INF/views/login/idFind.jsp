@@ -14,14 +14,14 @@
 	<table class="idFindTable">
 		<tr>
 			<th class="col1">이메일</th>
-			<td class="idFindCol2">
+			<td class="FindCol2">
 				<input type="email" id = "email"/>
 			</td>
 		</tr>
 	</table>
-	<div class="idFindBtn-area">
-		<button class="idFindBtn" type="button" onclick="idFind()">ID찾기</button>
-		<button class="idFindBtn" type="button" onclick="location.href='/member/login'">취소</button>
+	<div class="FindBtn-area">
+		<button class="FindBtn" type="button" onclick="idFind()">ID찾기</button>
+		<button class="FindBtn" type="button" onclick="location.href='/member/login'">취소</button>
 	</div>
 </body>
 <script>

@@ -133,36 +133,36 @@ th, td{
 
 
 
-/*idFind.jsp*/
+/*idFind.jsp, pwFind.jsp*/
 idFindTable{
 	width:370px;
 }
-.idFindCol2{
+.FindCol2{
 	width:300px;
 }
-.idFindCol2 #email{
+.FindCol2 #email,#id{
 	width:100%;
 	font-size:16px;
 	background-color:#fff;
 	border:1px solid #333;
 	border-radius:5px;
 }
-.idFindBtn-area{
+.FindBtn-area{
 	width:370px;
 	margin-top:20px;
 	text-align:right;
 }
-.idFindBtn-area .idFindBtn{
+.FindBtn-area .FindBtn{
 	background-color: #86b049;
 	color:#fff;
 	font-size:16px;
 	font-weight:700;
-	width:70px;
+	width:72px;
 	height:30px;
 	margin-left:10px;
 	border:none;
 	border-radius:5px;
 }
-.idFindBtn-area .idFindBtn:hover{
+.FindBtn-area .idFindBtn:hover{
 	cursor:pointer;
 }
