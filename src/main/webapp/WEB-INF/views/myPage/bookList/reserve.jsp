@@ -86,7 +86,9 @@
                                     
                                     	<tr>
                                     		<td class="bookReserve_id" >${brwdto.reserve_id}</td>
-                                    		<td>${brwdto.b_title}</td>
+                                    		<td>
+												<a href="bookDetail.do?b_id=${brwdto.b_id}">${brwdto.b_title}</a>
+                                    		</td>
                                     		<td>${brwdto.reserve_date}</td>
                                     		<td>${brwdto.reason}</td>
                                     		<td id="brw">
