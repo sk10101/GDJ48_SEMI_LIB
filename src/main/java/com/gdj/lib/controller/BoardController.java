@@ -29,7 +29,7 @@ public class BoardController {
 	
 	// 건의사항 목록페이지 이동
 	@RequestMapping(value = "/claimList", method = RequestMethod.GET)
-	public String claimList(Model model) {
+	public String claimList(Model model, HttpSession session) {
 		// claimList 에 리스트 보내기
 		/*
 		logger.info("건의사항 리스트 요청");
@@ -37,6 +37,9 @@ public class BoardController {
 		logger.info("건의사항 게시글의 개수 : " + claimList.size());
 		model.addAttribute("claimList",claimList);
 		*/
+		
+		logger.info("로그인한 아이디 : " + session.getAttribute("loginId"));
+		
 		return "myPage/claim/claimList";
 	}
 
