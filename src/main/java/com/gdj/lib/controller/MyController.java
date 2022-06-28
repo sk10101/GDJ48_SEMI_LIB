@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gdj.lib.dto.BookDTO;
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
 import com.gdj.lib.service.MyService;
 
@@ -41,8 +43,10 @@ public class MyController {
 				model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
 			} else {
 			ArrayList<MemberDTO> myUpdateList = service.myUpdateList();
+			
 			logger.info("memberList 갯수 : "+ myUpdateList.size());
 			logger.info("세션 확인 : "+memberSession.getAttribute("loginId"));
+			
 			mb_id = (String) memberSession.getAttribute("loginId");
 			model.addAttribute("myUpdateList", myUpdateList);
 			page = "redirect:/myUpdateDetail?mb_id="+mb_id;
@@ -76,6 +80,15 @@ public class MyController {
 
 	@RequestMapping(value = "/myUpdate")
 	public String myUpdate(Model model, HttpServletRequest request, String Oripw_chk) {
+		
+		BrwBookDTO brw = new BrwBookDTO();
+		String brwReason = brw.getReason();
+		String brw_status = brw.getBrw_status();
+		
+		// 서비스 보내는거 부터 해야됨 
+		
+		logger.info("예약중인 도서 : "+brwReason);
+		logger.info("대출중인 도서 : "+brw_status);
 		
 		String mb_id = request.getParameter("mb_id");
 		String mb_pw = request.getParameter("mb_pw");
