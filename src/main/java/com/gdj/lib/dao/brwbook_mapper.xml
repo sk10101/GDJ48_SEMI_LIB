@@ -4,7 +4,7 @@
 <mapper namespace="com.gdj.lib.dao.BrwBookDAO">
 	
 
-	<select id="detail" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="detail" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
