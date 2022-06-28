@@ -17,7 +17,6 @@
             </div>
             <nav>
                 <ul class="navi">
-                    <li>***님 환영합니다.</li>
                     <li><a href="#">로그아웃</a></li>
                     <li><a href="#">관리자페이지</a></li>
                 </ul>
@@ -38,10 +37,10 @@
 	<section>
 		<h3>대출내역</h3>
 		<ul class="book_menu">
-			<li><a href="#">대출내역</a></li>
-			<li><a href="brwHis()">이전 대출내역</a></li>
-			<li><a href="reserveList()">예약내역</a></li>
-			<li id="mb_id"></li>
+			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
+			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
+			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
+			<li>회원 ID : <div id="mb_id">${param.mb_id}</div></li>
 		</ul>
 	    <table class="brw_table">
 	        <thead>
@@ -61,16 +60,23 @@
 	</section>
 </body>
 <script>
+var mb_id=$('#mb_id').html();
+console.log(mb_id);
+
 listCall();
 
 function listCall() {
 	$.ajax({
 		type:'get',
 		url:'memberBrw.ajax',
-		data: {},
+		data: {
+			mb_id:mb_id
+		},
 		dataType:'json',
 		success:function(data){
+			console.log("테이블")
 			drawList(data.list);
+			console.log(data.list);
 		},
 		error:function(error){
 			console.log(error);
@@ -80,6 +86,7 @@ function listCall() {
 
 function drawList(brwList) {
 	var content='';
+	console.log("brwList");
 	brwList.forEach(function(item){
 		console.log(item);
 		content += '<tr>';
@@ -89,30 +96,15 @@ function drawList(brwList) {
 		content += '<td>'+item.return_date+'</td>';
 		content += '<td>'+item.brw_status+'</td>';
 		content += '<td>';
-		if(item.renew==true) {
-			content += 'Y';
-		}else{
-			content += 'N';
-		}
+			if(item.renew==true) {
+				content += 'Y';
+			}else{
+				content += 'N';
+			}
 		content += '</td>';
 		content += '</tr>';
 	});
 	$('#list').append(content);
 }
-
-function brwHis(hisList){
-	var content='';
-	hisList.forEach(function(item){
-		console.log(item);
-		content += '<tr>';
-		content += '<td>' +item.brw_id+ '</td>';
-		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
-		content += '<td>' +item.brw_date+ '</td>';
-		content += '<td>';		
-	}
-	$('#list').empty();
-	$('#list').append(content);
-}
-
 </script>
 </html>

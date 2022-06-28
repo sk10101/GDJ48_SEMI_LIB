@@ -135,6 +135,7 @@ function drawList(searchList){
       content += '<td>'+item.publisher+'</td>';
       content += '<td>'+item.b_status+'</td>';
       content += '<td>'+item.reason+'</td>';
+      /*
       content += '<td>';
       	if(item.reserveChk==false) {
       		content += 'N';
@@ -142,6 +143,7 @@ function drawList(searchList){
       		content += 'Y';
       	}
       	content += '</td>';
+      	*/
       content += '</tr>';
    });
    $('#searchList').empty();

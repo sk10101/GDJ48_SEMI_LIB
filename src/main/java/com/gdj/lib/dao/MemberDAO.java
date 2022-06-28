@@ -11,6 +11,7 @@ import com.gdj.lib.dto.MemberDTO;
 
 public interface MemberDAO {
 
+
 	MemberDTO memberUpdateDetailMy(String mb_id);
 
 
@@ -82,6 +83,15 @@ public interface MemberDAO {
 
 
 	String getMbClass(String id, String pw);
+
+
+	ArrayList<BrwBookDTO> hisList(String mb_id);
+
+
+	ArrayList<BrwBookDTO> reserveList(String mb_id);
+
+
+	int reserveCancel(String reserve_id);
 
 
 	
