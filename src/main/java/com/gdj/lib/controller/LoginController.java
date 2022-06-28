@@ -22,9 +22,10 @@ public class LoginController {
 	 Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 로그인 페이지
-	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/login")
 	public String memberhome( Model model) {
 		logger.info("로그인 페이지 이동");
+		
 		return "/login/login";
 	}
 	
@@ -104,7 +105,7 @@ public class LoginController {
 		
 		
 		// 로그인 
-		@RequestMapping(value = "login.do")
+		@RequestMapping(value = "member/login.do")
 		public String login(Model model,HttpSession session ,@RequestParam String id, @RequestParam String pw) {
 			logger.info("로그인 요청 :{},{}",id,pw);
 			String page="login/login"; 
@@ -118,7 +119,7 @@ public class LoginController {
 				session.setAttribute("loginId", loginId);
 				// 관리자와 일반 사용자가 이용할 수 있는 서비스가 다르기 때문에 회원 등급도 같이 가져온다.
 				session.setAttribute("mb_class", mb_class);
-				page="redirect:/"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
+				page="main"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
 			}else {
 				model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
 			}
@@ -128,7 +129,7 @@ public class LoginController {
 	
 		
 		// 로그아웃
-		@RequestMapping(value = "logout.do")
+		@RequestMapping(value = "member/logout.do")
 		public String logout(Model model,HttpSession session) {
 				session.removeAttribute("loginId");
 				model.addAttribute("msg", "로그아웃 되었습니다");

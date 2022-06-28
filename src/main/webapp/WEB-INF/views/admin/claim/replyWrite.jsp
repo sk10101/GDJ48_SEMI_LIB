@@ -95,7 +95,7 @@
              <tr>
                  <th style="height: 300px;">내용</th>
                  <td>
-	                 <input type="text" name="claim_id" value="${claim_id}"/>
+	                 <input type="hidden" name="claim_id" value="${claim_id}"/>
 	                 <textarea name="reply_content" style="height: 273px; width: 614px;">${reply.reply_content}</textarea>
                  </td>
              </tr>
