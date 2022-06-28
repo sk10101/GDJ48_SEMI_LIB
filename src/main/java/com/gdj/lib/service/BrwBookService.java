@@ -117,6 +117,13 @@ public class BrwBookService {
 	}
 
 
+	public void bookBrwDetail(String b_id) {
+		logger.info("도서예약 취소"+b_id);
+		dao.bookBrwDetail(b_id);
+		
+	}
+
+
 	
 
 

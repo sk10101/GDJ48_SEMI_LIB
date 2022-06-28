@@ -9,7 +9,6 @@ import com.gdj.lib.dto.BrwBookDTO;
 
 public interface BrwBookDAO {
 	
-	BrwBookDTO detail(String b_id);
 
 	void brw(String loginId, String b_id);
 
@@ -30,6 +29,10 @@ public interface BrwBookDAO {
 	void reserveBookBrw(String string);
 
 	void bookStatusUpdate(String string);
+
+	void bookBrwDetail(String b_id);
+
+	BrwBookDTO detail(String b_id);
 
 	
 

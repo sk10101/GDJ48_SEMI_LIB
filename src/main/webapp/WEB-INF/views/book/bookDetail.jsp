@@ -74,6 +74,7 @@ table {
                     <td>예약신청</td>
                    
                 <tr>
+				<c:forEach items="${detail}" var="dto">
                    <td id="brw_b_id">${dto.b_id}</td>
                    <td id="b_status">${dto.b_status}</td>
 <<<<<<< HEAD
@@ -101,25 +102,26 @@ table {
                    
                    <td id="brw">
                    <c:choose>
-						<c:when test="${brwdto.b_status eq '대출중'}">
+						<c:when test="${brwdto.b_status eq '대출불가'}">
 						<input type="hidden">
 						</c:when>
 						<c:when test="${brwdto.b_status eq '대출가능'}">                        				
-						<button id="brwBtn" onclick="bookbrw()">대출신청</button>								
+						<button class="brwBtn" onclick="bookBrwDetail(this)" bookID="${brwdto.b_id}" >대출신청</button>								
 						</c:when>
 						<c:when test="${brwdto.b_status eq '대출불가'}">
 						<input type="hidden">
 						</c:when>
 					</c:choose>
 					</td>
+				</c:forEach>
 					
-					<td id="reason">
+					<%-- <td id="reason">
 					<c:choose>
 						<c:when test="${brwdto.b_status eq '대출중'}">                        				
-							<button id="reasonBtn" onclick="bookreason()">예약신청</button>
+							<button class="reasonBtn" onclick="bookreason(this)">예약신청</button>
 						</c:when>
 					</c:choose>
-					</td>
+					</td> --%>
 					
 >>>>>>> origin/master
                 </tr>
@@ -145,12 +147,15 @@ table {
 	
 
 
-function bookbrw() {
+function bookBrwDetail(brwId) {
+	var bookID = $(brwId).attr("bookID");
+ 	console.log(bookID);
+	
 	$.ajax({
 		type:'get',
-		url:'bookbrw.ajax',
+		url:'bookBrwDetail.ajax',
 		data:{
-			b_id:$("#brw_b_id").text()
+			b_id : bookID
 		},
 		dataType:'JSON',
 		success:function(data) {
@@ -162,6 +167,8 @@ function bookbrw() {
 	});
 	
 }
+
+
 
 function bookreason() {
 	$.ajax({
@@ -201,7 +208,7 @@ function bookreserve() {
 	
 } 
 
-$("#brw").on("click",function(){
+/* $("#brw").on("click",function(){
 	$("#brw").hide();
 	alert("대출신청이 완료되었습니다");
 });
@@ -210,7 +217,7 @@ $("#brw").on("click",function(){
 $("#bookreserve").on("click",function(){
 	$("#bookreserve").hide();
 	alert("예약이 완료되었습니다");
-});
+}); */
 
   /* $(function(){
 	$("bookreserve").click(function(){
@@ -223,10 +230,10 @@ $("#bookreserve").on("click",function(){
 
 
 
-	$("#reasonBtn").on("click",function(){
+	/* $("#reasonBtn").on("click",function(){
 	   $("#reasonBtn").hide();
 	   alert("예약이 완료되었습니다");
-	});
+	}); */
 
 </script>
 </html>
