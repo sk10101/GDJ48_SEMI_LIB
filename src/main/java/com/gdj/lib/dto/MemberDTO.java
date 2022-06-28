@@ -2,6 +2,8 @@ package com.gdj.lib.dto;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MemberDTO {
 	
 	private String mb_id;
@@ -16,9 +18,11 @@ public class MemberDTO {
 		
 	private int black_id;
 	private String admin_start;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date black_start;
 	private String black_reason;
 	private String admin_end;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date black_end;
 	private String end_reason;
 	private boolean black_cancel;

@@ -21,10 +21,11 @@ public class MemberService {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public ArrayList<MemberDTO> memberList() {
-		
-		return dao.memberList();
-	}
+	/*
+	 * public ArrayList<MemberDTO> memberList() {
+	 * 
+	 * return dao.memberList(); }
+	 */
 
 	public MemberDTO detail(String mb_id) {
 	
@@ -35,10 +36,11 @@ public class MemberService {
 		return dto;
 	}
 	
-	public ArrayList<MemberDTO> adminList() {
-		
-		return dao.adminList();
-	}
+	/*
+	 * public ArrayList<MemberDTO> adminList() {
+	 * 
+	 * return dao.adminList(); }
+	 */
 
 	public void update(HashMap<String, String> params) {
 		logger.info("회원상태 수정 서비스");
@@ -50,11 +52,12 @@ public class MemberService {
 		logger.info("관리자 > 회원 도서내역 서비스 도착");
 		return dao.memberBrw();
 	}
-
+	/*
 	public ArrayList<MemberDTO> blackList() {
 		
 		return dao.blackList();
 	}
+	*/
 
 	public MemberDTO blackDetail(String black_id) {
 		logger.info("블랙리스트 상세보기 서비스 : "+black_id);
@@ -112,6 +115,92 @@ public class MemberService {
 		
 	}
 
+	
+	
+	
+	public HashMap<String, Object> blackPaging(HashMap<String, String> params) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		logger.info("보여줄 페이지 : "+page);
+		
+		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
+		int allCnt = dao.allCount();
+		logger.info("allCnt : "+allCnt);
+		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
+		if (page > pages) {
+			page = pages;
+		}
+		logger.info("pages : "+pages);
+		map.put("pages", pages); //만들 수 있는 최대 페이지 수
+		map.put("currPage", page); //현재 페이지
+		
+		int offset = (page - 1) * cnt;
+		logger.info("offset : "+offset);
+		
+		ArrayList<MemberDTO> list = dao.blackList(cnt, offset);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	public HashMap<String, Object> memberPaging(HashMap<String, String> params) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		logger.info("보여줄 페이지 : "+page);
+		
+		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
+		int allCnt = dao.allCount();
+		logger.info("allCnt : "+allCnt);
+		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
+		if (page > pages) {
+			page = pages;
+		}
+		logger.info("pages : "+pages);
+		map.put("pages", pages); //만들 수 있는 최대 페이지 수
+		map.put("currPage", page); //현재 페이지
+		
+		int offset = (page - 1) * cnt;
+		logger.info("offset : "+offset);
+		
+		ArrayList<MemberDTO> list = dao.memberList(cnt, offset);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	public HashMap<String, Object> adminPaging(HashMap<String, String> params) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		logger.info("보여줄 페이지 : "+page);
+		
+		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
+		int allCnt = dao.allCount();
+		logger.info("allCnt : "+allCnt);
+		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
+		if (page > pages) {
+			page = pages;
+		}
+		logger.info("pages : "+pages);
+		map.put("pages", pages); //만들 수 있는 최대 페이지 수
+		map.put("currPage", page); //현재 페이지
+		
+		int offset = (page - 1) * cnt;
+		logger.info("offset : "+offset);
+		
+		ArrayList<MemberDTO> list = dao.adminList(cnt, offset);
+		map.put("list", list);
+		
+		return map;
+	}
+
+	
 	
 
 }

@@ -30,6 +30,7 @@
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'
+		LIMIT #{param1} OFFSET #{param2}
 
 	</select>
 	
@@ -39,6 +40,7 @@
 	
 	<select id="adminList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, phone FROM member where mb_class = '관리자'
+		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<update id="update" parameterType="hashmap">
@@ -46,9 +48,14 @@
 		WHERE mb_id = #{mb_id}
 	</update>
 	
+	
+	
+	
 	<select id="blackList" resultType="com.gdj.lib.dto.MemberDTO">
-		SELECT black_id,mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
+		SELECT black_id, mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
+			ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
+	
 	
 
 	<select id="blackDetail" resultType="com.gdj.lib.dto.MemberDTO">
@@ -95,8 +102,11 @@
    </update>
    
    
+   <select id="allCount" resultType="int">
+		SELECT COUNT(black_id) FROM blacklist
+	</select>
    
-	
+
 	
 	
 	

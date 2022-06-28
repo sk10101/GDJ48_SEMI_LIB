@@ -14,17 +14,18 @@ public interface MemberDAO {
 
 	MemberDTO memberDetail(String mb_id);
 
-	ArrayList<MemberDTO> memberList();
+	//ArrayList<MemberDTO> memberList();
 
-	ArrayList<MemberDTO> adminList();
+	//ArrayList<MemberDTO> adminList();
 
 	MemberDTO detail(String mb_id);
 
 	int update(HashMap<String, String> params);
 
 	ArrayList<MemberDTO> memberBrw();
-
-	ArrayList<MemberDTO> blackList();
+	
+	
+	// ArrayList<MemberDTO> blackList();
 
 	MemberDTO blackDetail(String black_id);
 
@@ -79,6 +80,18 @@ public interface MemberDAO {
 
 
 	String getMbClass(String id, String pw);
+
+	
+	
+	// =====================================
+	int allCount();
+
+	ArrayList<MemberDTO> blackList (int cnt, int offset);
+
+	ArrayList<MemberDTO> memberList(int cnt, int offset);
+
+	ArrayList<MemberDTO> adminList(int cnt, int offset);
+
 
 
 	
