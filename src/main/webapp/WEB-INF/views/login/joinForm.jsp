@@ -17,26 +17,26 @@
 		<table>
 			<tr>
 				<th class="col1">ID</th>
-				<td class="col2"><input class="text-field" type="text"  id="id"/></td>
+				<td class="col2"><input class="joinInput" type="text"  id="joinId"/></td>
 				<td class="col3"><button class="chkBtn" onclick="overaly()">중복 확인</button></td>
 			</tr>
 			<tr>
 				<th class="col1">PW</th>
-				<td class="col2"><input  class="text-field" type="text" id="pw"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="joinPw"/></td>
 				<td class="col3">※ 4글자 이상 (한글 제외)</td>
 			</tr>
 			<tr>
 				<th class="col1">이름</th>
-				<td class="col2"><input class="text-field" type="text" id="name"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="joinName"/></td>
 			</tr>
 			<tr>
 				<th class="col1">전화번호</th>
-				<td class="col2"><input class="text-field" type="text" id="phone"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="joinPhone"/></td>
 				<td class="col3">※ 숫자만 입력하세요.</td>
 			</tr>
 			<tr>
 				<th class="col1">이메일</th>
-				<td class="col2"><input class="text-field" type="text" id="email"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="email"/></td>
 				<td class="col3"><button class="chkBtn" onclick="overalys()">중복 확인</button></td>
 			</tr>
 		</table>

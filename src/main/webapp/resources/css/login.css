@@ -38,7 +38,7 @@ th, td{
 .login-area{
 	width: 500px; padding: 5px;
 }
-.login-area input{
+.login-area > #id, #pw{
 	width:100%;
 	padding:10px;
 	background-color:#fff;
@@ -85,7 +85,7 @@ th, td{
 
 
 /*joinForm.jsp*/
-.join-form input{
+.join-form .joinInput{
 	font-size: 18px;
 	background-color:#fff;
 	border: 1px solid #333;
@@ -126,6 +126,7 @@ th, td{
 	height:35px;
 	margin:0 5px;
 	border:none;
+	border-radius:5px;
 }
 .joinBtn-area .submit-btn:hover{
 	cursor:pointer;
