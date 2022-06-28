@@ -39,7 +39,7 @@ public interface BoardDAO {
 	/*
 	ArrayList<BoardDTO> claimList();
 	*/
-	ArrayList<BoardDTO> claimList(int cnt, int offset);
+	ArrayList<BoardDTO> claimList(int cnt, int offset, String mb_id);
 
 	int allCount();
 	
@@ -59,11 +59,11 @@ public interface BoardDAO {
 	
 	int photoDel(int claim_id);
 
-	ArrayList<BoardDTO> subjectSearch(int cnt, int offset, String word);
+	ArrayList<BoardDTO> subjectSearch(int cnt, int offset, String word, String mb_id);
 
-	ArrayList<BoardDTO> statusSearch(int cnt, int offset, String word);
+	ArrayList<BoardDTO> statusSearch(int cnt, int offset, String word, String mb_id);
 
-	ArrayList<BoardDTO> writerSearch(int cnt, int page, String word);
+	ArrayList<BoardDTO> writerSearch(int cnt, int page, String word, String mb_id);
 
 	BoardDTO replyDetail(int claim_id);
 

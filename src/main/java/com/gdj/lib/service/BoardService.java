@@ -43,8 +43,10 @@ public class BoardService {
 		int page = Integer.parseInt(params.get("page"));
 		String option = params.get("option");
 		String word = params.get("word");
+		String mb_id = params.get("mb_id");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : " + page);
+		logger.info("로그인한 아이디 : " + mb_id);
 		
 		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
 		
@@ -70,7 +72,7 @@ public class BoardService {
 		
 		// 검색 관련 설정하는 조건문
 		if(word == null || word.equals("")) {
-			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
+			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset, mb_id);
 			
 			map.put("claimList", claimList);
 		} else {
@@ -78,13 +80,13 @@ public class BoardService {
 			
 			// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
 			if(option.equals("제목")) {
-				searchList = dao.subjectSearch(cnt,offset,word);
+				searchList = dao.subjectSearch(cnt,offset,word,mb_id);
 				logger.info("제목 옵션 설정");
 			} else if(option.equals("처리상태")) {
-				searchList = dao.statusSearch(cnt,offset,word);
+				searchList = dao.statusSearch(cnt,offset,word,mb_id);
 				logger.info("처리상태 옵션 설정");			
 			} else {
-				searchList = dao.writerSearch(cnt,offset,word);
+				searchList = dao.writerSearch(cnt,offset,word,mb_id);
 				logger.info("작성자 옵션 설정");	
 			}
 			
@@ -98,13 +100,15 @@ public class BoardService {
 	
 	
 	// 건의사항 글쓰기폼 (나중에 로그인했을 때 아이디 받아오는 것 추가해야함)
-	public String claimWrite(MultipartFile[] photos, HashMap<String, String> params) {
+	public String claimWrite(MultipartFile[] photos, HashMap<String, String> params, HttpSession session) {
 		
 		BoardDTO dto = new BoardDTO();
+		String mb_id = (String) session.getAttribute("loginId");
+		
 		dto.setClaim_title(params.get("claim_title"));
 		// claimDto.setMb_id(params.get("mb_id")); ==========================
 		// 일단 임시로 tester 계정 사용 ==========================
-		dto.setMb_id("tester");
+		dto.setMb_id(mb_id);
 		dto.setClaim_content(params.get("claim_content"));
 		// 기본적으로 건의사항을 작성하면 status 는 미처리가 된다.
 		dto.setStatus("미처리");

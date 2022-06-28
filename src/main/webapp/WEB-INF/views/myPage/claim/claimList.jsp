@@ -126,7 +126,8 @@
 </body>
 <script>
 	
-	
+	// 로그인한 아이디와 현재 페이지 정보를 변수에 담는다.
+	var mb_id = "${sessionScope.loginId}";
 	var currPage = 1;
 	listCall(currPage);
 	
@@ -157,6 +158,7 @@
 			data:{
 				cnt : pagePerNum,
 				page : page,
+				mb_id : mb_id
 			},
 			dataType:'JSON',
 			success:function(data){
@@ -254,7 +256,8 @@
 				cnt : pagePerNum,
 				page : page,
 				word : word,
-				option : option
+				option : option,
+				mb_id : mb_id
 			},
 			dataType:'JSON',
 			success: function(data){

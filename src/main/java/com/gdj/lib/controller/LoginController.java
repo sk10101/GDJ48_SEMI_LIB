@@ -104,7 +104,7 @@ public class LoginController {
 		
 		
 		// 로그인 
-		@RequestMapping(value = "member/login.do")
+		@RequestMapping(value = "login.do")
 		public String login(Model model,HttpSession session ,@RequestParam String id, @RequestParam String pw) {
 			logger.info("로그인 요청 :{},{}",id,pw);
 			String page="login/login"; 
@@ -125,13 +125,14 @@ public class LoginController {
 			
 			return page;
 		}
+	
 		
 		// 로그아웃
-		@RequestMapping(value = "member/logout.do")
+		@RequestMapping(value = "logout.do")
 		public String logout(Model model,HttpSession session) {
 				session.removeAttribute("loginId");
 				model.addAttribute("msg", "로그아웃 되었습니다");
-			
+				
 			return "login/login"; 
 		}
 	

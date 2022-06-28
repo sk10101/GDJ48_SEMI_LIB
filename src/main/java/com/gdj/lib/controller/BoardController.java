@@ -42,8 +42,11 @@ public class BoardController {
 		
 		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 			logger.info("건의사항 목록 페이지 이동 (일반회원만 가능)");
-		} else {
+		} /*else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
 			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "/main";
+		}*/ else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
 			page = "login/login";
 		}
 		
@@ -79,7 +82,7 @@ public class BoardController {
 		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 			logger.info("건의사항 글쓰기 페이지 이동 (일반회원만 가능)");
 		} else {
-			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
 			page = "login/login";
 		}
 		
@@ -89,10 +92,10 @@ public class BoardController {
 	
 	// 건의사항 글쓰기 + 이미지 파일 업로드
 	@RequestMapping(value = "/claimWrite.do")
-	public String claimWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+	public String claimWrite(MultipartFile[] photos, HttpSession session, @RequestParam HashMap<String, String> params) {
 		logger.info("글쓰기 요청 : " + params);
 		
-		return service.claimWrite(photos, params);
+		return service.claimWrite(photos, params, session);
 	}
 	
 	
@@ -108,7 +111,7 @@ public class BoardController {
 			service.claimDetail(model, claim_id);
 			service.replyDetail(model, claim_id);
 		} else {
-			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
 			page = "login/login";
 		}
 		
@@ -128,7 +131,7 @@ public class BoardController {
 			logger.info("건의사항 수정 상세보기 페이지 이동 (일반회원만 가능)");
 			service.claimDetail(model, claim_id);
 		} else {
-			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
 			page = "login/login";
 		}
 		
