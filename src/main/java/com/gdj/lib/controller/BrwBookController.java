@@ -74,11 +74,11 @@ public class BrwBookController {
 	@RequestMapping(value = "/bookDetail.do")
 	public String bookDetail(Model model, @RequestParam String b_id) {
 		
-		logger.info("도서 상세보기 요청"); 
+		logger.info("도서 상세보기 요청 : "+ b_id); 
 		BrwBookDTO dto = service.detail(b_id);
 		model.addAttribute("dto",dto);
 		
-		return "book/bookDetail";
+		return "redirect:/bookDetail.do?b_id="+b_id;
 	}
 	
 	
@@ -167,6 +167,21 @@ public class BrwBookController {
 		
 		
 	}
+	
+	
+	@RequestMapping(value = "/bookBrwDetail.ajax")
+	@ResponseBody
+	public String bookBrwDetail(HttpSession session, Model model,
+			@RequestParam String b_id) {
+		
+		String page = "redirect:/myPage/bookList/reserve";
+		logger.info("대출신청 : "+b_id);
+		service.bookBrwDetail(b_id);
+		
+		return "redirect:/reserve";
+		
+	}
+	
 	
 	
 }
