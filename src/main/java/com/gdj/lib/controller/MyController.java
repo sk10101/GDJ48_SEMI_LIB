@@ -114,19 +114,27 @@ public class MyController {
 		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
 	
-	@RequestMapping(value = "/CancelMySecession.ajax")
-	@ResponseBody
-	public HashMap<String, Object> CancelMySecession() {
+	@RequestMapping(value = "/cancelMySecession")
+	public String CancelMySecession(Model model, HttpServletRequest request, String mb_id) {
 		
-		return null;
+		mb_id = request.getParameter("mb_id");
+		logger.info("회원 탈퇴 취소 아이디 : "+mb_id);
+		
+		service.cancelMySecession(mb_id);
+		
+		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
 	
 	
-	@RequestMapping(value = "/MySecession.ajax")
-	@ResponseBody
-	public HashMap<String, Object> MySecession() {
+	@RequestMapping(value = "/mySecession")
+	public String MySecession(Model model, HttpServletRequest request, String mb_id) {
 		
-		return null;
+		 mb_id = request.getParameter("mb_id");
+		 logger.info("회원 탈퇴할 아이디 : "+mb_id);
+		 
+		 service.MySecession(mb_id);
+		
+		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
 	
 	

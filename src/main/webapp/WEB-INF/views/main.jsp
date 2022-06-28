@@ -57,9 +57,6 @@
     </section>
     
     <table>
-    <tr>
-    	<td>ID</td>
-    </tr>
     	<tr>
     	<td><a href="/myUpdateList">회원정보 수정 가기</a></td>
     	</tr>

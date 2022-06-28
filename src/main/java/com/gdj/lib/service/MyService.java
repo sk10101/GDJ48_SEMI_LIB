@@ -45,6 +45,16 @@ public class MyService {
 		
 	}
 
+	public void cancelMySecession(String mb_id) {
+		logger.info(mb_id+" 의 회원탈퇴 취소 요청");
+		dao.cancelMySecession(mb_id);
+	}
+
+	public void MySecession(String mb_id) {
+		logger.info(mb_id+" 의 회원탈퇴 요청");
+		dao.MySecession(mb_id);
+	}
+
 
 	
 	

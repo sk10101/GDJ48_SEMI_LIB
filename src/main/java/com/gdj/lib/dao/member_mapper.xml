@@ -27,6 +27,11 @@
 			,phone = #{param3}
 		WHERE mb_id = #{param1}
 	</update>
+	
+	<update id="cancelMySecession" parameterType="String">
+		update member set mb_status = null where mb_id = #{param1}
+	</update>
+	
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'

@@ -45,7 +45,7 @@
             </tr>
             <tr>
                 <th>회원탈퇴신청</th>
-                <td><input type="checkbox" id="chk"  onclick="">
+                <td><input type="checkbox" id="chk"  name="secession">
                     ※ 체크하신 후 수정버튼을 누르시면 탈퇴신청이 접수됩니다.<br/>
                     (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)                    
                 </td>
@@ -105,44 +105,13 @@
 		
 		if(("#chk").prop("checked", false)) {
 		
-			/*
-			$.ajax({
-				type : 'POST',
-				url: '/CancelMySecession.ajax',
-				data : {},
-				dataType : 'JSON',
-				success: function(data) {
-					console.log(data);
-				},
-				error: function(e) {
-					console.log(e);
-				}
-				
-			});
-			
-			*/
+			location.href= "/cancelMySecession";
 			
 		}
 		
 		else {
 			
-			/*
-			
-			$.ajax({
-				type: 'POST',
-				url: '/MySecession.ajax',
-				data : {},
-				dataType : {},
-				success: function(data) {
-					console.log(data);		
-				},
-				error: function(e) {
-					console.log(e);
-				}
-				
-			});
-			
-			*/
+			location.href= "/mySecession";
 		
 		}
 				
