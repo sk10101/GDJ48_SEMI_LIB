@@ -19,7 +19,7 @@
 						<a href="member/login">로그인</a>
 					</c:when>
 					<c:otherwise>
-						<div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="member/logout.do">로그아웃</a></div>
+						<div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="/member/logout.do">로그아웃</a></div>
 					</c:otherwise>
                 </c:choose>
                 </li>
@@ -29,7 +29,7 @@
     <!-- header end -->
     <section>
         <div class="logo">
-            <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
+            <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
         <form class="search" action="bookSearch.do" method="get">
             <select name="option">
@@ -39,7 +39,7 @@
                 <option value="publisher">출판사</option>
             </select>
             <input type="text" name="word" placeholder="도서 검색"/>
-            <input type="submit" class="btn_search"/>
+            <input type="submit" class="btn_search" value=""/>
         </form>
         <div class="menu">
             <ul class="icons">
@@ -47,13 +47,27 @@
                     <a href="/noticeList"><img src="../resources/img/mypage.png"/><br/>공지사항</a>
                 </li>
                 <li><!-- href 나중에 변경해야함 (임시.)-->
-                    <a href="#"><img src="../resources/img/mypage.png"/><br/>마이페이지</a>
+                <c:choose>
+                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+                		<a href="/memberList.do"><img src="../resources/img/mypage.png"/><br/>관리자 페이지</a>
+                	</c:when>
+                	<c:otherwise>
+	                    <a href="/myUpdateList"><img src="../resources/img/mypage.png"/><br/>마이 페이지</a>
+                	</c:otherwise>
+                </c:choose>
                 </li>
                 <li>
-                    <a href="#"><img src="../resources/img/mypage.png"/><br/>도서반납연기</a>
+                    <a href="/brwHistory"><img src="../resources/img/mypage.png"/><br/>도서 연장</a>
                 </li>
                 <li>
-                    <a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
+                <c:choose>
+                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+                		<a href="/adminClaimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
+                	</c:when>
+                	<c:when test="${sessionScope.loginId ne null || sessionScope.mb_class eq '일반회원'}">
+	                    <a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
+                	</c:when>
+                </c:choose>
                 </li>
                 <li>
                     <a href="seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
@@ -61,15 +75,6 @@
             </ul>
         </div>
     </section>
-    
-    <table>
-    <tr>
-    	<td>ID</td>
-    </tr>
-    	<tr>
-    	<td><a href="/myUpdateList">회원정보 수정 가기</a></td>
-    	</tr>
-    </table>
     
 </body>
 <script>

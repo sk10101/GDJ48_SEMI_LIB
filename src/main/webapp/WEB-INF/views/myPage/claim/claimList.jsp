@@ -71,7 +71,7 @@
 <body>
 	<div id="header">
             <a href="#">도서관 로고 들어갈 위치</a>
-            ${sessionScope.loginId} 님 환영합니다.
+            <div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="member/logout.do">로그아웃</a></div>
     </div>
     <div id="myPage_menu">
         <h3>마이페이지</h3>
