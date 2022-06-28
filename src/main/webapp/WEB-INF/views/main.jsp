@@ -22,15 +22,14 @@
         <div class="logo">
             <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
-        <form class="search" action="bookSearch.do" method="get">
+        <form class="search" action="bookSearch.go" method="get">
             <select name="option">
-                <option value="all" selected>전체</option>
                 <option value="b_title">제목</option>
                 <option value="writer">저자</option>
                 <option value="publisher">출판사</option>
             </select>
             <input type="text" name="word" placeholder="도서 검색"/>
-            <input type="submit" class="btn_search"/>
+            <input type="submit" class="btn_search" value=" "/>
         </form>
         <div class="menu">
             <ul class="icons">

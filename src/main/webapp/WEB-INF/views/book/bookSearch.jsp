@@ -36,7 +36,6 @@
 	<section>
         <form class="search" action="bookSearch.do" method="get">
             <select name="option">
-                <option value="all" selected>전체</option>
                 <option value="b_title">제목</option>
                 <option value="writer">저자</option>
                 <option value="publisher">출판사</option>
@@ -67,20 +66,9 @@
                       <td>예약가능여부</td>                 
                   </tr>
                </thead>
-               <tbody>
-				<c:forEach items="${dto}" var="dto">
-					<tr>
-						<td>
-							<p><img src="/image/${dto.newFileName}" height="200"/>
-						</td>	
-						<td><a href="bookDetail.do?b_id=${dto.b_id}">${dto.b_title}</a></td>
-						<td>${dto.writer}</td>
-						<td>${dto.publisher}</td>
-						<td>${dto.b_status}</td>
-						<td>미정</td>
-					</tr>
-				</c:forEach>
-            </tbody>
+               <tbody id="searchList">
+               		
+               </tbody>
            </table>
    </section>	
 </body>
@@ -99,26 +87,25 @@ $('#pagePerNum').on('change',function(){ // pagePerNum 에 change가 일어나�
    listCall(currPage); // listCall 함수 호출
    
 });
+*/
+listCall();
 
-
-function listCall(page) {
-   
-   var pagePerNum = $('#pagePerNum').val();
-   console.log("param page :" +page);
+function listCall() {
    $.ajax({
       type:'get',
       url:'searchList.ajax',
       data:{
-         cnt : pagePerNum,
-         page : page
+         //cnt : pagePerNum,
+         //page : page
       },
       dataType:'json',
       success:function(data){
          console.log('테이블 그리기');
-         console.log(data.searchList.searchList);
-         drawList(data.searchList.searchList);
-         currPage = data.currPage;
+         console.log(data.searchList);
+         drawList(data.searchList);
+         //currPage = data.currPage;
          
+         /*
          $("#pagination").twbsPagination({
             startPage:data.currPage,
             totalPages:data.pages,
@@ -128,7 +115,7 @@ function listCall(page) {
                currPage = page;
                listCall(page);
             }
-         });
+         }); */
       },
       error:function(e){
          console.log(e);
@@ -140,11 +127,21 @@ function drawList(searchList){
    var content = '';
    console.log(searchList);
    searchList.forEach(function(item) {
-      console.log(item);
+      console.log(item.reason);
       content += '<tr>';
-      content += '<td>'+item.b_id+'</td>';
+      content += ' <td><img src="/image/'+item.newFileName+' " height="200"/></td>';
       content += '<td>'+item.b_title+'</td>';
       content += '<td>'+item.writer+'</td>';
+      content += '<td>'+item.publisher+'</td>';
+      content += '<td>'+item.b_status+'</td>';
+      content += '<td>'+item.reason+'</td>';
+      content += '<td>';
+      	if(item.reserveChk==false) {
+      		content += 'N';
+      	}else{
+      		content += 'Y';
+      	}
+      	content += '</td>';
       content += '</tr>';
    });
    $('#searchList').empty();

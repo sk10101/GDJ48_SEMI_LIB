@@ -125,7 +125,7 @@
 	<!-- ============================================== -->
 	
 	<select id="brwList" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
-		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status
+		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status, renew
 		FROM borrow brw, book b 
 		WHERE brw.b_id = b.b_id AND mb_id=#{mb_id}
 	</select>

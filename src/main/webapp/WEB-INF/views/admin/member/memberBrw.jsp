@@ -88,7 +88,13 @@ function drawList(brwList) {
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_date+'</td>';
 		content += '<td>'+item.brw_status+'</td>';
-		content += '<td>'+item.renew+'</td>';
+		content += '<td>';
+		if(item.renew==true) {
+			content += 'Y';
+		}else{
+			content += 'N';
+		}
+		content += '</td>';
 		content += '</tr>';
 	});
 	$('#brwList').append(content);
