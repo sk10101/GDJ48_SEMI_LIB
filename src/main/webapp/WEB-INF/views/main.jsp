@@ -18,10 +18,10 @@
                 <li>
                 <c:choose>
 					<c:when test="${sessionScope.loginId eq null}">
-						<a href="member/login">로그인</a>
+						<a class="loginTab" href="member/login">로그인</a>
 					</c:when>
 					<c:otherwise>
-						<div>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.<a href="/member/logout.do">로그아웃</a></div>
+						<div>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.  <a href="/member/logout.do">[ 로그아웃 ]</a></div>
 					</c:otherwise>
                 </c:choose>
                 </li>
@@ -41,42 +41,44 @@
 	                <option value="writer">저자</option>
 	                <option value="publisher">출판사</option>
 	            </select>
-	            <input type="text" name="word" placeholder="도서 검색"/>
-            	<button class="searchBtn" type="submit"><i class="fa-solid fa-magnifying-glass searchIcon"></i></button>
+	            <input type="text"  class="searchBlock" name="word" placeholder="도서 검색"/>
+            	<input type="submit" class="btn_search" value=""/>
             </div>
         </form>
-        <div class="menu">
-            <ul class="icons">
-                <li>
-                    <a href="/noticeList"><img src="../resources/img/mypage.png"/><br/>공지사항</a>
-                </li>
-                <li><!-- href 나중에 변경해야함 (임시.)-->
-                <c:choose>
-                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
-                		<a href="/memberList.do"><img src="../resources/img/mypage.png"/><br/>관리자 페이지</a>
-                	</c:when>
-                	<c:otherwise>
-	                    <a href="/myUpdateList"><img src="../resources/img/mypage.png"/><br/>마이 페이지</a>
-                	</c:otherwise>
-                </c:choose>
-                </li>
-                <li>
-                    <a href="/brwHistory"><img src="../resources/img/mypage.png"/><br/>도서 연장</a>
-                </li>
-                <li>
-                <c:choose>
-                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
-                		<a href="/adminClaimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
-                	</c:when>
-                	<c:otherwise>
-                		<a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
-                	</c:otherwise>
-                </c:choose>
-                </li>
-                <li>
-                    <a href="/seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
-                </li>
-            </ul>
+        <div class="menuTab">
+        	<table class="menuTable">
+        		<tr>
+        			<td>
+        				<a class="links" href="/noticeList"><img src="../resources/img/notice.png"/><br/>공지사항</a>
+        			</td>
+        			<td>
+	        			<c:choose>
+		                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+		                		<a class="links" href="/memberList.do"><img src="../resources/img/mypage.png"/><br/>관리자 페이지</a>
+		                	</c:when>
+		                	<c:otherwise>
+			                    <a class="links" href="/myUpdateList"><img src="../resources/img/mypage.png"/><br/>마이 페이지</a>
+		                	</c:otherwise>
+	                	</c:choose>
+                	</td>
+                	<td>
+                		<a class="links" href="/brwHistory"><img src="../resources/img/timeover.png"/><br/>도서 연장</a>
+                	</td>
+                	<td>
+                		<c:choose>
+		                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+		                		<a class="links" href="/adminClaimList"><img src="../resources/img/qna.png"/><br/>건의사항</a>
+		                	</c:when>
+		                	<c:otherwise>
+		                		<a class="links" href="/claimList"><img src="../resources/img/qna.png"/><br/>건의사항</a>
+		                	</c:otherwise>
+                		</c:choose>
+                	</td>
+                	<td>
+                		<a class="links" href="/seat.go"><img src="../resources/img/seatIcon.png"/><br/>열람실</a>
+                	</td>
+        		</tr>
+        	</table>
         </div>
     </section>
     
