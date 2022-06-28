@@ -6,8 +6,8 @@
 		<a href="/"><img id="logo" src="resources/img/logo.png" alt=""></a>
 		<nav>
 			<ul>
-				<li style="margin-left:150px">*** 님 안녕하세요</li>
-				<li><a href="">[로그아웃]</a></li>
+				<li style="margin-left:150px">${sessionScope.loginId}(${sessionScope.mb_class}) 님 안녕하세요</li>
+				<li><a href="member/logout.do">[로그아웃]</a></li>
 				<li><a href="mypage.go">[마이페이지]</a></li>
 			</ul>
 		</nav>

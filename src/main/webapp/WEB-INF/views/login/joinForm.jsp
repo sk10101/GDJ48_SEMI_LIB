@@ -1,86 +1,37 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<link rel="stylesheet" href="../resources/css/login.css">
+<link rel="icon" href="../resources/img/favicon.png">
 </head>
 <style>
-*{margin: 0; box-sizing: border-box;}
-* {
- 
-  font-family: 'Noto Sans KR', sans-serif;
-  border-radius: 5px;
+table, th, td{
+	border: 1px solid black;
+	border-collapse: collapse;
 }
- 
-body {
-  margin: 0;
-  
-}
- 
-.login-form {
-    width: min-content;
-    background-color: #EEEFF1;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 50px;
-    padding: 20px;
-    text-align: center;
-    border: none;
-    
-}
- 
-.text-field {
-      font-size: 14px;
-      padding: 10px;
-      border: none;
-      width: 260px;
-      margin-bottom: 10px;
- 
-}
- 
-.submit-btn {
-  font-size: 14px;
-  border: none;
-  padding: 10px;
-  width: 125px;
-  background-color: #46c148;
-  margin-bottom: 30px;
-  color: black;
-}
- h3{
-    text-align: center;
- }
- 
- p{
- 	font-size: 10px;
- }
 
-
+th, td{
+	padding: 5px 10px;
+}
 </style>
 <body>
     <h3>회원가입</h3>
 	<div class="login-form">
 		<table>
-           
-            
 			<tr>
-				<th colspan="1">ID</th>
-				<td><input class="text-field" type="text"  id="id" placeholder="id"/>
-				<button onclick="overaly()">아이디 중복 체크</button>
+				<th>ID</th>
+				<td><input class="text-field" type="text"  id="id" placeholder="id"/></td>
+				<td><button onclick="overaly()">아이디 중복 체크</button></td>
 			</tr>
 			<tr>
 				<th>PW</th>
-				<td><input  class="text-field" type="text" id="pw" placeholder="pw"/>
-					<!-- <p>※ 4자리 이상 </p> -->
-					 <p>※영문자+숫자+특수문자 조합으로</p> 
-					<p>8~15자리 사용해야 합니다.</p> 
-				</td>
+				<td><input  class="text-field" type="text" id="pw" placeholder="pw"/></td>
+				<td>※한글을 제외한 4글자 이상</td>
 			</tr>
 			<tr>
 				<th>NAME</th>
@@ -88,28 +39,18 @@ body {
 			</tr>
 			<tr>
 				<th>PHONE</th>
-				<td><input class="text-field" type="text" id="phone" placeholder="phone"/>
-				<p>※(- 제외) 숫자만 입력 가능합니다. </p>
+				<td><input class="text-field" type="text" id="phone" placeholder="phone"/></td>
+				<td>※숫자만 입력하세요.</td>
 			</tr>
 			<tr>
-				<th colspan="1">EMAIL</th>
-				<td><input class="text-field" type="text" id="email" placeholder="email"/>
-				<button onclick="overalys()">이메일 중복 체크</button>
-				<br>
-            <br>
-				</th>
-			</tr>
-            
-			<tr>
-				<th colspan="2">
-					<input class="submit-btn" type="button" value="회원가입" onclick="join()"/>
-					<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='/member/login'"/>
-				</th>
+				<th>EMAIL</th>
+				<td><input class="text-field" type="text" id="email" placeholder="email"/></td>
+				<td><button onclick="overalys()">이메일 중복 체크</button></td>
 			</tr>
 		</table>
+			<input class="submit-btn" type="button" value="회원가입" onclick="join()"/>
+			<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='/member/login'"/>
     </div>
-	
-	
 </body>
 <script>
 	/* function joinFinish(){
@@ -212,7 +153,7 @@ body {
 		var phone = $('#phone');
 		var email = $('#email');
 	    
-	     var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/; 
+	    var pwdCheck = /^(?=.*[a-zA-Z]).{4,50}$/; 
 	   
 	    var reg = /^[0-9]+/g;
 		
@@ -226,7 +167,7 @@ body {
 				alert("비밀번호를 입력해 주세요!");
 				pw.focus();
 			} else if(!pwdCheck.test($("#pw").val())) {
-			    alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~15자리 사용해야 합니다.");
+			    alert("비밀번호는 한글을 제외한 4자리 이상이어야 합니다.");
 			    pwd.focus();
 			    return false;
 			  }  /* else if(pw.val().length <= 4){
@@ -240,7 +181,7 @@ body {
 				alert("번호를 입력해 주세요!");
 				phone.focus();
 				
-			} else if(!reg.test($("#phone").val)){
+			} else if(!reg.test($("#phone").val())){
 				alert("전화번호는 숫자만 입력할 수 있습니다.");
 				phone.focus();
 			    return false;

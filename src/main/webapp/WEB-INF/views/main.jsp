@@ -56,7 +56,7 @@
                     <a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
                 </li>
                 <li>
-                    <a href="seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
+                    <a href="/seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
                 </li>
             </ul>
         </div>
