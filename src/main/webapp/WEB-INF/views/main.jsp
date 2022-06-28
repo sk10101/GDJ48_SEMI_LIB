@@ -3,9 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>북적북적 도서관</title>
 <link rel="stylesheet" href="../resources/css/main.css">
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://kit.fontawesome.com/5415520417.js" crossorigin="anonymous"></script>
+<link rel="icon" href="../resources/img/favicon.png">
 <style></style>
 </head>
 <body>
@@ -19,7 +21,11 @@
 						<a href="member/login">로그인</a>
 					</c:when>
 					<c:otherwise>
+<<<<<<< HEAD
 						<div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="logout.do">로그아웃</a></div>
+=======
+						<div>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.<a href="/member/logout.do">로그아웃</a></div>
+>>>>>>> origin/master
 					</c:otherwise>
                 </c:choose>
                 </li>
@@ -28,18 +34,20 @@
     </header>
     <!-- header end -->
     <section>
-        <div class="logo">
+        <div class="logo" id="mainPageLogo">
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
         <form class="search" action="bookSearch.do" method="get">
-            <select name="option">
-                <option value="all" selected>전체</option>
-                <option value="b_title">제목</option>
-                <option value="writer">저자</option>
-                <option value="publisher">출판사</option>
-            </select>
-            <input type="text" name="word" placeholder="도서 검색"/>
-            <input type="submit" class="btn_search" value=""/>
+            <div>
+	            <select name="option">
+	                <option value="all" selected>전체</option>
+	                <option value="b_title">제목</option>
+	                <option value="writer">저자</option>
+	                <option value="publisher">출판사</option>
+	            </select>
+	            <input type="text" name="word" placeholder="도서 검색"/>
+            	<button class="searchBtn" type="submit"><i class="fa-solid fa-magnifying-glass searchIcon"></i></button>
+            </div>
         </form>
         <div class="menu">
             <ul class="icons">
@@ -70,7 +78,7 @@
                 </c:choose>
                 </li>
                 <li>
-                    <a href="seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
+                    <a href="/seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
                 </li>
             </ul>
         </div>
