@@ -38,9 +38,17 @@ public class BoardController {
 		model.addAttribute("claimList",claimList);
 		*/
 		
-		logger.info("로그인한 아이디 : " + session.getAttribute("loginId"));
+		String page = "myPage/claim/claimList";
 		
-		return "myPage/claim/claimList";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 목록 페이지 이동 (일반회원만 가능)");
+		} else {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		
+		return page;
 	}
 
 	
@@ -63,10 +71,19 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "/claimWrite.go")
-	public String claimWriteForm() {
+	public String claimWriteForm(Model model, HttpSession session) {
 		logger.info("건의사항 글쓰기 페이지 이동");
 		
-		return "myPage/claim/claimWrite";
+		String page = "myPage/claim/claimWrite";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 글쓰기 페이지 이동 (일반회원만 가능)");
+		} else {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		return page;
 	}
 	
 	
@@ -81,23 +98,41 @@ public class BoardController {
 	
 	// 건의사항 글 상세 보기
 	@RequestMapping(value = "/claimDetail")
-	public String claimDetail(Model model, @RequestParam int claim_id) {
+	public String claimDetail(Model model, HttpSession session, @RequestParam int claim_id) {
 		logger.info("상세보기 요청 : " + claim_id);
 		
-		service.claimDetail(model, claim_id);
-		service.replyDetail(model, claim_id);
+		String page = "myPage/claim/claimDetail";
 		
-		return "myPage/claim/claimDetail";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 상세보기 페이지 이동 (일반회원만 가능)");
+			service.claimDetail(model, claim_id);
+			service.replyDetail(model, claim_id);
+		} else {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		
+		return page;
 	}
 	
 	
 	// 수정 상세 보기
 	@RequestMapping(value = "/claimUpdate.go")
-	public String claimUpdateForm(Model model, @RequestParam int claim_id) {
+	public String claimUpdateForm(Model model, HttpSession session, @RequestParam int claim_id) {
 		logger.info("수정 상세보기 요청 : " + claim_id);
-		service.claimDetail(model, claim_id);
+
+		String page = "myPage/claim/claimUpdate";
 		
-		return "myPage/claim/claimUpdate";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 수정 상세보기 페이지 이동 (일반회원만 가능)");
+			service.claimDetail(model, claim_id);
+		} else {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		return page;
 	}
 	
 	

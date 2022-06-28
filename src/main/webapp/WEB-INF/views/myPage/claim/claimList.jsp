@@ -297,5 +297,11 @@
 		});
 	});
 	*/
+	
+	// 메세지를 받았을 때 이를 처리한다.
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
 </script>
 </html>
