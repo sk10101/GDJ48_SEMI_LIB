@@ -82,6 +82,9 @@ public class BrwBookDTO {
 		
 		//대출 정보
 		
+		
+
+
 		private int brw_id;
 		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		private Date brw_date;
@@ -97,22 +100,31 @@ public class BrwBookDTO {
 		public void setBrw_id(int brw_id) {
 			this.brw_id = brw_id;
 		}
-		public Date getBrw_date() {
-			return brw_date;
-		}
-		public void setBrw_date(Date brw_date) {
-			this.brw_date = brw_date;
-		}
+		
 		public boolean isRenew() {
 			return renew;
 		}
 		public void setRenew(boolean renew) {
 			this.renew = renew;
 		}
+		public Date getBrw_date() {
+			return brw_date;
+		}
+		public void setBrw_date(Date brw_date) {
+			this.brw_date = brw_date;
+		}
+		
+		public Date getReturn_date() {
+			return return_date;
+		}
+		public void setReturn_date(Date return_date) {
+		}
+		
 		public Date getreturn_date() {
 			return return_date;
 		}
 		public void setreturn_date(Date return_date) {
+
 			this.return_date = return_date;
 		}
 		public Date getReturn_finish() {

@@ -61,6 +61,12 @@ public interface MemberDAO {
 
 
 
+	int myUpdate(String mb_id, String mb_pw, String name,String phone);
+
+
+	int myUpdateTwo(String mb_id, String name, String phone);
+
+
 	ArrayList<BrwBookDTO> brwList(String mb_id);
 
 	ArrayList<MemberDTO> penaltyList();
@@ -73,6 +79,9 @@ public interface MemberDAO {
 
 
 	void blackUpdate(HashMap<String, String> params);
+
+
+	String getMbClass(String id, String pw);
 
 
 	

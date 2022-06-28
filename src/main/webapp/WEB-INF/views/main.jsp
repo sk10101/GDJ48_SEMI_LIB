@@ -13,7 +13,16 @@
     <header id="main_header">
         <nav>
             <ul class="login_menu">
-                <li><a href="member/login">로그인</a></li>
+                <li>
+                <c:choose>
+					<c:when test="${sessionScope.loginId eq null}">
+						<a href="member/login">로그인</a>
+					</c:when>
+					<c:otherwise>
+						<div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="member/logout.do">로그아웃</a></div>
+					</c:otherwise>
+                </c:choose>
+                </li>
             </ul>
         </nav>
     </header>
@@ -37,13 +46,13 @@
                     <a href="/noticeList"><img src="../resources/img/mypage.png"/><br/>공지사항</a>
                 </li>
                 <li><!-- href 나중에 변경해야함 (임시.)-->
-                    <a href="/bookList.go"><img src="../resources/img/mypage.png"/><br/>마이페이지</a>
+                    <a href="#"><img src="../resources/img/mypage.png"/><br/>마이페이지</a>
                 </li>
                 <li>
                     <a href="#"><img src="../resources/img/mypage.png"/><br/>도서반납연기</a>
                 </li>
                 <li>
-                    <a href="#"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
+                    <a href="/claimList"><img src="../resources/img/mypage.png"/><br/>건의사항</a>
                 </li>
                 <li>
                     <a href="seat.go"><img src="../resources/img/mypage.png"/><br/>열람실</a>
@@ -51,6 +60,16 @@
             </ul>
         </div>
     </section>
+    
+    <table>
+    <tr>
+    	<td>ID</td>
+    </tr>
+    	<tr>
+    	<td><a href="/myUpdateList">회원정보 수정 가기</a></td>
+    	</tr>
+    </table>
+    
 </body>
 <script>
 /*

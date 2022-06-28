@@ -1,5 +1,6 @@
 package com.gdj.lib.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import com.gdj.lib.dao.BookDAO;
 import com.gdj.lib.dao.BrwBookDAO;
 import com.gdj.lib.dto.BookDTO;
+import com.gdj.lib.dto.BrwBookDTO;
 
 
 @Service
@@ -22,8 +24,8 @@ public class BrwBookService {
 	
 	@Autowired BrwBookDAO dao;
 
-	public BookDTO detail(String b_id) {
-		BookDTO dto = null;
+	public BrwBookDTO detail(String b_id) {
+		BrwBookDTO dto = null;
 		logger.info(b_id+"상세보기 서비스 요청");
 		dto = dao.detail(b_id);
 		logger.info("b_title :"+dto.getB_title());
@@ -50,9 +52,9 @@ public class BrwBookService {
 	}
 
 
-	public ArrayList<BookDTO> brwList(HashMap<String, String> params) {
+	public ArrayList<BrwBookDTO> history(HashMap<String, String> params) {
 		logger.info("도서목록 서비스 요청");
-		return dao.brwList(params);
+		return dao.history(params);
 	}
 
 
@@ -64,6 +66,61 @@ public class BrwBookService {
 		return "redirect:/bookDetail?b_id="+b_id;
 		
 	}
+
+
+	public ArrayList<BrwBookDTO> bookList(HashMap<String, String> params) {
+		logger.info("도서목록 서비스 요청");
+		return dao.bookList(params);
+	}
+
+
+	public ArrayList<BrwBookDTO> reserve(HashMap<String, String> params) {
+		logger.info("도서목록 서비스 요청");
+		return dao.reserve(params);
+	}
+
+
+	public String reserveBtn(String brw_id) {
+		
+		BrwBookDTO dto = new BrwBookDTO();
+		
+		logger.info("도서연장 서비스 신청"+brw_id);
+		Date return_date = dto.getReturn_date();
+		dto.setReturn_date(return_date);
+		dto.setRenew(true);
+		dao.reserveBtn(brw_id);
+		
+		return "myPage/bookList/reserve";
+		
+	}
+
+
+	public String del(String reserve_id) {
+		
+		logger.info("도서예약 취소"+reserve_id);
+		dao.del(reserve_id);
+		
+		return "redirect:/reserve";
+		
+	}
+
+
+	
+
+
+	public String reserveBookBrw(HashMap<String, String> params) {
+		logger.info("예약된 책 대출신청"+params);
+		dao.reserveBookBrw(params.get("reserve_id"));
+		dao.bookStatusUpdate(params.get("b_id"));
+		return "redirect:/reserve";
+		
+	}
+
+
+	
+
+
+
 
 	
 
