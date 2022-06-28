@@ -39,8 +39,8 @@
 		<h3>대출내역</h3>
 		<ul class="book_menu">
 			<li><a href="#">대출내역</a></li>
-			<li><a href="/memberHis.go">이전 대출내역</a></li>
-			<li><a href="/memberReserve.go">예약내역</a></li>
+			<li><a href="brwHis()">이전 대출내역</a></li>
+			<li><a href="reserveList()">예약내역</a></li>
 			<li id="mb_id"></li>
 		</ul>
 	    <table class="brw_table">
@@ -54,7 +54,7 @@
 	                <td>연장여부</td>
 	            </tr>
 	        </thead>
-	        <tbody id="brwList">
+	        <tbody id="list">
 
 			</tbody>
 	    </table>
@@ -80,7 +80,7 @@ function listCall() {
 
 function drawList(brwList) {
 	var content='';
-	brwList.forEach(function(item,idx){
+	brwList.forEach(function(item){
 		console.log(item);
 		content += '<tr>';
 		content += '<td>' +item.brw_id+ '</td>';
@@ -97,7 +97,21 @@ function drawList(brwList) {
 		content += '</td>';
 		content += '</tr>';
 	});
-	$('#brwList').append(content);
+	$('#list').append(content);
+}
+
+function brwHis(hisList){
+	var content='';
+	hisList.forEach(function(item){
+		console.log(item);
+		content += '<tr>';
+		content += '<td>' +item.brw_id+ '</td>';
+		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
+		content += '<td>' +item.brw_date+ '</td>';
+		content += '<td>';		
+	}
+	$('#list').empty();
+	$('#list').append(content);
 }
 
 </script>
