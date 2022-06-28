@@ -197,7 +197,7 @@ public class BoardService {
 		BoardDTO dto = dao.claimDetail(claim_id);
 		// 답변 글 정보
 		// 건의사항 글에 올려진 이미지 정보
-		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id);
+		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id,2);
 		model.addAttribute("claim", dto);
 		model.addAttribute("claimList", claimPhotoList);
 	}
@@ -228,7 +228,7 @@ public class BoardService {
 	public void claimDel(int claim_id) {
 		
 		// 해당 claim_id 에 사진이 있는지 확인(어떤 사진들이 있는지 이름 확보)
-		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id);
+		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id,2);
 		logger.info(claim_id + " 번 게시물에 업로드된 사진 수 : " + claimPhotoList.size());
 		
 		int delCount = dao.claimDel(claim_id);
@@ -263,7 +263,7 @@ public class BoardService {
 		if(dto!=null) {
 			dto.setReply_id(dao.getReplyId(claim_id));
 			// 답변 글에 올려진 이미지 정보
-			ArrayList<PhotoDTO> replyPhotoList = dao.replyPhotoList(dto.getReply_id());
+			ArrayList<PhotoDTO> replyPhotoList = dao.replyPhotoList(dto.getReply_id(),3);
 			model.addAttribute("reply", dto);
 			model.addAttribute("replyList", replyPhotoList);
 		}

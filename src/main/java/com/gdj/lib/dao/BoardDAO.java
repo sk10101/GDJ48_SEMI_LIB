@@ -55,7 +55,7 @@ public interface BoardDAO {
 
 	BoardDTO claimDetail(int claim_id);
 
-	ArrayList<PhotoDTO> claimPhotoList(int claim_id);
+	ArrayList<PhotoDTO> claimPhotoList(int claim_id, int category_id);
 
 	int claimUpdate(HashMap<String, String> params);
 
@@ -68,7 +68,7 @@ public interface BoardDAO {
 
 	BoardDTO replyDetail(int claim_id);
 
-	ArrayList<PhotoDTO> replyPhotoList(int reply_id);
+	ArrayList<PhotoDTO> replyPhotoList(int reply_id, int category_id);
 
 	int replyWrite(BoardDTO dto);
 

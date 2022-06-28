@@ -106,7 +106,7 @@
              <tr>
 	           <th colspan="2">
 		            <input type="submit" value="저장" style="width: 60px; margin-top: 10px;"/>
-					<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim.claim_id}'"/>
+					<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim_id}'"/>
 				</th>
 			</tr>			
          </table>

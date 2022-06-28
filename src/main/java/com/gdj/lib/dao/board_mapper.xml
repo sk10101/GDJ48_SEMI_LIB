@@ -128,8 +128,8 @@
 		SELECT * FROM claim WHERE claim_id = #{claim_id}
 	</select>
 	
-	<select id="claimPhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
-		SELECT * FROM photo WHERE post_id = #{post_id}
+	<select id="claimPhotoList" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE post_id = #{param1} and category_id = #{param2}
 	</select>
 	
 	<update id="claimUpdate" parameterType="hashmap">
@@ -164,7 +164,7 @@
 	</select>
 	
 	<select id="replyPhotoList" resultType="com.gdj.lib.dto.PhotoDTO">
-		SELECT * FROM photo WHERE post_id = #{param1}
+		SELECT * FROM photo WHERE post_id = #{param1} and category_id = #{param2}
 	</select>
 	
 	<insert id="replyWrite" 

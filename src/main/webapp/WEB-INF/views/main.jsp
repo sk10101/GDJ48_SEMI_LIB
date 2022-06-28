@@ -21,11 +21,7 @@
 						<a class="loginTab" href="member/login">로그인</a>
 					</c:when>
 					<c:otherwise>
-<<<<<<< HEAD
-						<div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="member/logout.do">로그아웃</a></div>
-=======
 						<div class="loginTab">${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.  <a class="loginTab" href="/member/logout.do">[ 로그아웃 ]</a></div>
->>>>>>> origin/master
 					</c:otherwise>
                 </c:choose>
                 </li>
