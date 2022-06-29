@@ -2,6 +2,7 @@ package com.gdj.lib.service;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.exceptions.TooManyResultsException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import com.gdj.lib.dto.MemberDTO;
 
 @Service
 public class MyService {
+
+	private static final boolean TooManyResultsException = false;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -54,6 +57,16 @@ public class MyService {
 		logger.info(mb_id+" 의 회원탈퇴 요청");
 		dao.MySecession(mb_id);
 		dao.MySecessionTwo(mb_id);
+	}
+
+	public void notSecession(String mb_id) {
+		logger.info("예약 대출 확인할 아이디 : "+mb_id);
+		
+		 String row = dao.notSecession(mb_id);
+		 logger.info(mb_id+" 의 예약 대출 내역 "+row);
+		 
+
+		
 	}
 
 

@@ -14,7 +14,9 @@ public class MemberDTO {
 	private String phone;
 
 	private String mb_class;
-		
+	
+	
+
 	private int black_id;
 	private String admin_start;
 	private Date black_start;

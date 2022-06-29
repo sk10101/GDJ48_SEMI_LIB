@@ -93,6 +93,9 @@ public interface MemberDAO {
 	String getMbClass(String id, String pw);
 
 
+	String notSecession(String mb_id);
+
+
 
 	
 
