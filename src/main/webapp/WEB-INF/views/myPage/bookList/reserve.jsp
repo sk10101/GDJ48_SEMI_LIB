@@ -23,6 +23,9 @@
             <!-- TOP -->
             <div class="top">
                     <nav>
+
+                        <ul> 
+
                         <ul>
                             <li>${sessionScope.loginId}님 반갑습니다.</li>
                             <li>로그아웃</li>
@@ -34,9 +37,8 @@
             <div class="middle">
                 
                 <div class="middle-left">
-                    <span>
+                    
                         <table>
-                            <thead>
                                  <tr>
                                     <th>마이페이지</th>
                                 </tr>
@@ -49,13 +51,12 @@
                                 <tr>
                                     <th>회원정보</th>
                                 </tr>
-                            </thead>
                         </table>
-                    </span>
+
                 </div>
                 <div class="middle-right">
                     <div class="middle-right-1">
-                        <span>
+                        
                             <table>
                                 <thead>
                                     <tr>
@@ -65,11 +66,11 @@
                                     </tr>
                                 </thead>
                             </table>
-                        </span>
+                        
                     </div>
                     <div class="middle-right-2">
-                        <span>
-                            <table>
+                        
+                            <table id="main-container">
                                 <thead id="head">
                                     <tr>
                                         <th>예약번호</th>
@@ -79,13 +80,107 @@
                                         <th>대출신청</th>
                                         <th>취소</th>
                                     </tr>
-                                </thead>
+								</thead>
+                                 <tbody>
+									<c:forEach items="${reserve}" var="brwdto">
+                                    
+                                    	<tr>
+                                    		<td class="bookReserve_id" >${brwdto.reserve_id}</td>
+                                    		<td>
+												<a href="bookDetail.do?b_id=${brwdto.b_id}">${brwdto.b_title}</a>
+                                    		</td>
+                                    		<td>${brwdto.reserve_date}</td>
+                                    		<td>${brwdto.reason}</td>
+                                    		<td id="brw">
+                                    		<c:choose>
+                                    			<c:when test="${brwdto.b_status eq '대출중'}">
+                                    			<input type="hidden">
+                                    			</c:when>
+                                    			<c:when test="${brwdto.b_status eq '대출가능'}">
+                                    				
+													<button class="brwBtn" onclick="bookbrw(this)" brwValue="${brwdto.reserve_id}" bookID="${brwdto.b_id}">대출신청</button>
+													
+												</c:when>
+												<c:when test="${brwdto.b_status eq '대출불가'}">
+													<input type="hidden">
+												</c:when>
+												
+											</c:choose>
+											</td>
+											<td id="del"><button class="delBtn" onclick="bookDel(this)" idValue="${brwdto.reserve_id}">취소</button></td>
+                                    	<tr>
+                                    	
+                                   	 </c:forEach>
+                                    </tbody>
                             </table>
-                        </span>
-                    </div>    
+                        
+                    </div>  
+                    
             </div>
         </div>
-</div>
+
+        </div>
+        
+	
+
 </body>
-<script></script>
+<script>
+
+ 	
+	function bookDel(btn) {
+		var idValue = $(btn).attr("idValue")
+	 	console.log(idValue);
+		
+		$.ajax({
+			type:'get',
+			url:'bookDel.ajax',
+			data:{
+				reserve_id:idValue
+			},
+			dataType:'JSON',
+			success:function(data) {
+				consloe.log(data)
+			},
+			error:function(e) {
+				console.log(e);
+			}
+		});
+		
+	}
+	
+	function bookbrw(brwId) {
+		var brwValue = $(brwId).attr("brwValue");
+	 	console.log(brwValue);
+		var bookID = $(brwId).attr("bookID");
+	 	console.log(bookID);
+		
+		$.ajax({
+			type:'get',
+			url:'reserveBookbrw.ajax',
+			data:{
+				reserve_id : brwValue,
+				b_id : bookID
+			},
+			dataType:'JSON',
+			success:function(data) {
+				
+			},
+			error:function(e) {
+				console.log(e);
+			}
+		});
+		
+	}
+	
+	
+	$(".brwBtn").on("click",function(){
+		   $(this).hide();
+		   alert("대출신청이 완료되었습니다");
+	});
+		
+	$(".delBtn").on("click",function(){
+		alert("예약이 취소 되었습니다.");
+	});
+
+</script>
 </html>

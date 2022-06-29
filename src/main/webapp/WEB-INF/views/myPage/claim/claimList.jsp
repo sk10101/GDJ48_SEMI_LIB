@@ -71,6 +71,7 @@
 <body>
 	<div id="header">
             <a href="#">도서관 로고 들어갈 위치</a>
+            <div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="member/logout.do">로그아웃</a></div>
     </div>
     <div id="myPage_menu">
         <h3>마이페이지</h3>
@@ -125,7 +126,9 @@
 </body>
 <script>
 	
-	
+	// 로그인한 아이디와 현재 페이지 정보를 변수에 담는다.
+	var mb_id = "${sessionScope.loginId}";
+	var mb_class = "${sessionScope.mb_class}";
 	var currPage = 1;
 	listCall(currPage);
 	
@@ -156,6 +159,8 @@
 			data:{
 				cnt : pagePerNum,
 				page : page,
+				mb_id : mb_id,
+				mb_class : mb_class
 			},
 			dataType:'JSON',
 			success:function(data){
@@ -253,7 +258,9 @@
 				cnt : pagePerNum,
 				page : page,
 				word : word,
-				option : option
+				option : option,
+				mb_id : mb_id,
+				mb_class : mb_class
 			},
 			dataType:'JSON',
 			success: function(data){
@@ -296,5 +303,11 @@
 		});
 	});
 	*/
+	
+	// 메세지를 받았을 때 이를 처리한다.
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
 </script>
 </html>

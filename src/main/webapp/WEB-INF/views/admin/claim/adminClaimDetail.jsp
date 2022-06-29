@@ -91,6 +91,7 @@
 <body>
     <div id="header">
         <a href="#">도서관 로고 들어갈 위치</a>
+        ${sessionScope.loginId} 관리자님 환영합니다.
     </div>
     <div id="myPage_menu">
         <h3>관리자 페이지</h3>
@@ -201,6 +202,11 @@
     </div>
 </body>
 <script>
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
+
 
 	// 현재 건의사항 작성글의 처리상태를 옵션 목록에서 바로 보여주기
 	$(document).ready(function(){

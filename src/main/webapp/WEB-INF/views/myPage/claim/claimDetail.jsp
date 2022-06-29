@@ -163,14 +163,14 @@
 		        <td style="vertical-align:top">${reply.reply_content}</td>
 		    </tr>
 		    <c:if test="${replyList.size()>0}">
-			     <tr>
-			         <th>이미지</th>
-			         <td>
-			          	<c:forEach items="${replyList}" var="pathR">
+		     <tr>
+		         <th>이미지</th>
+		         <td>
+		          	<c:forEach items="${replyList}" var="pathR">
 						<img src="/image/${pathR.newFileName}" width="640"/>
-						</c:forEach>
-					</td>
-		        </tr>
+					</c:forEach>
+				</td>
+	        </tr>
 	       </c:if>
 		</table>
     </div>

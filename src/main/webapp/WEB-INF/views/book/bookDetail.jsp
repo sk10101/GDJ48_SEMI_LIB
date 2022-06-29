@@ -46,6 +46,7 @@ table {
 
        <table>
             <thead id="head">
+            <c:forEach items="${detail}" var="dto">
                 <tr>
                     <td>책제목</td>
                     <td>${dto.b_title}</td>
@@ -62,6 +63,7 @@ table {
                     <td>발행년도</td>
                     <td>${dto.issue}</td>
                 </tr>
+             </c:forEach>
             </thead>
         </table>
 
@@ -74,20 +76,45 @@ table {
                     <td>예약신청</td>
                    
                 <tr>
-                   <td id="brw_b_id">${dto.b_id}</td>
-                   <td id="b_status">${dto.b_status}</td>
-                   <c:if test="${dto.b_status eq '대출가능'}">
-					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
-					<td></td>
-					</c:if>
-					<c:if test="${dto.b_status eq '대출중'}">
-					<td></td>
-					<td id="reason"><button id="reasonBtn" onclick="bookreason()">예약신청</button></td>
-					</c:if>
+                   
+				   <c:forEach items="${detail}" var="dto">
+					   <td id="brw_b_id">${dto.b_id}</td>
+	                   <td id="b_status">${dto.b_status}</td>
+					   <td>
+		                   <c:choose>
+		                   		<c:when test="${dto.b_status eq '대출가능'}">
+									<button class="brwBtn" onclick="bookbrw(this)" brwValue="${dto.reserve_id}" bookID="${dto.b_id}">대출신청</button>
+		                   		</c:when>
+		                   		<c:when test="${dto.b_status eq '대출불가'}">
+		                   			<input type="hidden">
+		                   		</c:when>
+		                   		<c:when test="${dto.b_status eq '대출중'}">
+									<input type="hidden">
+		                   		</c:when>
+						   </c:choose>
+	                   </td>
+                   </c:forEach>
+                   
+                   <td>
+                   <c:forEach items="${detail}" var="dto">
+	                   <c:choose>
+	                   		<c:when test="${dto.b_status eq '대출중'}">
+	                   			<button class="bookreason" onclick="bookreason(this)" bookId="${dto.b_id}" >예약신청</button>
+	                   		</c:when>
+	                   		<c:when test="${dto.b_status eq '대출불가'}">
+	                   			<input type="hidden">
+	                   		</c:when>
+	                   		<c:when test="${dto.b_status eq '대출신청'}">
+								<input type="hidden">
+	                   		</c:when>
+					   </c:choose>
+					</c:forEach>
+                   </td>
+                   
                 </tr>
             </thead>
         </table>
-        <a href="/bookSearch.do"><input type="button" value="돌아가기" onclick=/></a>
+        <a href="/bookSearch"><input type="button" value="돌아가기" onclick=/></a>
 
 
     </body>
@@ -107,12 +134,15 @@ table {
 	
 
 
-function bookbrw() {
+/* function bookBrwDetail(brwId) {
+	var bookID = $(brwId).attr("bookID");
+ 	console.log(bookID);
+	
 	$.ajax({
 		type:'get',
-		url:'bookbrw.ajax',
+		url:'bookBrwDetail.ajax',
 		data:{
-			b_id:$("#brw_b_id").text()
+			b_id : bookID
 		},
 		dataType:'JSON',
 		success:function(data) {
@@ -123,8 +153,10 @@ function bookbrw() {
 		}
 	});
 	
-}
+} */
 
+
+/* 
 function bookreason() {
 	$.ajax({
 		type:'get',
@@ -142,28 +174,64 @@ function bookreason() {
 	});
 	
 } 
+ */
+ 
+ 
+	function bookbrw(brwId) {
+		var bookID = $(brwId).attr("bookID");
+	 	console.log(bookID);
+		
+		$.ajax({
+			type:'get',
+			url:'reserveBookbrw.ajax',
+			data:{
+				b_id : bookID
+			},
+			dataType:'JSON',
+			success:function(data) {
+				
+			},
+			error:function(e) {
+				console.log(e);
+			}
+		});
+ 	}
+		
 
-
-
-function bookreserve() {
-	$.ajax({
-		type:'get',
-		url:'bookreserve.ajax',
-		data:{
-			b_id:$("#brw_b_id").text()
-		},
-		dataType:'JSON',
-		success:function(data) {
-			
-		},
-		error:function(e) {
-			console.log(e);
-		}
-	});
 	
-} 
+	function bookreason(brwId) {
+		var bookID = $(brwId).attr("bookID");
+	 	console.log(bookID);
+		
+		$.ajax({
+			type:'get',
+			url:'bookreason.ajax',
+			data:{
+				b_id : bookID
+			},
+			dataType:'JSON',
+			success:function(data) {
+				
+			},
+			error:function(e) {
+				console.log(e);
+			}
+		});
 
-$("#brw").on("click",function(){
+	}
+
+	$(".brwBtn").on("click",function(){
+		   $(this).hide();
+		   alert("대출신청이 완료되었습니다");
+	});
+		
+	$(".bookreason").on("click",function(){
+		alert("예약신청이 완료되었습니다.");
+	});
+
+
+
+/* $("#brw").on("click",function(){
 	$("#brw").hide();
 	alert("대출신청이 완료되었습니다");
 });
@@ -172,7 +240,7 @@ $("#brw").on("click",function(){
 $("#bookreserve").on("click",function(){
 	$("#bookreserve").hide();
 	alert("예약이 완료되었습니다");
-});
+}); */
 
   /* $(function(){
 	$("bookreserve").click(function(){
@@ -184,16 +252,11 @@ $("#bookreserve").on("click",function(){
 
 
 
- 	$("#brw").on("click",function(){
-	   $("#brw").hide();
-	   alert("대출신청이 완료되었습니다");
-	});
 
-
-	$("#reasonBtn").on("click",function(){
+	/* $("#reasonBtn").on("click",function(){
 	   $("#reasonBtn").hide();
 	   alert("예약이 완료되었습니다");
-	});
+	}); */
 
 </script>
 </html>

@@ -29,7 +29,7 @@ public class BoardController {
 	
 	// 건의사항 목록페이지 이동
 	@RequestMapping(value = "/claimList", method = RequestMethod.GET)
-	public String claimList(Model model) {
+	public String claimList(Model model, HttpSession session) {
 		// claimList 에 리스트 보내기
 		/*
 		logger.info("건의사항 리스트 요청");
@@ -37,7 +37,21 @@ public class BoardController {
 		logger.info("건의사항 게시글의 개수 : " + claimList.size());
 		model.addAttribute("claimList",claimList);
 		*/
-		return "myPage/claim/claimList";
+		
+		String page = "myPage/claim/claimList";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 목록 페이지 이동 (일반회원만 가능)");
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		
+		return page;
 	}
 
 	
@@ -60,17 +74,31 @@ public class BoardController {
 	
 	
 	@RequestMapping(value = "/claimWrite.go")
-	public String claimWriteForm() {
+	public String claimWriteForm(Model model, HttpSession session) {
 		logger.info("건의사항 글쓰기 페이지 이동");
 		
-		return "myPage/claim/claimWrite";
+		String page = "myPage/claim/claimWrite";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 글쓰기 페이지 이동 (일반회원만 가능)");
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		return page;
 	}
 	
 	
 	// 건의사항 글쓰기 + 이미지 파일 업로드
 	@RequestMapping(value = "/claimWrite.do")
-	public String claimWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+	public String claimWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params, HttpSession session) {
 		logger.info("글쓰기 요청 : " + params);
+		
+		params.put("loginId", (String) session.getAttribute("loginId"));
 		
 		return service.claimWrite(photos, params);
 	}
@@ -78,23 +106,47 @@ public class BoardController {
 	
 	// 건의사항 글 상세 보기
 	@RequestMapping(value = "/claimDetail")
-	public String claimDetail(Model model, @RequestParam int claim_id) {
+	public String claimDetail(Model model, HttpSession session, @RequestParam int claim_id) {
 		logger.info("상세보기 요청 : " + claim_id);
 		
-		service.claimDetail(model, claim_id);
-		service.replyDetail(model, claim_id);
+		String page = "myPage/claim/claimDetail";
 		
-		return "myPage/claim/claimDetail";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 상세보기 페이지 이동 (일반회원만 가능)");
+			service.claimDetail(model, claim_id);
+			service.replyDetail(model, claim_id);
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		
+		return page;
 	}
 	
 	
 	// 수정 상세 보기
 	@RequestMapping(value = "/claimUpdate.go")
-	public String claimUpdateForm(Model model, @RequestParam int claim_id) {
+	public String claimUpdateForm(Model model, HttpSession session, @RequestParam int claim_id) {
 		logger.info("수정 상세보기 요청 : " + claim_id);
-		service.claimDetail(model, claim_id);
+
+		String page = "myPage/claim/claimUpdate";
 		
-		return "myPage/claim/claimUpdate";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("건의사항 수정 상세보기 페이지 이동 (일반회원만 가능)");
+			service.claimDetail(model, claim_id);
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		return page;
 	}
 	
 	
@@ -137,21 +189,45 @@ public class BoardController {
 	
 	// 관리자 건의사항 목록페이지 이동
 	@RequestMapping(value = "/adminClaimList", method = RequestMethod.GET)
-	public String adminClaimList() {
+	public String adminClaimList(Model model, HttpSession session) {
 		
-		return "admin/claim/adminClaimList";
+		String page = "admin/claim/adminClaimList";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("건의사항 전체 목록 페이지 이동 (관리자만 가능)");
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		return page;
 	}
 	
 	
 	// 관리자 건의사항 수정 상세보기
 	@RequestMapping(value = "/adminClaimDetail")
-	public String adminClaimDetail(Model model, @RequestParam int claim_id) {
+	public String adminClaimDetail(Model model, @RequestParam int claim_id, HttpSession session) {
 		logger.info("상세보기 요청 : " + claim_id);
 		
-		service.claimDetail(model, claim_id);
-		service.replyDetail(model, claim_id);
+		String page = "admin/claim/adminClaimDetail";
 		
-		return "admin/claim/adminClaimDetail";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("건의사항 상세보기 이동 (관리자만 가능)");
+			service.claimDetail(model, claim_id);
+			service.replyDetail(model, claim_id);
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		
+		return page;
 	}
 	
 	
@@ -166,18 +242,30 @@ public class BoardController {
 	
 	// 답변 쓰기 페이지 이동
 	@RequestMapping(value = "/replyWrite.go")
-	public String replyWriteForm(Model model, @RequestParam int claim_id) {
-		logger.info("건의사항 답변 글쓰기 페이지 이동");
-		model.addAttribute("claim_id",claim_id);
+	public String replyWriteForm(Model model, @RequestParam int claim_id, HttpSession session) {
 		
-		return "admin/claim/replyWrite";
+		String page = "admin/claim/replyWrite";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("건의사항 답변 글쓰기 페이지 이동 (관리자만 가능)");
+			model.addAttribute("claim_id",claim_id);
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "/main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
+		
+		return page;
 	}
 	
 	
 	// 관리자 답변 작성
 	@RequestMapping(value = "/replyWrite.do")
-	public String replyWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params) {
+	public String replyWrite(MultipartFile[] photos, @RequestParam HashMap<String, String> params, HttpSession session) {
 		logger.info("답변 글쓰기 : " + params);
+		params.put("loginId", (String) session.getAttribute("loginId"));
 		
 		return service.replyWrite(photos, params);
 	}
@@ -185,13 +273,24 @@ public class BoardController {
 	
 	// 관리자 답변 수정
 	@RequestMapping(value = "/replyUpdate.go")
-	public String replyUpdateForm(Model model, @RequestParam int claim_id, @RequestParam int reply_id) {
-		logger.info("답변 수정 요청 : " + reply_id);
-		service.claimDetail(model, claim_id);
-		service.replyDetail(model, claim_id);
+	public String replyUpdateForm(Model model, HttpSession session, @RequestParam int claim_id, @RequestParam int reply_id) {
+		
+		String page = "admin/claim/replyUpdate";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("답변 수정 요청 : " + reply_id);
+			service.claimDetail(model, claim_id);
+			service.replyDetail(model, claim_id);
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			page = "login/login";
+		}
 		
 		// return "admin/claim/replyUpdate?reply_id="+reply_id+"&claim_id="+claim_id;
-		return "admin/claim/replyUpdate";
+		return page;
 	}
 	
 	

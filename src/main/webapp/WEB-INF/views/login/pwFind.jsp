@@ -3,32 +3,29 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="../resources/css/login.css">
+<link rel="icon" href="../resources/img/favicon.png">
 </head>
 <body>
-	
-		<table>
-			<tr>
-			<td>ID</td>
-			<th><input type="text" id="id"/></th>
-			</tr>
-			<tr>
-			<td>EMAIL</td>
-			<th><input type="email" id="email"/></th>
-			</tr>
-			<!-- <tr>
-			 <td>새비밀번호</td>
-			<th><input type="text" pw="pw"/></th> 
-			</tr> -->
-			<tr>
-			<th colspan="2">
-			 <input type="button" value="비밀번호 찾기" onclick="pwFind()"/> 
-			<input type="button" value="돌아가기" onclick="location.href='/lib/member/login'"/>
-			</th>
-			</tr>
-		</table>
-	
+	<h3 id="title">비밀번호 찾기</h3>
+	<table>
+		<tr>
+			<th class="col1">아이디</th>
+			<td class="FindCol2">
+				<input type="text" id="id"/>
+			</td>
+		</tr>
+		<tr>
+			<th class="col1">이메일</th>
+			<td class="FindCol2"><input type="email" id="email"/></td>
+		</tr>
+	</table>
+	<div class="FindBtn-area">
+		<input class="FindBtn" type="button" value="PW찾기" onclick="pwFind()"/> 
+		<input class="FindBtn" type="button" value="취소" onclick="location.href='/member/login'"/>
+	</div>
 </body>
 <script>
  function pwFind(){

@@ -82,20 +82,49 @@
                                         <th>도서연장</th>                                
                                         <th>연장여부</th>
                                     </tr>
-                           
-                                    <c:forEach items="${brwList}" var="dto">
+                                    
+                                    <c:forEach items="${history}" var="brwdto">
                                     
                                     	<tr>
-                                    		<td>${dto.brw_id}</td>
-                                    		<td>${dto.b_title}</td>
-                                    		<td>${dto.brw_date}</td>
-                                    		<td>${dto.return_date}</td>
-                                    		<td>${dto.brw_status}</td>
-                                    		<td>Y</td>
-                                    		<td>${dto.renew}</td>
+
+                                    		<td id="extension_id">${brwdto.brw_id}</td>
+                                    		<td>
+                                    			<a href="bookDetail.do?b_id=${brwdto.b_id}">${brwdto.b_title}</a>
+                                    		</td>
+                                    		<td>${brwdto.brw_date}</td>
+                                    		<td>${brwdto.return_date}</td>
+                                    		<td>${brwdto.brw_status}</td>
+                                    		<td id="extension_Whether">
+                                    		
+                                  			<c:choose>
+                                  				<c:when test="${brwdto.renew eq 'Y'}">
+	                                    			<button class="extensionBtn" 
+	                                    				onclick="updateExtension(this)"
+	                                    				whetherValue ="${brwdto.brw_id}">
+	                                    				연장
+	                                    			</button>
+	                                    		</c:when>
+                                    		</c:choose>
+                                    		
+                                    		</td>
+                                    		<td id="extensionChk">
+	                                    		
+	                                    		<c:choose>
+													<c:when test="${brwdto.renew eq 'false'}">
+														N
+	                                    			</c:when>
+	                                    			<c:when test="${brwdto.renew eq 'true'}">
+														Y
+	                                    			</c:when>
+	                                    		</c:choose>
+                                    		</td>
+                                    		
+
                                     	<tr>
                                     	
-                                    </c:forEach>
+                                    	</c:forEach>
+                                                               
+
                                     
                                 </thead>
                             </table>
@@ -107,5 +136,40 @@
 </body>
 <script>
 
+function updateExtension(whethe_id) {
+	var whetherValue = $(whethe_id).attr("whetherValue")
+ 	console.log(whetherValue);
+	
+	$.ajax({
+		type:'get',
+		url:'reserveBtn.ajax',
+		data:{
+			brw_id:whetherValue
+		},
+		dataType:'JSON',
+		success:function(data) {
+			console.log(data)
+		},
+		error:function(e) {
+			console.log(e);
+		}
+	});
+	
+}
+
+
+
+$(".extensionBtn").on("click",function(){
+	   $(this).hide();
+	   alert("예약신청이 완료되었습니다");
+});
+
+
+
+
+
 </script>
 </html>
+
+
+

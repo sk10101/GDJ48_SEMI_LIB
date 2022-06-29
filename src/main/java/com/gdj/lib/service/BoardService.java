@@ -43,9 +43,14 @@ public class BoardService {
 		int page = Integer.parseInt(params.get("page"));
 		String option = params.get("option");
 		String word = params.get("word");
+		String mb_id = params.get("mb_id");
+		String mb_class = params.get("mb_class");
+		
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : " + page);
+		logger.info("로그인한 아이디 : " + mb_id);
 		
+		ArrayList<BoardDTO> claimList = new ArrayList<BoardDTO>();
 		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
 		
 		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
@@ -70,23 +75,43 @@ public class BoardService {
 		
 		// 검색 관련 설정하는 조건문
 		if(word == null || word.equals("")) {
-			ArrayList<BoardDTO> claimList = dao.claimList(cnt, offset);
+			// 관리자 건의사항 목록 페이지에선 아이디 상관없이 모두 보여줘야함
+			if (mb_class.equals("관리자")) {
+				claimList = dao.allClaimList(cnt, offset);
+			} else {
+				claimList = dao.claimList(cnt, offset, mb_id);
+			}
 			
 			map.put("claimList", claimList);
+			
 		} else {
 			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
 			
-			// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
-			if(option.equals("제목")) {
-				searchList = dao.subjectSearch(cnt,offset,word);
-				logger.info("제목 옵션 설정");
-			} else if(option.equals("처리상태")) {
-				searchList = dao.statusSearch(cnt,offset,word);
-				logger.info("처리상태 옵션 설정");			
+			if (mb_class.equals("관리자")) {
+				if(option.equals("제목")) {
+					searchList = dao.allSubjectSearch(cnt,offset,word);
+					logger.info("제목 옵션 설정");
+				} else if(option.equals("처리상태")) {
+					searchList = dao.allStatusSearch(cnt,offset,word);
+					logger.info("처리상태 옵션 설정");			
+				} else {
+					searchList = dao.allWriterSearch(cnt,offset,word);
+					logger.info("작성자 옵션 설정");	
+				}
 			} else {
-				searchList = dao.writerSearch(cnt,offset,word);
-				logger.info("작성자 옵션 설정");	
+				// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
+				if(option.equals("제목")) {
+					searchList = dao.subjectSearch(cnt,offset,word,mb_id);
+					logger.info("제목 옵션 설정");
+				} else if(option.equals("처리상태")) {
+					searchList = dao.statusSearch(cnt,offset,word,mb_id);
+					logger.info("처리상태 옵션 설정");			
+				} else {
+					searchList = dao.writerSearch(cnt,offset,word,mb_id);
+					logger.info("작성자 옵션 설정");	
+				}
 			}
+			
 			
 			logger.info("검색결과 건수 : " +searchList.size());
 			map.put("claimList", searchList);
@@ -101,10 +126,11 @@ public class BoardService {
 	public String claimWrite(MultipartFile[] photos, HashMap<String, String> params) {
 		
 		BoardDTO dto = new BoardDTO();
+		
 		dto.setClaim_title(params.get("claim_title"));
 		// claimDto.setMb_id(params.get("mb_id")); ==========================
 		// 일단 임시로 tester 계정 사용 ==========================
-		dto.setMb_id("tester");
+		dto.setMb_id(params.get("loginId"));
 		dto.setClaim_content(params.get("claim_content"));
 		// 기본적으로 건의사항을 작성하면 status 는 미처리가 된다.
 		dto.setStatus("미처리");
@@ -171,7 +197,7 @@ public class BoardService {
 		BoardDTO dto = dao.claimDetail(claim_id);
 		// 답변 글 정보
 		// 건의사항 글에 올려진 이미지 정보
-		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id);
+		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id,2);
 		model.addAttribute("claim", dto);
 		model.addAttribute("claimList", claimPhotoList);
 	}
@@ -202,7 +228,7 @@ public class BoardService {
 	public void claimDel(int claim_id) {
 		
 		// 해당 claim_id 에 사진이 있는지 확인(어떤 사진들이 있는지 이름 확보)
-		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id);
+		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id,2);
 		logger.info(claim_id + " 번 게시물에 업로드된 사진 수 : " + claimPhotoList.size());
 		
 		int delCount = dao.claimDel(claim_id);
@@ -237,7 +263,7 @@ public class BoardService {
 		if(dto!=null) {
 			dto.setReply_id(dao.getReplyId(claim_id));
 			// 답변 글에 올려진 이미지 정보
-			ArrayList<PhotoDTO> replyPhotoList = dao.replyPhotoList(dto.getReply_id());
+			ArrayList<PhotoDTO> replyPhotoList = dao.replyPhotoList(dto.getReply_id(),3);
 			model.addAttribute("reply", dto);
 			model.addAttribute("replyList", replyPhotoList);
 		}
@@ -245,9 +271,10 @@ public class BoardService {
 
 
 	public String replyWrite(MultipartFile[] photos, HashMap<String, String> params) {
-
+		
 		BoardDTO dto = new BoardDTO();
-		dto.setMb_id("admin");
+		
+		dto.setMb_id(params.get("loginId"));
 		dto.setClaim_id(Integer.parseInt(params.get("claim_id")));
 		// claimDto.setMb_id(params.get("mb_id")); ==========================
 		// 일단 임시로 tester 계정 사용 ==========================
