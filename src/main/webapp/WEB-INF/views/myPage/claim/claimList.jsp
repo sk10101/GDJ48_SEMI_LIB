@@ -77,6 +77,11 @@
 	var currPage = 1;
 	listCall(currPage);
 	
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
+	
 	// select 의 option 변경
 	$('#pagePerNum').on('change',function(){
 		var word = $('#word').val();
@@ -248,11 +253,5 @@
 		});
 	});
 	*/
-	
-	// 메세지를 받았을 때 이를 처리한다.
-	var msg = "${msg}"
-	if (msg != "") {
-		alert(msg);
-	}
 </script>
 </html>

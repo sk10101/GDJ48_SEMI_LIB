@@ -53,7 +53,7 @@
         			<td>
 	        			<c:choose>
 		                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
-		                		<a class="links" href="/memberList.do"><img src="../resources/img/mypage.png"/><br/>관리자 페이지</a>
+		                		<a class="links" href="/memberList.go"><img src="../resources/img/mypage.png"/><br/>관리자 페이지</a>
 		                	</c:when>
 		                	<c:otherwise>
 			                    <a class="links" href="/myUpdateList"><img src="../resources/img/mypage.png"/><br/>마이 페이지</a>

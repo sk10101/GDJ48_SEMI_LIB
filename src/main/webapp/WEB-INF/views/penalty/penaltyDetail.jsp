@@ -79,7 +79,7 @@
         </tr>
         <tr>
             <th colspan="2">
-                <input type="button" value="돌아가기" onclick="location.href='penaltyList.do'"/>
+                <input type="button" value="돌아가기" onclick="location.href='penaltyList.go'"/>
                 <input type="submit" value="수정"/>
             </th>
         </tr>
