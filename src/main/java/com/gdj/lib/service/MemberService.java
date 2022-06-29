@@ -182,7 +182,7 @@ public class MemberService {
 		logger.info("보여줄 페이지 : "+page);
 		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
-		int allCnt = dao.allCount();
+		int allCnt = dao.allBlackCount();
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {

@@ -50,65 +50,39 @@
             </tr>
         </thead>
         <tbody id="penaltyList">
-        <!--
-				<c:forEach items="${penaltyList}" var="dto">
-<<<<<<< HEAD
-			<tr>
-				<td>${dto.penalty_id}</td>
-				<td><a href="penaltyDetail.do?penalty_id=${dto.penalty_id}">${dto.mb_id }</a></td>
-				<c:choose>
-         			<c:when test="${dto.category_id eq '5'}">
-             			<td>대출연체</td>
-         			</c:when>
-         			<c:otherwise>
-              			<td>예약만료</td>
-         			</c:otherwise>
-    			</c:choose>
-				<td>${dto.penalty_start}</td>
-				<td>${dto.penalty_end }</td>
-				<c:choose>
-         			<c:when test="${dto.cancel eq 'true'}">
-             			<td>Y</td>
-         			</c:when>
-         			<c:otherwise>
-              			<td>N</td>
-         			</c:otherwise>
-    			</c:choose>
-			</tr>
-		</c:forEach>
-		</tbody>
-=======
-					<tr>
-						<td>${dto.penalty_id}</td>
-						<td><a href="penaltyDetail.do?penalty_id=${dto.penalty_id}">${dto.mb_id }</a></td>
-						<c:choose>
-                 			<c:when test="${dto.category_id eq '5'}">
-                     			<td>대출연체</td>
-                 			</c:when>
-                 			<c:otherwise>
-                      			<td>예약만료</td>
-                 			</c:otherwise>
-            			</c:choose>
-						<td>${dto.penalty_start}</td>
-						<c:choose>
-                 			<c:when test="${dto.category_id eq '5'}">
-                     			<td>${dto.penalty_end }</td>
-                 			</c:when>
-                 			<c:otherwise>
-                      			<td>${dto.penalty_end}</td>
-                 			</c:otherwise>
-            			</c:choose>						
-						<c:choose>
-                 			<c:when test="${dto.cancel eq 'true'}">
-                     			<td>Y</td>
-                 			</c:when>
-                 			<c:otherwise>
-                      			<td>N</td>
-                 			</c:otherwise>
-            			</c:choose>
-					</tr>
-				</c:forEach>
-				-->
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
 			</tbody>
 			<tr>
 				<td colspan="6" id="paging">

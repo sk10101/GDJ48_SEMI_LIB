@@ -94,7 +94,7 @@ public interface MemberDAO {
 	
 	
 	// =====================================
-
+	int allCount();
 
 	ArrayList<MemberDTO> blackList (int cnt, int offset);
 
@@ -105,7 +105,7 @@ public interface MemberDAO {
 
 
 
-	int allCount();
+
 
 
 	ArrayList<MemberDTO> penaltyList(int cnt, int offset);
@@ -118,6 +118,8 @@ public interface MemberDAO {
 
 
 	int reserveCancel(String reserve_id);
+
+	int allBlackCount();
 
 
 	
