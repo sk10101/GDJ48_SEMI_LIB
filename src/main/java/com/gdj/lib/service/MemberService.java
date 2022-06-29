@@ -47,7 +47,7 @@ public class MemberService {
 		dao.update(params);
 	}
 
-<<<<<<< HEAD
+
 	public ArrayList<MemberDTO> memberBrw() {
 		
 		logger.info("관리자 > 회원 도서내역 서비스 도착");
@@ -89,17 +89,13 @@ public class MemberService {
 		return success;
 	}
 
-<<<<<<< HEAD
-
 
 	public ArrayList<BrwBookDTO> brwList(String mb_id) {
 		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
 		return dao.brwList(mb_id);
 	}
 
-=======
->>>>>>> origin/master
-	
+
 
 	public ArrayList<MemberDTO> penaltyList() {
 		return dao.penaltyList();
@@ -125,7 +121,7 @@ public class MemberService {
 	
 	
 	
-<<<<<<< HEAD
+
 	public HashMap<String, Object> blackPaging(HashMap<String, String> params) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -210,7 +206,7 @@ public class MemberService {
 
 	
 	
-=======
+
 	
 // 관리자 > 회원 도서 관련 서비스
 	
@@ -240,7 +236,6 @@ public class MemberService {
 		return dao.reserveCancel(reserve_id);
 	}
 
->>>>>>> origin/master
 
 }
 
