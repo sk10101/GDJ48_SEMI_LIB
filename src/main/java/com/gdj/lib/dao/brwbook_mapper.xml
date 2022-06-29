@@ -4,7 +4,7 @@
 <mapper namespace="com.gdj.lib.dao.BrwBookDAO">
 	
 
-	<select id="detail" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="detail" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
@@ -21,13 +21,12 @@
  	</insert> -->
  	
  	<insert id="brw" parameterType="String">
- 		INSERT INTO reservation(mb_id,b_id)
- 			VALUES(#{param1},#{param2})
+ 		INSERT INTO reservation(b_id)
+ 			VALUES(#{param1})
  	</insert>
  	
- 	<insert id="reason" parameterType="String">
- 		INSERT INTO reservation(mb_id,b_id)
- 			VALUES(#{param1},#{param2})
+ 	<insert id="bookreason" parameterType="hashmap">
+ 	 	SELECT * FROM reservation WHERE b_id = #{b_id}
  	</insert>
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
@@ -37,13 +36,15 @@
 				, brw_date
 				, return_date
 				, brw_status
-				, renew 
+				, renew
+				, b.b_id
 			from
 				borrow br
 			inner join book b on
 				b.b_id  = br.b_id
 			where
 				brw_status = '대출'
+				ORDER BY brw_id desc
 	</select>
 	
 	<select id="bookList" resultType="com.gdj.lib.dto.BrwBookDTO">
@@ -54,13 +55,43 @@
 				, return_date
 				, brw_status
 				, renew 
+				, b.b_id
 			from
 				borrow br
 			inner join book b on
 				b.b_id  = br.b_id
 			where
 				brw_status = '반납'
+				ORDER BY brw_id DESC
 	</select>
+	
+	
+	<select id="bookListPaing" resultType="com.gdj.lib.dto.BrwBookDTO">
+		select
+				brw_id
+				, b.b_title
+				, brw_date
+				, return_date
+				, brw_status
+				, renew 
+				, b.b_id
+			from
+				borrow br
+			inner join book b on
+				b.b_id  = br.b_id
+			where
+				brw_status = '반납'
+				ORDER BY brw_id DESC limit #{param1} offset #{param2}
+	</select>
+	
+	<select id="allCount" resultType="Integer">
+		SELECT COUNT(b_id) FROM borrow
+	</select>
+	
+	<!-- 
+	<select id="allCount" resultType="Integer">
+		SELECT COUNT(b_id) FROM borrow
+	</select> -->
 	
 	<select id="reserve" resultType="com.gdj.lib.dto.BrwBookDTO">
 		select
@@ -76,13 +107,10 @@
 			r2.b_id = b.b_id
 			where
 				reason is null
+			ORDER BY reserve_id desc
 	</select>
 	
 	
- 	<insert id="bookreserve" parameterType="String">
- 		INSERT INTO reservation(mb_id,b_id)
- 			VALUES(#{param1},#{param2})
- 	</insert>
  	
  	
  	<delete id="del" parameterType="String">

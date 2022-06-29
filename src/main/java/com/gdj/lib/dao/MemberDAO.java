@@ -79,6 +79,15 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> memberUpdateListMy();
 
 
+
+	void cancelMySecession(String mb_id);
+
+
+	void MySecession(String mb_id);
+
+
+	void MySecessionTwo(String mb_id);
+
 	String getMbClass(String id, String pw);
 
 	
@@ -91,6 +100,7 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> memberList(int cnt, int offset);
 
 	ArrayList<MemberDTO> adminList(int cnt, int offset);
+
 
 
 

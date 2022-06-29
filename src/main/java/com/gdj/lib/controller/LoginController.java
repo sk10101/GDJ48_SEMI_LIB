@@ -22,9 +22,10 @@ public class LoginController {
 	 Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 로그인 페이지
-	@RequestMapping(value = "/member/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/member/login")
 	public String memberhome( Model model) {
 		logger.info("로그인 페이지 이동");
+		
 		return "/login/login";
 	}
 	
@@ -123,16 +124,17 @@ public class LoginController {
 				model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
 			}
 			
-			return page; 
+			return page;
 		}
+	
 		
 		// 로그아웃
 		@RequestMapping(value = "member/logout.do")
 		public String logout(Model model,HttpSession session) {
 				session.removeAttribute("loginId");
 				model.addAttribute("msg", "로그아웃 되었습니다");
-			
-			return "/login/login"; 
+				
+			return "login/login"; 
 		}
 	
 }
