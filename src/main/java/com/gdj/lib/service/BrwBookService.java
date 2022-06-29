@@ -20,6 +20,7 @@ import com.gdj.lib.dao.BrwBookDAO;
 import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
+import com.gdj.lib.dto.PhotoDTO;
 
 
 @Service
@@ -33,6 +34,12 @@ public class BrwBookService {
 		logger.info("도서상세보기 서비스 요청 : " + params);
 		return dao.detail(params);
 	}
+	
+	public ArrayList<PhotoDTO> photoList(HashMap<String, String> params) {
+		logger.info("도서상세보기 이미지 : " + params);
+		return dao.list(params);
+	}
+
 
 
 	public String brw (String b_id) {
@@ -93,28 +100,6 @@ public class BrwBookService {
 		dao.reserveBtn(brw_id);
 		
 		return "myPage/bookList/reserve";
-		
-	}
-
-
-	public String del(String reserve_id) {
-		
-		logger.info("도서예약 취소"+reserve_id);
-		dao.del(reserve_id);
-		
-		return "redirect:/reserve";
-		
-	}
-
-
-	
-
-
-	public String reserveBookBrw(HashMap<String, String> params) {
-		logger.info("예약된 책 대출신청"+params);
-		dao.reserveBookBrw(params.get("reserve_id"));
-		dao.bookStatusUpdate(params.get("b_id"));
-		return "redirect:/reserve";
 		
 	}
 
@@ -192,6 +177,53 @@ public class BrwBookService {
 		return brwBookPageMap;
 		
 	}
+	
+	
+	public String reserveBookBrw(HashMap<String, String> params) {
+		logger.info("예약된 책 대출신청"+params);
+		//dao.reserveBookBrw(params.get("reserve_id"));
+		dao.reserveBookBrw(params.get("reserve_id"));
+		dao.bookStatusUpdate(params.get("b_id"));
+		return "redirect:/reserve";
+		
+	}
+
+
+	public void bookDetailBrw(HashMap<String, String> params) {
+		logger.info("도서상세보기 대출신청 : " + params);
+		dao.bookDetailBrw(params);
+		dao.bookStatusUpdate(params.get("b_id"));
+		
+	}
+
+	public void del(HashMap<String, String> params) {
+		
+		logger.info("도서예약 취소"+params);
+		dao.bookdel(params.get("reserve_id"));
+		dao.bookdelStatusUpdate(params.get("b_id"));
+		
+	}
+
+	public ArrayList<BrwBookDTO> mb_id(HashMap<String, String> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void brwListMb_id(HashMap<String, String> params) {
+		logger.info("서비스컨트롤러 회원아이디 : "+params);
+		dao.brwListMb_id(params);
+		
+	}
+
+
+	
+
+	
+
+	
+
+
+	
 
 	
 	

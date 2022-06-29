@@ -8,6 +8,10 @@
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
+	<select id="list" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
+		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
+	</select>
+	
 	<!-- <insert id="brw" parameterType="hashmap">
 	INSERT INTO borrow (mb_id ,b_id ,brw_date ,renew ,return_date ,brw_status)
 	 VALUES (#{mb_id} ,#{b_id} ,CURRENT_TIMESTAMP ,false ,DATE_ADD(now(), interval +14 day) , "대출불가")
@@ -20,13 +24,14 @@
  		
  	</insert> -->
  	
- 	<insert id="brw" parameterType="String">
+ 	<!-- <insert id="brw" parameterType="String">
  		INSERT INTO reservation(b_id)
  			VALUES(#{param1})
- 	</insert>
+ 	</insert> -->
  	
  	<insert id="bookreason" parameterType="hashmap">
- 	 	SELECT * FROM reservation WHERE b_id = #{b_id}
+ 	 	INSERT INTO FROM reservation(b_id)
+ 			VALUES(#{b_id})
  	</insert>
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
@@ -63,6 +68,26 @@
 			where
 				brw_status = '반납'
 				ORDER BY brw_id DESC
+	</select>
+	
+	
+	
+	<select id="brwListMb_id" resultType="com.gdj.lib.dto.BrwBookDTO">
+		select
+				brw_id
+				, b.b_title
+				, brw_date
+				, return_date
+				, brw_status
+				, renew 
+				, b.b_id
+			from
+				borrow br
+			inner join book b on
+				b.b_id  = br.b_id
+			where
+				brw_status = '반납'
+				and br.mb_id = #{mb_id}				
 	</select>
 	
 	
@@ -113,18 +138,31 @@
 	
  	
  	
- 	<delete id="del" parameterType="String">
+ 	<delete id="bookdel" parameterType="String">
 		 DELETE FROM reservation WHERE reserve_id = #{reserve_id}
 	</delete>
- 	
+ 	<update id="bookdelStatusUpdate" parameterType="hashmap">
+ 		update book set b_status = "대출가능" where b_id = #{b_id}	
+ 	</update>
  	
  	<insert id="reserveBookBrw" parameterType="hashmap">
  		SELECT * FROM reservation WHERE reserve_id = #{reserve_id}
  	</insert>
  	
+ 	<insert id="bookDetailBrw" parameterType="hashmap">
+ 		INSERT INTO reservation(b_id,mb_id)
+ 			VALUES(#{b_id},#{loginId})
+ 	</insert>
+ 	
+ 	<!-- <insert id="reserveBookBrw" parameterType="hashmap">
+ 		SELECT * FROM reservation WHERE reserve_id = #{reserve_id}, mb_id = #{loginId} 
+ 	</insert> -->
+ 	
+ 	
  	<update id="bookStatusUpdate" parameterType="hashmap">
- 		update book set b_status = "대출불가" where b_id = #{b_id} 		
+ 		update book set b_status = "대출불가" where b_id = #{b_id}	
  	</update>
+ 	
  	<!-- <update id="reserveBtn" parameterType="String">						
 		UPDATE book SET return_finish = DATE_ADD(return_finish(), interval +7 day) WHERE b_id = #{param1}
 	</update> -->

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
+import com.gdj.lib.dto.PhotoDTO;
 
 public interface BrwBookDAO {
 	
@@ -25,10 +26,6 @@ public interface BrwBookDAO {
 
 	void reserveBtn(String brw_id);
 
-	void del(String reserve_id);
-
-	void reserveBookBrw(String string);
-
 	void bookStatusUpdate(String string);
 
 	void bookBrwDetail(String b_id);
@@ -40,6 +37,23 @@ public interface BrwBookDAO {
 	ArrayList<BrwBookDTO> bookListPaing(int cnt, int offset);
 
 	int allCount();
+
+	void reserveBookBrw(String string);
+
+	void bookDetailBrw(HashMap<String, String> params);
+
+	ArrayList<PhotoDTO> list(HashMap<String, String> params);
+
+	void bookdel(String string);
+
+	void bookdelStatusUpdate(String string);
+
+	void brwListMb_id(HashMap<String, String> params);
+
+
+
+	
+	
 
 	
 

@@ -35,7 +35,7 @@ table {
         </div>
         <nav>
             <ul>
-                <li>${sessionScope.loginId}님 반갑습니다.</li>
+                <li loginId="${sessionScope.loginId}">${sessionScope.loginId}님 반갑습니다.</li>
                 <li><a href="member/logout.do">로그아웃</a></li>
                 <li><a href="/brwHistory">마이페이지</a></li>
             </ul>
@@ -46,6 +46,11 @@ table {
 
        <table>
             <thead id="head">
+            <tr>
+            	<td>
+					<p><img src="/image/${dto.newFileName}" height="200"/>
+				</td>
+            </tr>
             <c:forEach items="${detail}" var="dto">
                 <tr>
                     <td>책제목</td>
@@ -83,11 +88,11 @@ table {
 					   <td>
 		                   <c:choose>
 		                   		<c:when test="${dto.b_status eq '대출가능'}">
-									<button class="brwBtn" onclick="bookbrw(this)" brwValue="${dto.reserve_id}" bookID="${dto.b_id}">대출신청</button>
+									<button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">대출신청</button>
 		                   		</c:when>
 		                   		<c:when test="${dto.b_status eq '대출불가'}">
 		                   			<input type="hidden">
-		                   		</c:when>
+		                   		</c:when> 
 		                   		<c:when test="${dto.b_status eq '대출중'}">
 									<input type="hidden">
 		                   		</c:when>
@@ -180,12 +185,15 @@ function bookreason() {
 	function bookbrw(brwId) {
 		var bookID = $(brwId).attr("bookID");
 	 	console.log(bookID);
+	 	var loginId = $(brwId).attr("loginId");
+	 	console.log(loginId);
 		
 		$.ajax({
 			type:'get',
-			url:'reserveBookbrw.ajax',
+			url:'bookDetailBrw.ajax',
 			data:{
-				b_id : bookID
+				b_id : bookID,
+				loginId : loginId
 			},
 			dataType:'JSON',
 			success:function(data) {
