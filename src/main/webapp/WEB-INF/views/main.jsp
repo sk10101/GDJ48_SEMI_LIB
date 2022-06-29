@@ -40,7 +40,7 @@
                 <option value="writer">저자</option>
                 <option value="publisher">출판사</option>
             </select>
-            <input type="text" name="word" placeholder="도서 검색"/>
+            <input class="searchBlock" type="text" name="word" placeholder="도서 검색"/>
             <input type="submit" class="btn_search" value=" "/>
         </form>
             
