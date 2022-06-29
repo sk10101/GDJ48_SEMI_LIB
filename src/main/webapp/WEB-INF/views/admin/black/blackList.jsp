@@ -61,13 +61,20 @@
 		 		</td>
 		 	</tr>
 		 	<tr>
-		 		<td>
+		 		<td colspan="5">
 			 		<select id="pagePerNum">
 					 	<option value="5">5</option>
 					 	<option value="10" selected="selected">10</option>
 					 	<option value="15">15</option>
 					 	<option value="20">20</option>
 					 </select>
+					 <select id="option" name="option">
+				       		<option value="회원ID">회원 ID</option>
+				       		<option value="지정한관리자ID">지정한 관리자 ID</option>
+				       		<option value="해제한관리자ID">해제한 관리자 ID</option>
+				       	</select>
+			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
 				 </td>
 		 	</tr>
 	    </table>
@@ -91,7 +98,12 @@
 			//페이지당 보여줄 수를 변경시 계산된 페이지 적용이 안된다. (플러그인의 문제)
 			//페이지당 보여줄 수를 변경시 기존 페이징 요소를 없애고 다시 만들어 준다.
 			$("#pagination").twbsPagination('destroy');
-			listCall(currPage);
+			// 검색어가 들어갔을 때와 아닐때를 구분
+			if(word==null || word==""){
+				listCall(currPage);
+			} else {
+				searchList(currPage)
+			}
 		});
 		
 	function listCall(page){	
@@ -119,8 +131,13 @@
 					onPageClick:function(e,page){
 						//console.log(e); //클릭한 페이지와 관련된 이벤트 객체
 						console.log(page); //사용자가 클릭한 페이지
-						//currPage = page;
-						listCall(page);
+						currPage = page;
+						
+						if(word==null){
+							listCall(page);
+						} else {
+							searchList(page);
+						}
 					}
 				});
 				
@@ -146,7 +163,7 @@
 				content += '<td>'+dto.admin_end+'</td>';
 				content += '<td>'+dto.black_end+'</td>';
 				content += '</tr>';				
-			}else{
+			} else{
 				content += '<tr>';
 				content += '<td><a href="blackDetail.do?black_id='+dto.black_id+'">'+dto.mb_id+'</a></td>';
 				content += '<td>'+dto.admin_start+'</td>';
@@ -154,14 +171,11 @@
 				content += '<td></td>';
 				content += '<td></td>';
 				content += '</tr>';
-			}
+			} 
 		});
 		$('#list').empty();
 		$('#list').append(content); //tbody에 뿌려줌
-		
-		
-		
-		
+				
 /* 		<c:forEach items="${blackList }" var="dto">
 		<tr>
 			<td><a href="blackDetail.do?black_id=${dto.black_id }">${dto.mb_id }</a></td>
@@ -172,6 +186,51 @@
 		</tr>
 	</c:forEach>
 		 */
+	}
+	
+	// 검색 결과 출력
+	function searchList(page) {
+		var word = $('#word').val();
+		var option = $('#option').val();
+		var pagePerNum = $('#pagePerNum').val();
+		
+		// 검색어 저장
+		/*
+		sessionStorage.setItem("word",word);
+		sessionStorage.setItem("option",option);
+		*/
+		
+		$.ajax({
+			type: 'GET',
+			url: 'blackPaging.ajax',
+			data:{
+				cnt : pagePerNum,
+				page : page,
+				word : word,
+				option : option
+			},
+			dataType:'JSON',
+			success: function(data){
+				// 테이블 초기화
+				$("#list").empty();
+				drawList(data.list);
+				currPage = 1;
+				// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+				$("#pagination").twbsPagination({
+					startPage: 1, // 시작 페이지
+					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+					onPageClick: function(e, page) {
+						console.log(page); // 사용자가 클릭한 페이지
+						currPage = page;
+						searchList(page);
+					}
+				});
+			},
+			error:function(e){
+				console.log(e);
+			}
+		})
 	}
 
 </script>

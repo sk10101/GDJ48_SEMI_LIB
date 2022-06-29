@@ -69,6 +69,24 @@
 			ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<select id="mbIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM blacklist
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%')
+				ORDER BY black_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adStartSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM blacklist
+			WHERE admin_start LIKE CONCAT('%',#{param3},'%')
+				ORDER BY black_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adEndSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM blacklist
+			WHERE admin_end LIKE CONCAT('%',#{param3},'%')
+				ORDER BY black_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
 	
 
 	<select id="blackDetail" resultType="com.gdj.lib.dto.MemberDTO">

@@ -121,6 +121,17 @@ public interface MemberDAO {
 
 	int allBlackCount();
 
+	
+	
+	
+	
+	
+	ArrayList<MemberDTO> mbIDSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> adStartSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> adEndSearch(int cnt, int offset, String word);
+
 
 	
 

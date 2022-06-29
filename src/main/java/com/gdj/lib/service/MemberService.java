@@ -182,7 +182,13 @@ public class MemberService {
 		
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
+		String option = params.get("option");
+		String word = params.get("word");
+		
 		logger.info("보여줄 페이지 : "+page);
+		
+		ArrayList<MemberDTO> list = new ArrayList<MemberDTO>();
+		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
 		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
 		int allCnt = dao.allBlackCount();
@@ -198,8 +204,34 @@ public class MemberService {
 		int offset = (page - 1) * cnt;
 		logger.info("offset : "+offset);
 		
-		ArrayList<MemberDTO> list = dao.blackList(cnt, offset);
-		map.put("list", list);
+		
+		// 검색 관련 설정 조건문
+		if(word == null || word.equals("")) {
+			list = dao.blackList(cnt, offset);
+			map.put("list", list);
+			
+		} else {
+			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+			
+			
+			if(option.equals("회원ID")) {
+				searchList = dao.mbIDSearch(cnt,offset,word);
+				logger.info("제목 옵션 설정");
+			} else if(option.equals("지정한관리자ID")) {
+				searchList = dao.adStartSearch(cnt,offset,word);
+				logger.info("처리상태 옵션 설정");			
+			} else {
+				searchList = dao.adEndSearch(cnt,offset,word);
+				logger.info("작성자 옵션 설정");	
+			}	
+			
+			
+			logger.info("검색결과 건수 : " +searchList.size());
+			map.put("list", searchList);
+			
+		}
+		logger.info("서비스 체크포인트");
+		
 		
 		return map;
 	}
