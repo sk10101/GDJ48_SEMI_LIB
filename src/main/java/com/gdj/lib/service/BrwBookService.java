@@ -4,21 +4,12 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRange;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gdj.lib.dao.BookDAO;
 import com.gdj.lib.dao.BrwBookDAO;
-import com.gdj.lib.dto.BoardDTO;
-import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 
 
@@ -110,20 +101,37 @@ public class BrwBookService {
 	
 
 
-	public String reserveBookBrw(HashMap<String, String> params) {
-		logger.info("예약된 책 대출신청"+params);
-		dao.reserveBookBrw(params.get("reserve_id"));
-		dao.bookStatusUpdate(params.get("b_id"));
-		return "redirect:/reserve";
-		
+	
+
+
+
+	public int reserveCheck(String mb_id) {
+		int cnt =0;
+		cnt = dao.reserveCheck(mb_id);
+		return cnt;
 	}
 
+
+	public long expiry(String mb_id) {
+		return dao.expiry(mb_id);
+	}
+
+
+	public long overExpiry(String mb_id) {
+		return dao.overExpiry(mb_id);
+	}
+
+
+	
+
+	
 
 	public void bookBrwDetail(String b_id) {
 		logger.info("도서예약 취소"+b_id);
 		dao.bookBrwDetail(b_id);
 		
 	}
+
 
 
 	public void bookreason(HashMap<String, String> params) {
@@ -154,20 +162,18 @@ public class BrwBookService {
 
 		if(page > pages) {
 			page = pages;
-		}if(page < pages) {
-			page = pages;
 		};
 		
 		brwBookPageMap.put("pages", pages); //만들수있는 쵀대 페이지 수
 		brwBookPageMap.put("currPage", page); //현재 페이지
 
-		
-		
 		int offset = (page -1) * cnt;
+
+		brwBookPageMap.put("offset", offset);
 		logger.info("offset : "+offset);
 		
-		ArrayList<BrwBookDTO> list = dao.bookListPaing(cnt, offset);
-		brwBookPageMap.put("list",list);
+		ArrayList<BrwBookDTO> bookListPaing = dao.bookListPaing(cnt, offset);
+		brwBookPageMap.put("bookListPaing",bookListPaing);
 		
 		// 검색 관련 설정하는 조건문
 //		if(word == null || word.equals("")) {
@@ -195,6 +201,7 @@ public class BrwBookService {
 		
 	}
 
+	
 	
 	
 

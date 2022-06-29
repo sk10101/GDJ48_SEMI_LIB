@@ -59,6 +59,11 @@
 	 <select id="allCount" resultType="int">
 		SELECT count(claim_id) FROM claim
 	</select>
+	
+	<select id="claimCount" resultType="int">
+		SELECT count(claim_id) FROM claim
+			WHERE mb_id = #{param1}
+	</select>
 	 
 	 <!-- 페이징 처리한 목록 (마이페이지 건의사항) -->
 	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO">

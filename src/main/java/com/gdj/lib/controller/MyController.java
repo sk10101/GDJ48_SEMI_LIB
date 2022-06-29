@@ -44,8 +44,8 @@ public class MyController {
 			}	
 			
 			else if(memberSession.getAttribute("mb_class").equals("관리자")) {
-				page = "main";
 				model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+				page = "main";
 			}
 			
 			else {

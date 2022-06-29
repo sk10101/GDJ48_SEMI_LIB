@@ -80,24 +80,36 @@
 	            <th colspan="2">
 	                <input type="button" value="대출내역" onclick="brwList()"/>
 	                <input type="button" value="예약내역" onclick="reserveList()"/>
-	                <input type="submit" value="수정"/>
-	                <input type="button" value="목록보기" onclick="location.href='/memberList.do'"/>
+	                <input type="submit" value="수정" onclick="update()"/>
+	                <input type="button" value="목록보기" onclick="location.href='/memberList.go'"/>
 	        </tr>
 	    </table>
     </form>
 </body>
 <script>
-function brwList() {
-	var mb_id = $('#mb_id').val();
-	console.log(mb_id);
-	location.href = 'memberBrw.go?mb_id='+mb_id;
-}
 
-function reserveList() {
-	var mb_id = $('#mb_id').val();
-	console.log(mb_id);
-	location.href = 'memberBrw.go?mb_id='+mb_id; // 도서내역페이지로 가서 예약내역 바로 보여주는??
-}
+
+	var msg = "${msg}";
+	if(msg != ""){
+	   alert(msg);
+	}
+
+	function update(){
+		alert("수정되었습니다.");
+	}
+
+	function brwList() {
+		var mb_id = $('#mb_id').val();
+		console.log(mb_id);
+		location.href = 'memberBrw.go?mb_id='+mb_id;
+	}
+	
+	function reserveList() {
+		var mb_id = $('#mb_id').val();
+		console.log(mb_id);
+		location.href = 'memberBrw.go?mb_id='+mb_id; // 도서내역페이지로 가서 예약내역 바로 보여주는??
+	}
+
 
 </script>
 </html>

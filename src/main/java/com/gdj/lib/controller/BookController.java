@@ -25,15 +25,32 @@ public class BookController {
 	@Autowired BookService service;
 	
 	// 도서 검색 결과 ---->
-	@RequestMapping(value = "/bookSearch.do")
-	public String bookSearch(Model model, 
+	@RequestMapping(value = "/bookSearch.go")
+	public String bookSearch(HttpSession session,
 			@RequestParam HashMap<String, String> params) {
 		
-		logger.info("도서 목록 요청 : {}",params); 
-		ArrayList<BookDTO> dto = service.bookSearch(params);
-		logger.info("list 갯수 :"+dto.size());
-		model.addAttribute("dto",dto);				
+		//session.setAttribute("option", params.get("option"));
+		//session.setAttribute("word", params.get("word"));
+		logger.info("도서 목록 요청 : {}",params);
+		
 		return "book/bookSearch";
+	}
+	
+	@RequestMapping(value = "/searchList.ajax")
+	@ResponseBody
+	public HashMap<String, Object> searchList(HttpSession session,
+			@RequestParam HashMap<String, String> params) {		
+		
+		logger.info("컨트롤러 리스트 요청 : {}", params);
+		
+		HashMap<String, Object> searchMap = service.bookSearch(params);
+		//String option = (String) session.getAttribute("option");
+		//String word = (String) session.getAttribute("word");
+		//session.removeAttribute("option");
+		//session.removeAttribute("word");
+		
+		//ArrayList<BookDTO> searchList = service.bookSearch(option,word);
+		return searchMap;
 	}
 		
 	//관리자 도서관리 페이지 시작--->
@@ -53,7 +70,9 @@ public class BookController {
 			) {		
 		
 		logger.info("리스트 요청 : {}",params);
-		return service.bookList(params);
+		HashMap<String, Object> map = service.bookList(params);
+		logger.info("컨트롤러 체크포인트");
+		return map;
 	}
 	
 	@RequestMapping(value = "/AdbookDetail.do")

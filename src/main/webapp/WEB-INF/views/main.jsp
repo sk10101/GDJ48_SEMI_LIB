@@ -33,18 +33,17 @@
         <div class="logo" id="mainPageLogo">
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
-        <form class="search" action="bookSearch.do" method="get">
-            <div>
-	            <select name="option">
-	                <option value="all" selected>전체</option>
-	                <option value="b_title">제목</option>
-	                <option value="writer">저자</option>
-	                <option value="publisher">출판사</option>
-	            </select>
-	            <input type="text"  class="searchBlock" name="word" placeholder="도서 검색"/>
-            	<input type="submit" class="btn_search" value=""/>
-            </div>
+
+        <form class="search" action="bookSearch.go" method="get">
+            <select name="option">
+                <option value="b_title">제목</option>
+                <option value="writer">저자</option>
+                <option value="publisher">출판사</option>
+            </select>
+            <input class="searchBlock" type="text" name="word" placeholder="도서 검색"/>
+            <input type="submit" class="btn_search" value=" "/>
         </form>
+            
         <div class="menuTab">
         	<table class="menuTable">
         		<tr>
@@ -54,7 +53,7 @@
         			<td>
 	        			<c:choose>
 		                	<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
-		                		<a class="links" href="/memberList.do"><img src="../resources/img/mypage.png"/><br/>관리자 페이지</a>
+		                		<a class="links" href="/memberList.go"><img src="../resources/img/mypage.png"/><br/>관리자 페이지</a>
 		                	</c:when>
 		                	<c:otherwise>
 			                    <a class="links" href="/myUpdateList"><img src="../resources/img/mypage.png"/><br/>마이 페이지</a>
@@ -81,7 +80,7 @@
         	</table>
         </div>
     </section>
-    
+   
 </body>
 <script>
 /*
