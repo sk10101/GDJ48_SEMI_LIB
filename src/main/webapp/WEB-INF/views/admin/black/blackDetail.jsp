@@ -30,6 +30,7 @@
 </style>
 </head>
 <body>
+
    <h3>블랙리스트 회원 상세보기</h3>
    <form action="blackUpdate.do" method="post">
    <input type ="hidden" id ="black_id" name = "black_id" value = "${param.black_id}"/>
@@ -67,16 +68,14 @@
 	             </c:if> 
 	             value="${dto.end_reason} "/></td>
 	         </tr>
-	
-	        
-	        
-	        
-	    </table>
+
+    </table>
+    </form>
+
     <div> 
         <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
-        <input type="submit" value="수정"/>
+        <input type="button"  onclick="update();return false;" value="수정"/>
     </div>
-    </form>
 </body>
 <script>
 /* if(id== ""|| id == null){
@@ -84,6 +83,23 @@
     return false; 
  }*/
  
+ function update(){
+	var form = document.getElementById("form");
+	var id = document.getElementById("clear");  
+	const checkbox = document.getElementById('black_cancel');
+	// 2. checked 속성을 체크합니다.
+	const is_checked = checkbox.checked;
+	if(is_checked){
+		var blank_pattern = /^\s+|\s+$/g;				
+		if(id.value == null || id.value == "" || id.value.replace(blank_pattern, '' ) == "" ){
+			alert("해제사유를 입력해주세요.");
+			return false;
+		}
+	}else{
+		id.value = "";	
+	}  
+	form.submit();
+ }
  var msg = "${msg}";
    if(msg != ""){
       alert(msg);

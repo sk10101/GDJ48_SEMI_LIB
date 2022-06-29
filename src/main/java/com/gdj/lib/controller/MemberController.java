@@ -1,6 +1,10 @@
 package com.gdj.lib.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import java.util.HashMap;
 
@@ -234,6 +238,7 @@ public class MemberController {
 		String page = "login/login";
 		
 	      logger.info("params : {}", params);
+
 	      if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
 	    	  if(params.get("black_cancel") == null) {
 	    		  params.put("black_cancel", "false");  
@@ -244,6 +249,20 @@ public class MemberController {
 	    		  
 	    		  
 	    	  }
+
+	      if(params.get("black_cancel") == null) {
+	         params.put("black_cancel", "false");  
+	        
+	      }else {
+	    	 
+	         params.put("admin_end", "tester");  
+	         
+	         
+	      }
+	      
+	      if(params.get("clear") != null) {
+	    	  params.put("end_reason", params.get("clear"));
+
 	    	  
 	    	  if(params.get("clear") != null) {
 	    		  params.put("end_reason", "");
@@ -260,7 +279,7 @@ public class MemberController {
 			}else {
 				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
 			}
-
+	      }
 	      return page;
 	   }
 
@@ -271,14 +290,28 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value = "/penaltyList.do")
-	public String penaltyList(Model model) {
-		logger.info("이용정지리스트 페이지");
-		ArrayList<MemberDTO> penaltyList = service.penaltyList();
-		logger.info("이용정지 회원 리스트 갯수 : "+penaltyList.size());	
-		model.addAttribute("penaltyList", penaltyList);
+	@RequestMapping(value = "/penaltyList.go")
+	public String ad_penaltyList(Model model)  {
+		logger.info("이용정지리스트 페이지 이동");
+		
 		return "penalty/penaltyList";
 	}
+	
+	@RequestMapping(value = "/penaltyList.ajax")
+	@ResponseBody
+	public HashMap<String, Object> penaltyList(
+			@RequestParam HashMap<String, String> params
+			) {		
+		
+		logger.info("리스트 요청 : {}",params);
+		HashMap<String, Object> penaltyList = service.penaltyList(params);
+		logger.info("컨트롤러 체크포인트");
+		
+		
+		return penaltyList;
+	}
+	
+	
 	
 	@RequestMapping(value = "/penaltyDetail.do")
 	public String penaltyDetail(Model model ,@RequestParam String penalty_id) {
@@ -292,10 +325,30 @@ public class MemberController {
 	}	
 	
 
+	@RequestMapping(value = "/penaltyUpdate.do")
+	public String penaltyUpdate(Model model,
+			@RequestParam HashMap<String, String> params) {
+		
+		logger.info("params : {}", params);
+		if(params.get("cancel") == null) {
+			params.put("cancel", "false");       
+		}else {
+			params.put("admin_cancel", "tester");  
+			
+		}
+		
+		service.penaltyUpdate(params);
+		String page = "redirect:/penaltyDetail.do?penalty_id="+params.get("penalty_id");
+		
+		return page;
+	}
+
+
 	
 	
 	
 	
+
 	
 //	관리자 > 회원의 도서내역
 	
@@ -387,23 +440,9 @@ public class MemberController {
 	
 	
 
-	@RequestMapping(value = "/penaltyUpdate.do")
-	   public String penaltyUpdate(Model model,
-	         @RequestParam HashMap<String, String> params) {
-	       
-	      logger.info("params : {}", params);
-	      if(params.get("cancel") == null) {
-	         params.put("cancel", "false");       
-	      }else {
-	         params.put("admin_cancel", "tester");  
-	         
-	      }
-	      
-	      service.penaltyUpdate(params);
-	      String page = "redirect:/penaltyDetail.do?penalty_id="+params.get("penalty_id");
+	
+	
 
-	      return page;
-	   }
 	
 	
 	
