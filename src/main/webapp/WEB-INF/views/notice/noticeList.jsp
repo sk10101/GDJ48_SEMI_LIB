@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>공지사항 목록</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
@@ -19,70 +19,64 @@
 		<jsp:include page="../commons/header.jsp"/>
 	</div>
 	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important; margin:0;"/>
-    <div id="myPage_menu">
-        <h3>마이페이지</h3>
-        <hr/>
-        <a href="#">도서내역</a><br/>
-        <br/>
-        <a href="noticeList">건의사항</a><br/>
-        <br/>
-        <a href="#">회원정보</a>
+    <div class="body">
+	    <div class="title">
+	    <h3>공지사항</h3>
+	    </div>
+	    <div class="btn-area">
+	    <c:choose>
+			<c:when test="${sessionScope.loginId eq null || sessionScope.mb_class eq '일반회원'}">
+			</c:when>
+			<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+			    <input class="adminBtn" type="button" value="삭제" onclick="noticeDelete()" />
+			    <button class="adminBtn" id="notice_write" onclick="location.href='noticeWrite.go'">공지사항 작성</button><br/>
+			</c:when>
+			<c:otherwise>
+			</c:otherwise>
+	    </c:choose>
+	    </div>
+	    <div class="noticeTable-area">
+		    <table id="notice_table">
+		    	<thead>
+			         <tr>
+			         	<c:choose>
+			         		<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
+				                 <th><input type="checkbox" id="all" /></th>
+			         		</c:when>
+			         		<c:otherwise>
+							</c:otherwise>
+			         	</c:choose>
+		                 <th>번호</th>
+		                 <th>제목</th>
+		                 <th>날짜</th>
+		             </tr>
+		    	 </thead>
+		    	<tbody id="noticeList">
+		    	
+		    	</tbody>
+		     </table>
+			 <div class="container">
+				 <nav aria-label="Page navigation" style="text-align:center">
+						 <ul class="pagination" id="pagination" >
+						 </ul>					
+				 </nav>
+			 </div>	
+			 <!-- 아래 페이징 처리 해야됨-->
+	      	 <div class="noticeSearchOption">
+			     <select class="selectBtn" id="pagePerNum">
+			         <option value="5">5</option>
+					 <option value="10" selected="selected">10</option>
+					 <option value="15">15</option>
+					 <option value="20">20</option>
+			     </select>
+				 <select class="selectBtn" id="option" name="option">
+		      	 	 <option value="제목">제목</option>
+		      	 </select>
+		         <input class="noticeSearchBlock" type="search" id="word" value="" name="word" placeholder="제목을 입력하세요"/>
+		         <input class="noticeSearchDo" type="button" onclick="searchList(currPage)" id="searchBtn" value="검색"/>
+	         </div>
+       </div>
     </div>
-    <c:choose>
-		<c:when test="${sessionScope.loginId eq null || sessionScope.mb_class eq '일반회원'}">
-		</c:when>
-		<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
-		    <input type="button" value="삭제" onclick="noticeDelete()" />
-		    <button id="notice_write" onclick="location.href='noticeWrite.go'">공지사항 작성</button><br/>
-		</c:when>
-		<c:otherwise>
-		</c:otherwise>
-    </c:choose>
-    <table id="notice_table">
-    	<thead>
-	         <tr>
-	         	<c:choose>
-	         		<c:when test="${sessionScope.loginId ne null and sessionScope.mb_class eq '관리자'}">
-		                 <th><input type="checkbox" id="all" /></th>
-	         		</c:when>
-	         		<c:otherwise>
-					</c:otherwise>
-	         	</c:choose>
-                 <th>번호</th>
-                 <th>제목</th>
-                 <th>날짜</th>
-             </tr>
-    	</thead>
-    	<tbody id="noticeList">
-    	
-    	</tbody>
-	    	<tr>
-				<td colspan="5" id="paging">
-					<div class="container">
-						<nav aria-label="Page navigation" style="text-align:center">
-								<ul class="pagination" id="pagination" >
-								</ul>					
-						</nav>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="4">
-				<!-- 아래 페이징 처리 해야됨-->
-			       <select id="pagePerNum">
-				       	<option value="5">5</option>
-						<option value="10" selected="selected">10</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-			       </select>
-					<select id="option" name="option">
-			      		<option value="제목">제목</option>
-			      	</select>
-			       <input type="search" id="word" value="" name="word" placeholder="제목을 입력하세요"/>
-			       <input type="button" onclick="searchList(currPage)" id="searchBtn" value="검색" style="width: 60px; margin-top: 10px;"/>
-				</td>
-			</tr>
-        </table>
 </body>
 <script>
 	//체크박스 전체 선택시 모두선택 / 헤제
@@ -203,13 +197,13 @@
 			//console.log(item.status);
 			content += '	<tr nID="' + item.notice_id + '">';
 			if(mb_class == "관리자") {
-				content += '		<td><input type="checkbox" id="chk" value="'+item.notice_id+'"/></td>';
+				content += '		<td class="noticeCol"><input type="checkbox" id="chk" value="'+item.notice_id+'"/></td>';
 			} else {
 				
 			}
-			content += '		<td id="noticeID">'+item.notice_id+'</td>';
+			content += '		<td class="noticeCol" id="noticeID">'+item.notice_id+'</td>';
 			content += '		<td><a href="noticeDetail.do?notice_id='+item.notice_id+'">'+item.notice_title+'</a></td>';
-			content += '		<td>'+item.notice_date+'</td>';
+			content += '		<td class="noticeCol">'+item.notice_date+'</td>';
 			content += '	</tr>';
 		});
 		// 혹시 모를 상황을 대비해 깨끗하게 비워두고 쌓는다. (append 는 있는 것에 계속해서 이어 붙이는 기능이기 때문)
