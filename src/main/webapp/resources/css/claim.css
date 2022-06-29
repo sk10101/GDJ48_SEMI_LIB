@@ -26,6 +26,9 @@
 	font-size:18px;
 	font-weight:700;
 }
+.myPageTab .tabSelect{
+	color:#333;
+}
 .section{
 	display: flex;
     align-items: center;
