@@ -12,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.gdj.lib.dto.BoardDTO;
-import com.gdj.lib.dto.BookDTO;
+
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
@@ -212,7 +211,7 @@ public class MemberService {
 		logger.info("보여줄 페이지 : "+page);
 		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
-		int allCnt = dao.allCount();
+		int allCnt = dao.allMemeberCount();
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {
@@ -239,7 +238,7 @@ public class MemberService {
 		logger.info("보여줄 페이지 : "+page);
 		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
-		int allCnt = dao.allCount();
+		int allCnt = dao.allAdminCount();
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {

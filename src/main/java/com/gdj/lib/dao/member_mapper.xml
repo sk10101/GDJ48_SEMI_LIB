@@ -125,8 +125,15 @@
    <select id="allBlackCount" resultType="int">
 		SELECT COUNT(black_id) FROM blacklist
 	</select>
+	
+	
+	<select id="allMemeberCount" resultType="int">
+		SELECT COUNT(mb_id) FROM member WHERE mb_class = '일반회원'
+	</select>
    
-
+	<select id="allAdminCount" resultType="int">
+		SELECT COUNT(mb_id) FROM member WHERE mb_class = '관리자'
+	</select>
 	
 	
 	

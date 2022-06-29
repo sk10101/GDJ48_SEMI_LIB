@@ -121,6 +121,10 @@ public interface MemberDAO {
 
 	int allBlackCount();
 
+	int allMemeberCount();
+
+	int allAdminCount();
+
 
 	
 
