@@ -69,23 +69,60 @@
 			ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
-	<select id="mbIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
+	<select id="blackIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT * FROM blacklist
 			WHERE mb_id LIKE CONCAT('%',#{param3},'%')
-				ORDER BY black_id DESC LIMIT #{param1} OFFSET #{param2}
+				ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="adStartSearch" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT * FROM blacklist
 			WHERE admin_start LIKE CONCAT('%',#{param3},'%')
-				ORDER BY black_id DESC LIMIT #{param1} OFFSET #{param2}
+				ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="adEndSearch" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT * FROM blacklist
 			WHERE admin_end LIKE CONCAT('%',#{param3},'%')
-				ORDER BY black_id DESC LIMIT #{param1} OFFSET #{param2}
+				ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
+
+	<select id="mbIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%') and mb_class = '일반회원'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+
+	<select id="mbNameSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE name LIKE CONCAT('%',#{param3},'%') and mb_class = '일반회원'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="mbStatusSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE mb_status LIKE CONCAT('%',#{param3},'%') and mb_class = '일반회원'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%') and mb_class = '관리자'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+
+	<select id="adNameSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE name LIKE CONCAT('%',#{param3},'%') and mb_class = '관리자'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adPhoneSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE phone LIKE CONCAT('%',#{param3},'%') and mb_class = '관리자'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
 	
 	
 

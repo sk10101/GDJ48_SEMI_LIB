@@ -121,22 +121,43 @@ public interface MemberDAO {
 
 	int allBlackCount();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 	
 	
 	
 	
 	
-	ArrayList<MemberDTO> mbIDSearch(int cnt, int offset, String word);
+	ArrayList<MemberDTO> blackIDSearch(int cnt, int offset, String word);
 
 	ArrayList<MemberDTO> adStartSearch(int cnt, int offset, String word);
 
 	ArrayList<MemberDTO> adEndSearch(int cnt, int offset, String word);
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> origin/master
 	int allMemeberCount();
 
 	int allAdminCount();
 
+<<<<<<< HEAD
+=======
+	ArrayList<MemberDTO> mbIDSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> mbNameSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> mbStatusSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> adIDSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> adNameSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> adPhoneSearch(int cnt, int offset, String word);
+>>>>>>> origin/master
 
 
 	
