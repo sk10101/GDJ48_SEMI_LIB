@@ -34,7 +34,7 @@ public class BookService {
 	public ArrayList<BookDTO> bookSearch(String option, String word) {
 		
 		logger.info("검색 서비스 도착: {},{}", option, word);
-		dao.reserveChk(option,word);
+		//dao.reserveChk(option,word);
 		if (option.equals("writer")){
 			logger.info("선택 옵션 :"+option);
 			return dao.searchWriter(word);
