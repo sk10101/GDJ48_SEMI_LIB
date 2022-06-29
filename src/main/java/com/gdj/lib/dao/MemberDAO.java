@@ -57,7 +57,7 @@ public interface MemberDAO {
 	String login(String id, String pw);
 
 
-	ArrayList<MemberDTO> memberUpdateListMy();
+	MemberDTO memberUpdateListMy(String mb_id);
 
 
 

@@ -17,9 +17,10 @@
 	  <h3>${sessionScope.loginId }님의 상세 정보</h3>
 	  <form action="myUpdate" method="post">
 	 <table>
+	 		
             <tr>
                 <th>ID</th>
-                <td><input type="hidden" name="mb_id" value="${myUpdateDetail.mb_id}">${myUpdateDetail.mb_id}</td>
+                <td><input type="hidden" name="mb_id" value="${sessionScope.loginId }">${sessionScope.loginId }</td>
             </tr>
             <tr>
                 <th>PW</th>

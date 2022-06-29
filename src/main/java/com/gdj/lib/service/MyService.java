@@ -15,8 +15,6 @@ import com.gdj.lib.dto.MemberDTO;
 @Service
 public class MyService {
 
-	private static final boolean TooManyResultsException = false;
-
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired MemberDAO dao;
@@ -28,9 +26,9 @@ public class MyService {
 		return dao.memberUpdateDetailMy(mb_id);
 	}
 
-	public ArrayList<MemberDTO> myUpdateList() {
+	public MemberDTO myUpdateList(String mb_id) {
 		logger.info("리스트 서비스 요청");
-		return dao.memberUpdateListMy();
+		return dao.memberUpdateListMy(mb_id);
 	}
 
 	public void myUpdate(String mb_id, String mb_pw, String name ,String phone) {
