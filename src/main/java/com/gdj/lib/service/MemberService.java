@@ -48,14 +48,9 @@ public class MemberService {
 	}
 
 
-	public ArrayList<MemberDTO> memberBrw() {
-		
-		logger.info("관리자 > 회원 도서내역 서비스 도착");
-		return dao.memberBrw();
-	}
+	
 	/*
-=======
->>>>>>> origin/master
+
 	public ArrayList<MemberDTO> blackList() {
 		
 		return dao.blackList();
@@ -90,10 +85,6 @@ public class MemberService {
 	}
 
 
-	public ArrayList<BrwBookDTO> brwList(String mb_id) {
-		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
-		return dao.brwList(mb_id);
-	}
 
 
 
