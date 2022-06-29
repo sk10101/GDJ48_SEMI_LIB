@@ -43,18 +43,20 @@ h3{
 #notice_table{
 	width:100%;
 }
-th,td{
+#notice_table th,td{
 	height:28px;
+	border:none;
+	padding: 5px 10px;
 }
-th{
+#notice_table th{
     background-color: #86b049;
     color: #eee;
     font-size:18px;
 }
-tbody tr:nth-child(even){
+#notice_table tbody tr:nth-child(even){
     background-color: #ebf7d8;
 }
-tbody tr:nth-child(odd){
+#notice_table tbody tr:nth-child(odd){
     background-color: #c9dab2;
 }
 .noticeCol{
@@ -184,8 +186,45 @@ tbody tr:nth-child(odd){
     font-size:15px;
     font-weight:700;
 }
+.noticeSearchDo:hover{
+	cursor:pointer;
+	background-color:#476930;
+}
 #noticeList a{
 	text-decoration-line:none;
 	color:#333;
 	font-weight:700;
+}
+
+
+
+/*noticeDetail.jsp*/
+.noticeDetail{
+	width:800px;
+	border-collapse: collapse;
+}
+.noticeDetail th{
+	border:1px solid #333;
+	padding: 5px 10px;
+}
+.noticeDetail td{
+	border:1px solid #333;
+	padding: 5px 10px;
+}
+.noticeDetail th{
+	width:15%;
+}
+.noticeBack{
+	width: 110px;
+	margin-top:20px;
+	background-color: #86b049;
+	padding: 5px;
+	color:#fff;
+	font-size:20px;
+	font-weight:700;
+	border-radius:5px;
+}
+.noticeBack:hover{
+	cursor:pointer;
+	background-color:#476930;
 }

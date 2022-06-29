@@ -21,7 +21,7 @@
 	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important; margin:0;"/>
     <div class="body">
 	    <div class="title">
-	    <h3>공지사항</h3>
+	    	<h3>공지사항</h3>
 	    </div>
 	    <div class="btn-area">
 	    <c:choose>

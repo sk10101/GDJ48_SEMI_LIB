@@ -3,50 +3,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/notice.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-	  		h3 {text-align: left; font-weight: bold; font-size: 40px;}
-            table {width: 80%}
-            table, th, td {border: 1px solid black; border-collapse: collapse;}
-            th, td{padding: 5px 10px; text-align: center;}
-            input[type='text'] {width: 100%;}
-            textarea {width: 100%; height : 150px; resize: none;}
-            button{margin-bottom: 5px; float: right;}
 </style>
 </head>
 <body>
-       <table class="notice">
-                <tr>
-                    <th>제목</th>
-                    <td>${notice.notice_title}</td>
-                </tr>
-                <tr>
-                    <th>작성자</th>
-                    <td>${notice.mb_id }</td>
-                </tr>
-                <tr>
-                    <th>작성일</th>
-                    <td>${notice.notice_date }</td>
-                </tr>
-                <tr>
-                    <th>내용</th>
-                    <td style="vertical-align:top">${notice.notice_content}</td>
-                </tr>
-                <c:if test="${noticeList.size() >0 }">
-                <tr>
-                    <th>첨부파일</th>
-                    <td>
-                    	<c:forEach items="${noticeList}" var="path">
-                    			<img src="/image/${path.newFileName}" width="500" />
-                    	</c:forEach>
-                    </td>
-                </tr>
-                </c:if>
-        </table>
-        <button onclick="location.href='noticeList'">돌아가기</button>
-    </body>
-    <script>
-        
-    </script>
+	<div id="header">
+		<jsp:include page="../commons/header.jsp"/>
+	</div>
+	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+		<div class="title">
+	    	<h3>공지사항 상세보기</h3>
+	    </div>
+		<table class="noticeDetail">
+		         <tr>
+		             <th>제목</th>
+		             <td>${notice.notice_title}</td>
+		        </tr>
+		        <tr>
+		            <th>작성자</th>
+		            <td>${notice.mb_id }</td>
+		        </tr>
+		        <tr>
+		            <th>작성일</th>
+		            <td>${notice.notice_date }</td>
+		        </tr>
+		        <tr>
+		            <th>내용</th>
+		            <td style="vertical-align:top">${notice.notice_content}</td>
+		        </tr>
+		        <c:if test="${noticeList.size() >0 }">
+		        <tr>
+		            <th>첨부파일</th>
+		            <td>
+		            	<c:forEach items="${noticeList}" var="path">
+		            			<img src="/image/${path.newFileName}" width="500" />
+		            	</c:forEach>
+		            </td>
+		        </tr>
+		        </c:if>
+		</table>
+		<button class="noticeBack" onclick="location.href='noticeList'">돌아가기</button>
+	</div>
+</body>
+<script>
+</script>
 </html>
