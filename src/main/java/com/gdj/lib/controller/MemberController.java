@@ -239,8 +239,8 @@ public class MemberController {
 	    		  params.put("black_cancel", "false");  
 	    		  
 	    	  }else {
-	    		  
-	    		  params.put("admin_end", "tester");  
+	    		  String loginId = (String) session.getAttribute("loginId");
+	    		  params.put("admin_end", loginId);  
 	    		  
 	    		  
 	    	  }
