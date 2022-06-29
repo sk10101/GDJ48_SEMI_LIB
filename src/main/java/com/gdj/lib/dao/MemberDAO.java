@@ -81,7 +81,7 @@ public interface MemberDAO {
 	void blackUpdate(HashMap<String, String> params);
 
 
-<<<<<<< HEAD
+
 	void cancelMySecession(String mb_id);
 
 
@@ -89,9 +89,9 @@ public interface MemberDAO {
 
 
 	void MySecessionTwo(String mb_id);
-=======
+
 	String getMbClass(String id, String pw);
->>>>>>> origin/master
+
 
 
 	
