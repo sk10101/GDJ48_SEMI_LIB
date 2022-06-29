@@ -4,9 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<%@ page import="java.util.Date" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 
 <style>
     .detail {
@@ -48,7 +49,8 @@
                 <td>취소</td>      
             </tr>
         </thead>
-        <tbody>
+        <tbody id="penaltyList">
+        <!--
 				<c:forEach items="${penaltyList}" var="dto">
 					<tr>
 						<td>${dto.penalty_id}</td>
@@ -80,21 +82,39 @@
             			</c:choose>
 					</tr>
 				</c:forEach>
+				-->
 			</tbody>
+			<tr>
+				<td colspan="6" id="paging">
+					<div class="container">
+						<nav aria-label="Page navigation" style="text-align:center">
+								<ul class="pagination" id="pagination" >
+								</ul>					
+						</nav>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan ="6" id="paging">
+				        <select id="pagePerNum">
+							<option value="5">5</option>
+							<option value="10" selected="selected">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+						</select>
+				       	<select id="option" name="option">
+				       		 <option value="member">회원ID</option>
+           					 <option value="bantext">제한내역</option>
+				       	</select>
+			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+				</td>
+			</tr>
     </table>
-    <br/>
-    <div>
-        <select id="option">
-            <option value="member">회원ID</option>
-            <option value="bantext">제한내역</option>
-        </select>
-        <input type="text" placeholder="검색"/>
-        <button type="submit">검색</button>
-    </div>
 </body>
 <script>
 
-/*
+
 var currPage=1;
 	
     listCall(currPage);
@@ -113,7 +133,7 @@ var currPage=1;
         console.log("param page : "+page);
         $.ajax({
             type:'GET',
-            url:'list.ajax',
+            url:'penaltyList.ajax',
             data:{
                 cnt : pagePerNum,
                 page : page
@@ -121,7 +141,7 @@ var currPage=1;
             dataType:'json',
             success:function(data){
                 console.log(data);
-                drawList(data.list);
+                drawList(data.penaltyList);
                 currPage = data.currPage;
                 
                 //불러오기가 성공되면 플러그인을 이용해 페이징 처리
@@ -145,21 +165,59 @@ var currPage=1;
         });
     }
     
-    function drawList(list){
+    function drawList(penaltyList){
         var content = '';
-        list.forEach(function(item){
-            console.log(item);
+        penaltyList.forEach(function(dto){
+            console.log(dto);
+            if(dto.penalty_end != null) {
             content += '<tr>';
-            content += '<td>'+item.idx+'</td>';
-            content += '<td>'+item.subject+'</td>';
-            content += '<td>'+item.user_name+'</td>';
-            content += '<td>'+item.bHit+'</td>';
+            content += '<td>'+dto.penalty_id+'</td>';
+            content += '<td><a href="penaltyDetail.do?penalty_id='+dto.penalty_id+'">'+dto.mb_id+'</a></td>';
+            if(dto.category_id == "5"){
+            	content += '<td>대출연체</td>';
+            }else {
+            	content += '<td>예약만료</td>';
+            }
+            content += '<td>'+dto.penalty_start+'</td>';
+            if(dto.category_id == "5"){
+            	content += '<td>'+dto.penalty_end+'</td>';
+            }else{
+            	content += '<td>'+dto.penalty_end+'</td>';
+            }
+            if(dto.cancel == true){
+            	content += '<td>Y</td>';
+            }else{
+            	content += '<td>N</td>';
+            }
             content += '</tr>';
+            	
+            }else{
+            	content += '<tr>';
+                content += '<td>'+dto.penalty_id+'</td>';
+                content += '<td><a href="penaltyDetail.do?penalty_id='+dto.penalty_id+'">'+dto.mb_id+'</a></td>';
+                if(dto.category_id == "5"){
+                	content += '<td>대출연체</td>';
+                }else {
+                	content += '<td>예약만료</td>';
+                }
+                content += '<td>'+dto.penalty_start+'</td>';
+                if(dto.category_id == "5"){
+                	content += '<td>'+dto.penalty_end+'</td>';
+                }else{
+                	content += '<td></td>';
+                }
+                if(dto.cancel == true){
+                	content += '<td>Y</td>';
+                }else{
+                	content += '<td>N</td>';
+                }
+                content += '</tr>';
+            }
         });
-        $('#list').empty();
-        $('#list').append(content); //tbody에 뿌려줌
+        $('#penaltyList').empty();
+        $('#penaltyList').append(content); //tbody에 뿌려줌
         
     }
-    */
+    
 </script>
 </html>

@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gdj.lib.dto.BoardDTO;
+import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
@@ -93,9 +95,7 @@ public class MemberService {
 	}
 
 	
-	public ArrayList<MemberDTO> penaltyList() {
-		return dao.penaltyList();
-	}
+	
 
 	public MemberDTO penaltyDetail(String penalty_id) {
 		logger.info("이용정지 리스트 상세보기 서비스 : "+penalty_id);
@@ -113,7 +113,62 @@ public class MemberService {
 		
 	}
 
-	
+	public HashMap<String, Object> penaltyList(HashMap<String, String> params) {
+HashMap<String, Object> map = new HashMap<String, Object>();
 
+
+int cnt = Integer.parseInt(params.get("cnt"));
+int page = Integer.parseInt(params.get("page"));
+String option = params.get("option");
+String word = params.get("word");
+logger.info("서비스 리스트 요청 : {}", params);
+logger.info("보여줄 페이지 : " + page);
+
+ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
+
+// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
+int allCnt = dao.allCount();
+logger.info("allCnt : " + allCnt);
+
+int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+
+logger.info("pages : " + pages);
+if (page > pages) {
+	page = pages;
 }
+map.put("pages", pages); // 최대 페이지 수
+
+int offset = cnt * (page-1);
+
+map.put("offset", offset);
+map.put("currPage", page); // 현재 페이지
+
+logger.info("offset : "+offset);
+	
+//검색 관련 설정하는 조건문
+		if(word == null || word.equals("")) {
+			ArrayList<MemberDTO> penaltyList = dao.penaltyList(cnt, offset);
+			
+			map.put("penaltyList", penaltyList);
+		} else {
+			/*
+			 * logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+			 * 
+			 * // 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음 if(option.equals("제목")) { searchList
+			 * = dao.subjectSearch(cnt,offset,word); logger.info("제목 옵션 설정"); } else
+			 * if(option.equals("처리상태")) { searchList = dao.statusSearch(cnt,offset,word);
+			 * logger.info("처리상태 옵션 설정"); } else { searchList =
+			 * dao.writerSearch(cnt,offset,word); logger.info("작성자 옵션 설정"); }
+			 */
+			
+			logger.info("검색결과 건수 : " +searchList.size());
+			map.put("penaltyList", searchList);
+			
+		}
+		logger.info("서비스 체크포인트");
+		return map;
+	
+	}
+}
+	
 

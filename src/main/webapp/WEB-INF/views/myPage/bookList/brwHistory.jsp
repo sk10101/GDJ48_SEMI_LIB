@@ -88,7 +88,9 @@
                                     	<tr>
 
                                     		<td id="extension_id">${brwdto.brw_id}</td>
-                                    		<td>${brwdto.b_title}</td>
+                                    		<td>
+                                    			<a href="bookDetail.do?b_id=${brwdto.b_id}">${brwdto.b_title}</a>
+                                    		</td>
                                     		<td>${brwdto.brw_date}</td>
                                     		<td>${brwdto.return_date}</td>
                                     		<td>${brwdto.brw_status}</td>
@@ -117,14 +119,6 @@
 	                                    		</c:choose>
                                     		</td>
                                     		
-
-                                    		<td>${dto.brw_id}</td>
-                                    		<td>${dto.b_title}</td>
-                                    		<td>${dto.brw_date}</td>
-                                    		<td>${dto.return_date}</td>
-                                    		<td>${dto.brw_status}</td>
-                                    		<td>Y</td>
-                                    		<td>${dto.renew}</td>
 
                                     	<tr>
                                     	

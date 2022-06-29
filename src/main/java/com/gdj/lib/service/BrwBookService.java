@@ -20,12 +20,9 @@ public class BrwBookService {
 	
 	@Autowired BrwBookDAO dao;
 
-	public BrwBookDTO detail(String b_id) {
-		BrwBookDTO dto = null;
-		logger.info(b_id+"상세보기 서비스 요청");
-		dto = dao.detail(b_id);
-		logger.info("b_title :"+dto.getB_title());
-		return dto;
+	public ArrayList<BrwBookDTO> detail(HashMap<String, String> params) {
+		logger.info("도서상세보기 서비스 요청 : " + params);
+		return dao.detail(params);
 	}
 
 
@@ -104,13 +101,8 @@ public class BrwBookService {
 	
 
 
-	public String reserveBookBrw(HashMap<String, String> params) {
-		logger.info("예약된 책 대출신청"+params);
-		dao.reserveBookBrw(params.get("reserve_id"));
-		dao.bookStatusUpdate(params.get("b_id"));
-		return "redirect:/reserve";
-		
-	}
+	
+
 
 
 	public int reserveCheck(String mb_id) {
@@ -130,25 +122,89 @@ public class BrwBookService {
 	}
 
 
-	public void penaltyDate(String mb_id) {
-		 dao.penaltyDate(mb_id);
+	
+
+	
+
+	public void bookBrwDetail(String b_id) {
+		logger.info("도서예약 취소"+b_id);
+		dao.bookBrwDetail(b_id);
 		
 	}
 
 
+
+	public void bookreason(HashMap<String, String> params) {
+		logger.info("도서 예약"+params);
+		dao.bookreason(params);
+		
+	}
+
+
+	public HashMap<String, Object> myPageBrwList(HashMap<String, String> params) {
+		
+		HashMap<String, Object> brwBookPageMap = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+//		String option = params.get("option");
+//		String word = params.get("word");
+		logger.info("서비스 리스트 요청 : {}", params);
+		logger.info("보여줄 페이지 : "+page);
+		
+		//ArrayList<BoardDTO> noticeSearchList = new ArrayList<BoardDTO>();
+		
+		int allCnt = dao.allCount();
+		logger.info("allCnt : "+allCnt);
+		int pages = allCnt % cnt> 0 ? (allCnt / cnt)+1 : (allCnt/ cnt);
+		logger.info("pages : "+pages);
+		
+
+		if(page > pages) {
+			page = pages;
+		}if(page < pages) {
+			page = pages;
+		};
+		
+		brwBookPageMap.put("pages", pages); //만들수있는 쵀대 페이지 수
+		brwBookPageMap.put("currPage", page); //현재 페이지
+
+		
+		
+		int offset = (page -1) * cnt;
+		logger.info("offset : "+offset);
+		
+		ArrayList<BrwBookDTO> list = dao.bookListPaing(cnt, offset);
+		brwBookPageMap.put("list",list);
+		
+		// 검색 관련 설정하는 조건문
+//		if(word == null || word.equals("")) {
+//			ArrayList<BoardDTO> noticeList = dao.noticeList(cnt, offset);
+//			
+//			noticePageMap.put("noticeList", noticeList);
+//		} else {
+//			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+//			
+//			// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
+//			if(option.equals("제목")) {
+//				noticeSearchList = dao.subjectNoticeSearch(cnt,offset,word);
+//				logger.info("제목 옵션 설정");
+//			}
+//			
+//			logger.info("검색결과 건수 : " +noticeSearchList.size());
+//			noticePageMap.put("noticeList", noticeSearchList);
+//			
+//		}
+//		logger.info("서비스 체크포인트");
+//		
+		
+		
+		return brwBookPageMap;
+		
+	}
+
 	
-
-
-
-
 	
-
-
-//	public ArrayList<BookDTO> list() {
-//		logger.info("도서목록 서비스 요청");
-//		return dao.list();
-//	}
-
 
 	
 

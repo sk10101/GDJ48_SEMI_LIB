@@ -4,12 +4,12 @@ package com.gdj.lib.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 
 public interface BrwBookDAO {
 	
-	BrwBookDTO detail(String b_id);
 
 	void brw(String loginId, String b_id);
 
@@ -27,9 +27,9 @@ public interface BrwBookDAO {
 
 	void del(String reserve_id);
 
-	void reserveBookBrw(String string);
 
 	void bookStatusUpdate(String string);
+
 
 	int reserveCheck(String mb_id);
 
@@ -38,6 +38,19 @@ public interface BrwBookDAO {
 	long overExpiry(String mb_id);
 
 	Object penaltyDate(String mb_id);
+
+	void bookBrwDetail(String b_id);
+
+	ArrayList<BrwBookDTO> detail(HashMap<String, String> params);
+
+	void bookreason(HashMap<String, String> params);	
+
+	ArrayList<BrwBookDTO> bookListPaing(int cnt, int offset);
+
+	int allCount();
+
+	
+
 
 	
 

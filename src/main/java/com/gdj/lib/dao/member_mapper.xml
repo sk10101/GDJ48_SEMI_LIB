@@ -63,8 +63,15 @@
 			VALUES(#{mb_id},#{admin_start},#{black_reason})
 	</insert>
 	
+	<!-- 이용정지 리스트 페이징 -->	
 	<select id="penaltyList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT penalty_id,mb_id,category_id,penalty_start,penalty_end,cancel  FROM penalty
+				ORDER BY penalty_id DESC limit #{param1} offset #{param2}
+		
+	</select>
+	
+	<select id="allCount" resultType="Integer">
+		SELECT COUNT(penalty_id) FROM penalty;
 	</select>
 	
 	<select id="penaltyDetail" resultType="com.gdj.lib.dto.MemberDTO">

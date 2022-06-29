@@ -1,12 +1,10 @@
 package com.gdj.lib.dao;
 
 
-import com.gdj.lib.dto.BrwBookDTO;
-import com.gdj.lib.dto.MemberDTO;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
 
 public interface MemberDAO {
@@ -69,7 +67,6 @@ public interface MemberDAO {
 
 	ArrayList<BrwBookDTO> brwList(String mb_id);
 
-	ArrayList<MemberDTO> penaltyList();
 
 
 	MemberDTO penaltyDetail(String penalty_id);
@@ -82,6 +79,12 @@ public interface MemberDAO {
 
 
 	String getMbClass(String id, String pw);
+
+
+	int allCount();
+
+
+	ArrayList<MemberDTO> penaltyList(int cnt, int offset);
 
 
 	

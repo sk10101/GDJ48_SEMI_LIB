@@ -1,6 +1,8 @@
 package com.gdj.lib.controller;
 
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.service.BrwBookService;
 
@@ -70,17 +71,32 @@ public class BrwBookController {
 		
 	}
 	
-	
 	@RequestMapping(value = "/bookDetail.do")
-	public String bookDetail(Model model, @RequestParam String b_id) {
+	public String bookDetail(Model model, HttpSession session,
+			@RequestParam HashMap<String, String> params) {
 		
-		logger.info("도서 상세보기 요청"); 
-		BrwBookDTO dto = service.detail(b_id);
-		model.addAttribute("dto",dto);
 		
+		
+		logger.info("이전대출 목록" + params); 
+		ArrayList<BrwBookDTO> detail = service.detail(params);
+		model.addAttribute("detail",detail);
+			
 		return "book/bookDetail";
+		
 	}
 	
+	
+	
+//	@RequestMapping(value = "/bookDetail.do")
+//	public String bookDetail(Model model, @RequestParam String b_id) {
+//		
+//		logger.info("도서 상세보기 요청 : "+ b_id); 
+//		BrwBookDTO dto = service.detail(b_id);
+//		model.addAttribute("dto",dto);
+//		
+//		return "book/bookDetail";
+//	}
+//	
 	
 	@RequestMapping(value = "/bookbrw.ajax")
 	@ResponseBody
@@ -98,16 +114,7 @@ public class BrwBookController {
 	
 	
 	
-	@RequestMapping(value = "/bookreason.ajax")
-	@ResponseBody
-	public String reason(HttpSession session, Model model,
-			@RequestParam String b_id) {
-		
-		String page = "redirect:/";
-		logger.info("예약신청 후 페이지"+b_id);
-		service.reason(b_id);
-		return "redirect:/bookDetail?b_id="+b_id;
-	}
+	
 		
 	@RequestMapping(value = "/bookreserve.ajax")
 	@ResponseBody
@@ -118,20 +125,7 @@ public class BrwBookController {
 		logger.info("기존 도서 상세보기 페이지"+b_id);
 		service.bookreserve(b_id);
 		
-		// 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회
-		int reserveCheck = service.reserveCheck(mb_id);
-		logger.info("예약한 수: "+reserveCheck);
-		if(reserveCheck == 1) {
-			long expiry = service.expiry(mb_id);
-			// 예약 만료일 
-			long overExpiry = service.overExpiry(mb_id);
-			// 만료일이 지났을 경우
-			if(expiry>overExpiry) {
-				service.penaltyDate(mb_id);
-			}
-		}
 		
-		// 예약 기간이 지났는데 반납을 안한 경우
 		
 		
 		return "redirect:/bookDetail?b_id="+b_id;
@@ -170,19 +164,49 @@ public class BrwBookController {
 		
 	}
 	
-	@RequestMapping(value = "/reserveBookbrw.ajax")
+	
+	
+	/*
+	 * @RequestMapping(value = "/bookreason.ajax")
+	 * 
+	 * @ResponseBody public String bookreason(HttpSession session, Model model,
+	 * 
+	 * @RequestParam HashMap<String, String> params) {
+	 * 
+	 * String page = "redirect:/"; logger.info("받아온 책번호 : "+ params ); String msg =
+	 * ""; long miliseconds = System.currentTimeMillis(); Date date = new
+	 * Date(miliseconds);
+	 * 
+	 * 
+	 * // 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 int reserveCheck =
+	 * service.reserveCheck("gustn0055"); logger.info("예약한 수: "+reserveCheck);
+	 * if(reserveCheck == 1) { long expiry = service.expiry("gustn0055"); // 만료일이
+	 * 지났을 경우
+	 * 
+	 * // expiry db 에서 데이트 타입으로 가져와야 비교 가능 if(expiry>date.) { msg = "이용정지 3일입니다";
+	 * }else { msg = "예약신청이 완료되었습니다."; service.bookreason(params); } } // 예약 기간이
+	 * 지났는데 반납을 안한 경우
+	 * 
+	 * return msg;
+	 * 
+	 * 
+	 * }
+	 */
+	
+	//brwList 페이징 처리
+	@RequestMapping("/myPageBrwList.ajax")
 	@ResponseBody
-	public String reserveBookBrw(HttpSession session, Model model, 
+	public HashMap<String, Object> myPageBrwList(
 			@RequestParam HashMap<String, String> params) {
+		logger.info("리스트 요청 : {}",params);
 		
-		String page = "redirect:/";
-		logger.info("받아온 예약번호, 책번호 : "+ params );
-		service.reserveBookBrw(params);
+		HashMap<String, Object> brwList = service.myPageBrwList(params);
+		logger.info("컨트롤러 체크포인트");
 		
-		return "redirect:/reserve";
-		
-		
+		return brwList;
 	}
+
+	
 	
 	
 }
