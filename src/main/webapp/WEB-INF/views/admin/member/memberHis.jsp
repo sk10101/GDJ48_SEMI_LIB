@@ -5,141 +5,103 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="../resources/css/admin.css">
 <style>
-    .detail {
-        right: 0;
-    }
-    table.bbs {
-		width: 50%;
-	}
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th, td {
-		padding: 10px 10px;
-	}
-	textarea {
-		width: 100%;
-		height: 150px;
-		resize: none;
-	}
-    input[type='text'] {
-        width: 10%;
-    }
-    a:link {
-        text-decoration: none;
-    }
 </style>
 </head>
 <body>
-	<h3>이전대출내역</h3>
-    <div class="header">
-        <th>***님 환영합니다.</th>
-        <a href="#">로그아웃</a>
-        <a href="#">관리자페이지</a>
-    </div>
-    <br/>
-    <tr>
-        <th colspan="2">
-            <th><a href="detail02.html">대출내역</a></th>
-            <th><a href="#">이전 대출내역</a></th>
-            <th><a href="detail04.html">예약내역</a></th>
-            <td>회원 ID:</td>
-        </th>
-    </tr>
-    <table class="bbs">
-        <thead>
-            <tr>
-                <td>대출번호</td>          
-                <td>도서제목</td>           
-                <td>대출일</td>           
-                <td>반납일</td>       
-                <td>연체여부</td>      
-            </tr>
-        </thead>
-        <tbody id="list">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-    <br/>
-    <div>
-        <input type="text" placeholder="검색"/>
-        <button type="submit">검색</button>
-    </div>
+    <header>
+        <div class="header-wrap">
+            <div class="logo">
+                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
+            </div>
+            <nav>
+                <ul class="navi">
+                    <li>***님 환영합니다.</li>
+                    <li><a href="#">로그아웃</a></li>
+                    <li><a href="#">관리자페이지</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <aside id="menu">
+        <h1>관리자페이지</h1>
+        <hr/>
+        <ul class="admin_menu">
+            <li><a href="#">회원관리</a></li>
+            <li><a href="#">도서관리</a></li>
+            <li><a href="#">건의사항</a></li>
+            <li><a href="#">블랙리스트</a></li>
+            <li><a href="#">이용정지내역</a></li>
+        </ul>
+    </aside>
+	<section>
+		<h3>대출내역</h3>
+		<ul class="book_menu">
+			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
+			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
+			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
+			<li>회원 ID : <div id="mb_id">${param.mb_id}</div></li>
+		</ul>
+	    <table class="brw_table">
+		    <thead>
+		        <tr>
+		            <td>대출번호</td>          
+		            <td>도서제목</td>           
+		            <td>대출일</td>           
+		            <td>반납일</td>       
+		            <td>연체여부</td>      
+		        </tr>
+		    </thead>
+		    <tbody id="list">
+		        
+		    </tbody>
+		</table>
+	</section>
 </body>
 <script>
+var mb_id=$('#mb_id').html();
+console.log(mb_id);
 
-var currPage=1;
-	
-    listCall(currPage);
-        
-        $('#pagePerNum').on('change', function(){
-            console.log("currPage : " + currPage);
-            //페이지당 보여줄 수를 변경시 계산된 페이지 적용이 안된다. (플러그인의 문제)
-            //페이지당 보여줄 수를 변경시 기존 페이징 요소를 없애고 다시 만들어 준다.
-            $("#pagination").twbsPagination('destroy');
-            listCall(currPage);
-        });
-        
-    function listCall(page){	
-        
-        var pagePerNum = $('#pagePerNum').val();
-        console.log("param page : "+page);
-        $.ajax({
-            type:'GET',
-            url:'list.ajax',
-            data:{
-                cnt : pagePerNum,
-                page : page
-            },
-            dataType:'json',
-            success:function(data){
-                console.log(data);
-                drawList(data.list);
-                currPage = data.currPage;
-                
-                //불러오기가 성공되면 플러그인을 이용해 페이징 처리
-                $("#pagination").twbsPagination({
-                    startPage:data.currPage, //시작 페이지
-                    totalPages:data.pages, //총 페이지(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
-                    visiblePages:10, //한 번에 보여줄 페이지 수 [1][2][3][4][5]
-                    onPageClick:function(e,page){
-                        //console.log(e); //클릭한 페이지와 관련된 이벤트 객체
-                        console.log(page); //사용자가 클릭한 페이지
-                        //currPage = page;
-                        listCall(page);
-                    }
-                });
-                
-                
-            },
-            error:function(e){
-                console.log(e);
-            }
-        });
-    }
-    
-    function drawList(list){
-        var content = '';
-        list.forEach(function(item){
-            console.log(item);
-            content += '<tr>';
-            content += '<td>'+item.idx+'</td>';
-            content += '<td>'+item.subject+'</td>';
-            content += '<td>'+item.user_name+'</td>';
-            content += '<td>'+item.bHit+'</td>';
-            content += '</tr>';
-        });
-        $('#list').empty();
-        $('#list').append(content); //tbody에 뿌려줌
-        
-    }
+listCall();
+
+function listCall() {
+	$.ajax({
+		type:'get',
+		url:'memberHis.ajax',
+		data: {mb_id:mb_id},
+		dataType:'json',
+		success:function(data){
+			console.log("테이블")
+			drawList(data.list);
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+}
+
+function drawList(hisList) {
+	var content='';
+	console.log("hisList");
+	hisList.forEach(function(item){
+		console.log(item);
+		content += '<tr>';
+		content += '<td>' +item.brw_id+ '</td>';
+		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
+		content += '<td>' +item.brw_date+ '</td>';
+		content += '<td>'+item.return_finish+'</td>';
+		content += '<td>';
+		if(item.return_finish > item.return_date) { //연체
+			content += 'Y';
+		}else{
+			content += 'N';
+		}
+		content += '</td>';
+		content += '</tr>';
+	});
+	$('#list').append(content);
+}
+       
 </script>
 </html>

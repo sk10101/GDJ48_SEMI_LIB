@@ -162,20 +162,18 @@ public class BrwBookService {
 
 		if(page > pages) {
 			page = pages;
-		}if(page < pages) {
-			page = pages;
 		};
 		
 		brwBookPageMap.put("pages", pages); //만들수있는 쵀대 페이지 수
 		brwBookPageMap.put("currPage", page); //현재 페이지
 
-		
-		
 		int offset = (page -1) * cnt;
+
+		brwBookPageMap.put("offset", offset);
 		logger.info("offset : "+offset);
 		
-		ArrayList<BrwBookDTO> list = dao.bookListPaing(cnt, offset);
-		brwBookPageMap.put("list",list);
+		ArrayList<BrwBookDTO> bookListPaing = dao.bookListPaing(cnt, offset);
+		brwBookPageMap.put("bookListPaing",bookListPaing);
 		
 		// 검색 관련 설정하는 조건문
 //		if(word == null || word.equals("")) {
@@ -203,6 +201,7 @@ public class BrwBookService {
 		
 	}
 
+	
 	
 	
 

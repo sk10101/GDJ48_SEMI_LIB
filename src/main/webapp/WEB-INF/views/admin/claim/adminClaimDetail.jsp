@@ -202,6 +202,11 @@
     </div>
 </body>
 <script>
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
+
 
 	// 현재 건의사항 작성글의 처리상태를 옵션 목록에서 바로 보여주기
 	$(document).ready(function(){

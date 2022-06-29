@@ -25,15 +25,30 @@ public class BookController {
 	@Autowired BookService service;
 	
 	// 도서 검색 결과 ---->
-	@RequestMapping(value = "/bookSearch.do")
-	public String bookSearch(Model model, 
+	@RequestMapping(value = "/bookSearch.go")
+	public String bookSearch(HttpSession session,
 			@RequestParam HashMap<String, String> params) {
 		
-		logger.info("도서 목록 요청 : {}",params); 
-		ArrayList<BookDTO> dto = service.bookSearch(params);
-		logger.info("list 갯수 :"+dto.size());
-		model.addAttribute("dto",dto);				
+		session.setAttribute("option", params.get("option"));
+		session.setAttribute("word", params.get("word"));
+		logger.info("도서 목록 요청 : {} , {}","option", "word");
+		
 		return "book/bookSearch";
+	}
+	
+	@RequestMapping(value = "/searchList.ajax")
+	@ResponseBody
+	public HashMap<String, Object> searchList(HttpSession session) {		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String option = (String) session.getAttribute("option");
+		String word = (String) session.getAttribute("word");
+		session.removeAttribute("option");
+		session.removeAttribute("word");
+		
+		ArrayList<BookDTO> searchList = service.bookSearch(option,word);
+		map.put("searchList", searchList);
+		return map;
 	}
 		
 	//관리자 도서관리 페이지 시작--->

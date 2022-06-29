@@ -82,7 +82,7 @@
 				b.b_id  = br.b_id
 			where
 				brw_status = '반납'
-				ORDER BY brw_id DESC limit #{param1} offset #{param2}
+				ORDER BY brw_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="allCount" resultType="Integer">

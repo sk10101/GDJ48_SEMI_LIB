@@ -9,6 +9,7 @@ import com.gdj.lib.dto.MemberDTO;
 
 public interface MemberDAO {
 
+
 	MemberDTO memberUpdateDetailMy(String mb_id);
 
 
@@ -78,13 +79,32 @@ public interface MemberDAO {
 	void blackUpdate(HashMap<String, String> params);
 
 
+
+	void cancelMySecession(String mb_id);
+
+
+	void MySecession(String mb_id);
+
+
+	void MySecessionTwo(String mb_id);
+
 	String getMbClass(String id, String pw);
+
 
 
 	int allCount();
 
 
 	ArrayList<MemberDTO> penaltyList(int cnt, int offset);
+
+
+	ArrayList<BrwBookDTO> hisList(String mb_id);
+
+
+	ArrayList<BrwBookDTO> reserveList(String mb_id);
+
+
+	int reserveCancel(String reserve_id);
 
 
 	

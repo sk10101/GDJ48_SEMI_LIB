@@ -50,12 +50,6 @@ public class MemberService {
 		dao.update(params);
 	}
 
-	public ArrayList<MemberDTO> memberBrw() {
-		
-		logger.info("관리자 > 회원 도서내역 서비스 도착");
-		return dao.memberBrw();
-	}
-
 	public ArrayList<MemberDTO> blackList() {
 		
 		return dao.blackList();
@@ -88,12 +82,6 @@ public class MemberService {
 		return success;
 	}
 
-
-	public ArrayList<BrwBookDTO> brwList(String mb_id) {
-		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
-		return dao.brwList(mb_id);
-	}
-
 	
 	
 
@@ -113,39 +101,40 @@ public class MemberService {
 		
 	}
 
+
 	public HashMap<String, Object> penaltyList(HashMap<String, String> params) {
-HashMap<String, Object> map = new HashMap<String, Object>();
-
-
-int cnt = Integer.parseInt(params.get("cnt"));
-int page = Integer.parseInt(params.get("page"));
-String option = params.get("option");
-String word = params.get("word");
-logger.info("서비스 리스트 요청 : {}", params);
-logger.info("보여줄 페이지 : " + page);
-
-ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
-
-// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
-int allCnt = dao.allCount();
-logger.info("allCnt : " + allCnt);
-
-int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
-
-logger.info("pages : " + pages);
-if (page > pages) {
-	page = pages;
-}
-map.put("pages", pages); // 최대 페이지 수
-
-int offset = cnt * (page-1);
-
-map.put("offset", offset);
-map.put("currPage", page); // 현재 페이지
-
-logger.info("offset : "+offset);
-	
-//검색 관련 설정하는 조건문
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		String option = params.get("option");
+		String word = params.get("word");
+		logger.info("서비스 리스트 요청 : {}", params);
+		logger.info("보여줄 페이지 : " + page);
+		
+		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
+		
+		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
+		int allCnt = dao.allCount();
+		logger.info("allCnt : " + allCnt);
+		
+		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+		
+		logger.info("pages : " + pages);
+		if (page > pages) {
+			page = pages;
+		}
+		map.put("pages", pages); // 최대 페이지 수
+		
+		int offset = cnt * (page-1);
+		
+		map.put("offset", offset);
+		map.put("currPage", page); // 현재 페이지
+		
+		logger.info("offset : "+offset);
+			
+		//검색 관련 설정하는 조건문
 		if(word == null || word.equals("")) {
 			ArrayList<MemberDTO> penaltyList = dao.penaltyList(cnt, offset);
 			
@@ -169,6 +158,42 @@ logger.info("offset : "+offset);
 		return map;
 	
 	}
-}
+
+
+
+
 	
+	
+	
+	
+// 관리자 > 회원 도서 관련 서비스
+	
+	public ArrayList<MemberDTO> memberBrw() {
+		
+		logger.info("관리자 > 회원 도서내역 서비스 도착");
+		return dao.memberBrw();
+	}	
+	
+	public ArrayList<BrwBookDTO> brwList(String mb_id) {
+		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
+		return dao.brwList(mb_id);
+	}
+	
+	public ArrayList<BrwBookDTO> hisList(String mb_id) {
+		logger.info("이전대출내역 조회 서비스 도착 :"+mb_id);
+		return dao.hisList(mb_id);
+	}
+	
+	public ArrayList<BrwBookDTO> reserveList(String mb_id) {
+		logger.info("예약내역 조회 서비스 도착 :"+mb_id);
+		return dao.reserveList(mb_id);
+	}
+
+	public int reserveCancel(String reserve_id) {
+		logger.info("예약 취소 서비스 도착"+reserve_id);
+		return dao.reserveCancel(reserve_id);
+		
+	}
+}
+
 

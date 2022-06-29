@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="../resources/css/bookList.css">
+<!-- <link rel="stylesheet" href="../resources/css/bookList.css"> -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
@@ -28,24 +28,17 @@
 </head>
 <body>
 	
-	게시물 갯수
-	<select id="pagePerNum">
-		<option value="5">5</option>
-		<option value="10">10</option>
-		<option value="15">15</option>
-		<option value="20">20</option>
-	</select>
 	<div class="container">
             <!-- TOP -->
             <div class="top">
                 <span>
                     <nav>
                         <ul>
-                            <li>${sessionScope.loginId}님 반갑습니다.</li>
+							<li>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.<a href="/member/logout.do">로그아웃</a></li>
                             <li>로그아웃</li>
                             <li>마이페이지</li>
                         </ul>
-                    </nav>
+                    </nav> 
                 </span>
             </div>
             <!--MIDDLE-->
@@ -86,41 +79,25 @@
                         </span>
                         
                     </div>
-                    <div class="middle-right-2">
-                        <table>
-							<thead id="a1234">
-								<tr>
-									<th>대출번호</th>
-									<th>도서제목</th>
-									<th>대출일</th>
-									<th>반납일</th>
-									<th>연체여부</th>
-									<th>도서상태</th>
-					                        
-								</tr>
-							</thead>
-							<tbody id="list">
-			
-							</tbody>
-							
-						</table>
-                    </div>    
+                 </div>    
             </div>
         </div>
 
-/
 
-<table id="claim_table">
+
+<table class="">
+
     	<thead>
 	         <tr>
-	             <th>No</th>
-	             <th>제목</th>
-	             <th>처리상태</th>
-	             <th>작성일</th>
-	             <th>삭제</th>
+	            <th>대출번호</th>
+				<th>도서제목</th>
+				<th>대출일</th>
+				<th>반납일</th>
+				<th>연체여부</th>
+				<th>도서상태</th>
 	         </tr>
     	</thead>
-    	<tbody id="claimList">
+    	<tbody id="list">
     	
     	</tbody>
 	    	<tr>
@@ -152,7 +129,7 @@
         </table>
 </body>
 
-/        	
+      	
         
 </body>
 <script>
@@ -162,18 +139,18 @@ listCall(currPage);
 
 // select 의 option 변경
 $('#pagePerNum').on('change',function(){
-	var word = $('#word').val();
+	//var word = $('#word').val();
 	console.log(currPage);
-	console.log(word);
+	//console.log(word);
 	// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
 	$("#pagination").twbsPagination('destroy');
 	// 검색어가 들어갔을 때와 아닐때를 구분
-	if(word==null || word==""){
 		listCall(currPage);
+	/* if(word==null || word==""){
 	} else {
 		searchList(currPage)
-	}
-	
+	} */
+	 
 });
 
 
@@ -183,7 +160,7 @@ function listCall(page) {
 	
 	$.ajax({
 		type:'GET',
-		url:'claimList.ajax',
+		url:'myPageBrwList.ajax',
 		data:{
 			cnt : pagePerNum,
 			page : page,
@@ -201,14 +178,14 @@ function listCall(page) {
 				// 페이지 클릭했을 때
 				onPageClick: function(e, page) {
 					console.log("클릭한 페이지 : "+page); // 사용자가 클릭한 페이지
-					console.log("입력한 검색어 : "+word);
+					//console.log("입력한 검색어 : "+word);
 					currPage = page;
 					
-					if(word==null){
 						listCall(page);
+					/* if(word==null){
 					} else {
 						searchList(page);
-					}
+					} */
 				}
 			});
 			
@@ -227,7 +204,7 @@ function drawList(bookListPaing) {
 		//console.log(item.status);
 		content += '	<tr>';
 		content += '		<td>'+item.brw_id+'</td>';
-		content += '		<td><a href="bookDetail?b_id='+item.b_id+'">'+item.b_title+'</a></td>';
+		content += '		<td><a href="bookDetail.do?b_id='+item.b_id+'">'+item.b_title+'</a></td>';
 		content += '		<td>'+item.brw_date+'</td>';
 		content += '		<td>'+item.return_date+'</td>';
 		content += '		<td>'+item.brw_status+'</td>';
