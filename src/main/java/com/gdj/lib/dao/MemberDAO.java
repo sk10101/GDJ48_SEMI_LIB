@@ -81,7 +81,17 @@ public interface MemberDAO {
 	void blackUpdate(HashMap<String, String> params);
 
 
+
+	void cancelMySecession(String mb_id);
+
+
+	void MySecession(String mb_id);
+
+
+	void MySecessionTwo(String mb_id);
+
 	String getMbClass(String id, String pw);
+
 
 
 	
