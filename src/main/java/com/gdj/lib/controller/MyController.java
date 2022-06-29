@@ -66,8 +66,10 @@ public class MyController {
 	
 	
 	@RequestMapping(value = "/myUpdateDetail")
-	public String myUpdateDetail(Model model, @RequestParam String mb_id) {
+	public String myUpdateDetail(Model model, @RequestParam String mb_id, HttpServletRequest request) {
 		
+		HttpSession memberSession = request.getSession();
+		mb_id = (String) memberSession.getAttribute("loginId");
 		
 		logger.info("회원정보 상세보기 할 아이디 : "+mb_id);
 		MemberDTO myUpdateDetail = service.myUpdateDetail(mb_id);
@@ -91,6 +93,7 @@ public class MyController {
 	public String myUpdate(Model model, HttpServletRequest request, String Oripw_chk) {
 		
 		
+		
 		String mb_id = request.getParameter("mb_id");
 		String mb_pw = request.getParameter("mb_pw");
 		String name = request.getParameter("name");
@@ -98,7 +101,7 @@ public class MyController {
 		
 		String pw_chk = request.getParameter("pw_chk");
 		
-		String secession = request.getParameter("secession");
+		String page = "redirect:/myUpdateDetail?mb_id="+mb_id;
 		
 		logger.info("수정할 아이디 : "+mb_id);
 		logger.info("수정할 이름 : "+name);
@@ -108,26 +111,34 @@ public class MyController {
 		logger.info("PW 확인 : "+pw_chk);
 		logger.info("원래 비밀 번호 : "+Oripw_chk);
 		
+		
+		String secession = request.getParameter("secession");
 		//기본값 false 체크시 true 로 바뀜
 		logger.info("회원탈퇴 체크 : "+secession);
 		
 		
-	    service.notSecession(mb_id);
+		int row = service.notSecession(mb_id);
 		
-		
-		if(secession.equals("true")) {
-			 service.MySecession(mb_id);
-		} 
-		
+		if (row > 0) {
+			model.addAttribute("msg", "※ 미반납된 도서가 있습니다. 확인후 탈퇴 신청해 주시기 바랍니다."
+					+ " 예약, 대출, 연체시 탈퇴 불가");
+		} else {
+			
+			if(secession.equals("true")) {
+				service.MySecession(mb_id);
+			} 
+			
+		}
 		
 		if (secession.equals("false")) {
 			service.cancelMySecession(mb_id);
 		}
-		 
+		
 		
 		// pw 확인 if 문
 		 if(pw_chk.equals(Oripw_chk)) {
 			// 비밀번호가 공백일때 if 문
+			 page = "redirect:/myUpdateDetail?mb_id="+mb_id;
 			 if(mb_pw == "") {
 				 service.myUpdateTwo(mb_id,name,phone);
 			 } else {
@@ -137,10 +148,12 @@ public class MyController {
 		} else {
 			// 알림창이 안뜸 해결해야됨
 			model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
+			page = "main";
 		}
 		
 		
-		return "redirect:/myUpdateDetail?mb_id="+mb_id;
+		
+		return page;
 	}
 	
 

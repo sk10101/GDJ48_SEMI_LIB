@@ -59,13 +59,13 @@ public class MyService {
 		dao.MySecessionTwo(mb_id);
 	}
 
-	public void notSecession(String mb_id) {
+	public int notSecession(String mb_id) {
 		logger.info("예약 대출 확인할 아이디 : "+mb_id);
 		
-		 String row = dao.notSecession(mb_id);
-		 logger.info(mb_id+" 의 예약 대출 내역 "+row);
+		 Integer row = dao.notSecession(mb_id);
+		 logger.info(mb_id+" 의 예약 대출 내역 : "+row);
 		 
-
+		 return row;
 		
 	}
 
