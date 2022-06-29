@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,10 +71,11 @@ public class MemberService {
 		return dao.idget(id);
 	}
 
-	public boolean blackAdd(HashMap<String, String> params) {
+	public boolean blackAdd(HashMap<String, String> params, HttpSession session) {
 		
 		MemberDTO dto = new MemberDTO();
-		dto.setAdmin_start("admin");
+		String admin_start = (String) session.getAttribute("loginId");
+		dto.setAdmin_start(admin_start);
 		dto.setMb_id(params.get("mb_id"));
 		dto.setBlack_reason(params.get("black_reason"));
 		
