@@ -214,14 +214,14 @@ public class MemberService {
 			
 			
 			if(option.equals("회원ID")) {
-				searchList = dao.mbIDSearch(cnt,offset,word);
-				logger.info("제목 옵션 설정");
+				searchList = dao.blackIDSearch(cnt,offset,word);
+				logger.info("회원ID 옵션 설정");
 			} else if(option.equals("지정한관리자ID")) {
 				searchList = dao.adStartSearch(cnt,offset,word);
-				logger.info("처리상태 옵션 설정");			
+				logger.info("지정한관리자ID 옵션 설정");			
 			} else {
 				searchList = dao.adEndSearch(cnt,offset,word);
-				logger.info("작성자 옵션 설정");	
+				logger.info("해제한관리자ID 옵션 설정");	
 			}	
 			
 			
@@ -230,8 +230,6 @@ public class MemberService {
 			
 		}
 		logger.info("서비스 체크포인트");
-		
-		
 		return map;
 	}
 
@@ -240,7 +238,12 @@ public class MemberService {
 		
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
+		String option = params.get("option");
+		String word = params.get("word");
 		logger.info("보여줄 페이지 : "+page);
+		
+		ArrayList<MemberDTO> memberList = new ArrayList<MemberDTO>();
+		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
 		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
 		int allCnt = dao.allMemeberCount();
@@ -256,8 +259,33 @@ public class MemberService {
 		int offset = (page - 1) * cnt;
 		logger.info("offset : "+offset);
 		
-		ArrayList<MemberDTO> list = dao.memberList(cnt, offset);
-		map.put("list", list);
+		
+		// 검색 관련 설정 조건문
+		if(word == null || word.equals("")) {
+			memberList = dao.memberList(cnt, offset);
+			map.put("memberList", memberList);
+			
+		} else {
+			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+			
+			
+			if(option.equals("회원ID")) {
+				searchList = dao.mbIDSearch(cnt,offset,word);
+				logger.info("회원 옵션 설정");
+			} else if(option.equals("회원이름")) {
+				searchList = dao.mbNameSearch(cnt,offset,word);
+				logger.info("회원이름 옵션 설정");			
+			} else {
+				searchList = dao.mbStatusSearch(cnt,offset,word);
+				logger.info("회원상태 옵션 설정");	
+			}	
+			
+			
+			logger.info("검색결과 건수 : " +searchList.size());
+			map.put("memberList", searchList);
+			
+		}
+		logger.info("서비스 체크포인트");
 		
 		return map;
 	}
@@ -267,7 +295,12 @@ public class MemberService {
 		
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
+		String option = params.get("option");
+		String word = params.get("word");
 		logger.info("보여줄 페이지 : "+page);
+		
+		ArrayList<MemberDTO> adminList = new ArrayList<MemberDTO>();
+		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
 		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
 		int allCnt = dao.allAdminCount();
@@ -283,8 +316,34 @@ public class MemberService {
 		int offset = (page - 1) * cnt;
 		logger.info("offset : "+offset);
 		
-		ArrayList<MemberDTO> list = dao.adminList(cnt, offset);
-		map.put("list", list);
+		
+		// 검색 관련 설정 조건문
+		if(word == null || word.equals("")) {
+			adminList = dao.adminList(cnt, offset);
+			map.put("adminList", adminList);
+			
+		} else {
+			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+			
+			
+			if(option.equals("관리자ID")) {
+				searchList = dao.adIDSearch(cnt,offset,word);
+				logger.info("관리자 옵션 설정");
+			} else if(option.equals("관리자이름")) {
+				searchList = dao.adNameSearch(cnt,offset,word);
+				logger.info("관리자이름 옵션 설정");			
+			} else {
+				searchList = dao.adPhoneSearch(cnt,offset,word);
+				logger.info("전화번호 옵션 설정");	
+			}	
+			
+			
+			logger.info("검색결과 건수 : " +searchList.size());
+			map.put("adminList", searchList);
+			
+		}
+		logger.info("서비스 체크포인트");
+		
 		
 		return map;
 	}

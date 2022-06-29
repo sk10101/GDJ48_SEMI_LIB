@@ -81,7 +81,7 @@
 	                <input type="button" value="대출내역" onclick="brwList()"/>
 	                <input type="button" value="예약내역" onclick="reserveList()"/>
 	                <input type="submit" value="수정" onclick="update()"/>
-	                <input type="button" value="목록보기" onclick="location.href='/memberList.do'"/>
+	                <input type="button" value="목록보기" onclick="location.href='/memberList.go'"/>
 	        </tr>
 	    </table>
     </form>
