@@ -4,125 +4,70 @@
 <head>
 <meta charset="UTF-8">
 <title>마이 페이지 / 건의사항</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/claim.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-	#header {
-            width: 100%;
-            height: 150px;
-            border: 2px solid #999;
-            background-color: #b0f592;
-        }
-
-    #myPage_menu {
-        width: 125px;
-        height: 750px;
-        background-color: #b0f592;
-        text-align: center;
-        float: left;
-        border: 2px solid #999;
-        margin-top: 15px;
-        margin-right: 10px;
-    }
-    a[href='#'] {
-        margin-bottom: 15px;
-    }
-
-    #claim_table {
-        width: 800px;
-        text-align: center;
-    }
-
-    #claim_table, th, td {
-        border: 2px solid #999;
-        border-collapse: collapse;
-        padding: 5px;
-    }
-
-    table th {
-        padding: 15px;
-        text-align:center;
-    }
-
-    #claim_write {
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-
-    #claim_no {
-        width: 15px;
-    }
-
-    #subject {
-        text-align: left;
-        padding-left: 5px;
-    }
-    
-    input[type='search'] {
-        margin-top: 20px;
-        width: 150px;
-        height: 35px;
-        border-radius: 5px;
-        }
 </style>
 </head>
 <body>
 	<div id="header">
-            <a href="#">도서관 로고 들어갈 위치</a>
-            <div>${sessionScope.loginId}(${sessionScope.mb_class}) 님, 반갑습니다. <a href="member/logout.do">로그아웃</a></div>
-    </div>
-    <div id="myPage_menu">
-        <h3>마이페이지</h3>
-        <hr/>
-        <a href="#">도서내역</a><br/>
-        <br/>
-        <a href="claimList">건의사항</a><br/>
-        <br/>
-        <a href="#">회원정보</a>
-    </div>
-    <button id="claim_write" onclick="location.href='claimWrite.go'">건의사항 작성</button><br/>
-    <table id="claim_table">
-    	<thead>
-	         <tr>
-	             <th>No</th>
-	             <th>제목</th>
-	             <th>처리상태</th>
-	             <th>작성일</th>
-	             <th>삭제</th>
-	         </tr>
-    	</thead>
-    	<tbody id="claimList">
-    	
-    	</tbody>
-	    	<tr>
-				<td colspan="5" id="paging">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+	    <div class="myPageTab" id="myPage_menu">
+	        <h3>마이페이지</h3>
+	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="/brwHistory">도서내역</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="claimList">건의사항</a><br/>
+	        <br/>
+	        <a href="#">회원정보</a>
+	    </div>
+	    <div class="section">
+		    <div class="claimWriteBtn-area">
+		    	<button id="claim_write" onclick="location.href='claimWrite.go'">건의사항 작성</button><br/>
+		    </div>
+		    <div class="claimTable-area">
+			    <table class="claim_table" id="claim_table">
+			    	<thead>
+				         <tr>
+				             <th>No</th>
+				             <th>제목</th>
+				             <th>처리상태</th>
+				             <th>작성일</th>
+				             <th>삭제</th>
+				         </tr>
+			    	</thead>
+			    	<tbody id="claimList">
+			    	
+			    	</tbody>
+			        </table>
 					<div class="container">
 						<nav aria-label="Page navigation" style="text-align:center">
-								<ul class="pagination" id="pagination" >
-								</ul>					
+								<ul class="pagination" id="pagination" ></ul>					
 						</nav>
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan ="5" id="paging">
-				        <select id="pagePerNum">
+					<div class="noticeSearchOption">
+				        <select class="selectBtn" id="pagePerNum">
 							<option value="5">5</option>
 							<option value="10" selected="selected">10</option>
 							<option value="15">15</option>
 							<option value="20">20</option>
 						</select>
-				       	<select id="option" name="option">
+				       	<select class="selectBtn" id="option" name="option">
 				       		<option value="제목">제목</option>
 				       		<option value="처리상태">처리상태</option>
 				       	</select>
-			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
-				</td>
-			</tr>
-        </table>
+			        	<input class="noticeSearchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
+			        	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+					</div>
+	        </div>
+	        </div>
+        </div>
 </body>
 <script>
 	
@@ -131,6 +76,11 @@
 	var mb_class = "${sessionScope.mb_class}";
 	var currPage = 1;
 	listCall(currPage);
+	
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
 	
 	// select 의 option 변경
 	$('#pagePerNum').on('change',function(){
@@ -201,7 +151,7 @@
 			//console.log(item.status);
 			content += '	<tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
 			content += '		<td id="claimID">'+item.claim_id+'</td>';
-			content += '		<td><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+			content += '		<td class="claimSubject"><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
 			content += '		<td class="delete" style="height:39px">';
@@ -303,11 +253,5 @@
 		});
 	});
 	*/
-	
-	// 메세지를 받았을 때 이를 처리한다.
-	var msg = "${msg}"
-	if (msg != "") {
-		alert(msg);
-	}
 </script>
 </html>

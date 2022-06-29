@@ -43,6 +43,7 @@
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'
+		LIMIT #{param1} OFFSET #{param2}
 
 	</select>
 	
@@ -52,6 +53,7 @@
 	
 	<select id="adminList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, phone FROM member where mb_class = '관리자'
+		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<update id="update" parameterType="hashmap">
@@ -59,13 +61,75 @@
 		WHERE mb_id = #{mb_id}
 	</update>
 	
+	
+	
+	
 	<select id="blackList" resultType="com.gdj.lib.dto.MemberDTO">
-		SELECT black_id,mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
+		SELECT black_id, mb_id, admin_start, black_start, admin_end, black_end FROM blacklist
+			ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<select id="blackIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM blacklist
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%')
+				ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adStartSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM blacklist
+			WHERE admin_start LIKE CONCAT('%',#{param3},'%')
+				ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adEndSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM blacklist
+			WHERE admin_end LIKE CONCAT('%',#{param3},'%')
+				ORDER BY black_start DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+
+	<select id="mbIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%') and mb_class = '일반회원'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+
+	<select id="mbNameSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE name LIKE CONCAT('%',#{param3},'%') and mb_class = '일반회원'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="mbStatusSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE mb_status LIKE CONCAT('%',#{param3},'%') and mb_class = '일반회원'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adIDSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%') and mb_class = '관리자'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+
+	<select id="adNameSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE name LIKE CONCAT('%',#{param3},'%') and mb_class = '관리자'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="adPhoneSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM member
+			WHERE phone LIKE CONCAT('%',#{param3},'%') and mb_class = '관리자'
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	
+	
+
 	<select id="blackDetail" resultType="com.gdj.lib.dto.MemberDTO">
       SELECT *FROM blackList b ,member m WHERE b.mb_id = m.mb_id and black_id= #{param1}
 	</select>
+
 	
 	<select id="idget" resultType="String">
 		SELECT mb_id FROM member WHERE mb_id = #{mb_id}
@@ -75,9 +139,19 @@
 		INSERT INTO blacklist (mb_id,admin_start, black_reason) 
 			VALUES(#{mb_id},#{admin_start},#{black_reason})
 	</insert>
+
+
+
 	
+	<!-- 이용정지 리스트 페이징 -->	
 	<select id="penaltyList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT penalty_id,mb_id,category_id,penalty_start,penalty_end,cancel  FROM penalty
+				ORDER BY penalty_id DESC limit #{param1} offset #{param2}
+		
+	</select>
+	
+	<select id="allCount" resultType="Integer">
+		SELECT COUNT(penalty_id) FROM penalty
 	</select>
 	
 	<select id="penaltyDetail" resultType="com.gdj.lib.dto.MemberDTO">
@@ -96,15 +170,25 @@
    
     <update id="blackUpdate" parameterType="hashmap">
       UPDATE blacklist SET black_cancel  = #{black_cancel} 
-      , admin_end = #{admin_end}
-      , end_reason = #{end_reason}
-      ,black_end = now()
+	      , admin_end = #{admin_end}
+	      , end_reason = #{end_reason}
+	      ,black_end = now()
       WHERE black_id = #{black_id}
    </update>
    
    
-   
+   <select id="allBlackCount" resultType="int">
+		SELECT COUNT(black_id) FROM blacklist
+	</select>
 	
+	
+	<select id="allMemeberCount" resultType="int">
+		SELECT COUNT(mb_id) FROM member WHERE mb_class = '일반회원'
+	</select>
+   
+	<select id="allAdminCount" resultType="int">
+		SELECT COUNT(mb_id) FROM member WHERE mb_class = '관리자'
+	</select>
 	
 	
 	
@@ -121,14 +205,10 @@
 		
 	<select id="memberoverlay" parameterType="String" resultType="String">
 		SELECT * FROM member WHERE mb_id = #{chkId}
-			
-			
 	</select>
 	
 	<select id="memberoverlays" parameterType="String" resultType="String">
 	SELECT * FROM member WHERE email = #{chkEmail}
-			
-			
 	</select>
 	
 	<select id="idFind" resultType="String" parameterType="String">
@@ -143,6 +223,15 @@
 	SELECT mb_id FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
+
+	<update id="blackCancel" parameterType="hashmap">
+		UPDATE blacklist SET 
+			admin_end=#{admin_end}, 
+			black_end=now(), 
+			end_reason=#{end_reason}
+		WHERE black_id = #{black_id};
+	</update>
+
 	
 	<select id="getMbClass" resultType="String">
 	SELECT mb_class FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
@@ -191,6 +280,8 @@
 		UPDATE reservation SET reason = "정상" 
 		WHERE reserve_id = #{param1};
 	</update>
+	
+	
 	
 	
 	

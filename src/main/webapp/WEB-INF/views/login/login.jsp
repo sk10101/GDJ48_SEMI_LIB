@@ -14,7 +14,7 @@
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
     </div>
   	<div class="login-form">
-    	<form action="login.do" method="POST">
+    	<form action="./login.do" method="POST">
 	        <div class="login-area">
 	            <input type="text" name="id" id="id" placeholder="아이디"/>
 	        </div>

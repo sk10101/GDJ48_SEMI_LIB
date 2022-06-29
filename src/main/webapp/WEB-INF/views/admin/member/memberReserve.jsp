@@ -88,6 +88,14 @@
 	</section>
 </body>
 <script>
+
+var msg ="${msg}";
+
+if (msg != "") {
+	alert(msg);
+}
+
+
 var mb_id=$('#mb_id').html();
 console.log(mb_id);
 

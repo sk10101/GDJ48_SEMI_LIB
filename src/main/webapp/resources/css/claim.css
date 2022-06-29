@@ -1,0 +1,217 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&family=Roboto:wght@700&display=swap');
+
+*{margin:0; padding:0; border:0;}
+.body{
+    display: flex;
+    justify-content:center;
+    height: 670px;
+    margin-top: 20px;
+    width:100%;
+}
+.myPageTab{
+	padding-top:20px;
+	width:150px;
+	height:600px;
+	text-align: center;
+	background-color:#c9dab2;
+}
+.myPageTab h3{
+	font-size:20px;
+	font-weight:700;
+}
+.myPageTab a{
+	text-decoration-line:none;
+	color:#828282;
+	font-size:18px;
+	font-weight:700;
+}
+.myPageTab .tabSelect{
+	color:#333;
+}
+.section{
+	display: flex;
+    align-items: center;
+    flex-direction:column;
+    width:850px;
+}
+.claimWriteBtn-area{
+	width:100%;
+	text-align:right;
+}
+.claimWriteBtn-area #claim_write{
+	background-color:#86b049;
+	font-size:15px;
+	font-weight:700;
+	color:#fff;
+	padding:5px;
+	border-radius:5px;
+	width:125px;
+}
+.claimWriteBtn-area #claim_write:hover{
+	cursor:pointer;
+	background-color:#476930;
+}
+.claimTable-area{
+	margin-top:10px;
+	width:100%;
+}
+.claim_table{
+	width:90%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.claim_table th,td{
+	border:1px solid #333;
+}
+.noticeSearchOption{
+	text-align:center;	
+}
+.selectBtn{
+	width: 70px;
+    height: 40px;
+    border: 4px solid #86b049;
+    border-radius: 5px;
+    background-color:#fff;
+}
+.noticeSearchBlock{
+	width:300px;
+	height:40px;
+	border: 4px solid #86b049;
+    border-radius: 5px;
+    background-color:#fff;
+    padding-left:5px;
+}
+.noticeSearchDo{
+	width:60px;
+	height:40px;
+	border: none;
+    border-radius: 5px;
+    background-color:#86b049;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+}
+.noticeSearchDo:hover{
+	cursor:pointer;
+	background-color:#476930;
+}
+.claimSubject{
+	text-align:left;
+	padding-left:5px;
+}
+.claimSubject a{
+	text-decoration-line:none;
+	color:#333;
+}
+.claimSubject a:hover{
+	color:blue;
+}
+.claim_table .delBtn{
+	padding:3px;
+}
+.claim_table .delBtn:hover{
+	cursor:pointer;
+	background-color:#476930;
+	color:#fff;
+}
+
+
+/*페이징*/
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.pagination > li {
+  display: inline;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+  color: #86b049;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:focus,
+.pagination > li > span:focus {
+  z-index: 2;
+  color: #476930;
+  background-color: #eee;
+  border-color: #ddd;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #86b049;
+  border-color: #86b049;
+}
+.pagination > .disabled > span,
+.pagination > .disabled > span:hover,
+.pagination > .disabled > span:focus,
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover,
+.pagination > .disabled > a:focus {
+  color: #777;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
+}
+.pagination-lg > li > a,
+.pagination-lg > li > span {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+}
+.pagination-lg > li:first-child > a,
+.pagination-lg > li:first-child > span {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.pagination-lg > li:last-child > a,
+.pagination-lg > li:last-child > span {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.pagination-sm > li > a,
+.pagination-sm > li > span {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.pagination-sm > li:first-child > a,
+.pagination-sm > li:first-child > span {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.pagination-sm > li:last-child > a,
+.pagination-sm > li:last-child > span {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
