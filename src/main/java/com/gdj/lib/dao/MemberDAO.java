@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public interface MemberDAO {
 
+
 	MemberDTO memberUpdateDetailMy(String mb_id);
 
 	MemberDTO memberDetail(String mb_id);
@@ -101,6 +102,16 @@ public interface MemberDAO {
 
 	ArrayList<MemberDTO> adminList(int cnt, int offset);
 
+
+
+
+	ArrayList<BrwBookDTO> hisList(String mb_id);
+
+
+	ArrayList<BrwBookDTO> reserveList(String mb_id);
+
+
+	int reserveCancel(String reserve_id);
 
 
 

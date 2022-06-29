@@ -47,12 +47,15 @@ public class MemberService {
 		dao.update(params);
 	}
 
+<<<<<<< HEAD
 	public ArrayList<MemberDTO> memberBrw() {
 		
 		logger.info("관리자 > 회원 도서내역 서비스 도착");
 		return dao.memberBrw();
 	}
 	/*
+=======
+>>>>>>> origin/master
 	public ArrayList<MemberDTO> blackList() {
 		
 		return dao.blackList();
@@ -86,6 +89,7 @@ public class MemberService {
 		return success;
 	}
 
+<<<<<<< HEAD
 
 
 	public ArrayList<BrwBookDTO> brwList(String mb_id) {
@@ -93,6 +97,8 @@ public class MemberService {
 		return dao.brwList(mb_id);
 	}
 
+=======
+>>>>>>> origin/master
 	
 
 	public ArrayList<MemberDTO> penaltyList() {
@@ -115,9 +121,11 @@ public class MemberService {
 		
 	}
 
+
 	
 	
 	
+<<<<<<< HEAD
 	public HashMap<String, Object> blackPaging(HashMap<String, String> params) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -202,6 +210,37 @@ public class MemberService {
 
 	
 	
+=======
+	
+// 관리자 > 회원 도서 관련 서비스
+	
+	public ArrayList<MemberDTO> memberBrw() {
+		
+		logger.info("관리자 > 회원 도서내역 서비스 도착");
+		return dao.memberBrw();
+	}	
+	
+	public ArrayList<BrwBookDTO> brwList(String mb_id) {
+		logger.info("회원대출내역 조회 서비스 도착 :"+mb_id);
+		return dao.brwList(mb_id);
+	}
+	
+	public ArrayList<BrwBookDTO> hisList(String mb_id) {
+		logger.info("이전대출내역 조회 서비스 도착 :"+mb_id);
+		return dao.hisList(mb_id);
+	}
+	
+	public ArrayList<BrwBookDTO> reserveList(String mb_id) {
+		logger.info("예약내역 조회 서비스 도착 :"+mb_id);
+		return dao.reserveList(mb_id);
+	}
+
+	public int reserveCancel(String reserve_id) {
+		logger.info("예약 취소 서비스 도착"+reserve_id);
+		return dao.reserveCancel(reserve_id);
+	}
+
+>>>>>>> origin/master
 
 }
 

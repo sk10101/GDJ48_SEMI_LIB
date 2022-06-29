@@ -91,6 +91,7 @@ public class BrwBookDTO {
 		private boolean renew;
 		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		private Date return_date;
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		private Date return_finish;
 		private String brw_status;
 
@@ -137,6 +138,7 @@ public class BrwBookDTO {
 		
 		//예약 정보
 		private int reserve_id;
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		private Date reserve_date;
 		private String reason;
 

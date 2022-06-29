@@ -291,30 +291,101 @@ public class MemberController {
 
 	}	
 	
+
+	
+	
+	
+	
 	
 //	관리자 > 회원의 도서내역
 	
 	@RequestMapping("/memberBrw.go")
-	public String memberBook(@RequestParam String mb_id, HttpSession session) {
+	public String memberBook(@RequestParam String mb_id) {
 
-		logger.info("관리자페이지 예약내역 요청 :"+mb_id);
-		session.setAttribute("mb_id", mb_id);
+		logger.info("관리자 > 대출내역 요청 :"+mb_id);
+		
+		//session.setAttribute("mb_id", mb_id);
+		//String page = "admin/member/memberBrw?mb_id="+mb_id;
 		return "admin/member/memberBrw";
 	}
 	
 	@RequestMapping("/memberBrw.ajax")
 	@ResponseBody
-	public HashMap<String, Object> memberBrw(HttpSession session) {
+	public HashMap<String, Object> memberBrw(@RequestParam String mb_id) {
 
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		String mb_id = (String) session.getAttribute("mb_id");
 		logger.info("회원의 대출내역 목록 요청 :"+mb_id);
 		ArrayList<BrwBookDTO> list = service.brwList(mb_id);
+		map.put("list", list);
+		logger.info("완료:"+list+'/'+mb_id);
+		return map;
+	}
+	
+	@RequestMapping("/memberHis.go")
+	public String memberHis(@RequestParam String mb_id) {
+
+		logger.info("관리자 > 이전대출내역 요청 :"+mb_id);
+		//session.setAttribute("mb_id", mb_id);
+		return "admin/member/memberHis";
+	}
+	
+	@RequestMapping("/memberHis.ajax")
+	@ResponseBody
+	public HashMap<String, Object> memberHisList(@RequestParam String mb_id) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		logger.info("이전대출내역 목록 요청:"+mb_id);
+		ArrayList<BrwBookDTO> list = service.hisList(mb_id);
 		map.put("list", list);
 		logger.info("완료:"+list);
 		return map;
 	}
+	
+	@RequestMapping("/memberReserve.go")
+	public String memberReserve(@RequestParam String mb_id) {
+
+		logger.info("관리자 > 예약내역 요청 :"+mb_id);
+		//session.setAttribute("mb_id", mb_id);
+		return "admin/member/memberReserve";
+	}
+	
+	@RequestMapping("/memberReserve.ajax")
+	@ResponseBody
+	public HashMap<String, Object> memberReserveList(@RequestParam String mb_id) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		logger.info("예약내역 목록 요청:"+mb_id);
+		ArrayList<BrwBookDTO> list = service.reserveList(mb_id);
+		map.put("list", list);
+		logger.info("완료:"+list);
+		return map;
+	}
+	
+	@RequestMapping("/reserveCancel.ajax")
+	@ResponseBody
+	public int reserveCancel(@RequestParam String reserve_id) {
+		
+		logger.info("예약 취소 요청:"+reserve_id);
+		int success = service.reserveCancel(reserve_id);
+		logger.info("완료:"+success);
+		return success;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@RequestMapping(value = "/penaltyUpdate.do")
 	   public String penaltyUpdate(Model model,

@@ -88,6 +88,7 @@
 </body>
 <script>
 
+<<<<<<< HEAD
 	var msg = "${msg}";
 	if(msg != ""){
 	   alert(msg);
@@ -106,6 +107,13 @@
 		location.href = 'memberBrw.go?mb_id='+mb_id; // 도서내역페이지로 가서 예약내역 바로 보여주는??
 	}
 
+=======
+function reserveList() {
+	var mb_id = $('#mb_id').val();
+	console.log(mb_id);
+	location.href = 'memberReserve.go?mb_id='+mb_id; 
+}
+>>>>>>> origin/master
 
 </script>
 </html>
