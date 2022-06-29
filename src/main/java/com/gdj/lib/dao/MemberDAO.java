@@ -1,6 +1,7 @@
 package com.gdj.lib.dao;
 
 
+import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
 
@@ -98,10 +99,16 @@ public interface MemberDAO {
 	ArrayList<BrwBookDTO> hisList(String mb_id);
 
 
-	ArrayList<BrwBookDTO> reserveList(String mb_id);
+	ArrayList<BookDTO> reserveList(int cnt, int offset, String mb_id);
 
 
 	int reserveCancel(String reserve_id);
+
+
+	int allReserveCount(String mb_id);
+
+
+	ArrayList<BookDTO> allBookSearch(int cnt, int offset, String word,String mb_id);
 
 
 

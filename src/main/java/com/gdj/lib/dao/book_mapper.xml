@@ -40,6 +40,12 @@
 			ORDER BY b_id DESC limit #{param1} offset #{param2}
 	</select>
 	
+	<select id="allBookSearch" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book
+		WHERE b_title LIKE CONCAT('%', #{param3}, '%')
+			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
 	<select id="allCount" resultType="Integer">
 		SELECT COUNT(b_id) FROM book;
 	</select>

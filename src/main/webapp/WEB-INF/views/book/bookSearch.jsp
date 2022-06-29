@@ -49,7 +49,7 @@
              게시물 갯수
              <select id="pagePerNum"> <!-- pagePerNum 을 ajax로 controller로 보내서 이에 따라 게시물 수 바꿔줄 것임 -->
                 <option value="5">5</option>
-                <option value="10">10</option>
+                <option value="10" selected="selected">10</option>
                 <option value="15">15</option>
                 <option value="20">20</option>
              </select>
@@ -163,7 +163,7 @@ function drawList(searchList){
       console.log(item.reason);
       content += '<tr>';
       content += ' <td><img src="/image/'+item.newFileName+' " height="200"/></td>';
-      content += '<td>'+item.b_title+'</td>';
+      content += '<td><a href="bookDetail.do?='+item.b_id +' ">'+item.b_title+'</a></td>';
       content += '<td>'+item.writer+'</td>';
       content += '<td>'+item.publisher+'</td>';
       content += '<td>'+item.b_status+'</td>';

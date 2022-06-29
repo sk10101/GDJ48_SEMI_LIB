@@ -70,7 +70,9 @@ public class BookController {
 			) {		
 		
 		logger.info("리스트 요청 : {}",params);
-		return service.bookList(params);
+		HashMap<String, Object> map = service.bookList(params);
+		logger.info("컨트롤러 체크포인트");
+		return map;
 	}
 	
 	@RequestMapping(value = "/AdbookDetail.do")

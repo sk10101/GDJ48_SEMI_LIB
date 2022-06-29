@@ -15,6 +15,8 @@ public interface BookDAO {
 	ArrayList<BookDTO> searchPublisher(int cnt, int offset, String word);
 
 	ArrayList<BookDTO> bookList(int cnt, int offset);
+	
+	ArrayList<BookDTO> allBookSearch(int cnt, int offset, String word);
 
 	BookDTO detail(String b_id);
 
@@ -35,6 +37,8 @@ public interface BookDAO {
 	int photoChk(BookDTO dto);
 
 	void reserveChk(String option, String word);
+
+	
 
 
 }
