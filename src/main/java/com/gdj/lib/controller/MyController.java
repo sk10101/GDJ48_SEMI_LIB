@@ -45,6 +45,7 @@ public class MyController {
 			
 			else if(memberSession.getAttribute("mb_class").equals("관리자")) {
 				page = "main";
+				model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
 			}
 			
 			else {
@@ -129,7 +130,7 @@ public class MyController {
 		
 		int row = service.notSecession(mb_id);
 		
-		if (row > 0) {
+		if (row > 0 && secession.equals("true")) {
 			model.addAttribute("msg", "※ 미반납된 도서가 있습니다. 확인후 탈퇴 신청해 주시기 바랍니다. "
 					+ "  예약, 대출, 연체시 탈퇴 불가");
 			
