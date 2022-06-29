@@ -31,12 +31,12 @@ public class BookService {
 	
 	@Autowired BookDAO dao;
 	
-	public ArrayList<BookDTO> bookSearch(HashMap<String, String> params) {
-		String option = params.get("option");
-		String word = params.get("word");
+	public ArrayList<BookDTO> bookSearch(String option, String word) {
 		
+		logger.info("검색 서비스 도착: {},{}", option, word);
+		//dao.reserveChk(option,word);
 		if (option.equals("writer")){
-			logger.info("선택 옵션 :"+option +"/"+word);
+			logger.info("선택 옵션 :"+option);
 			return dao.searchWriter(word);
 		} else if (option.equals("publisher")) {
 			logger.info("선택 옵션 :"+option);

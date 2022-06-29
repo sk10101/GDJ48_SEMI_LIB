@@ -32,6 +32,9 @@
  	<insert id="bookreason" parameterType="hashmap">
  	 	INSERT INTO FROM reservation(b_id)
  			VALUES(#{b_id})
+
+ 	 INSERT INTO reservation(mb_id,b_id,reserve_date)
+ 			VALUES(#{mb_id},#{b_id},now()
  	</insert>
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
@@ -145,9 +148,7 @@
  		update book set b_status = "대출가능" where b_id = #{b_id}	
  	</update>
  	
- 	<insert id="reserveBookBrw" parameterType="hashmap">
- 		SELECT * FROM reservation WHERE reserve_id = #{reserve_id}
- 	</insert>
+ 	
  	
  	<insert id="bookDetailBrw" parameterType="hashmap">
  		INSERT INTO reservation(b_id,mb_id)
@@ -162,6 +163,16 @@
  	<update id="bookStatusUpdate" parameterType="hashmap">
  		update book set b_status = "대출불가" where b_id = #{b_id}	
  	</update>
+
+ 	<select id="reserveCheck" parameterType="String" resultType="int">
+		SELECT COUNT(reserve_id) from reservation WHERE mb_id = #{param1} AND reason is null 
+	</select>
+	
+	<select id="expiry" parameterType="String" resultType="int">
+		SELECT reserve_date from reservation WHERE mb_id = #{param1} AND reason is null 
+	</select>
+ 	
+ 	
  	
  	<!-- <update id="reserveBtn" parameterType="String">						
 		UPDATE book SET return_finish = DATE_ADD(return_finish(), interval +7 day) WHERE b_id = #{param1}

@@ -26,7 +26,20 @@ public interface BrwBookDAO {
 
 	void reserveBtn(String brw_id);
 
+
+	void del(String reserve_id);
+
+
 	void bookStatusUpdate(String string);
+
+
+	int reserveCheck(String mb_id);
+
+	long expiry(String mb_id);
+
+	long overExpiry(String mb_id);
+
+	Object penaltyDate(String mb_id);
 
 	void bookBrwDetail(String b_id);
 
@@ -56,6 +69,7 @@ public interface BrwBookDAO {
 	
 
 	
+
 
 	
 

@@ -1,34 +1,33 @@
 package com.gdj.lib.dao;
 
 
-import com.gdj.lib.dto.BrwBookDTO;
-import com.gdj.lib.dto.MemberDTO;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
+
 
 public interface MemberDAO {
 
-	MemberDTO memberUpdateDetailMy(String mb_id);
 
+	MemberDTO memberUpdateDetailMy(String mb_id);
 
 	MemberDTO memberDetail(String mb_id);
 
+	//ArrayList<MemberDTO> memberList();
 
-
-	ArrayList<MemberDTO> memberList();
-
-	ArrayList<MemberDTO> adminList();
+	//ArrayList<MemberDTO> adminList();
 
 	MemberDTO detail(String mb_id);
 
 	int update(HashMap<String, String> params);
 
 	ArrayList<MemberDTO> memberBrw();
-
-	ArrayList<MemberDTO> blackList();
+	
+	
+	// ArrayList<MemberDTO> blackList();
 
 	MemberDTO blackDetail(String black_id);
 
@@ -57,7 +56,6 @@ public interface MemberDAO {
 	String login(String id, String pw);
 
 
-	ArrayList<MemberDTO> memberUpdateListMy();
 
 
 
@@ -69,7 +67,6 @@ public interface MemberDAO {
 
 	ArrayList<BrwBookDTO> brwList(String mb_id);
 
-	ArrayList<MemberDTO> penaltyList();
 
 
 	MemberDTO penaltyDetail(String penalty_id);
@@ -79,6 +76,8 @@ public interface MemberDAO {
 
 
 	void blackUpdate(HashMap<String, String> params);
+
+	ArrayList<MemberDTO> memberUpdateListMy();
 
 
 
@@ -91,6 +90,52 @@ public interface MemberDAO {
 	void MySecessionTwo(String mb_id);
 
 	String getMbClass(String id, String pw);
+
+	
+	
+	// =====================================
+	int allCount();
+
+	ArrayList<MemberDTO> blackList (int cnt, int offset);
+
+	ArrayList<MemberDTO> memberList(int cnt, int offset);
+
+	ArrayList<MemberDTO> adminList(int cnt, int offset);
+
+
+
+
+
+
+
+	ArrayList<MemberDTO> penaltyList(int cnt, int offset);
+
+
+	ArrayList<BrwBookDTO> hisList(String mb_id);
+
+
+	ArrayList<BrwBookDTO> reserveList(String mb_id);
+
+
+	int reserveCancel(String reserve_id);
+
+	int allBlackCount();
+
+
+	
+	
+	
+	
+	
+	ArrayList<MemberDTO> mbIDSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> adStartSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> adEndSearch(int cnt, int offset, String word);
+
+	int allMemeberCount();
+
+	int allAdminCount();
 
 
 
