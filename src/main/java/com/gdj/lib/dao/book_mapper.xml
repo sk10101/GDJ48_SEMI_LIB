@@ -5,30 +5,24 @@
 
 <!-- 검색 옵션 쿼리문 시작 -->
 	<select id="searchTitle" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status FROM book b,
+		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE b_title LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="searchWriter" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status FROM book b,
+		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE writer LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="searchPublisher" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status FROM book b,
+		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE publisher LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
 			LIMIT #{param1} OFFSET #{param2}
-	</select>
-	
-	 
-	<select id="reserveChk" parameterType="hashmap" resultType="com.gdj.lib.dto.BookDTO">
-		SELECT b.b_id, r.reserve_id, r.reason FROM book b RIGHT JOIN reservation r ON b.b_id=r.b_id 
-		WHERE b.b_status = "대출중" AND b_title LIKE CONCAT('%', #{param2}, '%')
 	</select>
 	
 <!-- 검색 옵션 쿼리문 끝 -->

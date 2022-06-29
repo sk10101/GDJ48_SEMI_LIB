@@ -160,23 +160,20 @@ function listCall(page) {
 function drawList(searchList){
    var content = '';
    searchList.forEach(function(item) {
-      console.log(item.reason);
+      console.log(item.reserve_able);
       content += '<tr>';
       content += ' <td><img src="/image/'+item.newFileName+' " height="200"/></td>';
       content += '<td><a href="bookDetail.do?='+item.b_id +' ">'+item.b_title+'</a></td>';
       content += '<td>'+item.writer+'</td>';
       content += '<td>'+item.publisher+'</td>';
       content += '<td>'+item.b_status+'</td>';
-      content += '<td>'+item.reason+'</td>';
-      /*
       content += '<td>';
-      	if(item.reserveChk==false) {
-      		content += 'N';
-      	}else{
+      	if(item.reserve_able == true) {
       		content += 'Y';
+      	} else {
+      		content += 'N';
       	}
-      	content += '</td>';
-      	*/
+      content += '</td>';
       content += '</tr>';
    });
    $('#searchList').empty();

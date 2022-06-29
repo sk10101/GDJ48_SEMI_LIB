@@ -68,7 +68,6 @@ public class BookService {
 		logger.info("offset : "+offset);		
 		
 		// 검색 옵션 설정
-		//dao.reserveChk(option,word);
 		if (option.equals("writer")){
 			logger.info("선택 옵션 :"+option);
 			searchList = dao.searchWriter(cnt,offset,word);
@@ -85,10 +84,6 @@ public class BookService {
 		return map;
 	}
 	
-	public ArrayList<BookDTO> reserveOK() {
-		logger.info("예약여부서비스도착");
-		return dao.reserveOk();
-	}
 
 // 관리자 도서관리 서비스 시작
 	public HashMap<String, Object> bookList(
@@ -99,6 +94,7 @@ public class BookService {
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
 		String word = params.get("word");
+		String option = params.get("option");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : " + page);
 		
@@ -122,13 +118,24 @@ public class BookService {
 		//map.put("offset", offset);
 		logger.info("offset : " + offset);
 		
-		bookList = dao.bookList(cnt,offset);
-		searchList = dao.allBookSearch(cnt,offset,word);
+		//검색 관련 설정하는 조건문
+		if(word == null || word.equals("")) {
+			bookList = dao.bookList(cnt,offset);
+			map.put("bookList", bookList);
+		}else {
+			logger.info("검색어 (옵션): "+word+ " ( " + option + ") ");
+			
+			if(option.equals("writer")) {
+				searchList = dao.searchWriter(cnt,offset,word);
+			} else if (option.equals("writer")) {
+				
+			} 
+			
+			searchList = dao.allBookSearch(cnt,offset,word);
+			map.put("searchList", searchList);
+		}
 		
-		logger.info("검색결과 건수 : " +searchList.size());
-		map.put("bookList", bookList);
-		map.put("searchList", searchList);
-		
+		logger.info("검색결과 건수 : " +searchList.size());		
 		return map;
 	}
 
