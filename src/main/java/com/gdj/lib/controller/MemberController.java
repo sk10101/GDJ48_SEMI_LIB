@@ -189,7 +189,7 @@ public class MemberController {
 			//2. 맞는 id라면 그 회원정보랑 블랙리스트 테이블 조인해서 블랙리스트 테이블에 값 넣어주기
 			if(s_id != null) {
 				logger.info("s_id 들어옴 : "+s_id);
-				if (service.blackAdd(params) == true) { 
+				if (service.blackAdd(params,session) == true) { 
 					model.addAttribute("msg","블랙리스트 목록에 추가되었습니다.");
 					page = "redirect:/blackList.do";
 				}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
@@ -232,7 +232,7 @@ public class MemberController {
 			   @RequestParam HashMap<String, String> params) {
 		
 		String page = "login/login";
-		
+		String admin_end = (String) session.getAttribute("loginId");
 	      logger.info("params : {}", params);
 
 	      if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
@@ -251,7 +251,7 @@ public class MemberController {
 	        
 	      }else {
 	    	 
-	         params.put("admin_end", "tester");  
+	         params.put("admin_end", admin_end);  
 	         
 	         
 	      }
