@@ -121,7 +121,7 @@ public interface MemberDAO {
 
 	int allBlackCount();
 
-<<<<<<< HEAD
+
 	
 	
 	
@@ -132,11 +132,11 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> adStartSearch(int cnt, int offset, String word);
 
 	ArrayList<MemberDTO> adEndSearch(int cnt, int offset, String word);
-=======
+
 	int allMemeberCount();
 
 	int allAdminCount();
->>>>>>> origin/master
+
 
 
 	
