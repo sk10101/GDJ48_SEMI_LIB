@@ -140,7 +140,7 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value = "/blackList.do")
+	@RequestMapping(value = "/blackList.go")
 	public String blackList(Model model, HttpSession session) {
 
 		logger.info("블랙리스트 컨트롤러");
