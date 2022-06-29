@@ -37,7 +37,7 @@ public class MemberController {
 		logger.info("리스트 요청 : {}",params);
 		return service.adminPaging(params);
 	}
-	  
+	
 	@RequestMapping("/memberPaging.ajax")
 	@ResponseBody
 	public HashMap<String, Object> memberPaging(@RequestParam HashMap<String, String>params ) {		
@@ -55,7 +55,7 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value = "/memberList.do")
+	@RequestMapping(value = "/memberList.go")
 	public String memberList( Model model, HttpSession session) {
 
 		logger.info("관리자페이지(회원리스트)이동 & 회원리스트 요청");
@@ -77,7 +77,7 @@ public class MemberController {
 		return page;
 	}
 	
-	@RequestMapping(value = "/adminList.do")
+	@RequestMapping(value = "/adminList.go")
 	public String adminList( Model model, HttpSession session) {
 
 		logger.info("관리자페이지(관리자리스트)이동 & 관리자리스트 요청");
