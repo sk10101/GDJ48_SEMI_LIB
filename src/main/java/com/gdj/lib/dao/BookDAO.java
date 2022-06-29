@@ -34,5 +34,7 @@ public interface BookDAO {
 
 	int photoChk(BookDTO dto);
 
+	void reserveChk(String option, String word);
+
 
 }
