@@ -115,9 +115,9 @@
    
     <update id="blackUpdate" parameterType="hashmap">
       UPDATE blacklist SET black_cancel  = #{black_cancel} 
-      , admin_end = #{admin_end}
-      , end_reason = #{end_reason}
-      ,black_end = now()
+	      , admin_end = #{admin_end}
+	      , end_reason = #{end_reason}
+	      ,black_end = now()
       WHERE black_id = #{black_id}
    </update>
    
