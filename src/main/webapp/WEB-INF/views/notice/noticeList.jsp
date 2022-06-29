@@ -8,71 +8,17 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/notice.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-	#header {
-            width: 100%;
-            height: 150px;
-            border: 2px solid #999;
-            background-color: #b0f592;
-        }
-
-    #myPage_menu {
-        width: 125px;
-        height: 750px;
-        background-color: #b0f592;
-        text-align: center;
-        float: left;
-        border: 2px solid #999;
-        margin-top: 15px;
-        margin-right: 10px;
-    }
-    a[href='#'] {
-        margin-bottom: 15px;
-    }
-
-    #notice_table {
-        width: 800px;
-        text-align: center;
-    }
-
-    #notice_table, th, td {
-        border: 2px solid #999;
-        border-collapse: collapse;
-        padding: 5px;
-    }
-
-    table th {
-        padding: 15px;
-        text-align:center;
-    }
-
-    #notice_write {
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-
-    #notice_no {
-        width: 15px;
-    }
-
-    #subject {
-        text-align: left;
-        padding-left: 5px;
-    }
-    
-    input[type='search'] {
-        margin-top: 20px;
-        width: 150px;
-        height: 35px;
-        border-radius: 5px;
-        }
+	
 </style>
 </head>
 <body>
 	<div id="header">
-            <a href="#">도서관 로고 들어갈 위치</a>
-            ${sessionScope.loginId} (${sessionScope.mb_class}) 님 환영합니다.
-    </div>
+		<jsp:include page="../commons/header.jsp"/>
+	</div>
+	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important; margin:0;"/>
     <div id="myPage_menu">
         <h3>마이페이지</h3>
         <hr/>
