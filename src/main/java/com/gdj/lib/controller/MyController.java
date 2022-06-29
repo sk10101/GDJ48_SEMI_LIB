@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gdj.lib.dto.BookDTO;
+import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.MemberDTO;
 import com.gdj.lib.service.MyService;
 
@@ -41,8 +43,10 @@ public class MyController {
 				model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
 			} else {
 			ArrayList<MemberDTO> myUpdateList = service.myUpdateList();
+			
 			logger.info("memberList 갯수 : "+ myUpdateList.size());
 			logger.info("세션 확인 : "+memberSession.getAttribute("loginId"));
+			
 			mb_id = (String) memberSession.getAttribute("loginId");
 			model.addAttribute("myUpdateList", myUpdateList);
 			page = "redirect:/myUpdateDetail?mb_id="+mb_id;
@@ -66,6 +70,7 @@ public class MyController {
 		logger.info("mb_pw : "+myUpdateDetail.getMb_pw());
 		logger.info("name : "+myUpdateDetail.getName());
 		logger.info("phone : "+myUpdateDetail.getPhone());
+		logger.info("회원 상태 : "+myUpdateDetail.getMb_status());
 		
 		model.addAttribute("myUpdateDetail", myUpdateDetail);
 		
@@ -76,8 +81,14 @@ public class MyController {
 	@RequestMapping(value = "/myUpdate")
 	public String myUpdate(Model model, HttpServletRequest request, String Oripw_chk) {
 		
-	
+		BrwBookDTO brw = new BrwBookDTO();
+		String brwReason = brw.getReason();
+		String brw_status = brw.getBrw_status();
 		
+		// 서비스 보내는거 부터 해야됨 
+		
+		logger.info("예약중인 도서 : "+brwReason);
+		logger.info("대출중인 도서 : "+brw_status);
 		
 		String mb_id = request.getParameter("mb_id");
 		String mb_pw = request.getParameter("mb_pw");
@@ -86,7 +97,7 @@ public class MyController {
 		
 		String pw_chk = request.getParameter("pw_chk");
 		
-		
+		String secession = request.getParameter("secession");
 		
 		logger.info("수정할 아이디 : "+mb_id);
 		logger.info("수정할 이름 : "+name);
@@ -96,9 +107,22 @@ public class MyController {
 		logger.info("PW 확인 : "+pw_chk);
 		logger.info("원래 비밀 번호 : "+Oripw_chk);
 		
+		//기본값 false 체크시 true 로 바뀜
+		logger.info("회원탈퇴 체크 : "+secession);
 		
+		if(secession.equals("true")) {
+			 service.MySecession(mb_id);
+		} 
+		
+		
+		if (secession.equals("false")) {
+			service.cancelMySecession(mb_id);
+		}
+		 
+		
+		// pw 확인 if 문
 		 if(pw_chk.equals(Oripw_chk)) {
-			
+			// 비밀번호가 공백일때 if 문
 			 if(mb_pw == "") {
 				 service.myUpdateTwo(mb_id,name,phone);
 			 } else {
@@ -106,7 +130,7 @@ public class MyController {
 			 }
 				
 		} else {
-			// 알림창이 안뜸
+			// 알림창이 안뜸 해결해야됨
 			model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
 		}
 		
@@ -114,22 +138,7 @@ public class MyController {
 		return "redirect:/myUpdateDetail?mb_id="+mb_id;
 	}
 	
-	@RequestMapping(value = "/CancelMySecession.ajax")
-	@ResponseBody
-	public HashMap<String, Object> CancelMySecession() {
-		
-		return null;
-	}
-	
-	
-	@RequestMapping(value = "/MySecession.ajax")
-	@ResponseBody
-	public HashMap<String, Object> MySecession() {
-		
-		return null;
-	}
-	
-	
+
 	
 	
 }

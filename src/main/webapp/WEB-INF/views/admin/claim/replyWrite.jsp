@@ -95,7 +95,7 @@
              <tr>
                  <th style="height: 300px;">내용</th>
                  <td>
-	                 <input type="text" name="claim_id" value="${claim_id}"/>
+	                 <input type="hidden" name="claim_id" value="${claim_id}"/>
 	                 <textarea name="reply_content" style="height: 273px; width: 614px;">${reply.reply_content}</textarea>
                  </td>
              </tr>
@@ -106,7 +106,7 @@
              <tr>
 	           <th colspan="2">
 		            <input type="submit" value="저장" style="width: 60px; margin-top: 10px;"/>
-					<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim.claim_id}'"/>
+					<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim_id}'"/>
 				</th>
 			</tr>			
          </table>
