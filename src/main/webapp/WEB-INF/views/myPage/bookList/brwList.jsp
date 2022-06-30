@@ -132,6 +132,11 @@
         
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
+
 
 var mb_id = "${sessionScope.loginId}";
 var currPage = 1;

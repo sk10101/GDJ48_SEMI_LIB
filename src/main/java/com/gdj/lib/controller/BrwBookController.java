@@ -35,19 +35,25 @@ public class BrwBookController {
 	public String history(Model model, HttpSession session,
 			@RequestParam HashMap<String, String> params) {
 		String mb_id = (String) session.getAttribute("loginId");
-		logger.info("대출내역 목록");
-		logger.info(mb_id);
-		model.addAttribute("mb_id",mb_id);
-		ArrayList<BrwBookDTO> history = service.history(params,mb_id);
-		logger.info("list 갯수 :"+history.size());
-		model.addAttribute("history",history);
+		String page = "login/login";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("대출내역 목록");
+			logger.info(mb_id);
+			model.addAttribute("mb_id",mb_id);
+			ArrayList<BrwBookDTO> history = service.history(params,mb_id);
+			logger.info("list 갯수 :"+history.size());
+			model.addAttribute("history",history);
+			page = "myPage/bookList/brwHistory";
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+		}
+				
+		return page;	
 
-		
-		
-		
-		
-			
-		return "myPage/bookList/brwHistory";
 	}
 	
 	
@@ -57,14 +63,23 @@ public class BrwBookController {
 	public String reserve(Model model, HttpSession session,
 			@RequestParam HashMap<String, String> params) {
 		String mb_id = (String) session.getAttribute("loginId");
+		String page = "login/login";
 		
-		logger.info("예약내역 목록"); 
-		model.addAttribute("mb_id",mb_id);
-		ArrayList<BrwBookDTO> reserve = service.reserve(params,mb_id);
-		logger.info("list 갯수 :"+reserve.size());
-		model.addAttribute("reserve",reserve);
-			
-		return "myPage/bookList/reserve";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			logger.info("예약내역 목록"); 
+			model.addAttribute("mb_id",mb_id);
+			ArrayList<BrwBookDTO> reserve = service.reserve(params,mb_id);
+			logger.info("list 갯수 :"+reserve.size());
+			model.addAttribute("reserve",reserve);
+			page = "myPage/bookList/reserve";
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+		}		
+		
+		return page; 
 		
 	}
 	
@@ -73,16 +88,14 @@ public class BrwBookController {
 	public String bookDetail(Model model, HttpSession session,
 			@RequestParam HashMap<String, String> params) {
 		
-		
-		
 		logger.info("이전대출 목록" + params); 
 		ArrayList<BrwBookDTO> detail = service.detail(params);
 		ArrayList<PhotoDTO> list = service.photoList(params); //photo 정보 가져옴
 		model.addAttribute("detail",detail);
 		model.addAttribute("list",list);
-			
+				
 		return "book/bookDetail";
-		
+				
 	}
 	
 
@@ -118,6 +131,9 @@ public class BrwBookController {
 		public String bookDetailBrw(HttpSession session, Model model, 
 				@RequestParam HashMap<String, String> params) {
 			
+			
+			
+	
 			logger.info("책번호 아이디 : "+ params );
 			service.bookDetailBrw(params);
 			
@@ -204,10 +220,19 @@ public class BrwBookController {
 		public String bookList(Model model, HttpSession session,
 				@RequestParam HashMap<String, String> params) {
 			
+			String page = "login/login";
 			
-			logger.info("이전대출 목록");
-			return "myPage/bookList/brwList";
-			
+			if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+				logger.info("이전대출 목록");
+				page = "myPage/bookList/brwList";
+			} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+				model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+				page = "main";
+			} else {
+				model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+
+			}				
+			return page;			
 		}
 		
 	//brwList 페이징 처리

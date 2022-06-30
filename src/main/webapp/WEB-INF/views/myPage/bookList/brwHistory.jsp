@@ -18,7 +18,6 @@
 </style>
 </head>
 <body>
-
 	<div class="container">
             <!-- TOP -->
             <div class="top">
@@ -135,6 +134,11 @@
 
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
+
 
 function updateExtension(whethe_id) {
 	var whetherValue = $(whethe_id).attr("whetherValue")
