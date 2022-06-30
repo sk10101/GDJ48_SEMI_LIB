@@ -86,7 +86,17 @@ public interface BoardDAO {
 
 	int claimCount(String mb_id);
 
+
 	int noticePhotoDelete(String notice_id);
+
+	ArrayList<BoardDTO> claimReplyList(int claim_id);
+
+
+	int replyDel(int reply_id);
+
+	void replyPhotoDel(int reply_id);
+
+
 
 	
 
