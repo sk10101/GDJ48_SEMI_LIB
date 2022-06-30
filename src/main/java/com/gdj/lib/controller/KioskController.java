@@ -113,15 +113,19 @@ public class KioskController {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		logger.info("borrowList : "+borrowList);
 		
-		
+		// 로그인 ID 확인
 		String loginId = (String) session.getAttribute("loginId");
+			
+		// 대출테이블에 대출 내역 insert
 		int borrowTable = service.borrowTable(loginId, borrowList);
 		
+		// 도서테이블에서 도서 상태를 대출중, 예약가능 여부를 1로
 		int cnt = service.borrow(borrowList);
+		// 예약테이블 사유 = 취소
 		service.updateR(borrowList);
 		map.put("cnt", cnt);
-		return map;
 		
+		return map;
 	}
 	
 	
