@@ -103,7 +103,10 @@ public class NoticeService {
 		for (int notice_id : noticeDeleteList) {
 			cnt += dao.noticeDelete(notice_id);
 			noticePhotoList = dao.noticePhotoList(notice_id);
+			
 			photoCnt += dao.noticePhotoDelete(notice_id);
+		
+			
 			
 			logger.info(notice_id+" 번 게시물에 업로드된 사진 수 : "+noticePhotoList.size());
 		}
@@ -118,19 +121,18 @@ public class NoticeService {
 		logger.info("cnt 체크 : "+cnt + " / photoCnt : " +photoCnt );
 		
 		if (cnt > 0) {
-			for (int i = 1; i <= cnt; i++) {
-				
+			for (int i = 1; i <= photoCnt ; i++) {
 				for (PhotoDTO photo : noticePhotoList) {
-					File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" +photo.getNewFileName());
+				File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" +photo.getNewFileName());
 					if(f.exists()) {
 						boolean success = f.delete();
 						logger.info(photo.getNewFileName() + " 의 삭제 여부 : "+ success);
 					}
 				}
-				
-			}
+		}
 			noticePhotoList.clear();
 		}
+		
 		
 	
 		
