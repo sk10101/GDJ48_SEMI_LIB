@@ -18,7 +18,7 @@
 	</select>
 	
 	<update id="borrow" parameterType="String">						
-		UPDATE book SET b_status='대출중' WHERE b_id = #{param1}
+		UPDATE book SET b_status='대출중', reserve_able ='1' WHERE b_id = #{param1}
 	</update>
 	
 	<update id="updateR" parameterType="String">
