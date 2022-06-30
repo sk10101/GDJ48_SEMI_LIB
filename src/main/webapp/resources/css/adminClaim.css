@@ -2,8 +2,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&family=Roboto:wght@700&display=swap');
 
 *{margin:0; padding:0; border:0;}
-
-
+.body{
+    display: flex;
+    justify-content:center;
+    height: 670px;
+    margin-top: 20px;
+    width:100%;
+}
+.myPageTab{
+	padding-top:20px;
+	width:150px;
+	height:600px;
+	text-align: center;
+	background-color:#c9dab2;
+}
+.myPageTab h3{
+	font-size:20px;
+	font-weight:700;
+	color:#333;
+}
+.myPageTab a{
+	text-decoration-line:none;
+	color:#828282;
+	font-size:18px;
+	font-weight:700;
+}
+.myPageTab .tabSelect{
+	color:#333;
+}
 
 
 /*페이징*/

@@ -17,7 +17,7 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-	<div>
+	<div class="body">
 		<div class="myPageTab" id="myPage_menu">
 	        <h3>관리자 페이지</h3>
 	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
@@ -25,7 +25,7 @@
 	        <br/>
 	        <a href="#">도서관리</a><br/>
 	        <br/>
-	        <a href="claimList">건의사항</a><br/>
+	        <a class="tabSelect" href="claimList">건의사항</a><br/>
 	        <br/>
 	        <a href="#">블랙리스트</a><br/>
 	        <br/>
