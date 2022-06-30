@@ -34,7 +34,7 @@ public class BookDTO {
 	private String publisher;
 	private int issue;
 	private String b_status;
-	private boolean b_reserve;
+	private boolean reserve_able;
 	private String newFileName;
 	
 	
@@ -44,11 +44,11 @@ public class BookDTO {
 	public void setNewFileName(String newFileName) {
 		this.newFileName = newFileName;
 	}
-	public boolean isB_reserve() {
-		return b_reserve;
+	public boolean isReserve_able() {
+		return reserve_able;
 	}
-	public void setB_reserve(boolean b_reserve) {
-		this.b_reserve = b_reserve;
+	public void setReserve_able(boolean reserve_able) {
+		this.reserve_able = reserve_able;
 	}
 	public int getB_id() {
 		return b_id;

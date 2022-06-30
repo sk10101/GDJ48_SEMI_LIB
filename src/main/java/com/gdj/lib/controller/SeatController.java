@@ -29,8 +29,8 @@ public class SeatController {
 	@RequestMapping(value = "/seat.go")
 	public String webSeat(Model model) {
 		logger.info("열람실 페이지 이동");
-		ArrayList<SeatDTO> list = service.list();
 		service.seatTime();
+		ArrayList<SeatDTO> list = service.list();
 		logger.info("list 개수: "+list.size());
 		for (int i = 0; i < list.size(); i++) {
 			logger.info(i+"번 : "+list.get(i).getSeat_status());

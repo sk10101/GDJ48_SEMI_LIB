@@ -98,7 +98,11 @@
                                     			</c:when>
                                     			<c:when test="${brwdto.b_status eq '대출가능'}">
                                     				
-													<button class="brwBtn" onclick="bookbrw(this)" brwValue="${brwdto.reserve_id}" bookID="${brwdto.b_id}">대출신청</button>
+													<button class="brwBtn" onclick="bookbrw(this)"
+															brwValue="${brwdto.reserve_id}"
+															bookID="${brwdto.b_id}"
+															loginId="${sessionScope.loginId}">대출신청
+													</button>
 													
 												</c:when>
 												<c:when test="${brwdto.b_status eq '대출불가'}">
@@ -107,7 +111,12 @@
 												
 											</c:choose>
 											</td>
-											<td id="del"><button class="delBtn" onclick="bookDel(this)" idValue="${brwdto.reserve_id}">취소</button></td>
+											<td id="del">
+												<button class="delBtn" onclick="bookDel(this)"
+														bookID="${brwdto.b_id}"
+														idValue="${brwdto.reserve_id}">취소
+												</button>
+											</td>
                                     	<tr>
                                     	
                                    	 </c:forEach>
@@ -130,12 +139,15 @@
 	function bookDel(btn) {
 		var idValue = $(btn).attr("idValue")
 	 	console.log(idValue);
+		var bookID = $(btn).attr("bookID");
+	 	console.log(bookID);
 		
 		$.ajax({
 			type:'get',
 			url:'bookDel.ajax',
 			data:{
-				reserve_id:idValue
+				reserve_id:idValue,
+				b_id : bookID
 			},
 			dataType:'JSON',
 			success:function(data) {
@@ -153,13 +165,16 @@
 	 	console.log(brwValue);
 		var bookID = $(brwId).attr("bookID");
 	 	console.log(bookID);
+	 	var loginId = $(brwId).attr("loginId");
+	 	console.log(loginId);
 		
 		$.ajax({
 			type:'get',
 			url:'reserveBookbrw.ajax',
 			data:{
 				reserve_id : brwValue,
-				b_id : bookID
+				b_id : bookID,
+				loginId : loginId
 			},
 			dataType:'JSON',
 			success:function(data) {

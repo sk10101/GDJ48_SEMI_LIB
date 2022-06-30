@@ -94,7 +94,6 @@
 				<th>대출일</th>
 				<th>반납일</th>
 				<th>연체여부</th>
-				<th>도서상태</th>
 	         </tr>
     	</thead>
     	<tbody id="list">
@@ -134,6 +133,7 @@
 </body>
 <script>
 
+var mb_id = "${sessionScope.loginId}";
 var currPage = 1;
 listCall(currPage);
 
@@ -164,6 +164,7 @@ function listCall(page) {
 		data:{
 			cnt : pagePerNum,
 			page : page,
+			mb_id : mb_id
 		},
 		dataType:'JSON',
 		success:function(data){
@@ -208,7 +209,6 @@ function drawList(bookListPaing) {
 		content += '		<td>'+item.brw_date+'</td>';
 		content += '		<td>'+item.return_date+'</td>';
 		content += '		<td>'+item.brw_status+'</td>';
-		content += '		<td>'+item.renew+'</td>';
 		content += '	</tr>';
 	});
 	// 혹시 모를 상황을 대비해 깨끗하게 비워두고 쌓는다. (append 는 있는 것에 계속해서 이어 붙이는 기능이기 때문)
