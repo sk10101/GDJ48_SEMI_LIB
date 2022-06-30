@@ -154,7 +154,7 @@
 			content += '		<td class="claimSubject"><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
-			content += '		<td class="delete" style="height:39px">';
+			content += '		<td class="delete">';
 			if(item.status=="미처리") {
 				content += '			<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
 			}
