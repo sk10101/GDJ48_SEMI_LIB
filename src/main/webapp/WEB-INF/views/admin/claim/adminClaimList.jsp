@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 페이지 / 건의사항</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
@@ -18,61 +17,63 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-	<div id="myPage_menu">
-        <h3>관리자 페이지</h3>
-        <hr/>
-        <a href="#">회원관리</a><br/>
-        <br/>
-        <a href="#">도서관리</a><br/>
-        <br/>
-        <a href="claimList">건의사항</a><br/>
-        <br/>
-        <a href="#">블랙리스트</a><br/>
-        <br/>
-        <a href="#">이용정지내역</a>
-    </div>
-    <table id="claim_table">
-    	<thead>
-	         <tr>
-	             <th>No</th>
-	             <th>제목</th>
-	             <th>작성자</th>
-	             <th>처리상태</th>
-	             <th>작성일</th>
-	             <th>삭제</th>
-	         </tr>
-    	</thead>
-    	<tbody id="claimList">
-    	
-    	</tbody>
-	    	<tr>
-				<td colspan="6" id="paging">
-					<div class="container">
-						<nav aria-label="Page navigation">
-								<ul class="pagination" id="pagination" >
-								</ul>					
-						</nav>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan ="6" id="paging">
-				        <select id="pagePerNum">
-							<option value="5">5</option>
-							<option value="10" selected="selected">10</option>
-							<option value="15">15</option>
-							<option value="20">20</option>
-						</select>
-				       	<select id="option" name="option">
-				       		<option value="제목">제목</option>
-				       		<option value="작성자">작성자</option>
-				       		<option value="처리상태">처리상태</option>
-				       	</select>
-			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
-				</td>
-			</tr>
-        </table>
+	<div>
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="#">회원관리</a><br/>
+	        <br/>
+	        <a href="#">도서관리</a><br/>
+	        <br/>
+	        <a href="claimList">건의사항</a><br/>
+	        <br/>
+	        <a href="#">블랙리스트</a><br/>
+	        <br/>
+	        <a href="#">이용정지내역</a>
+	    </div>
+	    <table id="claim_table">
+	    	<thead>
+		         <tr>
+		             <th>No</th>
+		             <th>제목</th>
+		             <th>작성자</th>
+		             <th>처리상태</th>
+		             <th>작성일</th>
+		             <th>삭제</th>
+		         </tr>
+	    	</thead>
+	    	<tbody id="claimList">
+	    	
+	    	</tbody>
+		    	<tr>
+					<td colspan="6" id="paging">
+						<div class="container">
+							<nav aria-label="Page navigation">
+									<ul class="pagination" id="pagination" >
+									</ul>					
+							</nav>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan ="6" id="paging">
+					        <select id="pagePerNum">
+								<option value="5">5</option>
+								<option value="10" selected="selected">10</option>
+								<option value="15">15</option>
+								<option value="20">20</option>
+							</select>
+					       	<select id="option" name="option">
+					       		<option value="제목">제목</option>
+					       		<option value="작성자">작성자</option>
+					       		<option value="처리상태">처리상태</option>
+					       	</select>
+				        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
+				        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+					</td>
+				</tr>
+	        </table>
+        </div>
 </body>
 <script>
 	var msg = "${msg}"
