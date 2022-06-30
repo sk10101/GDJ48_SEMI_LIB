@@ -10,11 +10,10 @@
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-
 </style>
 </head>
 <body>
-<div id="header">
+	<div id="header">
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
