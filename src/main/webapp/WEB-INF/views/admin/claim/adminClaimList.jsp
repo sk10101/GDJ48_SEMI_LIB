@@ -8,71 +8,17 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/adminClaim.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-	#header {
-            width: 100%;
-            height: 150px;
-            border: 2px solid #999;
-            background-color: #b0f592;
-        }
-
-    #myPage_menu {
-        width: 125px;
-        height: 750px;
-        background-color: #b0f592;
-        text-align: center;
-        float: left;
-        border: 2px solid #999;
-        margin-top: 15px;
-        margin-right: 10px;
-    }
-    a[href='#'] {
-        margin-bottom: 15px;
-    }
-
-    #claim_table {
-        width: 800px;
-        text-align: center;
-    }
-
-    #claim_table, th, td {
-        border: 2px solid #999;
-        border-collapse: collapse;
-        padding: 5px;
-    }
-
-    table th {
-        padding: 15px;
-        text-align:center;
-    }
-
-    #claim_write {
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-
-    #claim_no {
-        width: 15px;
-    }
-
-    #subject {
-        text-align: left;
-        padding-left: 5px;
-    }
-    
-    input[type='search'] {
-        margin-top: 20px;
-        width: 150px;
-        height: 35px;
-        border-radius: 5px;
-        }
 </style>
 </head>
 <body>
 	<div id="header">
-            <a href="#">도서관 로고 들어갈 위치</a>
-    </div>
-    <div id="myPage_menu">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div id="myPage_menu">
         <h3>관리자 페이지</h3>
         <hr/>
         <a href="#">회원관리</a><br/>
@@ -102,7 +48,7 @@
 	    	<tr>
 				<td colspan="6" id="paging">
 					<div class="container">
-						<nav aria-label="Page navigation" style="text-align:center">
+						<nav aria-label="Page navigation">
 								<ul class="pagination" id="pagination" >
 								</ul>					
 						</nav>
@@ -123,7 +69,7 @@
 				       		<option value="처리상태">처리상태</option>
 				       	</select>
 			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 				</td>
 			</tr>
         </table>
@@ -212,7 +158,7 @@
 			content += '		<td class="mbID">'+item.mb_id+'</td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
-			content += '		<td class="delete" style="height:39px">';
+			content += '		<td class="delete">';
 			if(item.status=="미처리") {
 				content += '			<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
 			}
