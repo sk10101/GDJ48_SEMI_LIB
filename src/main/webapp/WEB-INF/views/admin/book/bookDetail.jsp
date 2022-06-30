@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서상세보기</title>
+<title>도서상세보기(관리자)</title>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link rel="icon" href="resources/img/favicon.png">
