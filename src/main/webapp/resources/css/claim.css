@@ -19,6 +19,7 @@
 .myPageTab h3{
 	font-size:20px;
 	font-weight:700;
+	color:#333;
 }
 .myPageTab a{
 	text-decoration-line:none;
@@ -38,6 +39,7 @@
 .claimWriteBtn-area{
 	width:100%;
 	text-align:right;
+	margin-bottom:10px;
 }
 .claimWriteBtn-area #claim_write{
 	background-color:#86b049;
@@ -53,7 +55,6 @@
 	background-color:#476930;
 }
 .claimTable-area{
-	margin-top:10px;
 	width:100%;
 }
 .claim_table{
@@ -64,9 +65,44 @@
 }
 .claim_table th,td{
 	border:1px solid #333;
+	padding:5px;
+}
+.claim_table .tableTextLeft{
+	text-align:left;
+}
+.claimTableTh{
+	width:85px;
+}
+.claimWriteInput{
+	width:100%;
+	border:1px solid #333;
+	border-radius:5px;
+	padding: 5px 10px;
+}
+#claimWriteTextarea{
+	height:300px;
+}
+.claimWritePageBtn-area{
+	margin:10px;
+	text-align:center;
+}
+.claimBtn{
+	background:#86b049;
+	padding:5px 10px;
+	color:#fff;
+	font-size:16px;
+	border-radius:5px;
+}
+.claimBtn:hover{
+	cursor:pointer;
+	background-color:#476930;
 }
 .noticeSearchOption{
 	text-align:center;	
+}
+.claimBtnSection{
+	margin:10px;
+	text-align:center;
 }
 .selectBtn{
 	width: 70px;

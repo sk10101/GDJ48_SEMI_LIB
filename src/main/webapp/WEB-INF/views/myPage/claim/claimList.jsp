@@ -16,7 +16,7 @@
 	<div id="header">
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
-	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important; margin:0;"/>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
 	<div class="body">
 	    <div class="myPageTab" id="myPage_menu">
 	        <h3>마이페이지</h3>
