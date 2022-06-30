@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이전대출예약</title>
+<title>이전대출예약(관리자)</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -24,7 +24,7 @@
         <ul class="admin_menu">
             <li><a href="memberList.go">회원관리</a></li>
             <li><a href="bookList.go">도서관리</a></li>
-            <li><a href="claimList">건의사항</a></li>
+            <li><a href="adminClaimList">건의사항</a></li>
             <li><a href="blackList.go">블랙리스트</a></li>
             <li><a href="penaltyList.go">이용정지내역</a></li>
         </ul>

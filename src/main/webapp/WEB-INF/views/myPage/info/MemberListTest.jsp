@@ -3,17 +3,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원리스트(회원)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-	  		h3 {text-align: left; font-weight: bold; font-size: 40px;}
-            table {width: 40%}
-            table, th, td {border: 1px solid black; border-collapse: collapse;}
-            th, td{padding: 5px 10px; text-align: center;}
-            textarea {width: 50%; height : 30px; resize: none; float:left;}
+	  	
 </style>
 </head>
 <body>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
 	  <h3>${sessionScope.loginId }님의 상세 정보</h3>
 	  <h3>리스트 보기</h3>
 	 <table>

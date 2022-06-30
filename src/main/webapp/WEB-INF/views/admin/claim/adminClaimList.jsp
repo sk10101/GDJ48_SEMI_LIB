@@ -25,7 +25,7 @@
 	        <br/>
 	        <a href="bookList.go">도서관리</a><br/>
 	        <br/>
-	        <a class="tabSelect" href="claimList">건의사항</a><br/>
+	        <a class="tabSelect" href="adminClaimList">건의사항</a><br/>
 	        <br/>
 	        <a href="blackList.go">블랙리스트</a><br/>
 	        <br/>

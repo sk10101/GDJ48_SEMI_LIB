@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>대출내역(관리자)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link rel="icon" href="resources/img/favicon.png">
@@ -22,7 +22,7 @@
         <ul class="admin_menu">
             <li><a href="memberList.go">회원관리</a></li>
             <li><a href="bookList.go">도서관리</a></li>
-            <li><a href="claimList">건의사항</a></li>
+            <li><a href="adminClaimList">건의사항</a></li>
             <li><a href="blackList.go">블랙리스트</a></li>
             <li><a href="penaltyList.go">이용정지내역</a></li>
         </ul>
