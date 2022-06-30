@@ -56,6 +56,7 @@ public class BoardService {
 		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
 		int allCnt = 0;
 		
+		// 마이페이지 / 건의사항 과 관리자페이지 / 건의사항에 띄울 리스트의 개수를 각각 Count 해야한다.
 		if(mb_id != null && mb_class.equals("일반회원")) {
 			allCnt = dao.claimCount(mb_id);
 		} else {
