@@ -133,6 +133,7 @@
 </body>
 <script>
 
+var mb_id = "${sessionScope.loginId}";
 var currPage = 1;
 listCall(currPage);
 
@@ -163,6 +164,7 @@ function listCall(page) {
 		data:{
 			cnt : pagePerNum,
 			page : page,
+			mb_id : mb_id
 		},
 		dataType:'JSON',
 		success:function(data){

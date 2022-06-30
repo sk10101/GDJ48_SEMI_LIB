@@ -12,29 +12,11 @@
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
-	<!-- <insert id="brw" parameterType="hashmap">
-	INSERT INTO borrow (mb_id ,b_id ,brw_date ,renew ,return_date ,brw_status)
-	 VALUES (#{mb_id} ,#{b_id} ,CURRENT_TIMESTAMP ,false ,DATE_ADD(now(), interval +14 day) , "대출불가")
-	</insert>
- -->
- 
- 	<!-- <insert id="brw" parameterType="String">
- 		INSERT INTO reservation(mb_id,b_id)
- 			VALUES(#{param1},#{param2})
- 		
- 	</insert> -->
- 	
- 	<!-- <insert id="brw" parameterType="String">
- 		INSERT INTO reservation(b_id)
- 			VALUES(#{param1})
- 	</insert> -->
+
  	
  	<insert id="bookreason" parameterType="hashmap">
- 	 	INSERT INTO FROM reservation(b_id)
- 			VALUES(#{b_id})
-
- 	 INSERT INTO reservation(mb_id,b_id,reserve_date)
- 			VALUES(#{mb_id},#{b_id},now()
+ 	 	INSERT INTO reservation(b_id,mb_id)
+ 			VALUES(#{b_id},#{loginId})
  	</insert>
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
@@ -52,46 +34,10 @@
 				b.b_id  = br.b_id
 			where
 				brw_status = '대출'
+				and br.mb_id = #{param2}
 				ORDER BY brw_id desc
 	</select>
 	
-	<select id="bookList" resultType="com.gdj.lib.dto.BrwBookDTO">
-		select
-				brw_id
-				, b.b_title
-				, brw_date
-				, return_date
-				, brw_status
-				, renew 
-				, b.b_id
-			from
-				borrow br
-			inner join book b on
-				b.b_id  = br.b_id
-			where
-				brw_status = '반납'
-				ORDER BY brw_id DESC
-	</select>
-	
-	
-	
-	<select id="brwListMb_id" resultType="com.gdj.lib.dto.BrwBookDTO">
-		select
-				brw_id
-				, b.b_title
-				, brw_date
-				, return_date
-				, brw_status
-				, renew 
-				, b.b_id
-			from
-				borrow br
-			inner join book b on
-				b.b_id  = br.b_id
-			where
-				brw_status = '반납'
-				and br.mb_id = #{mb_id}				
-	</select>
 	
 	
 	<select id="bookListPaing" resultType="com.gdj.lib.dto.BrwBookDTO">
@@ -109,6 +55,7 @@
 				b.b_id  = br.b_id
 			where
 				brw_status = '반납'
+				and br.mb_id = #{param3}
 				ORDER BY brw_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
@@ -135,6 +82,7 @@
 			r2.b_id = b.b_id
 			where
 				reason is null
+				and r2.mb_id = #{param2}
 			ORDER BY reserve_id desc
 	</select>
 	
@@ -155,9 +103,9 @@
  			VALUES(#{b_id},#{loginId})
  	</insert>
  	
- 	<!-- <insert id="reserveBookBrw" parameterType="hashmap">
- 		SELECT * FROM reservation WHERE reserve_id = #{reserve_id}, mb_id = #{loginId} 
- 	</insert> -->
+ 	<insert id="reserveBookBrw" parameterType="hashmap">
+ 		SELECT * FROM reservation WHERE reserve_id = #{reserve_id} 
+ 	</insert>
  	
  	
  	<update id="bookStatusUpdate" parameterType="hashmap">
@@ -172,12 +120,6 @@
 		SELECT reserve_date from reservation WHERE mb_id = #{param1} AND reason is null 
 	</select>
  	
- 	
- 	
- 	<!-- <update id="reserveBtn" parameterType="String">						
-		UPDATE book SET return_finish = DATE_ADD(return_finish(), interval +7 day) WHERE b_id = #{param1}
-	</update> -->
-	
 	<update id="reserveBtn" parameterType="String">						
 		UPDATE
 			borrow set return_date =

@@ -33,48 +33,33 @@ public class BrwBookController {
 	@RequestMapping(value = "/brwHistory")
 	public String history(Model model, HttpSession session,
 			@RequestParam HashMap<String, String> params) {
-		
-		
-		logger.info("대출내역 목록"); 
-		
-		ArrayList<BrwBookDTO> history = service.history(params);
+		String mb_id = (String) session.getAttribute("loginId");
+		logger.info("대출내역 목록");
+		logger.info(mb_id);
+		model.addAttribute("mb_id",mb_id);
+		ArrayList<BrwBookDTO> history = service.history(params,mb_id);
 		logger.info("list 갯수 :"+history.size());
 		model.addAttribute("history",history);
+
+		
+		
+		
 		
 			
 		return "myPage/bookList/brwHistory";
 	}
 	
-	//이전대출 내역
-	@RequestMapping(value = "/brwList")
-	public String bookList(Model model, HttpSession session,
-			@RequestParam HashMap<String, String> params) {
-		
-		
-		logger.info("이전대출 목록");
-		
-		ArrayList<BrwBookDTO> bookList = service.bookList(params);
-		logger.info("list 갯수 :"+bookList.size());
-		model.addAttribute("bookList",bookList);
-		String mb_id = (String) session.getAttribute("loginId");
-		
-		logger.info(mb_id);
-		model.addAttribute("mb_id",mb_id);
-		service.brwListMb_id(params);
-			
-		return "myPage/bookList/brwList";
-		
-	}
+	
 	
 	//예약내역
 	@RequestMapping(value = "/reserve")
 	public String reserve(Model model, HttpSession session,
 			@RequestParam HashMap<String, String> params) {
-		
+		String mb_id = (String) session.getAttribute("loginId");
 		
 		logger.info("예약내역 목록"); 
-		
-		ArrayList<BrwBookDTO> reserve = service.reserve(params);
+		model.addAttribute("mb_id",mb_id);
+		ArrayList<BrwBookDTO> reserve = service.reserve(params,mb_id);
 		logger.info("list 갯수 :"+reserve.size());
 		model.addAttribute("reserve",reserve);
 			
@@ -234,13 +219,36 @@ public class BrwBookController {
 	 * }
 	 */
 	
+	
+		//이전대출 내역
+		@RequestMapping(value = "/brwList")
+		public String bookList(Model model, HttpSession session,
+				@RequestParam HashMap<String, String> params) {
+			
+			
+			logger.info("이전대출 목록");
+			
+			
+//			String mb_id = (String) session.getAttribute("loginId");
+//			ArrayList<BrwBookDTO> bookList = service.brwListMb_id(mb_id);
+//			logger.info("list 갯수 :"+bookList.size());
+//			model.addAttribute("bookList",bookList);
+//			
+//			
+//			logger.info(mb_id);
+//			model.addAttribute("mb_id",mb_id);
+			//service.brwListMb_id(mb_id);
+				
+			return "myPage/bookList/brwList";
+			
+		}
+		
 	//brwList 페이징 처리
 	@RequestMapping("/myPageBrwList.ajax")
 	@ResponseBody
-	public HashMap<String, Object> myPageBrwList(
+	public HashMap<String, Object> myPageBrwList(Model model, HttpSession session,
 			@RequestParam HashMap<String, String> params) {
 		logger.info("리스트 요청 : {}",params);
-		
 		HashMap<String, Object> brwList = service.myPageBrwList(params);
 		logger.info("컨트롤러 체크포인트");
 		

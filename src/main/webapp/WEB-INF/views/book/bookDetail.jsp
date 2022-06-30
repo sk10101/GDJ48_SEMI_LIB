@@ -81,58 +81,6 @@ table {
                     <td>예약신청</td>
                    
                 <tr>
-<<<<<<< HEAD
-				<c:forEach items="${detail}" var="dto">
-                   <td id="brw_b_id">${dto.b_id}</td>
-                   <td id="b_status">${dto.b_status}</td>
-<<<<<<< HEAD
-                   <c:if test="${dto.b_status eq '대출가능'}">
-					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
-					<td></td>
-					</c:if>
-					<c:if test="${dto.b_status eq '대출중'}">
-					<td></td>
-					<td id="reason"><button id="reasonBtn" onclick="bookreason()">예약신청</button></td>
-					</c:if>
-<<<<<<< HEAD
-                   <td>${dto.b_status}</td>
-                   <c:if test="${dto.b_status eq '대출가능'}">
-					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
-                   <td></td>
-                   </c:if>
-                   <c:if test="${dto.b_status eq '대출중'}"> 
-                     <td></td>  
-                   <td id="bookreserve"><button  onclick="bookreserve()">예약신청</button></td>
-                 	 </c:if>
-=======
->>>>>>> origin/master
-=======
-                   
-                   <td id="brw">
-                   <c:choose>
-						<c:when test="${brwdto.b_status eq '대출불가'}">
-						<input type="hidden">
-						</c:when>
-						<c:when test="${brwdto.b_status eq '대출가능'}">                        				
-						<button class="brwBtn" onclick="bookBrwDetail(this)" bookID="${brwdto.b_id}" >대출신청</button>								
-						</c:when>
-						<c:when test="${brwdto.b_status eq '대출불가'}">
-						<input type="hidden">
-						</c:when>
-					</c:choose>
-					</td>
-				</c:forEach>
-					
-					<%-- <td id="reason">
-					<c:choose>
-						<c:when test="${brwdto.b_status eq '대출중'}">                        				
-							<button class="reasonBtn" onclick="bookreason(this)">예약신청</button>
-						</c:when>
-					</c:choose>
-					</td> --%>
-					
->>>>>>> origin/master
-=======
                    
 				   <c:forEach items="${detail}" var="dto">
 					   <td id="brw_b_id">${dto.b_id}</td>
@@ -156,7 +104,7 @@ table {
                    <c:forEach items="${detail}" var="dto">
 	                   <c:choose>
 	                   		<c:when test="${dto.b_status eq '대출중'}">
-	                   			<button class="bookreason" onclick='bookreason("${dto.b_id}")' bookId="${dto.b_id}" >예약신청</button>
+	                   			<button class="bookreason" onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
 	                   		</c:when>
 	                   		<c:when test="${dto.b_status eq '대출불가'}">
 	                   			<input type="hidden">
@@ -168,7 +116,6 @@ table {
 					</c:forEach>
                    </td>
                    
->>>>>>> origin/master
                 </tr>
             </thead>
         </table>
@@ -261,19 +208,21 @@ function bookreason() {
 
 	
 	function bookreason(brwId) {
-		
-	 	console.log(brwId);
-		
+		var bookID = $(brwId).attr("bookID");
+	 	console.log(bookID);
+	 	var loginId = $(brwId).attr("loginId");
+	 	console.log(loginId);
 	 	
 		$.ajax({
 			type:'get',
 			url:'bookreason.ajax',
 			data:{
-				b_id : brwId
+				b_id : bookID,
+				loginId : loginId
 			},
 			dataType:'JSON',
 			success:function(data) {
-				alert(data);
+				
 			},
 			error:function(e) {
 				console.log(e);
@@ -286,7 +235,10 @@ function bookreason() {
 		   $(this).hide();
 		   alert("대출신청이 완료되었습니다");
 	});
-			
+		
+	$(".bookreason").on("click",function(){
+		alert("예약신청이 완료되었습니다.");
+	});
 
 
 

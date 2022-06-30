@@ -52,11 +52,7 @@ public class BrwBookService {
 	}
 
 
-	public ArrayList<BrwBookDTO> history(HashMap<String, String> params) {
-		logger.info("도서목록 서비스 요청");
-		return dao.history(params);
-	}
-
+	
 
 	public String bookreserve(String b_id) {
 		logger.info("도서예약 서비스 신청"+b_id);
@@ -68,15 +64,19 @@ public class BrwBookService {
 	}
 
 
-	public ArrayList<BrwBookDTO> bookList(HashMap<String, String> params) {
+//	public ArrayList<BrwBookDTO> bookList(HashMap<String, String> params) {
+//		logger.info("도서목록 서비스 요청");
+//		return dao.bookList(params);
+//	}
+
+	public ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id) {
 		logger.info("도서목록 서비스 요청");
-		return dao.bookList(params);
+		return dao.history(params,mb_id);
 	}
 
-
-	public ArrayList<BrwBookDTO> reserve(HashMap<String, String> params) {
-		logger.info("도서목록 서비스 요청");
-		return dao.reserve(params);
+	public ArrayList<BrwBookDTO> reserve(HashMap<String, String> params, String mb_id) {
+		logger.info("예약목록 서비스 요청 : " + dao.reserve(params, mb_id));
+		return dao.reserve(params,mb_id);
 	}
 
 
@@ -104,14 +104,6 @@ public class BrwBookService {
 		return "redirect:/reserve";
 		
 	}
-
-
-	
-
-
-	
-
-
 
 	public int reserveCheck(String mb_id) {
 		int cnt =0;
@@ -153,12 +145,15 @@ public class BrwBookService {
 		
 		HashMap<String, Object> brwBookPageMap = new HashMap<String, Object>();
 		
+		
+		String mb_id = params.get("mb_id");
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
 //		String option = params.get("option");
 //		String word = params.get("word");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : "+page);
+		logger.info("로그인한 아이디 : " + mb_id);
 		
 		//ArrayList<BoardDTO> noticeSearchList = new ArrayList<BoardDTO>();
 		
@@ -180,7 +175,7 @@ public class BrwBookService {
 		brwBookPageMap.put("offset", offset);
 		logger.info("offset : "+offset);
 		
-		ArrayList<BrwBookDTO> bookListPaing = dao.bookListPaing(cnt, offset);
+		ArrayList<BrwBookDTO> bookListPaing = dao.bookListPaing(cnt, offset, mb_id);
 		brwBookPageMap.put("bookListPaing",bookListPaing);
 		
 		// 검색 관련 설정하는 조건문
@@ -235,16 +230,15 @@ public class BrwBookService {
 		
 	}
 
-	public ArrayList<BrwBookDTO> mb_id(HashMap<String, String> params) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	public void brwListMb_id(HashMap<String, String> params) {
-		logger.info("서비스컨트롤러 회원아이디 : "+params);
-		dao.brwListMb_id(params);
-		
-	}
+	
+
+//	public ArrayList<BrwBookDTO> brwListMb_id(String mb_id) {
+//		logger.info("서비스컨트롤러 회원아이디 : "+mb_id);
+//		return dao.brwListMb_id(mb_id);
+//		
+//	}
 
 
 	

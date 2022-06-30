@@ -20,9 +20,7 @@ public interface BrwBookDAO {
 
 	ArrayList<BrwBookDTO> bookList(HashMap<String, String> params);
 
-	ArrayList<BrwBookDTO> history(HashMap<String, String> params);
-
-	ArrayList<BrwBookDTO> reserve(HashMap<String, String> params);
+	ArrayList<BrwBookDTO> reserve(HashMap<String, String> params, String mb_id);
 
 	void reserveBtn(String brw_id);
 
@@ -47,8 +45,6 @@ public interface BrwBookDAO {
 
 	void bookreason(HashMap<String, String> params);	
 
-	ArrayList<BrwBookDTO> bookListPaing(int cnt, int offset);
-
 	int allCount();
 
 	void reserveBookBrw(String string);
@@ -61,7 +57,11 @@ public interface BrwBookDAO {
 
 	void bookdelStatusUpdate(String string);
 
-	void brwListMb_id(HashMap<String, String> params);
+	ArrayList<BrwBookDTO> bookListPaing(int cnt, int offset, String mb_id);
+
+	ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id);
+
+	
 
 
 
