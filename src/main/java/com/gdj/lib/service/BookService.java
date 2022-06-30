@@ -17,9 +17,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dao.BookDAO;
+import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.PhotoDTO;
 
@@ -31,20 +33,56 @@ public class BookService {
 	
 	@Autowired BookDAO dao;
 	
-	public ArrayList<BookDTO> bookSearch(String option, String word) {
+	public HashMap<String, Object> bookSearch(
+			@RequestParam HashMap<String, String> params) {
 		
-		logger.info("검색 서비스 도착: {},{}", option, word);
+		logger.info("검색 서비스 도착: {}",params);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		String option = params.get("option");
+		String word = params.get("word");
+		
+		logger.info("보여줄 페이지 :" + page);
+		
+		ArrayList<BookDTO> searchList = new ArrayList<BookDTO>();
+		
+		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
+		int allCnt = dao.allCount();
+		logger.info("allCnt : " + allCnt);
+		
+		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+		
+		logger.info("pages : " + pages);
+		if (page > pages) {
+			page = pages;
+		}
+		map.put("pages", pages); // 최대 페이지 수
+		
+		int offset = cnt * (page-1);
+		
+		map.put("offset", offset);
+		map.put("currPage", page); // 현재 페이지
+		
+		logger.info("offset : "+offset);		
+		
+		// 검색 옵션 설정
 		//dao.reserveChk(option,word);
 		if (option.equals("writer")){
 			logger.info("선택 옵션 :"+option);
-			return dao.searchWriter(word);
+			searchList = dao.searchWriter(cnt,offset,word);
 		} else if (option.equals("publisher")) {
 			logger.info("선택 옵션 :"+option);
-			return dao.searchPublisher(word);
+			searchList = dao.searchPublisher(cnt,offset,word);
 		} else {
 			logger.info("선택 옵션 :"+option);
-			return dao.searchTitle(word);
+			searchList = dao.searchTitle(cnt,offset,word);
 		}
+		
+		logger.info("검색 결과 건수 : " + searchList.size());
+		map. put("searchList",searchList);
+		return map;
 	}
 	
 	public ArrayList<BookDTO> reserveOK() {
@@ -60,7 +98,12 @@ public class BookService {
 		
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
-		logger.info("보여줄 페이지 : "+page);
+		String word = params.get("word");
+		logger.info("서비스 리스트 요청 : {}", params);
+		logger.info("보여줄 페이지 : " + page);
+		
+		ArrayList<BookDTO> bookList = new ArrayList<BookDTO>();
+		ArrayList<BookDTO> searchList = new ArrayList<BookDTO>();
 		
 		// 총 갯수(allCnt) / 페이지당 보여줄 갯수(cnt) = 생성가능한 페이지(pages)
 		int allCnt = dao.allCount();
@@ -76,12 +119,15 @@ public class BookService {
 		map.put("currPage", page); // 현재 페이지
 		
 		int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
+		//map.put("offset", offset);
 		logger.info("offset : " + offset);
 		
-		ArrayList<BookDTO> bookList = dao.bookList(cnt, offset);
+		bookList = dao.bookList(cnt,offset);
+		searchList = dao.allBookSearch(cnt,offset,word);
 		
-		logger.info("bookList : {}",bookList);
+		logger.info("검색결과 건수 : " +searchList.size());
 		map.put("bookList", bookList);
+		map.put("searchList", searchList);
 		
 		return map;
 	}
@@ -201,6 +247,8 @@ public class BookService {
 		}
 		
 	}
+
+	
 
 	
 // 관리자 도서관리 서비스 끝

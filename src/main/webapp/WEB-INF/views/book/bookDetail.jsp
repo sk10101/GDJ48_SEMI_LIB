@@ -76,11 +76,11 @@ table {
                     <td>예약신청</td>
                    
                 <tr>
-<<<<<<< HEAD
+
 				<c:forEach items="${detail}" var="dto">
                    <td id="brw_b_id">${dto.b_id}</td>
                    <td id="b_status">${dto.b_status}</td>
-<<<<<<< HEAD
+
                    <c:if test="${dto.b_status eq '대출가능'}">
 					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
 					<td></td>
@@ -89,7 +89,7 @@ table {
 					<td></td>
 					<td id="reason"><button id="reasonBtn" onclick="bookreason()">예약신청</button></td>
 					</c:if>
-<<<<<<< HEAD
+
                    <td>${dto.b_status}</td>
                    <c:if test="${dto.b_status eq '대출가능'}">
 					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
@@ -99,9 +99,7 @@ table {
                      <td></td>  
                    <td id="bookreserve"><button  onclick="bookreserve()">예약신청</button></td>
                  	 </c:if>
-=======
->>>>>>> origin/master
-=======
+
                    
                    <td id="brw">
                    <c:choose>
@@ -126,8 +124,7 @@ table {
 					</c:choose>
 					</td> --%>
 					
->>>>>>> origin/master
-=======
+
                    
 				   <c:forEach items="${detail}" var="dto">
 					   <td id="brw_b_id">${dto.b_id}</td>
@@ -163,7 +160,7 @@ table {
 					</c:forEach>
                    </td>
                    
->>>>>>> origin/master
+
                 </tr>
             </thead>
         </table>

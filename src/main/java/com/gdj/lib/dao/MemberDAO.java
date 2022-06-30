@@ -1,6 +1,8 @@
 package com.gdj.lib.dao;
 
 
+import com.gdj.lib.dto.BookDTO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -114,7 +116,7 @@ public interface MemberDAO {
 	ArrayList<BrwBookDTO> hisList(String mb_id);
 
 
-	ArrayList<BrwBookDTO> reserveList(String mb_id);
+	ArrayList<BookDTO> reserveList(int cnt, int offset, String mb_id);
 
 
 	int reserveCancel(String reserve_id);
@@ -131,10 +133,11 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> adStartSearch(int cnt, int offset, String word);
 
 	ArrayList<MemberDTO> adEndSearch(int cnt, int offset, String word);
-	
+
 	int allMemeberCount();
 
 	int allAdminCount();
+
 
 	ArrayList<MemberDTO> mbIDSearch(int cnt, int offset, String word);
 
@@ -147,6 +150,13 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> adNameSearch(int cnt, int offset, String word);
 
 	ArrayList<MemberDTO> adPhoneSearch(int cnt, int offset, String word);
+
+
+	int allReserveCount(String mb_id);
+
+
+	ArrayList<BookDTO> allBookSearch(int cnt, int offset, String word,String mb_id);
+
 
 
 	

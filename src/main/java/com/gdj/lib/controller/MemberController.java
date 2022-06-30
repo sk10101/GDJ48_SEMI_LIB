@@ -402,14 +402,13 @@ public class MemberController {
 	
 	@RequestMapping("/memberReserve.ajax")
 	@ResponseBody
-	public HashMap<String, Object> memberReserveList(@RequestParam String mb_id) {
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
+	public HashMap<String, Object> memberReserveList(
+			@RequestParam HashMap<String, String> params
+			) {		
+		logger.info("예약내역 목록 요청:"+params);
 		
-		logger.info("예약내역 목록 요청:"+mb_id);
-		ArrayList<BrwBookDTO> list = service.reserveList(mb_id);
-		map.put("list", list);
-		logger.info("완료:"+list);
+		HashMap<String, Object> map = service.reserveList(params);
+		logger.info("컨트롤러 체크포인트");
 		return map;
 	}
 	

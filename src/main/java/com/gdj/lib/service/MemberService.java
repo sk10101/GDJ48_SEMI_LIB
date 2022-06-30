@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 
 
+import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.dto.MemberDTO;
@@ -370,11 +371,52 @@ public class MemberService {
 		return dao.hisList(mb_id);
 	}
 	
-	public ArrayList<BrwBookDTO> reserveList(String mb_id) {
-		logger.info("예약내역 조회 서비스 도착 :"+mb_id);
-		return dao.reserveList(mb_id);
+	public HashMap<String, Object> reserveList(
+			HashMap<String, String> params) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		String mb_id = params.get("mb_id");
+		String word = params.get("word");
+		logger.info("서비스 리스트 요청 : {}", params);
+		logger.info("보여줄 페이지 : " + page);
+		
+		ArrayList<BookDTO> reserveList = new ArrayList<BookDTO>();
+		ArrayList<BookDTO> searchList = new ArrayList<BookDTO>();
+		
+		// 총 갯수(allCnt) / 페이지당 보여줄 갯수(cnt) = 생성가능한 페이지(pages)
+		int allCnt = dao.allReserveCount(mb_id);
+		logger.info("allCnt : "+allCnt);		
+		int pages = allCnt%cnt > 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+		logger.info("pages : "+pages);
+		
+		if(page > pages) {
+			page = pages;
+		}
+		
+		map.put("pages", pages); // 만들 수 있는 최대 페이지 수
+		map.put("currPage", page); // 현재 페이지
+		
+		int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
+		//map.put("offset", offset);
+		logger.info("offset : " + offset);
+		
+		searchList = dao.allBookSearch(cnt,offset,word,mb_id);		
+		logger.info("검색결과 건수 : " +searchList.size());
+		
+		if(word == null || word.equals("")) {
+			reserveList = dao.reserveList(cnt,offset,mb_id);
+			map.put("reserveList", reserveList);
+		}else {
+			searchList = dao.allBookSearch(cnt,offset,word,mb_id);
+			map.put("searchList", searchList);
+		}
+		
+		return map;
 	}
-
+	
 	public int reserveCancel(String reserve_id) {
 		logger.info("예약 취소 서비스 도착"+reserve_id);
 		return dao.reserveCancel(reserve_id);
