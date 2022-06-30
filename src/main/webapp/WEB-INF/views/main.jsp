@@ -36,9 +36,9 @@
 
         <form class="search" action="bookSearch.go" method="get">
             <select name="option">
-                <option value="b_title">제목</option>
-                <option value="writer">저자</option>
-                <option value="publisher">출판사</option>
+                <option value="제목">제목</option>
+                <option value="저자">저자</option>
+                <option value="출판사">출판사</option>
             </select>
             <input class="searchBlock" type="text" name="word" placeholder="도서 검색"/>
             <input type="submit" class="btn_search" value=" "/>

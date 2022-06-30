@@ -154,8 +154,9 @@ public interface MemberDAO {
 
 	int allReserveCount(String mb_id);
 
+	ArrayList<BookDTO> reserveReasonSearch(int cnt, int offset, String word, String mb_id);
 
-	ArrayList<BookDTO> allBookSearch(int cnt, int offset, String word,String mb_id);
+	ArrayList<BookDTO> reserveTitleSearch(int cnt, int offset, String word, String mb_id);
 
 
 

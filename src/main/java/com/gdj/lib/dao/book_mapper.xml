@@ -34,7 +34,19 @@
 			ORDER BY b_id DESC limit #{param1} offset #{param2}
 	</select>
 	
-	<select id="allBookSearch" resultType="com.gdj.lib.dto.BookDTO">
+	<select id="bookWriterSearch" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book
+		WHERE writer LIKE CONCAT('%', #{param3}, '%')
+			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="bookPublisherSearch" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book
+		WHERE publisher LIKE CONCAT('%', #{param3}, '%')
+			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="bookTitleSearch" resultType="com.gdj.lib.dto.BookDTO">
 		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book
 		WHERE b_title LIKE CONCAT('%', #{param3}, '%')
 			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}

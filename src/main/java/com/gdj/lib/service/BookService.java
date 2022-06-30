@@ -68,10 +68,10 @@ public class BookService {
 		logger.info("offset : "+offset);		
 		
 		// 검색 옵션 설정
-		if (option.equals("writer")){
+		if (option.equals("저자")){
 			logger.info("선택 옵션 :"+option);
 			searchList = dao.searchWriter(cnt,offset,word);
-		} else if (option.equals("publisher")) {
+		} else if (option.equals("출판사")) {
 			logger.info("선택 옵션 :"+option);
 			searchList = dao.searchPublisher(cnt,offset,word);
 		} else {
@@ -125,14 +125,14 @@ public class BookService {
 		}else {
 			logger.info("검색어 (옵션): "+word+ " ( " + option + ") ");
 			
-			if(option.equals("writer")) {
-				searchList = dao.searchWriter(cnt,offset,word);
+			if(option.equals("b_title")) {
+				searchList = dao.bookTitleSearch(cnt,offset,word);
 			} else if (option.equals("writer")) {
-				
-			} 
-			
-			searchList = dao.allBookSearch(cnt,offset,word);
-			map.put("searchList", searchList);
+				searchList = dao.bookWriterSearch(cnt,offset,word);
+			} else {
+				searchList = dao.bookPublisherSearch(cnt,offset,word);
+			}		
+			map.put("bookList", searchList);
 		}
 		
 		logger.info("검색결과 건수 : " +searchList.size());		

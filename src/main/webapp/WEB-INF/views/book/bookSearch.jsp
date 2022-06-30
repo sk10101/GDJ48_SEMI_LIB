@@ -36,9 +36,9 @@
 	<section>
         <form class="search" action="bookSearch.go" method="get">
             <select name="option">
-                <option value="b_title">제목</option>
-                <option value="writer">저자</option>
-                <option value="publisher">출판사</option>
+                <option value="제목">제목</option>
+                <option value="저자">저자</option>
+                <option value="출판사">출판사</option>
             </select>
             <input type="text" name="word" placeholder="도서 검색"/>
             <input type="submit" class="btn_search" onclick=""/>
@@ -46,7 +46,6 @@
         
         <div class="content"> 
            <div class="content-pagination">
-             게시물 갯수
              <select id="pagePerNum"> <!-- pagePerNum 을 ajax로 controller로 보내서 이에 따라 게시물 수 바꿔줄 것임 -->
                 <option value="5">5</option>
                 <option value="10" selected="selected">10</option>
@@ -54,10 +53,7 @@
                 <option value="20">20</option>
              </select>
          </div>
-         <div class="keyword">
-         	<div id="optionResult">${param.option}</div>/
-         	<div id="wordResult">${param.word}</div>
-         </div>
+         <!-- <p>"${param.option }"에서 "${param.word }"로 검색한 결과입니다.</p>  -->
        </div>       
            <table border="1">
                <thead>
@@ -87,7 +83,14 @@
    </section>	
 </body>
 <script>
+//URL 에서 파라미터 가져오기
+//let url = document.location.href; // url 가져오기
+let query = window.location.search; //url query 부분 가져오기 ?option=writer
+var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오
+var option = param.get("option");
+var word = param.get("word");
 
+console.log(option, word);
 var currPage = 1;
 listCall(currPage);
 
@@ -113,8 +116,6 @@ $('#pagePerNum').on('change',function(){ // pagePerNum 에 change가 일어나�
 function listCall(page) {
 	
 	var pagePerNum = $('#pagePerNum').val();
-	var word = $('#wordResult').html();
-	var option = $('#optionResult').html();
 	
    $.ajax({
       type:'get',
@@ -163,7 +164,7 @@ function drawList(searchList){
       console.log(item.reserve_able);
       content += '<tr>';
       content += ' <td><img src="/image/'+item.newFileName+' " height="200"/></td>';
-      content += '<td><a href="bookDetail.do?='+item.b_id +' ">'+item.b_title+'</a></td>';
+      content += '<td><a href="bookDetail.do?b_id='+item.b_id +' ">'+item.b_title+'</a></td>';
       content += '<td>'+item.writer+'</td>';
       content += '<td>'+item.publisher+'</td>';
       content += '<td>'+item.b_status+'</td>';
