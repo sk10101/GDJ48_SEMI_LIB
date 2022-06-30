@@ -29,6 +29,7 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
+	    <div class=""></div>
 		<h3>회원상세보기</h3>
 		<form action="update.do" method="post">
 		    <table class="bbs">
