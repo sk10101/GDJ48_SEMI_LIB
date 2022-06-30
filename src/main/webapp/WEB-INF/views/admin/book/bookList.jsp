@@ -16,12 +16,11 @@
 <style></style>
 </head>
 <body>
-<<<<<<< HEAD
 <div id="header">
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-=======
+
     <header>
         <div class="header-wrap">
             <div class="logo">
@@ -36,7 +35,6 @@
             </nav>
         </div>
     </header>
->>>>>>> origin/master
     <aside id="menu">
         <h1>관리자페이지</h1>
         <hr/>

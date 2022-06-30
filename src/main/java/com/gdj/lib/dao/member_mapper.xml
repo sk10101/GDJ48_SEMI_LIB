@@ -263,6 +263,7 @@
 		SELECT reserve_id, b.b_id, b.b_title, reserve_date, reason
 		FROM reservation br, book b 
 		WHERE br.b_id = b.b_id AND mb_id=#{param3}
+			ORDER BY reserve_date DESC
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
