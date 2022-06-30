@@ -108,7 +108,6 @@
                 <th style="height: 300px;">답변 내용</th>
                 <td><textarea name="reply_content" style="height: 273px; width: 614px;">${reply.reply_content}</textarea></td>
             </tr>
-            <c:if test="${replyList.size()>0}">
 	            <tr>
 	                <th>이미지</th>
 	                <td>
@@ -118,7 +117,6 @@
 						</c:forEach>
 					</td>
 	            </tr>
-            </c:if>
             <tr>
 	          	<th colspan="2">
 		            <input type="submit" value="수정" style="width: 60px; margin-top: 10px;"/>
