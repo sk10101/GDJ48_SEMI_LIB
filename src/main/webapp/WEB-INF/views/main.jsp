@@ -91,6 +91,12 @@
 
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
+
+
 /*
 function bookSearch() {
 	var option=$('#bookSearchOption').val();

@@ -134,6 +134,10 @@
 
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
 
  	
 	function bookDel(btn) {

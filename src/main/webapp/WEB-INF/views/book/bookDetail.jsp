@@ -175,10 +175,9 @@ table {
 </body>
 <script>
 var msg = "${msg}"
-	if (msg != "") {
-		alert(msg);
-	}
-
+if (msg != "") {
+	alert(msg);
+}
 
  
 	function bookbrw(brwId) {
@@ -186,22 +185,27 @@ var msg = "${msg}"
 	 	console.log(bookID);
 	 	var loginId = $(brwId).attr("loginId");
 	 	console.log(loginId);
+	 	
+	 	
+	 		
+	 		$.ajax({
+				type:'get',
+				url:'bookDetailBrw.ajax',
+				data:{
+					b_id : bookID,
+					loginId : loginId
+				},
+				dataType:'JSON',
+				success:function(data) {
+					
+				},
+				error:function(e) {
+					console.log(e);
+				}
+			});
+	 		
+	 	
 		
-		$.ajax({
-			type:'get',
-			url:'bookDetailBrw.ajax',
-			data:{
-				b_id : bookID,
-				loginId : loginId
-			},
-			dataType:'JSON',
-			success:function(data) {
-				
-			},
-			error:function(e) {
-				console.log(e);
-			}
-		});
  	}
 		
 
