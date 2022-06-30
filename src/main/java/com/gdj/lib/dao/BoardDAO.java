@@ -17,7 +17,7 @@ public interface BoardDAO {
 
 	BoardDTO noticeDetail(int notice_id);
 
-	void noticeFileWrite(String oriFileName, String newFileName, int notice_id, int i);
+	void noticeFileWrite(String oriFileName, String newFileName, int notice_id, int category_id);
 
 	ArrayList<PhotoDTO> noticePhotoList(int notice_id);
 
@@ -85,6 +85,8 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> allWriterSearch(int cnt, int offset, String word);
 
 	int claimCount(String mb_id);
+
+	int noticePhotoDelete(String notice_id);
 
 	
 

@@ -1,5 +1,6 @@
 package com.gdj.lib.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,7 +49,7 @@ public class NoticeService {
 		logger.info("photos : "+ photos);
 		
 		if(row > 0) {
-			noticeFileSave(photos, notice_id);
+			noticeFileSave(photos, notice_id, 1);
 		}
 		
 		return "redirect:/noticeList.do";
@@ -60,7 +61,7 @@ public class NoticeService {
 	
 	
 
-	private void noticeFileSave(MultipartFile[] photos, int notice_id) {
+	private void noticeFileSave(MultipartFile[] photos, int post_id, int category_id) {
 		
 		for(MultipartFile photo : photos) {
 			String oriFileName = photo.getOriginalFilename();
@@ -80,7 +81,7 @@ public class NoticeService {
 					Path path = Paths.get("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" + newFileName);
 					Files.write(path, arr);
 					logger.info(newFileName + "저장 완료");
-					dao.noticeFileWrite(oriFileName,newFileName,notice_id,1);
+					dao.noticeFileWrite(oriFileName,newFileName,post_id, category_id);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -93,11 +94,31 @@ public class NoticeService {
 	
 	public int noticeDelete(ArrayList<String> noticeDeleteList) {
 		
+		
 		int cnt = 0;
 		
 		for (String notice_id : noticeDeleteList) {
 			cnt += dao.noticeDelete(notice_id);
+			cnt += dao.noticePhotoDelete(notice_id);
+			
 		}
+		
+		ArrayList<PhotoDTO> noticePhotoList = dao.noticePhotoList(cnt);
+		
+		if(cnt > 0) {
+			
+			for (PhotoDTO photo : noticePhotoList) {
+				File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" + photo.getNewFileName());
+				if(f.exists()) {
+					boolean success = f.delete();
+					logger.info(photo.getNewFileName() + " 의 삭제 여부 : " + success);
+				}
+			}
+			noticePhotoList.clear();
+			
+		}
+		
+	
 		
 		return cnt;
 	}
