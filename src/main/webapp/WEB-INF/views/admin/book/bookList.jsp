@@ -75,6 +75,11 @@
 							<option value="15">15</option>
 							<option value="20">20</option>
 						</select>
+						<select id="option" name="option">
+			                <option value="b_title">제목</option>
+			                <option value="writer">저자</option>
+			                <option value="publisher">출판사</option>
+			            </select>
 						<input id="word" type="search" placeholder="검색" name="word" value=""/>
 			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
 					</td>
@@ -163,6 +168,7 @@ function drawList(bookList){
 
 function searchList(page){
 	var word = $('#word').val();
+	var option = $('#option').val();
 	var pagePerNum = $('#pagePerNum').val();
 	console.log(word);
 	
@@ -173,12 +179,13 @@ function searchList(page){
 			cnt : pagePerNum,
 			page : page,
 			word : word,
+			option : option,
 		},
 		dataType:'JSON',
 		success: function(data){
 			// 테이블 초기화
 			$("#bookList").empty();
-			drawList(data.searchList);
+			drawList(data.bookList);
 			console.log(data);
 			currPage = 1;
 			// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
