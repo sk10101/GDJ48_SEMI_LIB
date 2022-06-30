@@ -84,7 +84,7 @@
 	</select>
 	
 	<select id="allCount" resultType="Integer">
-		SELECT COUNT(penalty_id) FROM penalty;
+		SELECT COUNT(penalty_id) FROM penalty
 	</select>
 	
 	<select id="penaltyDetail" resultType="com.gdj.lib.dto.MemberDTO">

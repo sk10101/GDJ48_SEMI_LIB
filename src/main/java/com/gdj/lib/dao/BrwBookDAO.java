@@ -1,6 +1,7 @@
 package com.gdj.lib.dao;
 
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,7 +36,7 @@ public interface BrwBookDAO {
 
 	long expiry(String mb_id);
 
-	long overExpiry(String mb_id);
+	
 
 	Object penaltyDate(String mb_id);
 
@@ -48,6 +49,12 @@ public interface BrwBookDAO {
 	ArrayList<BrwBookDTO> bookListPaing(int cnt, int offset);
 
 	int allCount();
+
+	void expiryPenalty(String mb_id);
+
+	void reserveCancel(String mb_id);
+
+	void addPenalty(String mb_id);
 
 	
 

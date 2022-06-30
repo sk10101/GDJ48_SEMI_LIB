@@ -116,10 +116,23 @@ public class BrwBookService {
 		return dao.expiry(mb_id);
 	}
 
-
-	public long overExpiry(String mb_id) {
-		return dao.overExpiry(mb_id);
+	public void expiryPenalty(String mb_id) {
+		dao.expiryPenalty(mb_id);
+		
 	}
+	
+	public void reserveCancel(String mb_id) {
+		dao.reserveCancel(mb_id);
+	}
+
+
+	public void addPenalty(String mb_id) {
+		dao.addPenalty(mb_id);
+
+	}
+
+	
+	
 
 
 	
@@ -200,6 +213,10 @@ public class BrwBookService {
 		return brwBookPageMap;
 		
 	}
+
+
+	
+
 
 	
 	

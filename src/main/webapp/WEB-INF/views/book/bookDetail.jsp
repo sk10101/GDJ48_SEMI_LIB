@@ -121,6 +121,10 @@ table {
 </html>
 </body>
 <script>
+var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
 
 
 /* $("#brwBtn").on("click",function(e){
@@ -215,7 +219,7 @@ function bookreason() {
 				alert(data);
 			},
 			error:function(e) {
-				console.log(e);
+				
 			}
 		});
 
