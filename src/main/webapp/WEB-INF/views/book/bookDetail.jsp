@@ -81,11 +81,6 @@ table {
                     <td>예약신청</td>
                    
                 <tr>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
 
 				<c:forEach items="${detail}" var="dto">
                    <td id="brw_b_id">${dto.b_id}</td>
@@ -133,15 +128,7 @@ table {
 						</c:when>
 					</c:choose>
 					</td> --%>
-					
 
-=======
->>>>>>> df44e9b043379e87d22761918c27481391cf019b
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/master
->>>>>>> origin/master
                    
 				   <c:forEach items="${detail}" var="dto">
 					   <td id="brw_b_id">${dto.b_id}</td>
@@ -176,20 +163,7 @@ table {
 					   </c:choose>
 					</c:forEach>
                    </td>
-                   
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> df44e9b043379e87d22761918c27481391cf019b
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> df44e9b043379e87d22761918c27481391cf019b
-=======
->>>>>>> origin/master
->>>>>>> origin/master
                 </tr>
             </thead>
         </table>
