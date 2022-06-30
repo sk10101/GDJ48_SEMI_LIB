@@ -92,13 +92,6 @@
 </body>
 <script>
 
-var msg ="${msg}";
-
-if (msg != "") {
-	alert(msg);
-}
-
-
 var mb_id=$('#mb_id').html();
 console.log(mb_id);
 
@@ -171,7 +164,7 @@ function drawList(hisList) {
 		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_finish+'</td>';
-		content += '<td class="">';
+		content += '<td class="delay">';
 		if(item.return_finish > item.return_date) { //연체
 			content += 'Y';
 		}else{
@@ -180,6 +173,7 @@ function drawList(hisList) {
 		content += '</td>';
 		content += '</tr>';
 	});
+	
 	$("#hisList").empty();
 	$('#hisList').append(content);
 }
@@ -224,6 +218,10 @@ function searchList(page) {
 		}
 	});
 }
+
+$(document).ready(function(){
+	console.log($("#hisList").children().children("#delay").text());
+});
        
 </script>
 </html>
