@@ -252,10 +252,11 @@
 		WHERE br.b_id = b.b_id AND br.brw_status="대출" AND mb_id=#{mb_id}
 	</select>
 	
-	<select id="hisList" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="hisList" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status, renew
 		FROM borrow br, book b 
-		WHERE br.b_id = b.b_id AND br.brw_status="반납" AND mb_id=#{mb_id}
+		WHERE br.b_id = b.b_id AND br.brw_status="반납" AND mb_id=#{param3}
+			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="reserveList" resultType="com.gdj.lib.dto.BrwBookDTO">
@@ -281,20 +282,21 @@
 		WHERE reserve_id = #{param1};
 	</update>
 	
-	<select id="hisListPaging" resultType="int">
-		SELECT COUNT(brw_id) FROM borrow WHERE br.brw_status="반납" AND mb_id=#{mb_id}
+	<select id="allHisCount" resultType="int">
+		SELECT COUNT(brw_id) FROM borrow WHERE brw_status="반납" AND mb_id=#{param1}
 	</select>
 	
-	<!-- 옵션 없애자 연체여부 디비에서 가져올 수가 없음 -->
 	<select id="allBookTSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
-		SELECT * FROM borrow br, book b 
-			WHERE b.b_title LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{mb_id}
+		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status, renew 
+		FROM borrow br, book b 
+			WHERE b.b_title LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{param4}
 				LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<!-- 연체여부 디비에서 가져올 수가 없음 -->
 	<select id="allBookRSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT * FROM borrow br, book b 
-			WHERE status LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{mb_id}
+			WHERE status LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{param4}
 				claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	

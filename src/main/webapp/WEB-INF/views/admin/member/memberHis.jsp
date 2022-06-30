@@ -199,8 +199,8 @@ function searchList(page) {
 		dataType:'JSON',
 		success: function(data){
 			// 테이블 초기화
-			$("#hisList").empty();
-			drawList(data.list);
+			$("#searchList").empty();
+			drawList(data.searchList);
 			currPage = 1;
 			// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
 			$("#pagination").twbsPagination({

@@ -375,14 +375,15 @@ public class MemberService {
 		int page = Integer.parseInt(params.get("page"));
 		String option = params.get("option");
 		String word = params.get("word");
+		String mb_id = params.get("mb_id");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : " + page);
 		
 		ArrayList<BrwBookDTO> hisList = new ArrayList<BrwBookDTO>();
 		ArrayList<BrwBookDTO> searchList = new ArrayList<BrwBookDTO>();
 		
-		String mb_id = params.get("mb_id");
-		int allCnt = dao.hisListPaging(mb_id);
+		
+		int allCnt = dao.allHisCount(mb_id);
 		
 		logger.info("allCnt : "+allCnt);	
 		
@@ -399,20 +400,20 @@ public class MemberService {
 		int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
 
 		map.put("offset", offset);
-		map.put("currPage", page); // 현재 페이지
 		
 		logger.info("offset : " + offset);
 		
 		// 검색 관련 설정하는 조건문
 		if(word == null || word.equals("")) {
-			hisList = dao.hisListPaging(cnt,offset);
+			hisList = dao.hisList(cnt,offset,mb_id);
 			map.put("hisList", hisList);
+			logger.info("검색결과 없을 경우");
 		} else {
 			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
 			if(option.equals("도서제목")) {
-				searchList = dao.allBookTSearch(cnt,offset,word);
+				searchList = dao.allBookTSearch(cnt,offset,word,mb_id);
 			} else if (option.equals("연체여부")) {
-				searchList = dao.allBookRSearch(cnt,offset,word);
+				searchList = dao.allBookRSearch(cnt,offset,word,mb_id);
 			}
 			logger.info("검색결과 건수 : " +searchList.size());
 			map.put("searchList", searchList);
