@@ -85,42 +85,6 @@ public class BrwBookController {
 	}
 	
 	
-	
-//	//도서 대출신청
-//	@RequestMapping(value = "/bookbrw.ajax")
-//	@ResponseBody
-//	public String brw(HttpSession session, Model model,
-//			@RequestParam String b_id) {
-//		
-//		logger.info("기존 도서 상세보기 페이지"+b_id);
-//		service.brw(b_id);
-//		
-//		return "redirect:/bookDetail?b_id="+b_id;
-//	
-//		
-//	}
-	
-	
-	
-	
-	//도서 예약신청
-	@RequestMapping(value = "/bookreserve.ajax")
-	@ResponseBody
-	public String bookreserve(HttpSession session, Model model,
-			@RequestParam String b_id,@RequestParam String mb_id) {
-		
-		logger.info("기존 도서 상세보기 페이지"+b_id);
-		service.bookreserve(b_id);
-		
-		
-		
-		
-		return "redirect:/bookDetail?b_id="+b_id;
-	
-		
-	}
-	
-	
 	//대출내역 연장신청
 	@RequestMapping(value = "/reserveBtn.ajax")
 	@ResponseBody
