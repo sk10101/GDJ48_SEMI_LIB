@@ -155,32 +155,7 @@ var msg = "${msg}"
  	}
 		
 
-	/* 
-	function bookreason(brwId) {
-		var bookID = $(brwId).attr("bookID");
-	 	console.log(bookID);
-	 	var loginId = $(brwId).attr("loginId");
-	 	console.log(loginId);
-		
-		
-		$.ajax({
-			type:'get',
-			url:'bookreason.ajax',
-			data:{
-				b_id : bookID
-				loginId : loginId
-
-			},
-			dataType:'JSON',
-			success:function(data) {
-				
-			},
-			error:function(e) {
-				
-			}
-		});
-
-	} */
+	
 	
 function bookreason(brwId) {
 	 	var bookID = $(brwId).attr("bookID");

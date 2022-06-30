@@ -82,10 +82,14 @@
     </table>
 </body>
 <script>
-
-
-
-var currPage=1;
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
+	// 관리자 임을 알 수 있는 회원등급과 현재 페이지 정보를 변수에 담는다.
+	var mb_id = "${sessionScope.loginId}";
+	var mb_class = "${sessionScope.mb_class}";
+	var currPage=1;
 	
     listCall(currPage);
         
