@@ -79,6 +79,10 @@
 					 	<option value="15">15</option>
 					 	<option value="20">20</option>
 					 </select>
+					 <select id="option" name="option">
+				       		<option value="도서제목">도서제목</option>
+				       		<option value="연체여부">연체여부</option>
+				       	</select>
 					 <input id="word" type="search" placeholder="검색" name="word" value=""/>
 			        <input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
 				  </td>
@@ -129,7 +133,7 @@ function listCall(page) {
 		dataType:'json',
 		success:function(data){
 			console.log("테이블")
-			drawList(data.list);
+			drawList(data.hisList);
 			currPage = data.currPage;
 			
 			//불러오기가 성공되면 플러그인을 이용해 페이징 처리
@@ -167,7 +171,7 @@ function drawList(hisList) {
 		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_finish+'</td>';
-		content += '<td>';
+		content += '<td class="">';
 		if(item.return_finish > item.return_date) { //연체
 			content += 'Y';
 		}else{

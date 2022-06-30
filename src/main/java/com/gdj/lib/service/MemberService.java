@@ -366,9 +366,61 @@ public class MemberService {
 		return dao.brwList(mb_id);
 	}
 	
-	public ArrayList<BrwBookDTO> hisList(String mb_id) {
-		logger.info("이전대출내역 조회 서비스 도착 :"+mb_id);
-		return dao.hisList(mb_id);
+	public HashMap<String, Object> hisList(HashMap<String, String> params) {
+		logger.info("이전대출내역 조회 서비스 도착 :"+params);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int cnt = Integer.parseInt(params.get("cnt"));
+		int page = Integer.parseInt(params.get("page"));
+		String option = params.get("option");
+		String word = params.get("word");
+		logger.info("서비스 리스트 요청 : {}", params);
+		logger.info("보여줄 페이지 : " + page);
+		
+		ArrayList<BrwBookDTO> hisList = new ArrayList<BrwBookDTO>();
+		ArrayList<BrwBookDTO> searchList = new ArrayList<BrwBookDTO>();
+		
+		String mb_id = params.get("mb_id");
+		int allCnt = dao.hisListPaging(mb_id);
+		
+		logger.info("allCnt : "+allCnt);	
+		
+		int pages = allCnt%cnt > 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+		logger.info("pages : "+pages);
+		
+		if(page > pages) {
+			page = pages;
+		}
+		
+		map.put("pages", pages); // 만들 수 있는 최대 페이지 수
+		map.put("currPage", page); // 현재 페이지
+		
+		int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
+
+		map.put("offset", offset);
+		map.put("currPage", page); // 현재 페이지
+		
+		logger.info("offset : " + offset);
+		
+		// 검색 관련 설정하는 조건문
+		if(word == null || word.equals("")) {
+			hisList = dao.hisListPaging(cnt,offset);
+			map.put("hisList", hisList);
+		} else {
+			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+			if(option.equals("도서제목")) {
+				searchList = dao.allBookTSearch(cnt,offset,word);
+			} else if (option.equals("연체여부")) {
+				searchList = dao.allBookRSearch(cnt,offset,word);
+			}
+			logger.info("검색결과 건수 : " +searchList.size());
+			map.put("searchList", searchList);
+		}
+		
+		logger.info("서비스 체크포인트");
+		
+		return map;
 	}
 	
 	public HashMap<String, Object> reserveList(

@@ -113,7 +113,7 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> penaltyList(int cnt, int offset);
 
 
-	ArrayList<BrwBookDTO> hisList(String mb_id);
+	ArrayList<BrwBookDTO> hisList(HashMap<String, String> params);
 
 
 	ArrayList<BookDTO> reserveList(int cnt, int offset, String mb_id);
@@ -156,6 +156,16 @@ public interface MemberDAO {
 
 
 	ArrayList<BookDTO> allBookSearch(int cnt, int offset, String word,String mb_id);
+
+	int hisListPaging(String mb_id);
+
+	ArrayList<BrwBookDTO> hisListPaging(int cnt, int offset);
+
+	ArrayList<BrwBookDTO> allBookTSearch(int cnt, int offset, String word);
+
+	ArrayList<BrwBookDTO> allBookRSearch(int cnt, int offset, String word);
+
+	
 
 
 

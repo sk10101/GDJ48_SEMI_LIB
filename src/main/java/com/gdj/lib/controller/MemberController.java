@@ -37,7 +37,7 @@ public class MemberController {
 		logger.info("리스트 요청 : {}",params);
 		return service.adminPaging(params);
 	}
-	
+	  
 	@RequestMapping("/memberPaging.ajax")
 	@ResponseBody
 	public HashMap<String, Object> memberPaging(@RequestParam HashMap<String, String>params ) {		
@@ -55,7 +55,7 @@ public class MemberController {
 	
 	
 	
-	@RequestMapping(value = "/memberList.go")
+	@RequestMapping(value = "/memberList.do")
 	public String memberList( Model model, HttpSession session) {
 
 		logger.info("관리자페이지(회원리스트)이동 & 회원리스트 요청");
@@ -77,7 +77,7 @@ public class MemberController {
 		return page;
 	}
 	
-	@RequestMapping(value = "/adminList.go")
+	@RequestMapping(value = "/adminList.do")
 	public String adminList( Model model, HttpSession session) {
 
 		logger.info("관리자페이지(관리자리스트)이동 & 관리자리스트 요청");
@@ -381,14 +381,13 @@ public class MemberController {
 	
 	@RequestMapping("/memberHis.ajax")
 	@ResponseBody
-	public HashMap<String, Object> memberHisList(@RequestParam String mb_id) {
+	public HashMap<String, Object> memberHisList(@RequestParam String mb_id,
+			@RequestParam HashMap<String, String> params) {
 
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = service.hisList(params);
 		
-		logger.info("이전대출내역 목록 요청:"+mb_id);
-		ArrayList<BrwBookDTO> list = service.hisList(mb_id);
-		map.put("list", list);
-		logger.info("완료:"+list);
+		logger.info("이전대출내역 목록 요청:"+params);
+		
 		return map;
 	}
 	
@@ -402,14 +401,15 @@ public class MemberController {
 	
 	@RequestMapping("/memberReserve.ajax")
 	@ResponseBody
-	public HashMap<String, Object> memberReserveList(
-			@RequestParam HashMap<String, String> params
-			) {		
-		logger.info("예약내역 목록 요청:"+params);
+	public HashMap<String, Object> memberReserveList(@RequestParam String mb_id) {
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
-		HashMap<String, Object> map = service.reserveList(params);
-		logger.info("컨트롤러 체크포인트");
-		return map;
+		logger.info("예약내역 목록 요청:"+mb_id);
+		//ArrayList<BrwBookDTO> list = service.reserveList(mb_id);
+		//map.put("list", list);
+		//logger.info("완료:"+list);
+		return null;
 	}
 	
 	@RequestMapping("/reserveCancel.ajax")
