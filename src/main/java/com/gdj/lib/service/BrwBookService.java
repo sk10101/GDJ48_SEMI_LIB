@@ -95,14 +95,6 @@ public class BrwBookService {
 
 	}
 
-	
-	
-
-
-	
-
-	
-
 	public void bookBrwDetail(String b_id) {
 		logger.info("도서예약 취소"+b_id);
 		dao.bookBrwDetail(b_id);
@@ -207,16 +199,25 @@ public class BrwBookService {
 		
 	}
 
-	
+	public long brwExpiry(String mb_id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int chkReturnOver(String mb_id) {
+		return dao.chkReturnOver(mb_id);
+	}
+
+	public int chkPenalty(String mb_id) {
+		return dao.chkPenalty(mb_id);
+	}
+
+	public void insertPenalty(String mb_id) {
+		dao.insertPenalty(mb_id);
+		
+	}
 
 	
-
-//	public ArrayList<BrwBookDTO> brwListMb_id(String mb_id) {
-//		logger.info("서비스컨트롤러 회원아이디 : "+mb_id);
-//		return dao.brwListMb_id(mb_id);
-//		
-//	}
-
 
 	
 

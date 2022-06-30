@@ -69,6 +69,12 @@ public interface BrwBookDAO {
 
 	ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id);
 
+	int chkReturnOver(String mb_id);
+
+	int chkPenalty(String mb_id);
+
+	void insertPenalty(String mb_id);
+
 	
 
 
