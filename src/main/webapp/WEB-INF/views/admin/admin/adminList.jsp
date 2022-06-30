@@ -4,10 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자리스트</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -17,7 +17,21 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-	<h3>관리자페이지(관리자회원 목록)</h3>
+	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a class="tabSelect" href="#">회원관리</a><br/>
+	        <br/>
+	        <a href="#">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a href="#">블랙리스트</a><br/>
+	        <br/>
+	        <a href="#">이용정지내역</a>
+	    </div>
+	    <div class="section">
     	<a href="/memberList.go">일반회원</a>
         <a href="/adminList.go">관리자</a>
     <table class="bbs">
@@ -61,6 +75,8 @@
 				 </td>
 		 	</tr>
     </table>
+    	</div>
+    </div>
 </body>
 <script>
 

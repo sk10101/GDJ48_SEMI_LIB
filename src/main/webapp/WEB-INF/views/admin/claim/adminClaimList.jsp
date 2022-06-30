@@ -20,12 +20,12 @@
 	<div class="body">
 		<div class="myPageTab" id="myPage_menu">
 	        <h3>관리자 페이지</h3>
-	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
 	        <a href="#">회원관리</a><br/>
 	        <br/>
 	        <a href="#">도서관리</a><br/>
 	        <br/>
-	        <a class="tabSelect" href="claimList">건의사항</a><br/>
+	        <a class="tabSelect" href="adminClaimList">건의사항</a><br/>
 	        <br/>
 	        <a href="#">블랙리스트</a><br/>
 	        <br/>
