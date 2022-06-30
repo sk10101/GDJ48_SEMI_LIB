@@ -380,7 +380,7 @@ public class MemberController {
 	
 	@RequestMapping("/memberHis.ajax")
 	@ResponseBody
-	public HashMap<String, Object> memberHisList(@RequestParam String mb_id,
+	public HashMap<String, Object> memberHisList(
 			@RequestParam HashMap<String, String> params) {
 
 		HashMap<String, Object> map = service.hisList(params);

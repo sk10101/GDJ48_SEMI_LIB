@@ -180,13 +180,16 @@ function drawList(hisList) {
 		content += '</td>';
 		content += '</tr>';
 	});
+	$("#hisList").empty();
 	$('#hisList').append(content);
 }
 
 
 function searchList(page) {
 	var word = $('#word').val();
+	var option = $('#option').val();
 	var pagePerNum = $('#pagePerNum').val();
+	console.log(word);
 	
 	$.ajax({
 		type: 'GET',
@@ -194,13 +197,15 @@ function searchList(page) {
 		data:{
 			cnt : pagePerNum,
 			page : page,
-			word : word,
+			mb_id : mb_id,
+			option : option,
+			word : word
 		},
 		dataType:'JSON',
 		success: function(data){
 			// 테이블 초기화
-			$("#searchList").empty();
-			drawList(data.searchList);
+			$("#hisList").empty();
+			drawList(data.hisList);
 			currPage = 1;
 			// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
 			$("#pagination").twbsPagination({
@@ -210,7 +215,7 @@ function searchList(page) {
 				onPageClick: function(e, page) {
 					console.log(page); // 사용자가 클릭한 페이지
 					currPage = page;
-					searchList(page);
+					listCall(page);
 				}
 			});
 		},

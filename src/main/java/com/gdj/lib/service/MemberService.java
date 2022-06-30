@@ -416,7 +416,7 @@ public class MemberService {
 				searchList = dao.allBookRSearch(cnt,offset,word,mb_id);
 			}
 			logger.info("검색결과 건수 : " +searchList.size());
-			map.put("searchList", searchList);
+			map.put("hisList", searchList);
 		}
 		
 		logger.info("서비스 체크포인트");
