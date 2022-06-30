@@ -204,6 +204,19 @@ public class BrwBookService {
 		return 0;
 	}
 
+	public int chkReturnOver(String mb_id) {
+		return dao.chkReturnOver(mb_id);
+	}
+
+	public int chkPenalty(String mb_id) {
+		return dao.chkPenalty(mb_id);
+	}
+
+	public void insertPenalty(String mb_id) {
+		dao.insertPenalty(mb_id);
+		
+	}
+
 	
 
 	

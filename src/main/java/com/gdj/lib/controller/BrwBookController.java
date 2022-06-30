@@ -88,6 +88,20 @@ public class BrwBookController {
 	public String reserveBtn(HttpSession session, Model model,
 			@RequestParam String brw_id) {
 		
+		String mb_id = (String) session.getAttribute("loginId");
+		logger.info(mb_id);
+		model.addAttribute("mb_id",mb_id);
+		
+		int chkReturnOver = service.chkReturnOver(mb_id);
+		if(chkReturnOver > 0) {
+			// 연체 페널티가 부과되었는지 확인
+			int chkPenalty = service.chkPenalty(mb_id);
+			// 페널티 부과된 내용이 없다면
+			if (chkPenalty == 0) {
+				// 연체 페널티 부과
+				service.insertPenalty(mb_id);
+			}
+		}
 		logger.info("예약기능"+brw_id);
 		service.reserveBtn(brw_id);	
 		return "myPage/bookList/reserve";
@@ -131,35 +145,50 @@ public class BrwBookController {
 		model.addAttribute("mb_id",mb_id);
 		logger.info("책번호 아이디 : "+ params);
 		
-		 int reserveCheck =service.reserveCheck(mb_id); 
-		  logger.info("예약만료인 책 권수: "+reserveCheck);
-		  if(reserveCheck >= 1) { 
-			  long brwExpiry = service.brwExpiry(mb_id); 
-			  logger.info("예약 만료일 "+brwExpiry);
-			  if(brwExpiry < nowtime) { 
-				  service.expiryPenalty(mb_id);
-				  service.reserveCancel(mb_id);
-				  service.addPenalty(mb_id);
-				  msg = "이용정지 3일입니다";
-				  logger.info(msg);
-				  model.addAttribute("msg", msg);
-		  }else { 		
-			  msg = "예약신청이 완료되었습니다."; 
-			  model.addAttribute("msg", msg);
-			  service.bookreason(params);
-		  }
-		  	}  else{  	 
-			  service.bookreason(params);
-			  msg = "예약신청이 완료되었습니다."; 
-			  model.addAttribute("msg", msg);
-			 }
+		// loginId가 대출한 책이 연체 되었는지 확인
+		int chkReturnOver = service.chkReturnOver(mb_id);
+		if(chkReturnOver > 0) {
+			// 연체 페널티가 부과되었는지 확인
+			int chkPenalty = service.chkPenalty(mb_id);
+			// 페널티 부과된 내용이 없다면
+			if (chkPenalty == 0) {
+				// 연체 페널티 부과
+				service.insertPenalty(mb_id);
+			}
+		}
 			service.bookDetailBrw(params);
-
-		  return msg;
+				return "/";
+	}
+		
+//		 int reserveCheck =service.reserveCheck(mb_id); 
+//		  logger.info("예약만료인 책 권수: "+reserveCheck);
+//		  if(reserveCheck >= 1) { 
+//			  long brwExpiry = service.brwExpiry(mb_id); 
+//			  logger.info("예약 만료일 "+brwExpiry);
+//			  if(brwExpiry < nowtime) { 
+//				  service.expiryPenalty(mb_id);
+//				  service.reserveCancel(mb_id);
+//				  service.addPenalty(mb_id);
+//				  msg = "이용정지 3일입니다";
+//				  logger.info(msg);
+//				  model.addAttribute("msg", msg);
+//		  }else { 		
+//			  msg = "예약신청이 완료되었습니다."; 
+//			  model.addAttribute("msg", msg);
+//			  service.bookreason(params);
+//		  }
+//		  	}  else{  	 
+//			  service.bookreason(params);
+//			  msg = "예약신청이 완료되었습니다."; 
+//			  model.addAttribute("msg", msg);
+//			 }
+//			service.bookDetailBrw(params);
+//
+//		  return msg;
 		  
 
 		  
-		  }
+// }
 					 
 		
 		
@@ -245,8 +274,6 @@ public class BrwBookController {
 		@RequestMapping(value = "/brwList")
 		public String bookList(Model model, HttpSession session,
 				@RequestParam HashMap<String, String> params) {
-			
-			
 			logger.info("이전대출 목록");
 			return "myPage/bookList/brwList";
 			
