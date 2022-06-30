@@ -18,7 +18,7 @@
 	</select>
 	
 	<update id="borrow" parameterType="String">						
-		UPDATE book SET b_status='대출중' WHERE b_id = #{param1}
+		UPDATE book SET b_status='대출중', reserve_able ='1' WHERE b_id = #{param1}
 	</update>
 	
 	<update id="updateR" parameterType="String">
@@ -55,8 +55,8 @@
 		SELECT date_format(return_finish,'%Y%m%d') FROM borrow WHERE mb_id = #{param1} ORDER BY return_finish DESC limit 1
 	</select>
 	
-	<update id="penaltyEndDate">
-		UPDATE penalty SET penalty_end = adddate(now(),interval 7 day) WHERE category_id = '5' AND penalty_end IS NULL
+	<update id="penaltyEndDate" parameterType="String">
+		UPDATE penalty SET penalty_end = adddate(now(),interval 7 day) WHERE category_id = '5' AND penalty_end IS NULL AND mb_id = #{param1} 
 	</update>
 	
 </mapper>
