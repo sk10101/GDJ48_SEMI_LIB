@@ -5,35 +5,17 @@
 <meta charset="UTF-8">
 <title>도서검색</title>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<<<<<<< HEAD
-<link rel="stylesheet" href="../resources/css/book.css">
 <link rel="icon" href="resources/img/favicon.png">
-
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-=======
->>>>>>> origin/master
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <style></style>
 </head>
 <body>
-<<<<<<< HEAD
-	<!-- header start -->
-    <div id="header">
-		<jsp:include page="../commons/header.jsp"/>
-	</div>
-	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-    <!-- header end -->
-	
-=======
 	<div id="header">
 		<jsp:include page="../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-    
->>>>>>> origin/master
 	<section>
         <form class="search" action="bookSearch.go" method="get">
             <select name="option">

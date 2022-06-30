@@ -20,13 +20,8 @@
 	<div class="body">
 		<div class="myPageTab" id="myPage_menu">
 	        <h3>관리자 페이지</h3>
-<<<<<<< HEAD
-	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
-	        <a href="#">회원관리</a><br/>
-=======
 	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
 	        <a href="memberList.go">회원관리</a><br/>
->>>>>>> origin/master
 	        <br/>
 	        <a href="bookList.go">도서관리</a><br/>
 	        <br/>
