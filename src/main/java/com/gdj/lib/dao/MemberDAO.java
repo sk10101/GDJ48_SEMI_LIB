@@ -125,8 +125,6 @@ public interface MemberDAO {
 
 	
 	
-	
-	
 	ArrayList<MemberDTO> blackIDSearch(int cnt, int offset, String word);
 
 	ArrayList<MemberDTO> adStartSearch(int cnt, int offset, String word);
@@ -136,7 +134,6 @@ public interface MemberDAO {
 	int allMemeberCount();
 
 	int allAdminCount();
-
 
 
 	ArrayList<MemberDTO> mbIDSearch(int cnt, int offset, String word);

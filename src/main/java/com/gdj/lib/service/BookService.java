@@ -6,11 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dao.BookDAO;
-import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.PhotoDTO;
 

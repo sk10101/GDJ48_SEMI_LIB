@@ -1,7 +1,6 @@
 package com.gdj.lib.dao;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.PhotoDTO;
