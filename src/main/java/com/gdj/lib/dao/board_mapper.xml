@@ -158,7 +158,7 @@
 	</delete>
 	
 	<delete id="photoDel">
-		DELETE FROM photo WHERE post_id = #{param1}
+		DELETE FROM photo WHERE post_id = #{param1} and category_id = '2'
 	</delete>
 	
 	
@@ -191,5 +191,17 @@
 		SELECT reply_id from reply
 			WHERE claim_id = #{param1}
 	</select>
+	
+	<select id="claimReplyList" resultType="com.gdj.lib.dto.BoardDTO">
+		SELECT reply_id FROM reply WHERE claim_id = #{param1}
+	</select>
+	
+	<delete id="replyDel">
+		DELETE FROM reply WHERE reply_id = #{param1}
+	</delete>
+	
+	<delete id="replyPhotoDel">
+		DELETE FROM photo WHERE post_id = #{param1} and category_id = '3'
+	</delete>
 	
 </mapper>
