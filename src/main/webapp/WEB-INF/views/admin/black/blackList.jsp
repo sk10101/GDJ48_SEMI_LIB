@@ -190,11 +190,6 @@
 		var option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
 		
-		// 검색어 저장
-		/*
-		sessionStorage.setItem("word",word);
-		sessionStorage.setItem("option",option);
-		*/
 		
 		$.ajax({
 			type: 'GET',

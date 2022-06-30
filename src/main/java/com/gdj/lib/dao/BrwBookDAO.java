@@ -65,9 +65,16 @@ public interface BrwBookDAO {
 
 	void bookdelStatusUpdate(String string);
 
-	ArrayList<BrwBookDTO> bookListPaing(int cnt, int offset, String mb_id);
 
 	ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id);
+
+	ArrayList<BrwBookDTO> brwBookList(int cnt, int offset, String mb_id);
+
+	ArrayList<BrwBookDTO> brwSubjectSearch(int cnt, int offset, String word, String mb_id);
+
+	ArrayList<BrwBookDTO> brwStatusSearch(int cnt, int offset, String word, String mb_id);
+
+	int brwBookCount(String mb_id);
 
 	
 

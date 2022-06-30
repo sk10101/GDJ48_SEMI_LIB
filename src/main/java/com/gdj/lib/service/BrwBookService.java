@@ -123,18 +123,19 @@ public class BrwBookService {
 		HashMap<String, Object> brwBookPageMap = new HashMap<String, Object>();
 		
 		
-		String mb_id = params.get("mb_id");
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
-//		String option = params.get("option");
-//		String word = params.get("word");
+		String option = params.get("option");
+		String word = params.get("word");
+		String mb_id = params.get("mb_id");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : "+page);
 		logger.info("로그인한 아이디 : " + mb_id);
 		
-		//ArrayList<BoardDTO> noticeSearchList = new ArrayList<BoardDTO>();
+		ArrayList<BrwBookDTO> brwBookList = new ArrayList<BrwBookDTO>();
+		ArrayList<BrwBookDTO> brwBookSearchList = new ArrayList<BrwBookDTO>();
 		
-		int allCnt = dao.allCount();
+		int allCnt = dao.brwBookCount(mb_id);
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt> 0 ? (allCnt / cnt)+1 : (allCnt/ cnt);
 		logger.info("pages : "+pages);
@@ -152,29 +153,28 @@ public class BrwBookService {
 		brwBookPageMap.put("offset", offset);
 		logger.info("offset : "+offset);
 		
-		ArrayList<BrwBookDTO> bookListPaing = dao.bookListPaing(cnt, offset, mb_id);
-		brwBookPageMap.put("bookListPaing",bookListPaing);
 		
 		// 검색 관련 설정하는 조건문
-//		if(word == null || word.equals("")) {
-//			ArrayList<BoardDTO> noticeList = dao.noticeList(cnt, offset);
-//			
-//			noticePageMap.put("noticeList", noticeList);
-//		} else {
-//			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
-//			
-//			// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
-//			if(option.equals("제목")) {
-//				noticeSearchList = dao.subjectNoticeSearch(cnt,offset,word);
-//				logger.info("제목 옵션 설정");
-//			}
-//			
-//			logger.info("검색결과 건수 : " +noticeSearchList.size());
-//			noticePageMap.put("noticeList", noticeSearchList);
-//			
-//		}
-//		logger.info("서비스 체크포인트");
-//		
+		if(word == null || word.equals("")) {
+			brwBookList = dao.brwBookList(cnt, offset, mb_id);
+			brwBookPageMap.put("brwBookList",brwBookList);
+		} else {
+			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+			
+			// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
+			if(option.equals("제목")) {
+				brwBookSearchList = dao.brwSubjectSearch(cnt,offset,word, mb_id);
+				logger.info("제목 옵션 설정");
+			} else {
+				brwBookSearchList = dao.brwStatusSearch(cnt,offset,word, mb_id);
+				logger.info("상태 옵션 설정");
+			}
+	
+			logger.info("검색결과 건수 : " +brwBookSearchList.size());
+			brwBookPageMap.put("brwBookList", brwBookSearchList);
+			
+		}
+		logger.info("서비스 체크포인트");	
 		
 		
 		return brwBookPageMap;
