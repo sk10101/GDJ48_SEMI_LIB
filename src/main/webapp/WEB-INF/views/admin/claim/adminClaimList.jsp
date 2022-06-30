@@ -21,15 +21,15 @@
 		<div class="myPageTab" id="myPage_menu">
 	        <h3>관리자 페이지</h3>
 	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
-	        <a href="#">회원관리</a><br/>
+	        <a href="memberList.go">회원관리</a><br/>
 	        <br/>
-	        <a href="#">도서관리</a><br/>
+	        <a href="bookList.go">도서관리</a><br/>
 	        <br/>
 	        <a class="tabSelect" href="claimList">건의사항</a><br/>
 	        <br/>
-	        <a href="#">블랙리스트</a><br/>
+	        <a href="blackList.go">블랙리스트</a><br/>
 	        <br/>
-	        <a href="#">이용정지내역</a>
+	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
 	    <div class="section">
 	    	<div class="claimTable-area">
