@@ -35,7 +35,7 @@
             <div class="middle">
                 
                 <div class="middle-left">
-                    <span>
+
                         <table>
                             <thead>
                                  <tr>
@@ -52,11 +52,11 @@
                                 </tr>
                             </thead>
                         </table>
-                    </span>
+
                 </div>
                 <div class="middle-right">
                     <div class="middle-right-1">
-                        <span>
+
                             <table>
                                 <thead>
                                     <tr>
@@ -66,10 +66,10 @@
                                     </tr>
                                 </thead>
                             </table>
-                        </span>
+
                     </div>
                     <div class="middle-right-2">
-                        <span>
+
                             <table>
                                 <thead id="head">
                                     <tr>
@@ -127,7 +127,7 @@
                                     
                                 </thead>
                             </table>
-                        </span>
+
                     </div>    
             </div>
         </div>

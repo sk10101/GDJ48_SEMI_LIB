@@ -125,47 +125,10 @@ table {
 </body>
 <script>
 var msg = "${msg}"
-<<<<<<< HEAD
 if (msg != "") {
 	alert(msg);
 }
 
- 
-	function bookbrw(brwId) {
-		var bookID = $(brwId).attr("bookID");
-	 	console.log(bookID);
-	 	var loginId = $(brwId).attr("loginId");
-	 	console.log(loginId);
-	 	
-	 	
-	 		
-	 		$.ajax({
-				type:'get',
-				url:'bookDetailBrw.ajax',
-				data:{
-					b_id : bookID,
-					loginId : loginId
-				},
-				dataType:'JSON',
-				success:function(data) {
-					
-				},
-				error:function(e) {
-					console.log(e);
-				}
-			});
-	 		
-	 	
-		
- 	}
-		
-=======
-   if (msg != "") {
-      alert(msg);
-   }
-
-
- 
    function bookbrw(brwId) {
       var bookID = $(brwId).attr("bookID");
        console.log(bookID);
@@ -187,10 +150,7 @@ if (msg != "") {
             console.log(e);
          }
       });
-    }
-      
->>>>>>> origin/master
-
+    }      
    
    
 function bookreason(brwId) {
