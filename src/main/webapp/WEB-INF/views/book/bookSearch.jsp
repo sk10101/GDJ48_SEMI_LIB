@@ -6,33 +6,17 @@
 <title>Insert title here</title>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="../resources/css/book.css">
-
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
-
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <style></style>
 </head>
 <body>
-	<!-- header start -->
-    <header>
-        <div class="header-wrap">
-            <div class="logo">
-                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
-            </div>
-            <nav>
-                <ul class="navi">
-                    <li>***님 환영합니다.</li>
-                    <li><a href="#">로그아웃</a></li>
-                    <li><a href="#">마이페이지</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <!-- header end -->
-	
+	<div id="header">
+		<jsp:include page="../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+    
 	<section>
         <form class="search" action="bookSearch.go" method="get">
             <select name="option">

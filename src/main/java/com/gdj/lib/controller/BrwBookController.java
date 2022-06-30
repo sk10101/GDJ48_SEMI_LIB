@@ -238,7 +238,7 @@ public class BrwBookController {
 	//brwList 페이징 처리
 	@RequestMapping("/myPageBrwList.ajax")
 	@ResponseBody
-	public HashMap<String, Object> myPageBrwList(Model model, HttpSession session,
+	public HashMap<String, Object> myPageBrwList(
 			@RequestParam HashMap<String, String> params) {
 		logger.info("리스트 요청 : {}",params);
 		HashMap<String, Object> brwList = service.myPageBrwList(params);
@@ -247,6 +247,7 @@ public class BrwBookController {
 		return brwList;
 	}
 
+	
 	
 	
 	

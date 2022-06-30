@@ -3,36 +3,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>블랙리스트</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-    .detail {
-        right: 0;
-    }
-    table.bbs {
-		width: 50%;
-	}
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th, td {
-		padding: 10px 10px;
-	}
-	textarea {
-		width: 100%;
-		height: 150px;
-		resize: none;
-	}
-    a:link {
-        text-decoration: none;
-    }
 </style>
 </head>
 <body>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
 	<h3>블랙리스트 기본</h3>
 	    <table>
 	        <thead>
@@ -53,7 +37,7 @@
 		 		<td colspan="5" id="paging">
 		 			<!-- plugin 사용법 -->
 		 			<div class="container">
-		 				<nav aria-label="Page navigation" style="text-align:center">
+		 				<nav aria-label="Page navigation">
 		 					<ul class="pagination" id="pagination">
 		 					</ul>
 		 				</nav>
@@ -74,7 +58,7 @@
 				       		<option value="해제한관리자ID">해제한 관리자 ID</option>
 				       	</select>
 			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 				 </td>
 		 	</tr>
 	    </table>
@@ -190,11 +174,6 @@
 		var option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
 		
-		// 검색어 저장
-		/*
-		sessionStorage.setItem("word",word);
-		sessionStorage.setItem("option",option);
-		*/
 		
 		$.ajax({
 			type: 'GET',
