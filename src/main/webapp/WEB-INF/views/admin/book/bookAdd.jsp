@@ -20,7 +20,7 @@
         <ul class="admin_menu">
             <li><a href="memberList.go">회원관리</a></li>
             <li><a href="bookList.go">도서관리</a></li>
-            <li><a href="claimList">건의사항</a></li>
+            <li><a href="adminClaimList">건의사항</a></li>
             <li><a href="blackList.go">블랙리스트</a></li>
             <li><a href="penaltyList.go">이용정지내역</a></li>
         </ul>

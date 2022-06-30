@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>퇴실(키오스크)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://kit.fontawesome.com/5415520417.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="resources/css/kioskStyle.css">
