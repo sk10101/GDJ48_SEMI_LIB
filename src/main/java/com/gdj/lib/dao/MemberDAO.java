@@ -123,9 +123,7 @@ public interface MemberDAO {
 
 	int allBlackCount();
 
-	
-	
-	
+
 	
 	
 	ArrayList<MemberDTO> blackIDSearch(int cnt, int offset, String word);
