@@ -8,14 +8,14 @@
 
 <style>
 table {
-		width: 100%;
-	}
-	table,th,td {
-		border: 1px solid black;
-		border-collapse: collapse;
-		padding: 5px;	
-	}
-	
+      width: 100%;
+   }
+   table,th,td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px;   
+   }
+   
 
 .logo {
     font-size: 30px;
@@ -30,7 +30,7 @@ table {
 </head>
 <body>
 
-   		<div class="logo">
+         <div class="logo">
             <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
         <nav>
@@ -47,9 +47,9 @@ table {
        <table>
             <thead id="head">
             <tr>
-            	<td>
-					<p><img src="/image/${dto.newFileName}" height="200"/>
-				</td>
+               <td>
+               <p><img src="/image/${dto.newFileName}" height="200"/>
+            </td>
             </tr>
             <c:forEach items="${detail}" var="dto">
                 <tr>
@@ -81,89 +81,39 @@ table {
                     <td>예약신청</td>
                    
                 <tr>
-
-				<c:forEach items="${detail}" var="dto">
-                   <td id="brw_b_id">${dto.b_id}</td>
-                   <td id="b_status">${dto.b_status}</td>
-
-                   <c:if test="${dto.b_status eq '대출가능'}">
-					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
-					<td></td>
-					</c:if>
-					<c:if test="${dto.b_status eq '대출중'}">
-					<td></td>
-					<td id="reason"><button id="reasonBtn" onclick="bookreason()">예약신청</button></td>
-					</c:if>
-
-                   <td>${dto.b_status}</td>
-                   <c:if test="${dto.b_status eq '대출가능'}">
-					<td id="brw"><button id="brwBtn" onclick="bookbrw()">대출신청</button></td>
-                   <td></td>
-                   </c:if>
-                   <c:if test="${dto.b_status eq '대출중'}"> 
-                     <td></td>  
-                   <td id="bookreserve"><button  onclick="bookreserve()">예약신청</button></td>
-                 	 </c:if>
-
-                   
-                   <td id="brw">
-                   <c:choose>
-						<c:when test="${brwdto.b_status eq '대출불가'}">
-						<input type="hidden">
-						</c:when>
-						<c:when test="${brwdto.b_status eq '대출가능'}">                        				
-						<button class="brwBtn" onclick="bookBrwDetail(this)" bookID="${brwdto.b_id}" >대출신청</button>								
-						</c:when>
-						<c:when test="${brwdto.b_status eq '대출불가'}">
-						<input type="hidden">
-						</c:when>
-					</c:choose>
-					</td>
-				</c:forEach>
-					
-					<%-- <td id="reason">
-					<c:choose>
-						<c:when test="${brwdto.b_status eq '대출중'}">                        				
-							<button class="reasonBtn" onclick="bookreason(this)">예약신청</button>
-						</c:when>
-					</c:choose>
-					</td> --%>
-
-
-				   <c:forEach items="${detail}" var="dto">
-					   <td id="brw_b_id">${dto.b_id}</td>
-	                   <td id="b_status">${dto.b_status}</td>
-					   <td>
-		                   <c:choose>
-		                   		<c:when test="${dto.b_status eq '대출가능'}">
-									<button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">대출신청</button>
-		                   		</c:when>
-		                   		<c:when test="${dto.b_status eq '대출불가'}">
-		                   			<input type="hidden">
-		                   		</c:when> 
-		                   		<c:when test="${dto.b_status eq '대출중'}">
-									<input type="hidden">
-		                   		</c:when>
-						   </c:choose>
-	                   </td>
+               <c:forEach items="${detail}" var="dto">
+                  <td id="brw_b_id">${dto.b_id}</td>
+                      <td id="b_status">${dto.b_status}</td>
+                  <td>
+                         <c:choose>
+                               <c:when test="${dto.b_status eq '대출가능'}">
+                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">대출신청</button>
+                               </c:when>
+                               <c:when test="${dto.b_status eq '대출불가'}">
+                                  <input type="hidden">
+                               </c:when> 
+                               <c:when test="${dto.b_status eq '대출중'}">
+                           <input type="hidden">
+                               </c:when>
+                     </c:choose>
+                      </td>
                    </c:forEach>
                    
                    <td>
                    <c:forEach items="${detail}" var="dto">
-	                   <c:choose>
-	                   		<c:when test="${dto.b_status eq '대출중'}">
-	                   			<button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
-	                   		</c:when>
-	                   		<c:when test="${dto.b_status eq '대출불가'}">
-	                   			<input type="hidden">
-	                   		</c:when>
-	                   		<c:when test="${dto.b_status eq '대출신청'}">
-								<input type="hidden">
-	                   		</c:when>
-					   </c:choose>
-					</c:forEach>
+                      <c:choose>
+                            <c:when test="${dto.b_status eq '대출중'}">
+                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
+                            </c:when>
+                            <c:when test="${dto.b_status eq '대출불가'}">
+                               <input type="hidden">
+                            </c:when>
+                            <c:when test="${dto.b_status eq '대출신청'}">
+                        <input type="hidden">
+                            </c:when>
+                  </c:choose>
+               </c:forEach>
                    </td>
-
                 </tr>
             </thead>
         </table>
@@ -175,97 +125,68 @@ table {
 </body>
 <script>
 var msg = "${msg}"
-	if (msg != "") {
-		alert(msg);
-	}
+if (msg != "") {
+	alert(msg);
+}
 
-
- 
-	function bookbrw(brwId) {
-		var bookID = $(brwId).attr("bookID");
-	 	console.log(bookID);
-	 	var loginId = $(brwId).attr("loginId");
-	 	console.log(loginId);
-		
-		$.ajax({
-			type:'get',
-			url:'bookDetailBrw.ajax',
-			data:{
-				b_id : bookID,
-				loginId : loginId
-			},
-			dataType:'JSON',
-			success:function(data) {
-				
-			},
-			error:function(e) {
-				console.log(e);
-			}
-		});
- 	}
-		
-
-	/* 
-	function bookreason(brwId) {
-		var bookID = $(brwId).attr("bookID");
-	 	console.log(bookID);
-	 	var loginId = $(brwId).attr("loginId");
-	 	console.log(loginId);
-		
-		
-		$.ajax({
-			type:'get',
-			url:'bookreason.ajax',
-			data:{
-				b_id : bookID
-				loginId : loginId
-
-			},
-			dataType:'JSON',
-			success:function(data) {
-				
-			},
-			error:function(e) {
-				
-			}
-		});
-
-	} */
-	
+   function bookbrw(brwId) {
+      var bookID = $(brwId).attr("bookID");
+       console.log(bookID);
+       var loginId = $(brwId).attr("loginId");
+       console.log(loginId);
+      
+      $.ajax({
+         type:'get',
+         url:'bookDetailBrw.ajax',
+         data:{
+            b_id : bookID,
+            loginId : loginId
+         },
+         dataType:'JSON',
+         success:function(data) {
+            
+         },
+         error:function(e) {
+            console.log(e);
+         }
+      });
+    }      
+   
+   
 function bookreason(brwId) {
-	 	var bookID = $(brwId).attr("bookID");
-	 	console.log(bookID);
-	 	var loginId = $(brwId).attr("loginId");
-	 	console.log(loginId);
-		
-	 	
-		$.ajax({
-			type:'get',
-			url:'bookreason.ajax',
-			data:{
-				b_id : bookID,
-				loginId : loginId
+       var bookID = $(brwId).attr("bookID");
+       console.log(bookID);
+       var loginId = $(brwId).attr("loginId");
+       console.log(loginId);
+      
+       
+      $.ajax({
+         type:'get',
+         url:'bookreason.ajax',
+         data:{
+            b_id : bookID,
+            loginId : loginId
 
-			},
-			dataType:'JSON',
-			success:function(data) {
-				alert(data);
-			},
-			error:function(e) {
-				
-			}
-		});
+         },
+         dataType:'JSON',
+         success:function(data) {
+            alert(data);
+         },
+         error:function(e) {
+            
+         }
+      });
 
-	}
+   }
 
-	$(".brwBtn").on("click",function(){
-		   $(this).hide();
-		   alert("대출신청이 완료되었습니다");
-	});
-		
-	$(".bookreason").on("click",function(){
-		alert("예약신청이 완료되었습니다.");
-	});
+   $(".brwBtn").on("click",function(){
+         $(this).hide();
+         alert("대출신청이 완료되었습니다");
+   });
+      
+   $(".bookreason").on("click",function(){
+      alert("예약신청이 완료되었습니다.");
+   });
 
 </script>
 </html>

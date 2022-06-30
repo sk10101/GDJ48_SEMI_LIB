@@ -8,7 +8,7 @@
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
-	<select id="list" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
+	<select id="list" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
@@ -112,12 +112,7 @@
  		update book set b_status = "대출불가" where b_id = #{b_id}	
  	</update>
 
- 	
- 	
- 	
-
-
-
+ 
  	<select id="reserveCheck" parameterType="String" resultType="int">
 		SELECT COUNT(reserve_id) from reservation WHERE mb_id = #{param1} AND reason is null 
 	</select>
@@ -150,6 +145,22 @@
 			, interval 7 day),renew = '1' where brw_id = #{brw_id}
 	</update>
  	
+ 	
+ 	<!-- 연채여부 -->
+ 	
+ 	<select id="chkReturnOver" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT count(brw_id) FROM borrow WHERE mb_id = #{loginId} AND brw_status = '대출' AND return_date < now()	
+		]]> 
+	</select>
+	
+	<select id="chkPenalty" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT count(penalty_id) FROM penalty p WHERE mb_id = #{loginId} AND penalty_end is null
+	</select>
+	
+	<insert id="insertPenalty" parameterType="String">
+		INSERT INTO penalty(category_id, mb_id, penalty_start,cancel) VALUES('5',#{loginId},now(), false);
+	</insert>
 	
 	
 	<!-- 아래부터 이전대출내역 검색기능 관련 쿼리문 -->

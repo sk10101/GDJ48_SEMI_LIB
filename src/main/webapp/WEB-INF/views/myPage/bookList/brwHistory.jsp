@@ -18,7 +18,6 @@
 </style>
 </head>
 <body>
-
 	<div class="container">
             <!-- TOP -->
             <div class="top">
@@ -36,7 +35,7 @@
             <div class="middle">
                 
                 <div class="middle-left">
-                    <span>
+
                         <table>
                             <thead>
                                  <tr>
@@ -53,11 +52,11 @@
                                 </tr>
                             </thead>
                         </table>
-                    </span>
+
                 </div>
                 <div class="middle-right">
                     <div class="middle-right-1">
-                        <span>
+
                             <table>
                                 <thead>
                                     <tr>
@@ -67,10 +66,10 @@
                                     </tr>
                                 </thead>
                             </table>
-                        </span>
+
                     </div>
                     <div class="middle-right-2">
-                        <span>
+
                             <table>
                                 <thead id="head">
                                     <tr>
@@ -128,13 +127,18 @@
                                     
                                 </thead>
                             </table>
-                        </span>
+
                     </div>    
             </div>
         </div>
 
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
+
 
 function updateExtension(whethe_id) {
 	var whetherValue = $(whethe_id).attr("whetherValue")
