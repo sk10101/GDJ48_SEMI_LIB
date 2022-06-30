@@ -54,10 +54,14 @@ public class BoardService {
 		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
 		
 		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
-		int allCnt = dao.allCount();
-		if(mb_id != null) {
+		int allCnt = 0;
+		
+		if(mb_id != null && mb_class.equals("일반회원")) {
 			allCnt = dao.claimCount(mb_id);
+		} else {
+			allCnt = dao.allCount();
 		}
+		
 		logger.info("allCnt : " + allCnt);
 		
 		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
