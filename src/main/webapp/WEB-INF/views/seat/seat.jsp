@@ -14,7 +14,7 @@
 	<div id="header">
 		<jsp:include page="../commons/header.jsp"/>
 	</div>
-	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important;"/>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important;"/>
 	<div id="body">
 		<div class="seatSection">
 	        <h1>열람실 현황</h1><br>
