@@ -375,7 +375,6 @@ public class MemberController {
 	public String memberHis(@RequestParam String mb_id) {
 
 		logger.info("관리자 > 이전대출내역 요청 :"+mb_id);
-		//session.setAttribute("mb_id", mb_id);
 		return "admin/member/memberHis";
 	}
 	
@@ -456,6 +455,7 @@ public class MemberController {
 
 
 }
+
 		
 	
 

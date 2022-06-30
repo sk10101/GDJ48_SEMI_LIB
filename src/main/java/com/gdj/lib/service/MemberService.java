@@ -433,6 +433,7 @@ public class MemberService {
 		int page = Integer.parseInt(params.get("page"));
 		String mb_id = params.get("mb_id");
 		String word = params.get("word");
+		String option = params.get("option");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : " + page);
 		
@@ -456,17 +457,20 @@ public class MemberService {
 		//map.put("offset", offset);
 		logger.info("offset : " + offset);
 		
-		searchList = dao.allBookSearch(cnt,offset,word,mb_id);		
-		logger.info("검색결과 건수 : " +searchList.size());
-		
 		if(word == null || word.equals("")) {
 			reserveList = dao.reserveList(cnt,offset,mb_id);
 			map.put("reserveList", reserveList);
 		}else {
-			searchList = dao.allBookSearch(cnt,offset,word,mb_id);
-			map.put("searchList", searchList);
-		}
-		
+			if(option.equals("b_title")) {
+				logger.info("옵션 선택 :" +option);
+				searchList = dao.reserveTitleSearch(cnt,offset,word,mb_id);				
+			} else {
+				logger.info("옵션 선택 :" +option);
+				searchList = dao.reserveReasonSearch(cnt,offset,word,mb_id);	
+			}
+			logger.info("검색결과 건수 : " +searchList.size());
+			map.put("reserveList", searchList);
+		}		
 		return map;
 	}
 	
@@ -476,5 +480,6 @@ public class MemberService {
 		
 	}
 }
+
 
 

@@ -123,7 +123,6 @@ public interface MemberDAO {
 
 	int allBlackCount();
 
-
 	
 	
 	ArrayList<MemberDTO> blackIDSearch(int cnt, int offset, String word);
@@ -152,8 +151,10 @@ public interface MemberDAO {
 
 	int allReserveCount(String mb_id);
 
+	ArrayList<BookDTO> reserveReasonSearch(int cnt, int offset, String word, String mb_id);
 
-	ArrayList<BookDTO> allBookSearch(int cnt, int offset, String word,String mb_id);
+	ArrayList<BookDTO> reserveTitleSearch(int cnt, int offset, String word, String mb_id);
+
 
 	int allHisCount(String mb_id);
 
