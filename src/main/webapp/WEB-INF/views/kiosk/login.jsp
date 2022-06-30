@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인(키오스크)</title>
 <link rel="stylesheet" href="resources/css/kioskStyle.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style></style>
