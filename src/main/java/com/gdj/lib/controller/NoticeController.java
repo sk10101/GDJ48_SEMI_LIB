@@ -95,6 +95,8 @@ public class NoticeController {
 			int cnt = service.noticeDelete(noticeDeleteList);
 			noticeMap.put("msg",noticeDeleteList.size()+"개 중"+cnt+" 개 삭제 완료");
 			
+			noticeMap.put("noticeDeleteList", noticeDeleteList);
+			
 			return noticeMap;
 			
 		}

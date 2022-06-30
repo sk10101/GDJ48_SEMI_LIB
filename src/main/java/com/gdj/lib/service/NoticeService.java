@@ -42,7 +42,7 @@ public class NoticeService {
 		dto.setNotice_content(params.get("notice_content"));
 		
 		int row = dao.noticeWrite(dto);
-		logger.info(row + "공지사항 글 작성 성공");
+		logger.info(row + " 공지사항 글 작성 성공");
 		
 		int notice_id = dto.getNotice_id();
 		logger.info("방금 넣은 글 번호 : "+notice_id);
@@ -102,30 +102,34 @@ public class NoticeService {
 		
 		for (int notice_id : noticeDeleteList) {
 			cnt += dao.noticeDelete(notice_id);
+			noticePhotoList = dao.noticePhotoList(notice_id);
 			photoCnt += dao.noticePhotoDelete(notice_id);
 			
+			logger.info(notice_id+" 번 게시물에 업로드된 사진 수 : "+noticePhotoList.size());
 		}
-		/*
 		
-		for(PhotoDTO notice_id : noticePhotoList) {
-			photoCnt += dao.noticePhotoDelete(notice_id.getPost_id());
+		/*
+		for(PhotoDTO post_id : noticePhotoList) {
 			
 		}
 		*/
-		
+	
+		// 지운 번호에 해당하는 사진을 가져오지 못해서 문제 
 		logger.info("cnt 체크 : "+cnt + " / photoCnt : " +photoCnt );
 		
-		if(cnt > 0 ) {
-			
-			for (PhotoDTO photo : noticePhotoList) {
-				File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" + photo.getNewFileName());
-				if(f.exists()) {
-					boolean success = f.delete();
-					logger.info(photo.getNewFileName() + " 의 삭제 여부 : " + success);
-				} 
+		if (cnt > 0) {
+			for (int i = 1; i <= cnt; i++) {
+				
+				for (PhotoDTO photo : noticePhotoList) {
+					File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" +photo.getNewFileName());
+					if(f.exists()) {
+						boolean success = f.delete();
+						logger.info(photo.getNewFileName() + " 의 삭제 여부 : "+ success);
+					}
+				}
+				
 			}
 			noticePhotoList.clear();
-			
 		}
 		
 	
