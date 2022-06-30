@@ -84,6 +84,8 @@ public interface BoardDAO {
 
 	ArrayList<BoardDTO> allWriterSearch(int cnt, int offset, String word);
 
+	int claimCount(String mb_id);
+
 	
 
 

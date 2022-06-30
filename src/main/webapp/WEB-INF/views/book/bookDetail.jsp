@@ -104,7 +104,7 @@ table {
                    <c:forEach items="${detail}" var="dto">
 	                   <c:choose>
 	                   		<c:when test="${dto.b_status eq '대출중'}">
-	                   			<button class="bookreason" onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
+	                   			<button class="bookreason" onclick="bookreason(this)" bookId="${dto.b_id}" >예약신청</button>
 	                   		</c:when>
 	                   		<c:when test="${dto.b_status eq '대출불가'}">
 	                   			<input type="hidden">
@@ -210,15 +210,12 @@ function bookreason() {
 	function bookreason(brwId) {
 		var bookID = $(brwId).attr("bookID");
 	 	console.log(bookID);
-	 	var loginId = $(brwId).attr("loginId");
-	 	console.log(loginId);
-	 	
+		
 		$.ajax({
 			type:'get',
 			url:'bookreason.ajax',
 			data:{
-				b_id : bookID,
-				loginId : loginId
+				b_id : bookID
 			},
 			dataType:'JSON',
 			success:function(data) {

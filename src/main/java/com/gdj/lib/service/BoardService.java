@@ -55,6 +55,9 @@ public class BoardService {
 		
 		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
 		int allCnt = dao.allCount();
+		if(mb_id != null) {
+			allCnt = dao.claimCount(mb_id);
+		}
 		logger.info("allCnt : " + allCnt);
 		
 		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
