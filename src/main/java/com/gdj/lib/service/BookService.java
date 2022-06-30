@@ -6,11 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gdj.lib.dao.BookDAO;
-import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.PhotoDTO;
 
@@ -68,11 +64,10 @@ public class BookService {
 		logger.info("offset : "+offset);		
 		
 		// 검색 옵션 설정
-		//dao.reserveChk(option,word);
-		if (option.equals("writer")){
+		if (option.equals("저자")){
 			logger.info("선택 옵션 :"+option);
 			searchList = dao.searchWriter(cnt,offset,word);
-		} else if (option.equals("publisher")) {
+		} else if (option.equals("출판사")) {
 			logger.info("선택 옵션 :"+option);
 			searchList = dao.searchPublisher(cnt,offset,word);
 		} else {
@@ -85,10 +80,6 @@ public class BookService {
 		return map;
 	}
 	
-	public ArrayList<BookDTO> reserveOK() {
-		logger.info("예약여부서비스도착");
-		return dao.reserveOk();
-	}
 
 // 관리자 도서관리 서비스 시작
 	public HashMap<String, Object> bookList(
@@ -99,6 +90,7 @@ public class BookService {
 		int cnt = Integer.parseInt(params.get("cnt"));
 		int page = Integer.parseInt(params.get("page"));
 		String word = params.get("word");
+		String option = params.get("option");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : " + page);
 		
@@ -122,13 +114,24 @@ public class BookService {
 		//map.put("offset", offset);
 		logger.info("offset : " + offset);
 		
-		bookList = dao.bookList(cnt,offset);
-		searchList = dao.allBookSearch(cnt,offset,word);
+		//검색 관련 설정하는 조건문
+		if(word == null || word.equals("")) {
+			bookList = dao.bookList(cnt,offset);
+			map.put("bookList", bookList);
+		}else {
+			logger.info("검색어 (옵션): "+word+ " ( " + option + ") ");
+			
+			if(option.equals("b_title")) {
+				searchList = dao.bookTitleSearch(cnt,offset,word);
+			} else if (option.equals("writer")) {
+				searchList = dao.bookWriterSearch(cnt,offset,word);
+			} else {
+				searchList = dao.bookPublisherSearch(cnt,offset,word);
+			}		
+			map.put("bookList", searchList);
+		}
 		
-		logger.info("검색결과 건수 : " +searchList.size());
-		map.put("bookList", bookList);
-		map.put("searchList", searchList);
-		
+		logger.info("검색결과 건수 : " +searchList.size());		
 		return map;
 	}
 
