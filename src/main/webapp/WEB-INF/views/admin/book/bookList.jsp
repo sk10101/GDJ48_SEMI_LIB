@@ -22,9 +22,9 @@
             </div>
             <nav>
                 <ul class="navi">
-                    <li>***님 환영합니다.</li>
-                    <li><a href="#">로그아웃</a></li>
-                    <li><a href="#">관리자페이지</a></li>
+                    <li>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.</li>
+                    <li><a class="loginTab" href="/member/logout.do">[ 로그아웃 ]</a></li>
+                    <li><a href="admin/memberList.go">관리자페이지</a></li>
                 </ul>
             </nav>
         </div>
@@ -89,6 +89,11 @@
     </section>
 </body>
 <script>
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
+
 var currPage = 1;
 listCall(currPage);
 

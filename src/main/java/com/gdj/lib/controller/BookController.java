@@ -57,10 +57,21 @@ public class BookController {
 	
 		//도서목록
 	@RequestMapping(value = "/bookList.go")
-	public String ad_bookList(Model model) {
+	public String ad_bookList(Model model, HttpSession session) {
 		
-		logger.info("관리자 > 도서목록페이지로 이동");
-		return "admin/book/bookList";
+		String page =  "login/login";
+		
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("관리자 > 도서목록페이지로 이동");
+			page = "admin/book/bookList";
+		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			page = "/main";
+		}else {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+		}
+
+		return page;	
 	}
 	
 	@RequestMapping(value = "/bookList.ajax")
@@ -76,21 +87,39 @@ public class BookController {
 	}
 	
 	@RequestMapping(value = "/AdbookDetail.do")
-	public String bookDetail(Model model, @RequestParam String b_id) {
+	public String bookDetail(Model model, @RequestParam String b_id, HttpSession session) {
 		
-		logger.info("도서 상세보기 요청 : "+b_id);
-		service.detail(model, b_id);
-		return "admin/book/bookDetail";
+		String page = "login/login";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("도서 상세보기 요청 : "+b_id);
+			service.detail(model, b_id);
+			page = "admin/book/bookDetail";
+		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			page = "/main";
+		}else {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+		}
+		return page;
 	}
 	
 	@RequestMapping(value = "/bookAdd.go")
-	public String bookAdd(Model model) {
+	public String bookAdd(Model model, HttpSession session) {
 		
-		logger.info("도서추가페이지로 이동");
-		return "admin/book/bookAdd";
+		String page = "login/login";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("도서추가페이지로 이동");
+			page = "admin/book/bookAdd";
+		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			page = "/main";
+		}else {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+		}
+		return page;
 	}
 	
-	@RequestMapping(value = "/bookAdd.do")
+	@RequestMapping(value = "/bookAdd.do") //점심먹고 여기부터 로그인 막기~!
 	public String bookAddForm(Model model,  MultipartFile[] b_img,
 			@RequestParam HashMap<String, String> params) {
 		logger.info("도서추가요청 : {} / {}", b_img, params);
