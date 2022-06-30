@@ -72,9 +72,8 @@
 						</select>
 				       	<select id="option" name="option">
 				       		 <option value="member">회원ID</option>
-           					 <option value="bantext">제한내역</option>
 				       	</select>
-			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
+			        	<input id="word" type="search" placeholder="회원검색" name="word" value=""/>
 			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
 				</td>
 			</tr>
@@ -90,16 +89,22 @@
 	var mb_id = "${sessionScope.loginId}";
 	var mb_class = "${sessionScope.mb_class}";
 	var currPage=1;
-	
     listCall(currPage);
         
-        $('#pagePerNum').on('change', function(){
-            console.log("currPage : " + currPage);
-            //페이지당 보여줄 수를 변경시 계산된 페이지 적용이 안된다. (플러그인의 문제)
-            //페이지당 보여줄 수를 변경시 기존 페이징 요소를 없애고 다시 만들어 준다.
-            $("#pagination").twbsPagination('destroy');
-            listCall(currPage);
-        });
+  //게시물 갯수 선택 요소에 이벤트 걸어줌 - 갯수 변경 -> change 이벤트
+    $('#pagePerNum').on('change',function(){ //pagePerNum 에 change가 일어나게 되면
+    	var word = $('#word').val();
+    	console.log(word);
+    	console.log("currPage : " +currPage);		
+    	// 페이지당 보여줄 수 변경 시 계산된 페이지 적용이 안된다. (플러그인의 문제)
+    	// 페이지당 보여줄 수 변경 시 기존 페이징 요소를 없애고 다시 만들어 준다.
+    	$("#pagination").twbsPagination('destroy');
+    	if(word==null || word==""){
+    		listCall(currPage);
+    	} else {
+    		searchList(currPage)
+    	}
+    });
         
     function listCall(page){	
         
@@ -109,8 +114,10 @@
             type:'GET',
             url:'penaltyList.ajax',
             data:{
-                cnt : pagePerNum,
-                page : page
+            	cnt : pagePerNum,
+				page : page,
+				mb_id : mb_id,
+				mb_class : mb_class
             },
             dataType:'json',
             success:function(data){
@@ -142,15 +149,15 @@
     function drawList(penaltyList){
         var content = '';
         penaltyList.forEach(function(dto){
-            console.log(dto);
+            // console.log(dto);
             if(dto.penalty_end != null) {
             content += '<tr>';
             content += '<td>'+dto.penalty_id+'</td>';
             content += '<td><a href="penaltyDetail.do?penalty_id='+dto.penalty_id+'">'+dto.mb_id+'</a></td>';
             if(dto.category_id == "5"){
-            	content += '<td>대출연체</td>';
+            	content += '<td class="bantext">대출연체</td>';
             }else {
-            	content += '<td>예약만료</td>';
+            	content += '<td class="bantext">예약만료</td>';
             }
             content += '<td>'+dto.penalty_start+'</td>';
             if(dto.category_id == "5"){
@@ -191,6 +198,57 @@
         $('#penaltyList').empty();
         $('#penaltyList').append(content); //tbody에 뿌려줌
         
+    }
+    
+    
+    function searchList(page){
+    	var word = $('#word').val();
+    	
+    	var option = $('#option').val();
+   
+    	
+    	
+    	var pagePerNum = $('#pagePerNum').val();
+    	console.log(word);
+    	
+    	$.ajax({
+    		type: 'GET',
+    		url: 'penaltyList.ajax',
+    		data:{
+    			cnt : pagePerNum,
+				page : page,
+				word : word,
+				option : option,
+				mb_id : mb_id,
+				mb_class : mb_class
+    		},
+    		dataType:'JSON',
+    		success: function(data){
+    			// 테이블 초기화
+    			$("#penaltyList").empty();
+    			drawList(data.penaltyList);
+    			console.log(data);
+    			currPage = 1;
+    			// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+    			$("#pagination").twbsPagination({
+    				startPage: 1, // 시작 페이지
+    				totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+    				visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+    				onPageClick: function(e, page) {
+    					console.log(page); // 사용자가 클릭한 페이지
+    					currPage = page;
+    					listCall(page);
+    				}
+    			})
+    		},
+    		error:function(e){
+    			console.log(e);
+    		}
+    	});	
+    }
+
+    function test (btn) {
+    	console.log($(this).text());
     }
     
 

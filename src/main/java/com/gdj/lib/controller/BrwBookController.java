@@ -161,12 +161,18 @@ public class BrwBookController {
 		/*
 		 * if(params.get("mb_id") == null) { params.put("mb_id", mb_id); }
 		 */
+	  // 이용정지 내역에 해당 아이디가 있나 조회
+	  int penaltyCheck = service.penaltyCheck(mb_id);
+	  model.addAttribute("penaltyCheck",penaltyCheck);
+	  logger.info("이용정지 리스트에 있나?"+ penaltyCheck +"건");
+	  if(penaltyCheck <1 ) {
+		 
 	  
 	  
 	  // 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 
 	  int reserveCheck =service.reserveCheck(mb_id); 
 	  logger.info("예약만료인 책 권수: "+reserveCheck);
-	  if(reserveCheck >= 1) { 
+	  if(reserveCheck >= 1) {
 		  long expiry = service.expiry(mb_id); 
 		  logger.info("예약 만료일 "+expiry);
 		 
@@ -176,7 +182,6 @@ public class BrwBookController {
 	  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
 		  if(expiry < nowtime) { 
 			  service.expiryPenalty(mb_id);
-			  logger.info("1");
 			  service.reserveCancel(mb_id);
 			  service.addPenalty(mb_id);
 			  msg = "이용정지 3일입니다";
@@ -186,12 +191,19 @@ public class BrwBookController {
 		  msg = "예약신청이 완료되었습니다."; 
 		  model.addAttribute("msg", msg);
 		  service.bookreason(params);
+		  service.reserve_able(params);
 	  }
 	  	}  else{  	 
 		  service.bookreason(params);
+		  service.reserve_able(params);
 		  msg = "예약신청이 완료되었습니다."; 
 		  model.addAttribute("msg", msg);
 		 }
+	  }else {
+		  logger.info("이용정지중이라 이용 못해요 ㅠㅠ");
+		  msg="이용정지중입니다";
+		  model.addAttribute("msg", msg);
+	  }
 	  
 	  return msg;
 	  

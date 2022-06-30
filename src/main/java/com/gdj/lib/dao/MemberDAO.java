@@ -155,6 +155,10 @@ public interface MemberDAO {
 
 	ArrayList<BookDTO> reserveTitleSearch(int cnt, int offset, String word, String mb_id);
 
+	ArrayList<MemberDTO> memberSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> penaltySearch(int cnt, int offset, String word);
+
 
 
 

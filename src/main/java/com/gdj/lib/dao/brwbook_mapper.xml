@@ -13,11 +13,7 @@
 	</select>
 	
 
- 	
- 	<insert id="bookreason" parameterType="hashmap">
- 	 	INSERT INTO reservation(b_id,mb_id)
- 			VALUES(#{b_id},#{loginId})
- 	</insert>
+
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
 		select
@@ -115,7 +111,9 @@
  	
  	
  	
-
+	<select id="penaltyCheck" parameterType="String" resultType="int">
+		SELECT COUNT(mb_id) FROM penalty where mb_id=#{mb_id}
+	</select>
 
 
  	<select id="reserveCheck" parameterType="String" resultType="int">
@@ -142,6 +140,19 @@
 	   INSERT INTO penalty (mb_id,category_id,penalty_start,penalty_end,cancel) VALUES(#{param1},'6',now(),adddate(now(),interval 3 day),false);
 		
 	</insert>
+	
+	
+ 	<insert id="bookreason" parameterType="hashmap">
+ 	 	INSERT INTO reservation(b_id,mb_id)
+ 			VALUES(#{b_id},#{loginId})
+ 	</insert>
+	
+	
+	<update id="reserve_able" parameterType="hashmap">
+		UPDATE book SET reserve_able = false where b_id = #{b_id} AND reserve_able = true
+	</update>
+	
+	
  	
 	<update id="reserveBtn" parameterType="String">						
 		UPDATE
@@ -150,6 +161,5 @@
 			, interval 7 day),renew = '1' where brw_id = #{brw_id}
 	</update>
  	
-	
 	
 </mapper>

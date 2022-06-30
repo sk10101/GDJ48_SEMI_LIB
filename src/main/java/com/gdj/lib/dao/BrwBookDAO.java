@@ -69,6 +69,11 @@ public interface BrwBookDAO {
 
 	ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id);
 
+	void reserve_able(HashMap<String, String> params);
+
+	int penaltyCheck(String mb_id);
+
+
 	
 
 
