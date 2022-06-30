@@ -86,7 +86,7 @@ public class NoticeController {
 		@RequestMapping(value = "/noticeDelete.ajax")
 		@ResponseBody
 		public HashMap<String, Object> noticedelete(HttpSession session,
-		@RequestParam(value="noticedeleteList[]") ArrayList<String> noticeDeleteList) {
+		@RequestParam(value="noticedeleteList[]") ArrayList<Integer> noticeDeleteList) {
 			
 			
 			HashMap<String, Object> noticeMap = new HashMap<String, Object>();

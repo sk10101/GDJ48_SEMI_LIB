@@ -13,7 +13,7 @@ public interface BoardDAO {
 
 	int noticeWrite(BoardDTO dto);
 
-	int noticeDelete(String notice_id);
+	int noticeDelete(int notice_id);
 
 	BoardDTO noticeDetail(int notice_id);
 
@@ -87,7 +87,7 @@ public interface BoardDAO {
 	int claimCount(String mb_id);
 
 
-	int noticePhotoDelete(String notice_id);
+	int noticePhotoDelete(int notice_id);
 
 	ArrayList<BoardDTO> claimReplyList(int claim_id);
 

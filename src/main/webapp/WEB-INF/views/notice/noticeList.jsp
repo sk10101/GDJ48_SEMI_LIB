@@ -111,7 +111,9 @@
 		$.ajax({
 			type: 'POST',
 			url: '/noticeDelete.ajax',
-			data : {noticedeleteList:noticeArray},
+			data : {
+				noticedeleteList:noticeArray
+				},
 			dataType: 'JSON',
 			success: function(data){
 				console.log(data);

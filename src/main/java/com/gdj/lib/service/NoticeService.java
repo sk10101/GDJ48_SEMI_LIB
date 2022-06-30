@@ -92,27 +92,37 @@ public class NoticeService {
 	}
 
 	
-	public int noticeDelete(ArrayList<String> noticeDeleteList) {
+	public int noticeDelete(ArrayList<Integer> noticeDeleteList) {
 		
+		ArrayList<PhotoDTO> noticePhotoList = new ArrayList<PhotoDTO>();
 		
 		int cnt = 0;
 		
-		for (String notice_id : noticeDeleteList) {
+		int photoCnt = 0;
+		
+		for (int notice_id : noticeDeleteList) {
 			cnt += dao.noticeDelete(notice_id);
-			cnt += dao.noticePhotoDelete(notice_id);
+			photoCnt += dao.noticePhotoDelete(notice_id);
 			
 		}
+		/*
 		
-		ArrayList<PhotoDTO> noticePhotoList = dao.noticePhotoList(cnt);
+		for(PhotoDTO notice_id : noticePhotoList) {
+			photoCnt += dao.noticePhotoDelete(notice_id.getPost_id());
+			
+		}
+		*/
 		
-		if(cnt > 0) {
+		logger.info("cnt 체크 : "+cnt + " / photoCnt : " +photoCnt );
+		
+		if(cnt > 0 ) {
 			
 			for (PhotoDTO photo : noticePhotoList) {
 				File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" + photo.getNewFileName());
 				if(f.exists()) {
 					boolean success = f.delete();
 					logger.info(photo.getNewFileName() + " 의 삭제 여부 : " + success);
-				}
+				} 
 			}
 			noticePhotoList.clear();
 			
