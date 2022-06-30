@@ -51,38 +51,6 @@
         </thead>
         <tbody id="penaltyList">
        
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
 			</tbody>
 			<tr>
 				<td colspan="6" id="paging">
