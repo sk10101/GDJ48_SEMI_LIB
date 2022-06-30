@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예약내역</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -11,34 +11,32 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 
 <style>
 </style>
 </head>
 <body>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
     <header>
         <div class="header-wrap">
             <div class="logo">
                 <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
             </div>
-            <nav>
-                <ul class="navi">
-                    <li>***님 환영합니다.</li>
-                    <li><a href="#">로그아웃</a></li>
-                    <li><a href="#">관리자페이지</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
     <aside id="menu">
         <h1>관리자페이지</h1>
         <hr/>
         <ul class="admin_menu">
-            <li><a href="#">회원관리</a></li>
-            <li><a href="#">도서관리</a></li>
-            <li><a href="#">건의사항</a></li>
-            <li><a href="#">블랙리스트</a></li>
-            <li><a href="#">이용정지내역</a></li>
+            <li><a href="memberList.go">회원관리</a></li>
+            <li><a href="bookList.go">도서관리</a></li>
+            <li><a href="claimList">건의사항</a></li>
+            <li><a href="blackList.go">블랙리스트</a></li>
+            <li><a href="penaltyList.go">이용정지내역</a></li>
         </ul>
     </aside>
 	<section>
@@ -66,7 +64,7 @@
 			 		<td colspan="4" id="paging">
 				 		<!-- plugin 사용법 -->
 				 		<div class="container">
-				 			<nav arial-label="page navigation" style="text-align:center">
+				 			<nav arial-label="page navigation">
 				 				<ul class="pagination" id="pagination"></ul>
 				 			</nav>
 				 		</div>
@@ -85,7 +83,7 @@
 							<option value="reason">예약종료사유</option>
 						</select>
 						<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 					</td>
 			 	</tr>
 		</table>
