@@ -3,46 +3,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 작성</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/notice.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-			h3 {text-align: left; font-weight: bold; font-size: 40px;}
-            table {width: 80%}
-            table, th, td {border: 1px solid black; border-collapse: collapse;}
-            th, td{padding: 5px 10px; text-align: center;}
-            input[type='text'] {width: 100%;}
-            input[type='file'] {float: left;}
-            textarea {width: 100%; height : 150px; resize: none;}
-            button{margin-bottom: 5px; float: right;}
 </style>
 </head>
 <body>
-	<form action="noticeWrite.do" method="post" enctype="multipart/form-data">
-       			<input type="hidden" name="mb_id" />
-       <table class="notice">
+	<div id="header">
+		<jsp:include page="../commons/header.jsp"/>
+	</div>
+	<hr style="border:1px solid #333; height: 1px !important; display: block !important; width: 100% !important; margin:0;"/>
+    <div class="body">
+    	<div class="title">
+	    	<h3>공지사항 작성</h3>
+	    </div>
+		<form action="noticeWrite.do" method="post" enctype="multipart/form-data">
+       		<input type="hidden" name="mb_id" />
+       		<table class="noticeWrite">
                 <tr>
                     <th>제목</th>
-                    <td><input type="text" name="notice_title" /></td>
+                    <td><input class="noticeWriteSubject" type="text" name="notice_title" /></td>
                 </tr>
                 <tr>
                     <th>내용</th>
                     <td>
-                        <textarea name="notice_content"></textarea>
+                        <textarea class="noticeWriteContent" name="notice_content"></textarea>
                     </td>
                 </tr>
                 <tr>
                     <th>첨부파일</th>
                     <td><input type="file" name="photos" multiple="multiple" /></td>
                 </tr>
-        </table>
-        <input type="submit" value="저장" />
-       <input type="button" value="취소" onclick="location.href='noticeList'">
-     </form>
-    </body>
-    <script>
-   	 var msg = "${msg}"
-    	if (msg != "") {
-    		alert(msg);
-    	}
-    </script>
+        	 </table>
+	     	 <div class="noticeWriteBtn-area">
+	        	<input class="noticeWriteBtn" type="submit" value="저장" />
+	       		<input class="noticeWriteBtn" type="button" value="취소" onclick="location.href='noticeList'">
+	       	 </div>	
+     	 </form>
+     </div>
+</body>
+<script>
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
+</script>
 </html>

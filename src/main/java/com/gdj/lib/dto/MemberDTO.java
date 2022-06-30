@@ -12,25 +12,21 @@ public class MemberDTO {
 	private String name;
 	private String email;
 	private String phone;
-
+	private Date reg_date;
+	private Date leave_date;
 	private String mb_class;
 		
 	private int black_id;
 	private String admin_start;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date black_start;
 	private String black_reason;
 	private String admin_end;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date black_end;
 	private String end_reason;
-	
 	private boolean black_cancel;
 	
-	public boolean isBlack_cancel() {
-		return black_cancel;
-	}
-	public void setBlack_cancel(boolean black_cancel) {
-		this.black_cancel = black_cancel;
-	}
 
 
 	private int penalty_id;
@@ -45,6 +41,14 @@ public class MemberDTO {
 	
 	
 	
+	
+	
+	public boolean isBlack_cancel() {
+		return black_cancel;
+	}
+	public void setBlack_cancel(boolean black_cancel) {
+		this.black_cancel = black_cancel;
+	}
 	public int getPenalty_id() {
 		return penalty_id;
 	}
@@ -182,13 +186,6 @@ public class MemberDTO {
 		this.black_id = black_id;
 	}
 	
-
-@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date reg_date;
-
-@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
-	private Date leave_date;
-
 	
 
 }
