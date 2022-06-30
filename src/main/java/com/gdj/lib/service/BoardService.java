@@ -230,13 +230,38 @@ public class BoardService {
 
 	public void claimDel(int claim_id) {
 		
+		BoardDTO dto = new BoardDTO();
 		// 해당 claim_id 에 사진이 있는지 확인(어떤 사진들이 있는지 이름 확보)
 		ArrayList<PhotoDTO> claimPhotoList = dao.claimPhotoList(claim_id,2);
 		logger.info(claim_id + " 번 게시물에 업로드된 사진 수 : " + claimPhotoList.size());
 		
+		// 답변이 있는지 확인
+		ArrayList<BoardDTO> claimReplyId = dao.claimReplyList(claim_id);
+		// 답변이 있다면 같이 삭제
+		if(claimReplyId.size()!=0) {
+			dto.setReply_id(dao.getReplyId(claim_id));
+			ArrayList<PhotoDTO> replyPhotoList = dao.replyPhotoList(dto.getReply_id(),3);	
+			int replyDelCount = dao.replyDel(dto.getReply_id());
+			logger.info(replyDelCount + " 건의 답변 삭제 완료");
+			dao.replyPhotoDel(dto.getReply_id());
+			
+			// 답변을 지우는데 성공하면 그때 사진도 함께 지운다.
+			if(replyDelCount>0) {
+				for (PhotoDTO photo : replyPhotoList) {
+					File f = new File("C:\\STUDY\\SPRING\\GDJ48_SEMI_LIB\\src\\main\\webapp\\resources\\photo\\" + photo.getNewFileName());
+					if(f.exists()) {
+						boolean success = f.delete();
+						logger.info(photo.getNewFileName() + " 의 삭제 여부 : " + success);
+					}
+				}
+				logger.info(dto.getReply_id() + " 번 게시물에 업로드된 사진 수 : " + replyPhotoList.size());
+			}
+		}
 		int delCount = dao.claimDel(claim_id);
 		// Photo DB 에서도 지워준다.
 		dao.photoDel(claim_id);
+		
+		// 답변
 		
 		logger.info(delCount + " 건의 건의사항 삭제 완료");
 		// claim 테이블의 데이터 삭제(이때, photo 도 자동으로 지워진다.)
