@@ -2,6 +2,7 @@ package com.gdj.lib.controller;
 
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -84,43 +85,7 @@ public class BrwBookController {
 		
 	}
 	
-	
-	
-//	//도서 대출신청
-//	@RequestMapping(value = "/bookbrw.ajax")
-//	@ResponseBody
-//	public String brw(HttpSession session, Model model,
-//			@RequestParam String b_id) {
-//		
-//		logger.info("기존 도서 상세보기 페이지"+b_id);
-//		service.brw(b_id);
-//		
-//		return "redirect:/bookDetail?b_id="+b_id;
-//	
-//		
-//	}
-	
-	
-	
-	
-	//도서 예약신청
-	@RequestMapping(value = "/bookreserve.ajax")
-	@ResponseBody
-	public String bookreserve(HttpSession session, Model model,
-			@RequestParam String b_id,@RequestParam String mb_id) {
-		
-		logger.info("기존 도서 상세보기 페이지"+b_id);
-		service.bookreserve(b_id);
-		
-		
-		
-		
-		return "redirect:/bookDetail?b_id="+b_id;
-	
-		
-	}
-	
-	
+
 	//대출내역 연장신청
 	@RequestMapping(value = "/reserveBtn.ajax")
 	@ResponseBody
@@ -128,11 +93,7 @@ public class BrwBookController {
 			@RequestParam String brw_id) {
 		
 		logger.info("예약기능"+brw_id);
-		service.reserveBtn(brw_id);
-		
-		
-		//service.bookreserve(b_id);
-		
+		service.reserveBtn(brw_id);	
 		return "myPage/bookList/reserve";
 	
 		
@@ -178,48 +139,66 @@ public class BrwBookController {
 		
 		
 	}
+ 
+	  @RequestMapping(value = "/bookreason.ajax")
 	
-	//도서상세보기 대출예약 
-	@RequestMapping(value = "/bookreason.ajax")
-	@ResponseBody
-	public String bookreason(HttpSession session, Model model, 
-			@RequestParam HashMap<String, String> params) {
-		
-		logger.info("받아온 책번호 : "+ params );
-		service.bookreason(params);
-		return "book/bookDetail";
-		
-		
-	}
 
-	/*
-	 * @RequestMapping(value = "/bookreason.ajax")
-	 * 
-	 * @ResponseBody public String bookreason(HttpSession session, Model model,
-	 * 
-	 * @RequestParam HashMap<String, String> params) {
-	 * 
-	 * String page = "redirect:/"; logger.info("받아온 책번호 : "+ params ); String msg =
-	 * ""; long miliseconds = System.currentTimeMillis(); Date date = new
-	 * Date(miliseconds);
-	 * 
-	 * 
-	 * // 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 int reserveCheck =
-	 * service.reserveCheck("gustn0055"); logger.info("예약한 수: "+reserveCheck);
-	 * if(reserveCheck == 1) { long expiry = service.expiry("gustn0055"); // 만료일이
-	 * 지났을 경우
-	 * 
-	 * // expiry db 에서 데이트 타입으로 가져와야 비교 가능 if(expiry>date.) { msg = "이용정지 3일입니다";
-	 * }else { msg = "예약신청이 완료되었습니다."; service.bookreason(params); } } // 예약 기간이
-	 * 지났는데 반납을 안한 경우
-	 * 
-	 * return msg;
-	 * 
-	 * 
-	 * }
-	 */
-	
-	
+	  @ResponseBody public String bookreason(HttpSession session, Model model,
+	  
+	  @RequestParam HashMap<String, String> params) {
+		  
+		String mb_id = (String) session.getAttribute("loginId");
+		logger.info(mb_id);
+		model.addAttribute("mb_id",mb_id);
+	  String page = "redirect:/"; logger.info("받아온 책번호 : "+ params ); 
+	  String msg =""; 
+	  
+	  long miliseconds = System.currentTimeMillis(); 
+	  Date date = new Date(miliseconds);
+	  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	  String nowTime = sdf.format(date);
+	  long nowtime = Long.parseLong(nowTime);
+		/*
+		 * if(params.get("mb_id") == null) { params.put("mb_id", mb_id); }
+		 */
+	  
+	  
+	  // 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 
+	  int reserveCheck =service.reserveCheck(mb_id); 
+	  logger.info("예약만료인 책 권수: "+reserveCheck);
+	  if(reserveCheck >= 1) { 
+		  long expiry = service.expiry(mb_id); 
+		  logger.info("예약 만료일 "+expiry);
+		 
+	  // 만료일이지났을 경우
+	  
+	  // expiry db 에서 데이트 타입으로 가져와야 비교 가능 
+	  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
+		  if(expiry < nowtime) { 
+			  service.expiryPenalty(mb_id);
+			  logger.info("1");
+			  service.reserveCancel(mb_id);
+			  service.addPenalty(mb_id);
+			  msg = "이용정지 3일입니다";
+			  logger.info(msg);
+			  model.addAttribute("msg", msg);
+	  }else { 		
+		  msg = "예약신청이 완료되었습니다."; 
+		  model.addAttribute("msg", msg);
+		  service.bookreason(params);
+	  }
+	  	}  else{  	 
+		  service.bookreason(params);
+		  msg = "예약신청이 완료되었습니다."; 
+		  model.addAttribute("msg", msg);
+		 }
+	  
+	  return msg;
+	  
+	  
+	  
+	  }
+
 		//이전대출 내역
 		@RequestMapping(value = "/brwList")
 		public String bookList(Model model, HttpSession session,
@@ -227,18 +206,6 @@ public class BrwBookController {
 			
 			
 			logger.info("이전대출 목록");
-			
-			
-//			String mb_id = (String) session.getAttribute("loginId");
-//			ArrayList<BrwBookDTO> bookList = service.brwListMb_id(mb_id);
-//			logger.info("list 갯수 :"+bookList.size());
-//			model.addAttribute("bookList",bookList);
-//			
-//			
-//			logger.info(mb_id);
-//			model.addAttribute("mb_id",mb_id);
-			//service.brwListMb_id(mb_id);
-				
 			return "myPage/bookList/brwList";
 			
 		}

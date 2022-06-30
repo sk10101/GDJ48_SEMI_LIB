@@ -33,42 +33,6 @@ public class BrwBookService {
 
 
 
-	public String brw (String b_id) {
-		
-		logger.info("도서대출 서비스 신청"+b_id);
-		String loginId = "gustn0055";
-		dao.brw(loginId, b_id);
-		
-		return "redirect:/bookDetail?b_id="+b_id;
-	}
-
-	public String reason(String b_id) {
-		
-		logger.info("도서예약 서비스 신청"+b_id);
-		String loginId = "admin1";
-		dao.reason(loginId, b_id);
-		
-		return "redirect:/bookDetail?b_id="+b_id;
-	}
-
-
-	
-
-	public String bookreserve(String b_id) {
-		logger.info("도서예약 서비스 신청"+b_id);
-		String loginId = "gustn0055";
-		dao.bookreserve(loginId, b_id);
-		
-		return "redirect:/bookDetail?b_id="+b_id;
-		
-	}
-
-
-//	public ArrayList<BrwBookDTO> bookList(HashMap<String, String> params) {
-//		logger.info("도서목록 서비스 요청");
-//		return dao.bookList(params);
-//	}
-
 	public ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id) {
 		logger.info("도서목록 서비스 요청");
 		return dao.history(params,mb_id);
@@ -116,10 +80,23 @@ public class BrwBookService {
 		return dao.expiry(mb_id);
 	}
 
-
-	public long overExpiry(String mb_id) {
-		return dao.overExpiry(mb_id);
+	public void expiryPenalty(String mb_id) {
+		dao.expiryPenalty(mb_id);
+		
 	}
+	
+	public void reserveCancel(String mb_id) {
+		dao.reserveCancel(mb_id);
+	}
+
+
+	public void addPenalty(String mb_id) {
+		dao.addPenalty(mb_id);
+
+	}
+
+	
+	
 
 
 	
@@ -249,6 +226,10 @@ public class BrwBookService {
 
 
 	
+
+
+	
+
 
 	
 	
