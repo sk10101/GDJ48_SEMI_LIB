@@ -145,6 +145,20 @@ public class KioskController {
 	public String kioskReturnPage(HttpSession session, Model model) {
 		logger.info("키오스크 반납 신청 아이디: "+session.getAttribute("loginId"));
 		String loginId = (String) session.getAttribute("loginId");
+		
+		// loginId가 대출한 책이 연체 되었는지 확인
+		int chkReturnOver = service.chkReturnOver(loginId);
+		if(chkReturnOver > 0) {
+			// 연체 페널티가 부과되었는지 확인
+			int chkPenalty = service.chkPenalty(loginId);
+			// 페널티 부과된 내용이 없다면
+			if (chkPenalty == 0) {
+				// 연체 페널티 부과
+				service.insertPenalty(loginId);
+			}
+		}
+		
+		// loginId가 대출중인 목록 보여주기
 		ArrayList<KioskDTO> returnList = service.returnList(loginId);
 		logger.info("list 갯수: "+returnList.size());
 		model.addAttribute("list", returnList);

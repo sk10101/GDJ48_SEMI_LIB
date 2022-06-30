@@ -32,4 +32,10 @@ public interface KioskDAO {
 
 	void penaltyEndDate(String loginId);
 
+	int chkReturnOver(String loginId);
+
+	int chkPenalty(String loginId);
+
+	void insertPenalty(String loginId);
+
 }

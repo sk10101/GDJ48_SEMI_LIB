@@ -99,5 +99,18 @@ public class KioskService {
 		dao.penaltyEndDate(loginId);
 	}
 
+	public int chkReturnOver(String loginId) {
+		return dao.chkReturnOver(loginId);
+	}
+
+	public int chkPenalty(String loginId) {
+		return dao.chkPenalty(loginId);
+	}
+
+	public void insertPenalty(String loginId) {
+		dao.insertPenalty(loginId);
+		
+	}
+
 
 }

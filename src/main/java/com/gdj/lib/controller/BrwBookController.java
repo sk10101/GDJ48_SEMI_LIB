@@ -131,6 +131,9 @@ public class BrwBookController {
 		public String bookDetailBrw(HttpSession session, Model model, 
 				@RequestParam HashMap<String, String> params) {
 			
+			
+			
+	
 			logger.info("책번호 아이디 : "+ params );
 			service.bookDetailBrw(params);
 			
