@@ -25,7 +25,7 @@
 	        <br/>
 	        <a class="tabSelect" href="claimList">건의사항</a><br/>
 	        <br/>
-	        <a href="#">회원정보</a>
+	        <a href="myUpdateDetail.go">회원정보</a>
 	    </div>
 	    <div class="section">
 		    <div class="claimWriteBtn-area">
@@ -47,7 +47,7 @@
 			    	</tbody>
 			        </table>
 					<div class="container">
-						<nav aria-label="Page navigation" style="text-align:center">
+						<nav aria-label="Page navigation">
 								<ul class="pagination" id="pagination" ></ul>					
 						</nav>
 					</div>
@@ -63,7 +63,7 @@
 				       		<option value="처리상태">처리상태</option>
 				       	</select>
 			        	<input class="noticeSearchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 					</div>
 	        </div>
 	        </div>
@@ -154,7 +154,7 @@
 			content += '		<td class="claimSubject"><a href="claimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
 			content += '		<td class="claimStatus">'+item.status+'</td>';
 			content += '		<td>'+item.claim_date+'</td>';
-			content += '		<td class="delete" style="height:39px">';
+			content += '		<td class="delete">';
 			if(item.status=="미처리") {
 				content += '			<button class="delBtn" onclick="clickEvt(this)">삭제</button>';
 			}

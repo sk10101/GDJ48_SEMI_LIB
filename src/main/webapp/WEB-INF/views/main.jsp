@@ -18,10 +18,10 @@
                 <li>
                 <c:choose>
 					<c:when test="${sessionScope.loginId eq null}">
-						<a class="loginTab" href="member/login">로그인</a>
+						<a class="loginTab" href="login.go">로그인</a>
 					</c:when>
 					<c:otherwise>
-						<div class="loginTab">${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.&nbsp;&nbsp;<a class="loginTab" href="/member/logout.do">[ 로그아웃 ]</a></div>
+						<div class="loginTab">${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.&nbsp;&nbsp;<a class="loginTab" href="logout.do">[ 로그아웃 ]</a></div>
 					</c:otherwise>
                 </c:choose>
                 </li>
@@ -83,6 +83,12 @@
    
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
+
+
 /*
 function bookSearch() {
 	var option=$('#bookSearchOption').val();

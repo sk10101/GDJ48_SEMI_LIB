@@ -3,37 +3,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서추가</title>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="../resources/css/admin.css">
+<link rel="stylesheet" href="resources/css/frame.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style></style>
 </head>
 <body>
-    <header>
-        <div class="header-wrap">
-            <div class="logo">
-                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
-            </div>
-            <nav>
-                <ul class="navi">
-                    <li>***님 환영합니다.</li>
-                    <li><a href="#">로그아웃</a></li>
-                    <li><a href="#">관리자페이지</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <aside id="menu">
-        <h1>관리자페이지</h1>
-        <hr/>
-        <ul class="admin_menu">
-            <li><a href="#">회원관리</a></li>
-            <li><a href="#">도서관리</a></li>
-            <li><a href="#">건의사항</a></li>
-            <li><a href="#">블랙리스트</a></li>
-            <li><a href="#">이용정지내역</a></li>
-        </ul>
-    </aside>
+    <div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div>
     <section>
         <div class="content">
             <form action="bookAdd.do" method="post" enctype="multipart/form-data">
@@ -64,6 +58,12 @@
             </form>
         </div>
     </section>
+    </div>
 </body>
-<script></script>
+<script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
+</script>
 </html>

@@ -3,22 +3,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이전대출내역(회원)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="../resources/css/bookList.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-	table {
-		width: 100%;
-	}
-	table,th,td {
-		border: 1px solid black;
-		border-collapse: collapse;
-		padding: 5px;	
-		}
+	
 </style>
 </head>
 <body>
-
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
 	<div class="container">
             <!-- TOP -->
             <div class="top">
@@ -36,7 +33,7 @@
             <div class="middle">
                 
                 <div class="middle-left">
-                    <span>
+
                         <table>
                             <thead>
                                  <tr>
@@ -53,11 +50,11 @@
                                 </tr>
                             </thead>
                         </table>
-                    </span>
+
                 </div>
                 <div class="middle-right">
                     <div class="middle-right-1">
-                        <span>
+
                             <table>
                                 <thead>
                                     <tr>
@@ -67,10 +64,10 @@
                                     </tr>
                                 </thead>
                             </table>
-                        </span>
+
                     </div>
                     <div class="middle-right-2">
-                        <span>
+
                             <table>
                                 <thead id="head">
                                     <tr>
@@ -101,7 +98,7 @@
 	                                    			<button class="extensionBtn" 
 	                                    				onclick="updateExtension(this)"
 	                                    				whetherValue ="${brwdto.brw_id}">
-	                                    				연장
+	                                    				<a href="brwHistory">연장</a>
 	                                    			</button>
 	                                    		</c:when>
                                     		</c:choose>
@@ -128,13 +125,18 @@
                                     
                                 </thead>
                             </table>
-                        </span>
+
                     </div>    
             </div>
         </div>
 
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
+
 
 function updateExtension(whethe_id) {
 	var whetherValue = $(whethe_id).attr("whetherValue")
@@ -148,7 +150,8 @@ function updateExtension(whethe_id) {
 		},
 		dataType:'JSON',
 		success:function(data) {
-			console.log(data)
+			console.log(data);
+			location.reload(true);
 		},
 		error:function(e) {
 			console.log(e);

@@ -1,12 +1,9 @@
 package com.gdj.lib.dao;
 
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.gdj.lib.dto.BoardDTO;
-import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.PhotoDTO;
 
@@ -42,7 +39,7 @@ public interface BrwBookDAO {
 
 	void bookBrwDetail(String b_id);
 
-	ArrayList<BrwBookDTO> detail(HashMap<String, String> params);
+	BrwBookDTO detail(String b_id);
 
 	void bookreason(HashMap<String, String> params);	
 
@@ -59,15 +56,32 @@ public interface BrwBookDAO {
 
 	void bookDetailBrw(HashMap<String, String> params);
 
-	ArrayList<PhotoDTO> list(HashMap<String, String> params);
+	ArrayList<PhotoDTO> list(String b_id);
 
 	void bookdel(String string);
 
 	void bookdelStatusUpdate(String string);
 
-	ArrayList<BrwBookDTO> bookListPaing(int cnt, int offset, String mb_id);
 
 	ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id);
+
+	ArrayList<BrwBookDTO> brwBookList(int cnt, int offset, String mb_id);
+
+	ArrayList<BrwBookDTO> brwSubjectSearch(int cnt, int offset, String word, String mb_id);
+
+	ArrayList<BrwBookDTO> brwStatusSearch(int cnt, int offset, String word, String mb_id);
+
+	int brwBookCount(String mb_id);
+	int chkReturnOver(String mb_id);
+
+	int chkPenalty(String mb_id);
+
+	void insertPenalty(String mb_id);
+
+	ArrayList<BrwBookDTO> brwlist(HashMap<String, String> params);
+
+	
+	ArrayList<PhotoDTO> photoList(String b_id);
 
 	
 

@@ -3,39 +3,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이전대출예약(관리자)</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="../resources/css/admin.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
 </head>
 <body>
-    <header>
-        <div class="header-wrap">
-            <div class="logo">
-                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
-            </div>
-            <nav>
-                <ul class="navi">
-                    <li>***님 환영합니다.</li>
-                    <li><a href="#">로그아웃</a></li>
-                    <li><a href="#">관리자페이지</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
     <aside id="menu">
         <h1>관리자페이지</h1>
         <hr/>
         <ul class="admin_menu">
-            <li><a href="#">회원관리</a></li>
-            <li><a href="#">도서관리</a></li>
-            <li><a href="#">건의사항</a></li>
-            <li><a href="#">블랙리스트</a></li>
-            <li><a href="#">이용정지내역</a></li>
+            <li><a href="memberList.go">회원관리</a></li>
+            <li><a href="bookList.go">도서관리</a></li>
+            <li><a href="adminClaimList">건의사항</a></li>
+            <li><a href="blackList.go">블랙리스트</a></li>
+            <li><a href="penaltyList.go">이용정지내역</a></li>
         </ul>
     </aside>
 	<section>
@@ -79,6 +70,10 @@
 					 	<option value="15">15</option>
 					 	<option value="20">20</option>
 					 </select>
+					 <select id="option" name="option">
+				       		<option value="도서제목">도서제목</option>
+				       		<option value="연체여부">연체여부</option>
+				       	</select>
 					 <input id="word" type="search" placeholder="검색" name="word" value=""/>
 			        <input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
 				  </td>
@@ -93,7 +88,6 @@ var msg ="${msg}";
 if (msg != "") {
 	alert(msg);
 }
-
 
 var mb_id=$('#mb_id').html();
 console.log(mb_id);
@@ -129,7 +123,7 @@ function listCall(page) {
 		dataType:'json',
 		success:function(data){
 			console.log("테이블")
-			drawList(data.list);
+			drawList(data.hisList);
 			currPage = data.currPage;
 			
 			//불러오기가 성공되면 플러그인을 이용해 페이징 처리
@@ -167,7 +161,7 @@ function drawList(hisList) {
 		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_finish+'</td>';
-		content += '<td>';
+		content += '<td class="delay">';
 		if(item.return_finish > item.return_date) { //연체
 			content += 'Y';
 		}else{
@@ -176,13 +170,17 @@ function drawList(hisList) {
 		content += '</td>';
 		content += '</tr>';
 	});
+	
+	$("#hisList").empty();
 	$('#hisList').append(content);
 }
 
 
 function searchList(page) {
 	var word = $('#word').val();
+	var option = $('#option').val();
 	var pagePerNum = $('#pagePerNum').val();
+	console.log(word);
 	
 	$.ajax({
 		type: 'GET',
@@ -190,13 +188,15 @@ function searchList(page) {
 		data:{
 			cnt : pagePerNum,
 			page : page,
-			word : word,
+			mb_id : mb_id,
+			option : option,
+			word : word
 		},
 		dataType:'JSON',
 		success: function(data){
 			// 테이블 초기화
 			$("#hisList").empty();
-			drawList(data.list);
+			drawList(data.hisList);
 			currPage = 1;
 			// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
 			$("#pagination").twbsPagination({
@@ -206,7 +206,7 @@ function searchList(page) {
 				onPageClick: function(e, page) {
 					console.log(page); // 사용자가 클릭한 페이지
 					currPage = page;
-					searchList(page);
+					listCall(page);
 				}
 			});
 		},
@@ -215,6 +215,10 @@ function searchList(page) {
 		}
 	});
 }
+
+$(document).ready(function(){
+	console.log($("#hisList").children().children("#delay").text());
+});
        
 </script>
 </html>

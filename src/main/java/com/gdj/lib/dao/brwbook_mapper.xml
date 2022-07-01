@@ -8,7 +8,7 @@
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
-	<select id="list" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
+	<select id="photoList" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
@@ -40,23 +40,23 @@
 	
 	
 	
-	<select id="bookListPaing" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="brwBookList" resultType="com.gdj.lib.dto.BrwBookDTO">
 		select
 				brw_id
 				, b.b_title
 				, brw_date
 				, return_date
 				, brw_status
-				, renew 
+				, renew
 				, b.b_id
 			from
 				borrow br
 			inner join book b on
 				b.b_id  = br.b_id
 			where
-				brw_status = '반납'
+				br.brw_status = '반납'
 				and br.mb_id = #{param3}
-				ORDER BY brw_id DESC LIMIT #{param1} OFFSET #{param2}
+				ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="allCount" resultType="Integer">
@@ -103,6 +103,17 @@
  			VALUES(#{b_id},#{loginId})
  	</insert>
  	
+ 	<select id="brwlist" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+		select 
+			b_id
+			, m.mb_id
+		from 
+			reservation r3 
+		inner join member m on
+			 r3.mb_id = m.mb_id
+			and r3.mb_id = #{loginId}
+	</select>
+ 	
  	<insert id="reserveBookBrw" parameterType="hashmap">
  		SELECT * FROM reservation WHERE reserve_id = #{reserve_id} 
  	</insert>
@@ -112,12 +123,7 @@
  		update book set b_status = "대출불가" where b_id = #{b_id}	
  	</update>
 
- 	
- 	
- 	
-
-
-
+ 
  	<select id="reserveCheck" parameterType="String" resultType="int">
 		SELECT COUNT(reserve_id) from reservation WHERE mb_id = #{param1} AND reason is null 
 	</select>
@@ -150,6 +156,59 @@
 			, interval 7 day),renew = '1' where brw_id = #{brw_id}
 	</update>
  	
+ 	
+ 	<!-- 연채여부 -->
+ 	
+ 	<select id="chkReturnOver" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT count(brw_id) FROM borrow WHERE mb_id = #{loginId} AND brw_status = '대출' AND return_date < now()	
+		]]> 
+	</select>
 	
+	<select id="chkPenalty" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT count(penalty_id) FROM penalty p WHERE mb_id = #{loginId} AND penalty_end is null
+	</select>
+	
+	<insert id="insertPenalty" parameterType="String">
+		INSERT INTO penalty(category_id, mb_id, penalty_start,cancel) VALUES('5',#{loginId},now(), false);
+	</insert>
+	
+	
+	<!-- 아래부터 이전대출내역 검색기능 관련 쿼리문 -->
+	<select id="brwSubjectSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT brw_id
+				, b.b_title
+				, brw_date
+				, return_date
+				, brw_status
+				, renew
+				, b.b_id
+			FROM
+				borrow br
+			INNER JOIN book b
+				ON b.b_id  = br.b_id
+					WHERE b.b_title LIKE CONCAT('%',#{param3},'%') and br.mb_id = #{param4} and (br.brw_status = '반납' OR br.brw_status='연체')
+						ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+	<select id="brwStatusSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT brw_id
+				, b.b_title
+				, brw_date
+				, return_date
+				, brw_status
+				, renew
+				, b.b_id
+			FROM
+				borrow br
+			INNER JOIN book b
+				ON b.b_id  = br.b_id
+					WHERE br.brw_status LIKE CONCAT('%',#{param3},'%') and br.mb_id = #{param4} and (br.brw_status = '반납' OR br.brw_status='연체')
+						ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="brwBookCount" resultType="Integer">
+		SELECT COUNT(b_id) FROM borrow WHERE mb_id = #{param1} and brw_status = '반납'
+	</select>
 	
 </mapper>

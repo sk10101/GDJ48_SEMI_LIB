@@ -3,22 +3,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예약내역(회원)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="../resources/css/bookList.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-	table {
-		width: 100%;
-	}
-	table,th,td {
-		border: 1px solid black;
-		border-collapse: collapse;
-		padding: 5px;	
-		}
+	
 </style>
 </head>
 <body>
-
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
 	<div class="container">
             <!-- TOP -->
             <div class="top">
@@ -101,7 +98,7 @@
 													<button class="brwBtn" onclick="bookbrw(this)"
 															brwValue="${brwdto.reserve_id}"
 															bookID="${brwdto.b_id}"
-															loginId="${sessionScope.loginId}">대출신청
+															loginId="${sessionScope.loginId}"><a href="reserve">대출신청</a>
 													</button>
 													
 												</c:when>
@@ -114,7 +111,7 @@
 											<td id="del">
 												<button class="delBtn" onclick="bookDel(this)"
 														bookID="${brwdto.b_id}"
-														idValue="${brwdto.reserve_id}">취소
+														idValue="${brwdto.reserve_id}"><a href="reserve">취소</a>
 												</button>
 											</td>
                                     	<tr>
@@ -134,6 +131,10 @@
 
 </body>
 <script>
+var msg = "${msg}"
+if (msg != "") {
+	alert(msg);
+}
 
  	
 	function bookDel(btn) {
@@ -151,7 +152,7 @@
 			},
 			dataType:'JSON',
 			success:function(data) {
-				consloe.log(data)
+				consloe.log(data);
 			},
 			error:function(e) {
 				console.log(e);
