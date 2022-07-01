@@ -242,7 +242,8 @@ function cancel(btn) {
 		type:'get',
 		url:'reserveCancel.ajax',
 		data:{
-			reserve_id:id
+			reserve_id:id,
+			b_id:b_id
 		},
 		dataType:'json',
 		success:function(data){
