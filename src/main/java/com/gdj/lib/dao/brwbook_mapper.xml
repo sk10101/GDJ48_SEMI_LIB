@@ -12,8 +12,6 @@
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
-
-
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
 		select

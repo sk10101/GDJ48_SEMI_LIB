@@ -15,6 +15,7 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+
 	<div class="body">
 		<div class="myPageTab" id="myPage_menu">
 	        <h3>관리자 페이지</h3>
@@ -64,6 +65,15 @@
 	                    <tr>
 	                        <th>등록일자</th>
 	                        <td><input type="text" name="b_date" value="${book.b_date}"></td>
+	                    </tr>
+	                    <tr>
+	                        <th>도서예약상태</th>
+	                        <td>
+	                        	<c:choose>
+	                        		<c:when test="${book.reserve_able eq true}"><p>예약중</p></c:when>
+	                        		<c:otherwise><p>예약자없음</p></c:otherwise>
+	                        	</c:choose>
+	                        </td>
 	                    </tr>
 	                    <tr>
 	                        <th>도서상태</th>
