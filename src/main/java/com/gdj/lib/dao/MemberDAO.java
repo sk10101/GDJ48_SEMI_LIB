@@ -164,6 +164,7 @@ public interface MemberDAO {
 
 	ArrayList<BrwBookDTO> allBookRSearch(int cnt, int offset, String word, String mb_id);
 
+
 	
 
 

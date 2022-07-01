@@ -143,6 +143,7 @@ public class BookService {
 		model.addAttribute("list", list);
 
 		logger.info("b_title :"+dto.getB_title());
+		logger.info("photo:"+list);
 	}
 
 	public String bookAdd(MultipartFile[] b_img, HashMap<String, String> params) {

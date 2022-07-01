@@ -261,14 +261,15 @@
 	
 	<select id="reserveList" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT reserve_id, b.b_id, b.b_title, reserve_date, reason
-		FROM reservation r, book b 
+		FROM reservation br, book b 
 		WHERE br.b_id = b.b_id AND mb_id=#{param3}
+			ORDER BY reserve_date DESC
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="reserveTitleSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT reserve_id, b.b_id, b.b_title, reserve_date, reason
-		FROM reservation r, book b 
+		FROM reservation br, book b 
 		WHERE br.b_id = b.b_id AND mb_id=#{param4} 
 			AND b.b_title LIKE CONCAT ('%', #{param3} ,'%')
 		LIMIT #{param1} OFFSET #{param2}
@@ -276,7 +277,7 @@
 	
 	<select id="reserveReasonSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT reserve_id, b.b_id, b.b_title, reserve_date, reason
-		FROM reservation r, book b 
+		FROM reservation br, book b 
 		WHERE br.b_id = b.b_id AND mb_id=#{param4} 
 			AND reason LIKE CONCAT ('%', #{param3} ,'%')
 		LIMIT #{param1} OFFSET #{param2}
@@ -319,7 +320,7 @@
 	
 	
 	
-	
+
 	
 	
 </mapper>

@@ -8,7 +8,7 @@
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
-	<select id="list" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="photoList" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
