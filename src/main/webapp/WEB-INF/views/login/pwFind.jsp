@@ -24,7 +24,7 @@
 	</table>
 	<div class="FindBtn-area">
 		<input class="FindBtn" type="button" value="PW찾기" onclick="pwFind()"/> 
-		<input class="FindBtn" type="button" value="취소" onclick="location.href='/member/login'"/>
+		<input class="FindBtn" type="button" value="취소" onclick="location.href='../login.go'"/>
 	</div>
 </body>
 <script>
@@ -43,7 +43,7 @@
 		success:function(data){			
 			if(data){
 				alert("고객님의 비밀번호는 : "+ data + "입니다");
-				 location.href="/member/login"
+				 location.href="../login.go"
 			}else{
 				alert("고객님의 id 또는 email 이 일치하지 않습니다.");				
 			}

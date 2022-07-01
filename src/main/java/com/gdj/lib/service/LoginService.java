@@ -72,6 +72,23 @@ public class LoginService {
 		return dao.getMbClass(id,pw);
 	}
 
+	public String mb_status(String loginId) {
+		
+		return dao.mb_status(loginId);
+	}
+
+	public long leave_date(String loginId) {
+		
+		return dao.leave_date(loginId);
+	}
+
+	public void mySecessionCheck(String loginId) {
+		
+		 dao.mySecessionCheck(loginId);
+		
+	}
+
+
 	
 	 
 

@@ -33,8 +33,6 @@ public class BrwBookDTO {
 		private String publisher;
 		private int issue;
 		private String b_status;
-
-		
 		
 		public int getB_id() {
 			return b_id;

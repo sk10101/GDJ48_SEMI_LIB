@@ -21,7 +21,7 @@
 	width:100%;
 }
 .bbs{
-	width:95%;
+	width:90%;
 	margin-left:5%;
 	text-align:center;
 	border-collapse:collapse;
@@ -44,25 +44,25 @@
 .info-area{
 	width:100%;
 }
-.bbs .memberDetailTh{
+.bbs .penaltyDetailTh{
 	width:150px;
 }
-.bbs .memberClassSelect{
+.bbs .penaltyClassSelect{
 	border:2px solid #333;
 	border-radius:4px;
 }
-.memberDetailBtn-area{
+.penaltyDetailBtn-area{
 	width:100%;
 	text-align:center;
 	padding:10px;
 }
-.memberDetailBtn-area input{
+.penaltyDetailBtn-area input{
 	background:#86b049;
 	padding:2px 5px;
 	color:#fff;
 	border-radius:5px;
 }
-.memberDetailBtn-area input:hover{
+.penaltyDetailBtn-area input:hover{
 	cursor:pointer;
 	background-color:#476930;
 }

@@ -287,11 +287,25 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/penaltyList.go")
-	public String ad_penaltyList(Model model)  {
-		logger.info("이용정지리스트 페이지 이동");
+	public String ad_penaltyList(Model model, HttpSession session)  {
+		String page = "login/login";
 		
-		return "penalty/penaltyList";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			page = "penalty/penaltyList";
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			
+		}
+		
+		
+		return page;
+		
+		
 	}
+	
 	
 	@RequestMapping(value = "/penaltyList.ajax")
 	@ResponseBody
@@ -310,31 +324,60 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/penaltyDetail.do")
-	public String penaltyDetail(Model model ,@RequestParam String penalty_id) {
+	public String penaltyDetail(HttpSession session,Model model ,@RequestParam String penalty_id) {
 		
 		logger.info(penalty_id+"번 이용정지리스트 상세보기 요청 :");
+
+		String page = "login/login";
+
 		
-		MemberDTO dto = service.penaltyDetail(penalty_id);
-		model.addAttribute("dto", dto);
-		return "penalty/penaltyDetail";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			MemberDTO dto = service.penaltyDetail(penalty_id);
+			model.addAttribute("dto", dto);
+			page = "penalty/penaltyDetail";
+			
+		} else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자만 이용 가능한 서비스 입니다.");
+			page = "main";
+		} else {
+			model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
+			
+		}
+		
+		
+		return page;
+		
+		
 
 	}	
 	
 
 	@RequestMapping(value = "/penaltyUpdate.do")
-	public String penaltyUpdate(Model model,
+	public String penaltyUpdate(HttpSession session,Model model,
 			@RequestParam HashMap<String, String> params) {
 		
+		String page = "login/login";
+		String admin_cancel = (String) session.getAttribute("loginId");
 		logger.info("params : {}", params);
-		if(params.get("cancel") == null) {
-			params.put("cancel", "false");       
-		}else {
-			params.put("admin_cancel", "tester");  
-			
-		}
-		
-		service.penaltyUpdate(params);
-		String page = "redirect:/penaltyDetail.do?penalty_id="+params.get("penalty_id");
+		   if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			   
+			   if(params.get("cancel") == null) {
+				   params.put("cancel", "false");       
+			   }else {
+				   params.put("admin_cancel", admin_cancel);  
+				   
+			   }
+			   service.penaltyUpdate(params);
+			    page = "redirect:/penaltyDetail.do?penalty_id="+params.get("penalty_id");
+			   
+			   
+		   }else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+				page = "/main";
+			}else {
+				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			}
+
 		
 		return page;
 	}

@@ -88,10 +88,10 @@ public interface MemberDAO {
 	void cancelMySecession(String mb_id);
 
 
-	void MySecession(String mb_id);
+	void mySecession(String mb_id);
 
 
-	void MySecessionTwo(String mb_id);
+	void mySecessionCheck(String loginId);
 
 	String getMbClass(String id, String pw);
 
@@ -157,6 +157,10 @@ public interface MemberDAO {
 
 	ArrayList<BookDTO> reserveTitleSearch(int cnt, int offset, String word, String mb_id);
 
+	ArrayList<MemberDTO> memberSearch(int cnt, int offset, String word);
+
+	ArrayList<MemberDTO> penaltySearch(int cnt, int offset, String word);
+
 
 	int allHisCount(String mb_id);
 
@@ -168,14 +172,17 @@ public interface MemberDAO {
 
 
 	
-
-
 	int notSecession(String mb_id);
-
 
 
 	
 
+	String mb_status(String id);
+
+	long leave_date(String loginId);
+
+
+	
 
 
 

@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>마이 페이지 / 건의사항 / 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="resources/css/claim.css">
+<link rel="stylesheet" href="resources/css/myClaim.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -18,7 +18,7 @@
 	<div class="body">
 	    <div class="myPageTab" id="myPage_menu">
 	        <h3>마이페이지</h3>
-	        <hr/>
+	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
 	        <a href="/brwHistory">도서내역</a><br/>
 	        <br/>
 	        <a class="tabSelect" href="claimList">건의사항</a><br/>
