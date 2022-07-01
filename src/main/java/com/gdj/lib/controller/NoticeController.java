@@ -86,7 +86,7 @@ public class NoticeController {
 		@RequestMapping(value = "/noticeDelete.ajax")
 		@ResponseBody
 		public HashMap<String, Object> noticedelete(HttpSession session,
-		@RequestParam(value="noticedeleteList[]") ArrayList<String> noticeDeleteList) {
+		@RequestParam(value="noticedeleteList[]") ArrayList<Integer> noticeDeleteList) {
 			
 			
 			HashMap<String, Object> noticeMap = new HashMap<String, Object>();
@@ -94,6 +94,8 @@ public class NoticeController {
 			
 			int cnt = service.noticeDelete(noticeDeleteList);
 			noticeMap.put("msg",noticeDeleteList.size()+"개 중"+cnt+" 개 삭제 완료");
+			
+			noticeMap.put("noticeDeleteList", noticeDeleteList);
 			
 			return noticeMap;
 			

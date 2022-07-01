@@ -58,6 +58,8 @@ public interface MemberDAO {
 	String login(String id, String pw);
 
 
+	MemberDTO memberUpdateListMy(String mb_id);
+
 
 
 
@@ -166,6 +168,9 @@ public interface MemberDAO {
 
 
 	
+
+
+	int notSecession(String mb_id);
 
 
 

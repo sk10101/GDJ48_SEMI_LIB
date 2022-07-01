@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
-		SELECT mb_id, mb_pw, name, phone, email FROM member
+		SELECT mb_id, mb_pw, name, phone, email FROM member where mb_id = #{mb_id}
 		
 	</select>
 	
@@ -36,10 +36,18 @@
 		update member set mb_status = '탈퇴신청', leave_date = now() where mb_id = #{param1}
 	</update>
 	
-	<update id="MySecessionTwo" parameterType="String">
+	<update id="MySecessionTwo" parameterType="String" >
 		update member set mb_status = '탈퇴완료' where mb_status = '탈퇴신청'
 			and leave_date >= date_add(leave_date, interval 7 day)
 	</update>
+	
+	<select id="notSecession" parameterType="String" resultType="Integer" >
+	select sum(id) from (
+	select count(r.mb_id) as id  from reservation r where reason is null and mb_id = #{param1}
+	union all
+	select count(b.mb_id) as id from borrow b where brw_status = '대출' and mb_id = #{param1}
+	) as id
+	</select>
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'
