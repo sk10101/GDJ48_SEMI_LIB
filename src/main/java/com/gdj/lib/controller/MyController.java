@@ -39,18 +39,38 @@ public class MyController {
 			String page = "main";
 			HttpSession memberSession = request.getSession();
 			if(memberSession.getAttribute("loginId") == null) {
-				page = "login/login";
+				page = "login/login"; 
 				model.addAttribute("msg", "로그인이 필요한 서비스 입니다.");
-			} else {
-			ArrayList<MemberDTO> myUpdateList = service.myUpdateList();
+			}	
 			
-			logger.info("memberList 갯수 : "+ myUpdateList.size());
-			logger.info("세션 확인 : "+memberSession.getAttribute("loginId"));
-			
-			mb_id = (String) memberSession.getAttribute("loginId");
-			model.addAttribute("myUpdateList", myUpdateList);
-			page = "redirect:/myUpdateDetail?mb_id="+mb_id;
+			else if(memberSession.getAttribute("mb_class").equals("관리자")) {
+				model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+				page = "main";
 			}
+			
+			else {
+			// MemberDTO myUpdateList = service.myUpdateList();
+			
+			// logger.info("memberList 갯수 : "+ myUpdateList.size());
+			// logger.info("세션 확인 : "+memberSession.getAttribute("loginId"));
+			mb_id = (String) memberSession.getAttribute("loginId");
+			
+			MemberDTO myUpdateDetail = service.myUpdateList(mb_id);
+			model.addAttribute("myUpdateDetail", myUpdateDetail);
+			
+			// logger.info("회원정보 상세보기 할 아이디 : "+mb_id);
+			
+			logger.info("mb_id : "+myUpdateDetail.getMb_id());
+			logger.info("mb_pw : "+myUpdateDetail.getMb_pw());
+			logger.info("name : "+myUpdateDetail.getName());
+			logger.info("phone : "+myUpdateDetail.getPhone());
+			logger.info("회원 상태 : "+myUpdateDetail.getMb_status());
+			
+			
+			page = "myPage/info/memberDetail";
+			
+			}
+			
 		
 		return page;
 	}
@@ -59,10 +79,8 @@ public class MyController {
 	@RequestMapping(value = "/myUpdateDetail")
 	public String myUpdateDetail(Model model, @RequestParam String mb_id) {
 		
-		
 		logger.info("회원정보 상세보기 할 아이디 : "+mb_id);
 		MemberDTO myUpdateDetail = service.myUpdateDetail(mb_id);
-		
 		
 		model.addAttribute("myUpdateDetail", myUpdateDetail);
 		
@@ -81,14 +99,9 @@ public class MyController {
 	@RequestMapping(value = "/myUpdate")
 	public String myUpdate(Model model, HttpServletRequest request, String Oripw_chk) {
 		
-		BrwBookDTO brw = new BrwBookDTO();
-		String brwReason = brw.getReason();
-		String brw_status = brw.getBrw_status();
+
 		
-		// 서비스 보내는거 부터 해야됨 
-		
-		logger.info("예약중인 도서 : "+brwReason);
-		logger.info("대출중인 도서 : "+brw_status);
+		String page = "redirect:/myUpdateList";
 		
 		String mb_id = request.getParameter("mb_id");
 		String mb_pw = request.getParameter("mb_pw");
@@ -97,7 +110,9 @@ public class MyController {
 		
 		String pw_chk = request.getParameter("pw_chk");
 		
-		String secession = request.getParameter("secession");
+		MemberDTO myUpdateDetail = service.myUpdateList(mb_id);
+		model.addAttribute("myUpdateDetail", myUpdateDetail);
+		
 		
 		logger.info("수정할 아이디 : "+mb_id);
 		logger.info("수정할 이름 : "+name);
@@ -107,35 +122,70 @@ public class MyController {
 		logger.info("PW 확인 : "+pw_chk);
 		logger.info("원래 비밀 번호 : "+Oripw_chk);
 		
+		
+		String secession = request.getParameter("secession");
 		//기본값 false 체크시 true 로 바뀜
 		logger.info("회원탈퇴 체크 : "+secession);
 		
-		if(secession.equals("true")) {
-			 service.MySecession(mb_id);
-		} 
 		
+		int row = service.notSecession(mb_id);
 		
-		if (secession.equals("false")) {
-			service.cancelMySecession(mb_id);
-		}
-		 
-		
-		// pw 확인 if 문
-		 if(pw_chk.equals(Oripw_chk)) {
-			// 비밀번호가 공백일때 if 문
-			 if(mb_pw == "") {
-				 service.myUpdateTwo(mb_id,name,phone);
-			 } else {
-				 service.myUpdate(mb_id,mb_pw,name,phone);
-			 }
+		if (row > 0 && secession.equals("true")) {
+			model.addAttribute("msg", "※ 미반납된 도서가 있습니다. 확인후 탈퇴 신청해 주시기 바랍니다. "
+					+ "  예약, 대출, 연체시 탈퇴 불가");
+			
+			// pw 확인 if 문
+			 if(pw_chk.equals(Oripw_chk)) {
+				// 비밀번호가 공백일때 if 문
+				 if(mb_pw == "") {
+					 service.myUpdateTwo(mb_id,name,phone);
+				 } else {
+					 service.myUpdate(mb_id,mb_pw,name,phone);
+				 }
+					
+			} else {
+				model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
+				page = "myPage/info/memberDetail";
 				
+			}
+			// 미반납 한사람이 회원 정보 변경시 새로고침 1번해야 내용 적용  why??
+			model.addAttribute("myUpdateDetail", myUpdateDetail);
+			page = "myPage/info/memberDetail";
+			
+			
 		} else {
-			// 알림창이 안뜸 해결해야됨
-			model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
+			
+			if(secession.equals("true")) {
+				service.MySecession(mb_id);
+			} 
+			
+			if (secession.equals("false")) {
+				service.cancelMySecession(mb_id);
+			}
+			
+			
+			// pw 확인 if 문
+			 if(pw_chk.equals(Oripw_chk)) {
+				// 비밀번호가 공백일때 if 문
+				 if(mb_pw == "") {
+					 service.myUpdateTwo(mb_id,name,phone);
+				 } else {
+					 service.myUpdate(mb_id,mb_pw,name,phone);
+				 }
+					
+			} else {
+				// 알림창이 안뜸 해결해야됨
+				model.addAttribute("msg" , "비밀번호가 일치하지 않습니다.");
+				page = "myPage/info/memberDetail";
+				
+			}
+			
+			
 		}
 		
 		
-		return "redirect:/myUpdateDetail?mb_id="+mb_id;
+		
+		return page;
 	}
 	
 

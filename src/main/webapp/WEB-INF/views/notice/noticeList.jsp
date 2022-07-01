@@ -92,7 +92,7 @@
 	});
 	
 	$('input[type="checkbox"]').click(function() {
-	   // console.log($(this).val());
+	  // console.log($(this).val());
 	});
 	
 	
@@ -106,20 +106,23 @@
 			
 			console.log(noticeArray);
 			
-			$.ajax({
-				type: 'POST',
-				url: '/noticeDelete.ajax',
-				data : {noticedeleteList:noticeArray},
-				dataType: 'JSON',
-				success: function(data){
-					console.log(data);
-					location.href='/noticeList';
-				},
-				error: function(e) {
-					console.log(e);
-				}
+		});
+		
+		$.ajax({
+			type: 'POST',
+			url: '/noticeDelete.ajax',
+			data : {
+				noticedeleteList:noticeArray,
 				
-			});
+				},
+			dataType: 'JSON',
+			success: function(data){
+				console.log(data);
+				location.href='/noticeList';
+			},
+			error: function(e) {
+				console.log(e);
+			}
 			
 		});
 			
