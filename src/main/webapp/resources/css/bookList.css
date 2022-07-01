@@ -1,62 +1,38 @@
 @charset "UTF-8";
-
-*{
-    margin: 0px;
-    padding: 0px;
+.upBtn-area{
+	width:100%;
+	text-align:right;
+	margin-bottom:10px;
 }
-.container{
-    width: 1000px;
-    margin: 0 auto;
+.btn_bookAdd{
+	background:#86b049;
+	padding:5px;
+	color:#fff;
+	font-size:16px;
+	font-weight:700;
+	border-radius:5px;
 }
-.container div{
-    text-align: center;
-    display: table;
+.book_table{
+	width:95%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
 }
-.container div span{
-    display: table-cell;
-    vertical-align:baseline;
+.book_table th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
 }
-.top{
-    margin-top: 20px;
-    outline: 1px solid darkcyan;
-    width: 1000px;
-    height: 80px;
-    display: table;
+.book_table .bookIdTh{
+	width:40px;
 }
-.middle{
-    max-width: 20px;
-    width: 1000px;
-    height: 500px;
-    position: relative;
+.book_table .bookDateTh{
+	width:116px;
 }
-.middle-left{
-    margin-top: 10px;
-    position: absolute;
-    top: 0px;
-    width: 200px;
-    height: 490px;
-    background-color: green;
+.book_table td a{
+	text-decoration-line:none;
+	color:#333;
 }
-.middle-right{
-    position: absolute;
-    top: 0px;
-    left: 200px;
-    width: 380px;
-    height: 500px;
+.book_table td a:hover{
+	color:blue;
 }
-.middle-right-1{
-    outline: 1px solid #9F9F9F;
-    margin-top: 10px;
-    width: 790px;
-    height: 30px;
-    margin-left: 10px;
-}
-.middle-right-2{
-    outline: 1px solid #9F9F9F;
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 790px;
-    height: 450px;
-    background-color: #fff;
-  }
-  
