@@ -51,10 +51,10 @@ public class MyService {
 		dao.cancelMySecession(mb_id);
 	}
 
-	public void MySecession(String mb_id) {
+	public void mySecession(String mb_id) {
 		logger.info(mb_id+" 의 회원탈퇴 요청");
-		dao.MySecession(mb_id);
-		dao.MySecessionTwo(mb_id);
+		dao.mySecession(mb_id);
+		// dao.MySecessionTwo(mb_id);
 	}
 
 	public int notSecession(String mb_id) {

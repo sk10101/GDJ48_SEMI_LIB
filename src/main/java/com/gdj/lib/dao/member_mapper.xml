@@ -32,13 +32,22 @@
 		update member set mb_status = null , leave_date = null where mb_id = #{param1}
 	</update>
 	
-	<update id="MySecession" parameterType="String">
+	<update id="mySecession" parameterType="String">
 		update member set mb_status = '탈퇴신청', leave_date = now() where mb_id = #{param1}
 	</update>
 	
-	<update id="MySecessionTwo" parameterType="String" >
-		update member set mb_status = '탈퇴완료' where mb_status = '탈퇴신청'
-			and leave_date >= date_add(leave_date, interval 7 day)
+	<select id="mb_status"  resultType="String">
+		SELECT mb_status from member where mb_id = #{param1}
+	</select>
+	
+	<select id="leave_date" resultType="long">
+		SELECT date_format(leave_date,'%Y%m%d') from member where mb_id = #{param1}
+	</select>
+	
+	
+	<update id="mySecessionCheck">
+		update member set mb_status = '탈퇴완료' where mb_id = #{param1}
+			and now() >= date_add(leave_date, interval 7 day)
 	</update>
 	
 	<select id="notSecession" parameterType="String" resultType="Integer" >
