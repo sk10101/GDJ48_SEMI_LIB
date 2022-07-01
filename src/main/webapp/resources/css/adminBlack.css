@@ -1,0 +1,42 @@
+@charset "UTF-8";
+.upBtn-area{
+	width:100%;
+	text-align:right;
+	margin-bottom:10px;
+}
+.blackAddBtn{
+	background:#86b049;
+	padding:2px 5px;
+	color:#fff;
+	font-size:15px;
+	font-weight:700;
+	border-radius:5px;
+}
+.blackAddBtn:hover{
+	cursor:pointer;
+	background:#476930;
+}
+.black_table{
+	width:95%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.black_table th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
+}
+.blackDate{
+	width:15%;
+}
+.adminId{
+	width:25%;
+}
+.black_table td a{
+	text-decoration-line:none;
+	color:#333;
+}
+.black_table td a:hover{
+	color:blue;
+}

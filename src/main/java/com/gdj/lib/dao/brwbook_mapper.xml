@@ -12,8 +12,6 @@
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
-
-
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
 		select
@@ -141,7 +139,7 @@
 	<select id="penaltyDate" parameterType="String" resultType="long">
 		SELECT 
 		date_format(penalty_end,'%Y%m%d')
-		FROM penalty WHERE mb_id=#{mb_id}
+		FROM penalty WHERE mb_id=#{mb_id} AND penalty_end ORDER BY penalty_end DESC limit 1
 	</select>
 	
 	
