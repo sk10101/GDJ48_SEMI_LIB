@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.service.LoginService;
+import com.gdj.lib.service.MyService;
 
 @Controller
 public class LoginController {
@@ -113,6 +115,7 @@ public class LoginController {
 			String loginId =service.login(id,pw); 
 			String mb_class = service.getMbClass(id,pw);
 			logger.info("로그인한 아이디 : "+loginId+" > "+mb_class);
+			
 			
 			
 			if(loginId != null) {
