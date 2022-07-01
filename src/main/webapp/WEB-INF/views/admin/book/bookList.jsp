@@ -16,36 +16,12 @@
 <style></style>
 </head>
 <body>
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
 <div id="header">
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
 
-<<<<<<< HEAD
-=======
-    <header>
-        <div class="header-wrap">
-            <div class="logo">
-                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
-            </div>
-            <nav>
-                <ul class="navi">
-                    <li>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.</li>
-                    <li><a class="loginTab" href="/member/logout.do">[ 로그아웃 ]</a></li>
-                    <li><a href="admin/memberList.go">관리자페이지</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
->>>>>>> origin/master
     <aside id="menu">
         <h1>관리자페이지</h1>
         <hr/>
