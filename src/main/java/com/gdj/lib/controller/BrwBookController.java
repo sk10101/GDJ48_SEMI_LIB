@@ -86,13 +86,10 @@ public class BrwBookController {
 	//도서 상세보기
 	@RequestMapping(value = "/bookDetail.do")
 	public String bookDetail(Model model, HttpSession session,
-			@RequestParam HashMap<String, String> params) {
+			@RequestParam String b_id) {
 		
-		logger.info("이전대출 목록" + params); 
-		ArrayList<BrwBookDTO> detail = service.detail(params);
-		ArrayList<PhotoDTO> list = service.photoList(params); //photo 정보 가져옴
-		model.addAttribute("detail",detail);
-		model.addAttribute("list",list);
+		logger.info("도서 상세보기" + b_id); 
+		service.detail(model, b_id);
 				
 		return "book/bookDetail";
 				
@@ -128,19 +125,48 @@ public class BrwBookController {
 	//도서 상세보기 대출신청
 		@RequestMapping(value = "/bookDetailBrw.ajax")
 		@ResponseBody
-		public String bookDetailBrw(HttpSession session, Model model, 
+		public HashMap<String, String> bookDetailBrw(HttpSession session, Model model, 
 				@RequestParam HashMap<String, String> params) {
 			
+			String msg = "도서대출이 완료되었습니다.";
+			HashMap<String, String> map = new HashMap<String, String>();
+		
+			//현재대출신청 기간..
+			long miliseconds = System.currentTimeMillis(); 
+			Date date = new Date(miliseconds);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String nowTime = sdf.format(date);
+			long nowtime = Long.parseLong(nowTime);
+				
+			String mb_id = (String) session.getAttribute("loginId");
+			logger.info(mb_id);
+			logger.info("책번호 아이디 : "+ params);
 			
+			if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
+				logger.info("회원 : 도서대출 서비스 컨트롤러");
+				// loginId가 대출한 책이 연체 되었는지 확인
+				int chkReturnOver = service.chkReturnOver(mb_id);
+				if(chkReturnOver > 0) {
+					// 연체 페널티가 부과되었는지 확인
+					int chkPenalty = service.chkPenalty(mb_id);
+					// 페널티 부과된 내용이 없다면
+					if (chkPenalty == 0) {
+						// 연체 페널티 부과
+						service.insertPenalty(mb_id);
+					}
+					
+				} else {
+					service.bookDetailBrw(params);
+					msg = "도서대출 완료";
+				} 
+			} else { // 회원x 관리자
+				msg = "일반회원만 이용가능한 서비스입니다.";
+			}
 			
-	
-			logger.info("책번호 아이디 : "+ params );
-			service.bookDetailBrw(params);
-			
-			return "myPage/bookList/reserve";
-			
-			
-		}
+			map.put("msg", msg);
+			return map;
+	}
+
 	
 	//예약내역에 대출신청
 	@RequestMapping(value = "/reserveBookbrw.ajax")
