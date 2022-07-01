@@ -8,7 +8,7 @@
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
-	<select id="list" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="photoList" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
@@ -102,6 +102,17 @@
  		INSERT INTO reservation(b_id,mb_id)
  			VALUES(#{b_id},#{loginId})
  	</insert>
+ 	
+ 	<select id="brwlist" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+		select 
+			b_id
+			, m.mb_id
+		from 
+			reservation r3 
+		inner join member m on
+			 r3.mb_id = m.mb_id
+			and r3.mb_id = #{loginId}
+	</select>
  	
  	<insert id="reserveBookBrw" parameterType="hashmap">
  		SELECT * FROM reservation WHERE reserve_id = #{reserve_id} 

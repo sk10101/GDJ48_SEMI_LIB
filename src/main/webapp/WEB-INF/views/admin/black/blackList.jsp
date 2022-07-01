@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -17,6 +18,20 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div>
 	<h3>블랙리스트 기본</h3>
 	    <table>
 	        <thead>
@@ -63,6 +78,7 @@
 		 	</tr>
 	    </table>
 	<input type="button" value="추가" onclick="location.href='blackAdd.go'">
+	</div>
 </body>
 <script>
 

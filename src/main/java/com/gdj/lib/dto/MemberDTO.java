@@ -15,7 +15,9 @@ public class MemberDTO {
 	private Date reg_date;
 	private Date leave_date;
 	private String mb_class;
-		
+	
+	
+
 	private int black_id;
 	private String admin_start;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")

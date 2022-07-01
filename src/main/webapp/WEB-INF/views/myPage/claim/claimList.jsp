@@ -47,7 +47,7 @@
 			    	</tbody>
 			        </table>
 					<div class="container">
-						<nav aria-label="Page navigation">
+						<nav aria-label="Page navigation" style="text-align:center">
 								<ul class="pagination" id="pagination" ></ul>					
 						</nav>
 					</div>

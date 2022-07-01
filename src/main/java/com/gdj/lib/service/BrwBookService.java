@@ -4,13 +4,16 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.gdj.lib.dao.BrwBookDAO;
 import com.gdj.lib.dto.BrwBookDTO;
+import com.gdj.lib.dto.KioskDTO;
 import com.gdj.lib.dto.PhotoDTO;
 
 
@@ -21,16 +24,22 @@ public class BrwBookService {
 	
 	@Autowired BrwBookDAO dao;
 
-	public ArrayList<BrwBookDTO> detail(HashMap<String, String> params) {
-		logger.info("도서상세보기 서비스 요청 : " + params);
-		return dao.detail(params);
+	public void detail(Model model, String b_id) {
+		logger.info("도서상세보기 서비스 요청 : " + b_id);
+		BrwBookDTO detail = dao.detail(b_id);
+		ArrayList<PhotoDTO> list = dao.photoList(b_id); //photo 정보 가져옴
+		model.addAttribute("detail",detail);
+		model.addAttribute("list",list);
+		
+		logger.info("도서제목 : "+detail.getB_title());
+		logger.info("photo:" + list);
 	}
 	
-	public ArrayList<PhotoDTO> photoList(HashMap<String, String> params) {
-		logger.info("도서상세보기 이미지 : " + params);
-		return dao.list(params);
-	}
-
+	/*
+	public ArrayList<PhotoDTO> photoList(String b_id) {
+		logger.info("도서상세보기 이미지 : " + b_id);
+		return dao.list(b_id);
+	}*/
 
 
 	public ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id) {
@@ -216,6 +225,12 @@ public class BrwBookService {
 		dao.insertPenalty(mb_id);
 		
 	}
+
+	public ArrayList<BrwBookDTO> brwlist(HashMap<String, String> params) {
+		return dao.brwlist(params);
+	}
+
+	
 
 	
 

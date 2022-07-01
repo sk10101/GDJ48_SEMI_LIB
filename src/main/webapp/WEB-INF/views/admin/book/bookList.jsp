@@ -5,96 +5,71 @@
 <meta charset="UTF-8">
 <title>도서리스트</title>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="../resources/css/admin.css">
-
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
-
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style></style>
 </head>
 <body>
-
-<div id="header">
+	<div id="header">
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-
-    <header>
-        <div class="header-wrap">
-            <div class="logo">
-                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
-            </div>
-            <nav>
-                <ul class="navi">
-                    <li>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.</li>
-                    <li><a class="loginTab" href="/member/logout.do">[ 로그아웃 ]</a></li>
-                    <li><a href="admin/memberList.go">관리자페이지</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <aside id="menu">
-        <h1>관리자페이지</h1>
-        <hr/>
-        <ul class="admin_menu">
-            <li><a href="memberList.go">회원관리</a></li>
-            <li><a href="#">도서관리</a></li>
-            <li><a href="adminClaimList">건의사항</a></li>
-            <li><a href="blackList.go">블랙리스트</a></li>
-            <li><a href="penaltyList.go">이용정지내역</a></li>
-        </ul>
-    </aside>
-    <section>    
-        <div class="content">
-            <button class="btn_bookAdd" onclick="location.href='bookAdd.go' ">도서추가</button>
-            <table class="book_table">
-                <thead>
-                	<tr>
-                		<td>ID</td>
-                		<td>제목</td>
-                		<td>저자</td>
-                		<td>출판사</td>
-                		<td>도서상태</td>
-                		<td>등록일</td>
-                	</tr>
-                </thead>
-                <tbody id="bookList">
-                    
-                </tbody>
-                <tr>
-			 		<td colspan="4" id="paging">
-				 		<!-- plugin 사용법 -->
-				 		<div class="container">
-				 			<nav arial-label="page navigation" style="text-align:center">
-				 				<ul class="pagination" id="pagination"></ul>
-				 			</nav>
-				 		</div>
-			 		</td>
-			 	</tr>
-			 	<tr>
-				 	<td colspan ="6" id="paging">
-				        <select id="pagePerNum">
-							<option value="5">5</option>
-							<option value="10" selected="selected">10</option>
-							<option value="15">15</option>
-							<option value="20">20</option>
-						</select>
-						<select id="option" name="option">
-			                <option value="b_title">제목</option>
-			                <option value="writer">저자</option>
-			                <option value="publisher">출판사</option>
-			            </select>
-						<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
-					</td>
-			 	</tr>
-            </table>
-        </div>
-    </section>
+	<div class="body">
+    	<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div> 
+	    <div class="section"> 
+	            <button class="btn_bookAdd" onclick="location.href='bookAdd.go' ">도서추가</button>
+	            <table class="book_table">
+	                <thead>
+	                	<tr>
+	                		<td>ID</td>
+	                		<td>제목</td>
+	                		<td>저자</td>
+	                		<td>출판사</td>
+	                		<td>도서상태</td>
+	                		<td>등록일</td>
+	                	</tr>
+	                </thead>
+	                <tbody id="bookList">
+	                    
+	                </tbody>
+	            </table>
+				<div class="container">
+					<nav arial-label="page navigation" style="text-align:center">
+						<ul class="pagination" id="pagination"></ul>
+					</nav>
+				</div>
+				<div class="searchOption">
+					<select class="selectBtn" sid="pagePerNum">
+						<option value="5">5</option>
+						<option value="10" selected="selected">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select>
+					<select class="selectBtn" id="option" name="option">
+						<option value="b_title">제목</option>
+						<option value="writer">저자</option>
+						<option value="publisher">출판사</option>
+					</select>
+					<input class="searchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
+					<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+				</div>
+		</div>
+	</div>
 </body>
 <script>
 var msg = "${msg}"
