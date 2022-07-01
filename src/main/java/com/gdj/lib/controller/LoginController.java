@@ -116,8 +116,6 @@ public class LoginController {
 			String mb_class = service.getMbClass(id,pw);
 			logger.info("로그인한 아이디 : "+loginId+" > "+mb_class);
 			
-			
-			
 			if(loginId != null) {
 				session.setAttribute("loginId", loginId);
 				// 관리자와 일반 사용자가 이용할 수 있는 서비스가 다르기 때문에 회원 등급도 같이 가져온다.
