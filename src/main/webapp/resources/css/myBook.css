@@ -43,3 +43,8 @@
 .borrow_table .brwBookTitle{
 	text-align:left;
 }
+.borrow_table .delBtn{
+	color:#fff;
+	padding:2px 5px;
+	font-size:15px;
+}
