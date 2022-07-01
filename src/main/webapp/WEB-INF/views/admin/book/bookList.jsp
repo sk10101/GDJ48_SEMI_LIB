@@ -16,6 +16,10 @@
 <style></style>
 </head>
 <body>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 <div id="header">
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
@@ -35,13 +39,17 @@
             </nav>
         </div>
     </header>
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     <aside id="menu">
         <h1>관리자페이지</h1>
         <hr/>
         <ul class="admin_menu">
             <li><a href="memberList.go">회원관리</a></li>
             <li><a href="#">도서관리</a></li>
-            <li><a href="claimList">건의사항</a></li>
+            <li><a href="adminClaimList">건의사항</a></li>
             <li><a href="blackList.go">블랙리스트</a></li>
             <li><a href="penaltyList.go">이용정지내역</a></li>
         </ul>

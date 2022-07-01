@@ -4,13 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <title>회원리스트</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/adminMember.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-  
 </style>
 </head>
 <body>
@@ -18,50 +18,62 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-	<h3>관리자페이지(일반회원 관리)</h3>
-		 <a href="/memberList.go">일반회원</a>
-	     <a href="/adminList.go">관리자</a>
-	    <table class="bbs">
-	        <thead>
-	            <tr>
-	                <td>회원ID</td>          
-	                <td>회원이름</td>           
-	                <td>회원상태</td>                
-	            </tr>
-	        </thead>
-	        <tbody id="memberList">
-				
-			</tbody>
-			
-			<tr>
-		 		<td colspan="5" id="paging">
-		 			<!-- plugin 사용법 -->
-		 			<div class="container">
-		 				<nav aria-label="Page navigation">
-		 					<ul class="pagination" id="pagination">
-		 					</ul>
-		 				</nav>
-		 			</div>
-		 		</td>
-		 	</tr>
-		 	<tr>
-		 		<td colspan="3">
-			 		<select id="pagePerNum">
-					 	<option value="5">5</option>
-					 	<option value="10" selected="selected">10</option>
-					 	<option value="15">15</option>
-					 	<option value="20">20</option>
-					 </select>
-					 <select id="option" name="option">
-			       		<option value="회원ID">회원 ID</option>
-			       		<option value="회원이름">회원이름</option>
-			       		<option value="회원상태">회원상태</option>
-			       	</select>
-				     <input id="word" type="search" placeholder="회원 검색" name="word" value=""/>
-				     <input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
-				 </td>
-		 	</tr>
-	    </table>
+	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a class="tabSelect" href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div>
+	    <div class="section">
+	    	<div class="memberClassBtn-area">
+				 <a class="memberClassBtnChk" href="/memberList.go">일반회원</a>
+			     <a class="memberClassBtn" href="/adminList.go">관리자</a>
+	     	</div>
+	     	<div class="table-area">
+			    <table class="bbs">
+			        <thead>
+			            <tr>
+			                <th>회원ID</th>          
+			                <th>회원이름</th>           
+			                <th>회원상태</th>                
+			            </tr>
+			        </thead>
+			        <tbody id="memberList">
+						
+					</tbody>
+			    </table>
+				<div class="container">
+					<nav aria-label="Page navigation" style="text-align:center">
+						<ul class="pagination" id="pagination">
+						</ul>
+					</nav>
+				</div>
+				<div class="searchOption">
+					<select class="selectBtn" id="pagePerNum">
+						<option value="5">5</option>
+						<option value="10" selected="selected">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select>
+					<select class="selectBtn" id="option" name="option">
+						<option value="회원ID">회원 ID</option>
+						<option value="회원이름">회원이름</option>
+						<option value="회원상태">회원상태</option>
+					</select>
+					<input class="searchBlock" id="word" type="search" placeholder="회원 검색" name="word" value=""/>
+					<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script>
 

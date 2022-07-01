@@ -5,33 +5,19 @@
 <meta charset="UTF-8">
 <title>bookDetail</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 
 <style>
-table {
-      width: 100%;
-   }
-   table,th,td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 5px;   
-   }
-   
 
-.logo {
-    font-size: 30px;
-    font-weight: bold;
-    width: 200px;
-    height: 120px;
-    text-align: center;
-    /* line-height: 120px; */
-    margin-bottom: 70px;
-}
 </style>
 </head>
 <body>
-
+	<div id="header">
+		<jsp:include page="../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
          <div class="logo">
-            <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
+            <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
         <nav>
             <ul>

@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>예약내역</title>
+<title>예약내역(관리자)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="../resources/css/admin.css">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -21,20 +21,13 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-    <header>
-        <div class="header-wrap">
-            <div class="logo">
-                <a href="/"><img src="../resources/img/logo.png" class="logo"></a>
-            </div>
-        </div>
-    </header>
     <aside id="menu">
         <h1>관리자페이지</h1>
         <hr/>
         <ul class="admin_menu">
             <li><a href="memberList.go">회원관리</a></li>
             <li><a href="bookList.go">도서관리</a></li>
-            <li><a href="claimList">건의사항</a></li>
+            <li><a href="adminClaimList">건의사항</a></li>
             <li><a href="blackList.go">블랙리스트</a></li>
             <li><a href="penaltyList.go">이용정지내역</a></li>
         </ul>

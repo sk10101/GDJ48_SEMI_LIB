@@ -3,27 +3,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>대출내역(회원)</title>
 <!-- <link rel="stylesheet" href="../resources/css/bookList.css"> -->
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 
 
 
 <style>
-	table {
-		width: 100%;
-	}
-	table,th,td {
-		border: 1px solid black;
-		border-collapse: collapse;
-		padding: 5px;
-		}
-	#a1234 {
-		height: 30px;
-	}
+	
 </style>
 </head>
 <body>
@@ -93,7 +84,7 @@
 	    	<tr>
 				<td colspan="5" id="paging">
 					<div class="container">
-						<nav aria-label="Page navigation" style="text-align:center">
+						<nav aria-label="Page navigation">
 								<ul class="pagination" id="pagination" >
 								</ul>					
 						</nav>
@@ -113,7 +104,7 @@
 				       		<option value="상태">상태</option>
 				       	</select>
 			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 				</td>
 			</tr>
         </table>

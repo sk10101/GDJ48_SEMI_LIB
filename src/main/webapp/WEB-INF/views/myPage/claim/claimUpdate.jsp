@@ -23,7 +23,7 @@
 	        <br/>
 	        <a class="tabSelect" href="claimList">건의사항</a><br/>
 	        <br/>
-	        <a href="#">회원정보</a>
+	        <a href="myUpdateDetail.go">회원정보</a>
 	    </div>
     	<div class="section" id="main_content">
 	    	<form class="claimTable-area" action="claimUpdate.do" method="post" enctype="multipart/form-data">

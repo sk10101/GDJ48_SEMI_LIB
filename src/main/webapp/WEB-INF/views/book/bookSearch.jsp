@@ -3,9 +3,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서검색</title>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
@@ -16,7 +16,6 @@
 		<jsp:include page="../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-    
 	<section>
         <form class="search" action="bookSearch.go" method="get">
             <select name="option">
@@ -56,7 +55,7 @@
                		<tr>
 				<td colspan="6" id="paging">
 					<div class="container">
-						<nav aria-label="Page navigation" style="text-align:center">
+						<nav aria-label="Page navigation">
 								<ul class="pagination" id="pagination" >
 								</ul>					
 						</nav>
