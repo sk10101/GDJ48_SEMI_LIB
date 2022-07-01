@@ -147,6 +147,11 @@
 		INSERT INTO blacklist (mb_id,admin_start, black_reason) 
 			VALUES(#{mb_id},#{admin_start},#{black_reason})
 	</insert>
+	
+	<select id="blackCon" resultType="Integer">
+		SELECT COUNT(black_id) FROM blacklist b 
+			WHERE mb_id = #{param1} and black_cancel is null
+	</select >
 
 
 

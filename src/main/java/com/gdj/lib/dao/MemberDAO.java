@@ -176,6 +176,8 @@ public interface MemberDAO {
 
 	int notSecession(String mb_id);
 
+	int blackCon(String s_id);
+
 
 
 	
