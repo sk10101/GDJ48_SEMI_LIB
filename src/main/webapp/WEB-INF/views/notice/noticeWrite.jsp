@@ -36,6 +36,7 @@
                     <th>첨부파일</th>
                     <td><input type="file" name="photos" multiple="multiple" /></td>
                 </tr>
+                 <input type="hidden" name="notice_id" value="${sessionScope.loginId}"/>
         	 </table>
 	     	 <div class="noticeWriteBtn-area">
 	        	<input class="noticeWriteBtn" type="submit" value="저장" />

@@ -37,7 +37,7 @@ public class NoticeService {
 		logger.info("공지사항 글쓰기 서비스 요청");
 		
 		BoardDTO dto = new BoardDTO();
-		dto.setMb_id("admin"); //mb_id 를 일단 admin 으로 설정
+		dto.setMb_id(params.get("notice_id")); //mb_id 를 일단 admin 으로 설정
 		dto.setNotice_title(params.get("notice_title"));
 		dto.setNotice_content(params.get("notice_content"));
 		
@@ -103,10 +103,10 @@ public class NoticeService {
 		for (int notice_id : noticeDeleteList) {
 			cnt += dao.noticeDelete(notice_id);
 			noticePhotoList = dao.noticePhotoList(notice_id);
+				
 			
 			photoCnt += dao.noticePhotoDelete(notice_id);
-		
-			
+	
 			
 			logger.info(notice_id+" 번 게시물에 업로드된 사진 수 : "+noticePhotoList.size());
 		}
