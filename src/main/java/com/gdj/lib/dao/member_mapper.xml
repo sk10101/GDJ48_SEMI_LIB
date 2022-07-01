@@ -171,6 +171,23 @@
 		SELECT COUNT(penalty_id) FROM penalty
 	</select>
 	
+	
+	<select id="memberSearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM penalty
+			WHERE mb_id LIKE CONCAT('%',#{param3},'%') 
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="penaltySearch" resultType="com.gdj.lib.dto.MemberDTO">
+		SELECT * FROM penalty
+			WHERE category_id LIKE CONCAT('%',#{param3},'%') 
+				ORDER BY mb_id ASC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	
+	
+	
+	
 	<select id="penaltyDetail" resultType="com.gdj.lib.dto.MemberDTO">
       <!-- SELECT *FROM penalty WHERE penalty_id= #{param1} -->
       SELECT *FROM penalty p ,member m WHERE p.mb_id = m.mb_id and penalty_id= #{param1}

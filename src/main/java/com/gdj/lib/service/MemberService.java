@@ -152,15 +152,18 @@ public class MemberService {
 			
 			map.put("penaltyList", penaltyList);
 		} else {
-			/*
-			 * logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
-			 * 
-			 * // 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음 if(option.equals("제목")) { searchList
-			 * = dao.subjectSearch(cnt,offset,word); logger.info("제목 옵션 설정"); } else
-			 * if(option.equals("처리상태")) { searchList = dao.statusSearch(cnt,offset,word);
-			 * logger.info("처리상태 옵션 설정"); } else { searchList =
-			 * dao.writerSearch(cnt,offset,word); logger.info("작성자 옵션 설정"); }
-			 */
+			
+			  logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
+			  
+			  // 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음 
+			  if(option.equals("member")) { 
+				  searchList= dao.memberSearch(cnt,offset,word); 
+				  logger.info("회원 옵션 설정"); 
+			  }  else { 
+				  searchList = dao.penaltySearch(cnt,offset,word);
+			  	  logger.info("제한내역 옵션 설정"); 
+			  }
+			 
 			
 			logger.info("검색결과 건수 : " +searchList.size());
 			map.put("penaltyList", searchList);

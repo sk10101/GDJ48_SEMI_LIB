@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>블랙리스트</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/adminBlack.css"/>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -32,52 +32,45 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-	<h3>블랙리스트 기본</h3>
-	    <table>
-	        <thead>
-	            <tr>
-	                <td>회원ID</td>          
-	                <td>지정한 관리자ID</td>           
-	                <td>지정일</td>           
-	                <td>해제한 관리자ID</td>       
-	                <td>해제일</td>      
-	            </tr>
-	        </thead>
-	        <tbody id=list>
-				
-			</tbody>
-			
-			
-			<tr>
-		 		<td colspan="5" id="paging">
-		 			<!-- plugin 사용법 -->
-		 			<div class="container">
-		 				<nav aria-label="Page navigation">
-		 					<ul class="pagination" id="pagination">
-		 					</ul>
-		 				</nav>
-		 			</div>
-		 		</td>
-		 	</tr>
-		 	<tr>
-		 		<td colspan="5">
-			 		<select id="pagePerNum">
-					 	<option value="5">5</option>
-					 	<option value="10" selected="selected">10</option>
-					 	<option value="15">15</option>
-					 	<option value="20">20</option>
-					 </select>
-					 <select id="option" name="option">
-				       		<option value="회원ID">회원 ID</option>
-				       		<option value="지정한관리자ID">지정한 관리자 ID</option>
-				       		<option value="해제한관리자ID">해제한 관리자 ID</option>
-				       	</select>
-			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
-				 </td>
-		 	</tr>
-	    </table>
-	<input type="button" value="추가" onclick="location.href='blackAdd.go'">
+	    <div class="section">
+	    	<div class="upBtn-area">
+				<input class="blackAddBtn" type="button" value="블랙리스트 추가" onclick="location.href='blackAdd.go'">
+			</div>
+		    <table class="black_table">
+		        <thead>
+		            <tr>
+		                <th>회원ID</th>          
+		                <th class="adminId">지정한 관리자ID</th>           
+		                <th class="blackDate">지정일</th>           
+		                <th class="adminId">해제한 관리자ID</th>       
+		                <th class="blackDate">해제일</th>      
+		            </tr>
+		        </thead>
+		        <tbody id=list>
+					
+				</tbody>
+		    </table>
+			<div class="container">
+				<nav aria-label="Page navigation" style="text-align:center">
+					<ul class="pagination" id="pagination"></ul>
+				</nav>
+			</div>
+			<div class="searchOption">
+				<select class="selectBtn" id="pagePerNum">
+					<option value="5">5</option>
+					<option value="10" selected="selected">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+				</select>
+				<select class="selectBtn" id="option" name="option">
+					<option value="회원ID">회원 ID</option>
+					<option value="지정한관리자ID">지정한 관리자 ID</option>
+					<option value="해제한관리자ID">해제한 관리자 ID</option>
+				</select>
+				<input class="searchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
+				<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+			</div>
+		</div>
 	</div>
 </body>
 <script>

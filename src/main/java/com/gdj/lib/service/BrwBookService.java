@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 
 import com.gdj.lib.dao.BrwBookDAO;
 import com.gdj.lib.dto.BrwBookDTO;
-import com.gdj.lib.dto.KioskDTO;
 import com.gdj.lib.dto.PhotoDTO;
 
 
@@ -77,7 +75,15 @@ public class BrwBookService {
 		return "redirect:/reserve";
 		
 	}
-
+	
+	
+	public void reserve_able(HashMap<String, String> params) {
+		logger.info("예약 가능 여부 0으로 바꿔요");
+		dao.reserve_able(params);
+		
+	}
+	
+	
 	public int reserveCheck(String mb_id) {
 		int cnt =0;
 		cnt = dao.reserveCheck(mb_id);
@@ -111,12 +117,12 @@ public class BrwBookService {
 	}
 
 
-
 	public void bookreason(HashMap<String, String> params) {
-		logger.info("도서 예약"+params);
+		logger.info("도서 예약"+params.get("loginId"));
 		dao.bookreason(params);
 		
 	}
+
 
 
 	public HashMap<String, Object> myPageBrwList(HashMap<String, String> params) {
@@ -208,6 +214,20 @@ public class BrwBookService {
 		
 	}
 
+	public int penaltyCheck(String mb_id) {
+		logger.info("이용정지 리스트 찾기 서비스");
+		return dao.penaltyCheck(mb_id);
+	}
+
+	public long penaltyDate(String mb_id) {
+		logger.info("이용정지 기간 확인 서비스");
+		return dao.penaltyDate(mb_id);
+		
+	}
+
+	
+
+	
 	public long brwExpiry(String mb_id) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -229,8 +249,6 @@ public class BrwBookService {
 	public ArrayList<BrwBookDTO> brwlist(HashMap<String, String> params) {
 		return dao.brwlist(params);
 	}
-
-	
 
 	
 

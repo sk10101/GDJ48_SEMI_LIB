@@ -5,10 +5,9 @@
 <meta charset="UTF-8">
 <title>이전대출내역(회원)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="../resources/css/bookList.css">
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-	
 </style>
 </head>
 <body>
@@ -16,41 +15,21 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+	    <div class="myPageTab" id="myPage_menu">
+	        <h3>마이페이지</h3>
+	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a class="tabSelect" href="/brwHistory">도서내역</a><br/>
+	        <br/>
+	        <a href="claimList">건의사항</a><br/>
+	        <br/>
+	        <a href="myUpdateDetail.go">회원정보</a>
+	    </div>
 	<div class="container">
-            <!-- TOP -->
-            <div class="top">
-                <span>
-                    <nav>
-                        <ul>
-                            <li>${sessionScope.loginId}님 반갑습니다.</li>
-                            <li>로그아웃</li>
-                            <li>마이페이지</li>
-                        </ul>
-                    </nav>
-                </span>
-            </div>
             <!--MIDDLE-->
             <div class="middle">
                 
                 <div class="middle-left">
-
-                        <table>
-                            <thead>
-                                 <tr>
-                                    <th>마이페이지</th>
-                                </tr>
-                                <tr>
-                                    <th><a href="/brwHistory">도서내역</a></th>
-                                </tr>
-                                <tr>
-                                    <th><a href="/claimList">건의사항</a></th>
-                                </tr>
-                                <tr>
-                                    <th>회원정보</th>
-                                </tr>
-                            </thead>
-                        </table>
-
                 </div>
                 <div class="middle-right">
                     <div class="middle-right-1">
@@ -129,7 +108,8 @@
                     </div>    
             </div>
         </div>
-
+	</div>
+	</div>
 </body>
 <script>
 var msg = "${msg}"
