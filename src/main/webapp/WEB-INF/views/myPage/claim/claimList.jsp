@@ -70,6 +70,10 @@
         </div>
 </body>
 <script>
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
 	
 	// 로그인한 아이디와 현재 페이지 정보를 변수에 담는다.
 	var mb_id = "${sessionScope.loginId}";
@@ -77,31 +81,33 @@
 	var word = $('#word').val();
 	var option = $('#option').val();
 	var currPage = 1;
+	
 	listCall(currPage);
 	
-	var msg = "${msg}"
-	if (msg != "") {
-		alert(msg);
-	}
 	
-	// select 의 option 변경
+	// cnt 변경 (한 번에 보여줄 게시글 수 변경) 시에 초기화
 	$('#pagePerNum').on('change',function(){
-		word = $('#word').val();
 		console.log(currPage);
-		console.log(word);
 		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
 		$("#pagination").twbsPagination('destroy');
 		// 검색어가 들어갔을 때와 아닐때를 구분
-		if(word == null){
+		if(word == null && word == ''){
 			listCall(currPage);
-		} else if (word != null) {
+		} else if (word != null && word != '') {
 			searchList(currPage)
+			console.log(word);
 		}
-		
+	});
+	
+	// 검색 버튼 클릭했을 때 한 번 초기화
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
 	});
 	
 	
 	function listCall(page) {
+		
 		var pagePerNum = $('#pagePerNum').val();
 		console.log("param page : " + page);
 		
@@ -127,14 +133,8 @@
 					// 페이지 클릭했을 때
 					onPageClick: function(e, page) {
 						console.log("클릭한 페이지 : "+page); // 사용자가 클릭한 페이지
-						console.log("입력한 검색어 : "+word);
 						currPage = page;
-						
-						if(word == null){
-							listCall(currPage);
-						} else if (word != null) {
-							searchList(currPage)
-						}
+						listCall(currPage);
 					}
 				});
 				
@@ -143,6 +143,48 @@
 				console.log(e);
 			}
 		});
+	}
+	
+	
+	
+	// 검색 결과 출력
+	function searchList(page) {
+		var pagePerNum = $('#pagePerNum').val();
+		word = $('#word').val();
+		option = $('#option').val();
+		
+		$.ajax({
+			type: 'GET',
+			url: 'claimList.ajax',
+			data:{
+				cnt : pagePerNum,
+				page : page,
+				word : word,
+				option : option,
+				mb_id : mb_id,
+				mb_class : mb_class
+			},
+			dataType:'JSON',
+			success: function(data){
+				drawList(data.claimList);
+				currPage = 1;
+				// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+				$("#pagination").twbsPagination({
+					startPage: 1, // 시작 페이지
+					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+					onPageClick: function(e, page) {
+						console.log("클릭한 페이지 : " + page); // 사용자가 클릭한 페이지
+						currPage = page;
+						searchList(page);
+					}
+				});
+				console.log("보여줄 페이지 수 : " + data.pages);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		})
 	}
 	
 	
@@ -168,88 +210,13 @@
 		$("#claimList").append(content);
 	}
 	
-	
-	// 페이지 변경할 때 검색어를 저장하기위한 시도
-	/*
-	$('.page-item active > a.page-link').on('click',function(){
-		console.log("페이지가 변경됐습니다.")
-		if(sessionStorage.getItem("word")!=null) {
-			$(this).text() = currPage;
-			searchList(currPage);
-		}
-	});
-	*/
-	
-	
-	// 새로고침하면 세션에 저장된 검색어와 검색옵션 값을 비운다.
-	/*
-	function sessionClear() {
-		    window.onbeforereload = function (e) {
-		    	sessionStorage.removeItem("word");
-		    	sessionStorage.removeItem("option");
-		    };
-		}
-	*/
-	
-	// 검색 결과 출력
-	function searchList(page) {
-		word = $('#word').val();
-		option = $('#option').val();
-		
-		if(word != null) {
-			var pagePerNum = $('#pagePerNum').val();
-			
-			// 검색어 저장
-			/*
-			sessionStorage.setItem("word",word);
-			sessionStorage.setItem("option",option);
-			*/
-			
-			$.ajax({
-				type: 'GET',
-				url: 'claimList.ajax',
-				data:{
-					cnt : pagePerNum,
-					page : page,
-					word : word,
-					option : option,
-					mb_id : mb_id,
-					mb_class : mb_class
-				},
-				dataType:'JSON',
-				success: function(data){
-					// 테이블 초기화
-					$("#claimList").empty();
-					drawList(data.claimList);
-					currPage = 1;
-					// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
-					$("#pagination").twbsPagination({
-						startPage: 1, // 시작 페이지
-						totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
-						visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
-						onPageClick: function(e, page) {
-							console.log("클릭한 페이지 : " + page); // 사용자가 클릭한 페이지
-							currPage = page;
-							searchList(page);
-						}
-					});
-					console.log("보여줄 페이지 수 : " + data.pages);
-				},
-				error:function(e){
-					console.log(e);
-				}
-			})
-		} else {
-			console.log("searchList 스킵");
-		}
-	}
 	// 삭제 버튼 기능구현 (동적으로 생성한 버튼은 javascript 로 구현)
 	function clickEvt(btn) {
 		var claim_id = $(btn).parent().parent().attr("cID");
 		console.log($(btn));
 			location.href='/claimDel.do?claim_id=' + claim_id;
 	}
-	
+
 	/* 삭제 기능 다른 방법
 	$(document).ready(function() {
 		$("#claim_table").on('click', '.delBtn', function() {
