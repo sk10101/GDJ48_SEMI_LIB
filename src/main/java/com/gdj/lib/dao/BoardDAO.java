@@ -38,7 +38,7 @@ public interface BoardDAO {
 	
 	/*
 	ArrayList<BoardDTO> claimList();
-	*/
+	
 	ArrayList<BoardDTO> claimList(int cnt, int offset, String mb_id);
 
 	ArrayList<BoardDTO> subjectSearch(int cnt, int offset, String word, String mb_id);
@@ -46,8 +46,9 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> statusSearch(int cnt, int offset, String word, String mb_id);
 	
 	ArrayList<BoardDTO> writerSearch(int cnt, int page, String word, String mb_id);
+	 */
 	
-	int allCount();
+	// int allCount();
 	
 	int claimWrite(BoardDTO dto);
 
@@ -75,7 +76,7 @@ public interface BoardDAO {
 	int replyUpdate(HashMap<String, String> params);
 
 	int getReplyId(int claim_id);
-
+	/*
 	ArrayList<BoardDTO> allClaimList(int cnt, int offset);
 
 	ArrayList<BoardDTO> allSubjectSearch(int cnt, int offset, String word);
@@ -83,8 +84,8 @@ public interface BoardDAO {
 	ArrayList<BoardDTO> allStatusSearch(int cnt, int offset, String word);
 
 	ArrayList<BoardDTO> allWriterSearch(int cnt, int offset, String word);
-
-	int claimCount(String mb_id);
+	*/
+	// int claimCount(String mb_id);
 
 
 	int noticePhotoDelete(int notice_id);
@@ -96,6 +97,14 @@ public interface BoardDAO {
 
 	void replyPhotoDel(int reply_id);
 
+	ArrayList<BoardDTO> allCount(HashMap<String, Object> map);
+
+	ArrayList<BoardDTO> claimList(HashMap<String, Object> map);
+
+
+	// ArrayList<BoardDTO> searchList(int cnt, int offset, String word, String mb_id, String option);
+
+	// int searchCount(String mb_id, String word);
 
 
 	

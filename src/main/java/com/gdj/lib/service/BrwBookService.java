@@ -18,13 +18,28 @@ import com.gdj.lib.dto.PhotoDTO;
 @Service
 public class BrwBookService {
 	
+	
+
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired BrwBookDAO dao;
 
+
 	public void detail(Model model, String b_id) {
 		logger.info("도서상세보기 서비스 요청 : " + b_id);
 		BrwBookDTO detail = dao.detail(b_id);
+		
+		
+//		BrwBookDTO aaa = new BrwBookDTO();
+//		try {
+//			if((aaa = dao.aaa(b_id)) != null) {
+//				model.addAttribute("aaa",aaa);
+//			}
+//		}catch (Exception e) {
+//			aaa.setMb_id("");
+//			model.addAttribute("aaa",aaa);
+//		}
+				
 		ArrayList<PhotoDTO> list = dao.photoList(b_id); //photo 정보 가져옴
 		model.addAttribute("detail",detail);
 		model.addAttribute("list",list);
@@ -249,6 +264,22 @@ public class BrwBookService {
 	public ArrayList<BrwBookDTO> brwlist(HashMap<String, String> params) {
 		return dao.brwlist(params);
 	}
+
+	public ArrayList<BrwBookDTO> bookCheck(HashMap<String, String> params) {
+		
+		return dao.bookCheck(params);
+	}
+
+	public void idCheck(HashMap<String, String> params) {
+		dao.idCheck(params);
+		
+	}
+
+	
+	
+
+	
+	
 
 	
 

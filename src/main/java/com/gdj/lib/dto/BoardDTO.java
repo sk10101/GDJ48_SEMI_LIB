@@ -127,15 +127,4 @@ public class BoardDTO {
 	}
 	
 	
-	// mapper 에서 조건부 쿼리문 작성할 때 쓰일 DTO
-	private int allCount;
-
-	public int getAllCount() {
-		return allCount;
-	}
-	public void setAllCount(int allCount) {
-		this.allCount = allCount;
-	}
-
-	
 }

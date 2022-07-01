@@ -51,19 +51,25 @@ public class BoardService {
 		logger.info("로그인한 아이디 : " + mb_id);
 		
 		ArrayList<BoardDTO> claimList = new ArrayList<BoardDTO>();
-		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
+		// ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
 		
 		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
 		int allCnt = 0;
 		
 		// 마이페이지 / 건의사항 과 관리자페이지 / 건의사항에 띄울 리스트의 개수를 각각 Count 해야한다.
-		if(mb_id != null && mb_class.equals("일반회원")) {
-			allCnt = dao.claimCount(mb_id);
-		} else {
-			allCnt = dao.allCount();
+		map.put("cnt", cnt);
+		map.put("mb_id", mb_id);
+		map.put("mb_class", mb_class);
+		map.put("word", word);
+		
+		if (word != null && word != "") {
+			map.put("option", option);
 		}
 		
+		ArrayList<BoardDTO> allCount = dao.allCount(map);
+		allCnt = allCount.size();
 		logger.info("allCnt : " + allCnt);
+		
 		
 		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
 		
@@ -71,6 +77,7 @@ public class BoardService {
 		if (page > pages) {
 			page = pages;
 		}
+		
 		map.put("pages", pages); // 최대 페이지 수
 		
 		int offset = cnt * (page-1);
@@ -81,6 +88,9 @@ public class BoardService {
 		logger.info("offset : "+offset);
 		
 		
+		claimList = dao.claimList(map);
+		map.put("claimList", claimList);
+		/*
 		// 검색 관련 설정하는 조건문
 		if(word == null || word.equals("")) {
 			// 관리자 건의사항 목록 페이지에선 아이디 상관없이 모두 보여줘야함
@@ -119,12 +129,11 @@ public class BoardService {
 					logger.info("작성자 옵션 설정");	
 				}
 			}
-			
-			
 			logger.info("검색결과 건수 : " +searchList.size());
 			map.put("claimList", searchList);
 			
 		}
+		*/
 		logger.info("서비스 체크포인트");
 		return map;
 	}
@@ -216,15 +225,16 @@ public class BoardService {
       int claim_id = Integer.parseInt(params.get("claim_id"));
       String status = params.get("status");
       int row = 0;
-      String page = "";
+      String page = "redirect:/claimDetail?claim_id="+claim_id;
       
       if(status==null) {
          row = dao.claimUpdate(params);
-         page = "redirect:/claimDetail?claim_id="+claim_id;
       } else {
          row = dao.adminClaimUpdate(status, claim_id);
          page = "redirect:/adminClaimDetail?claim_id="+claim_id;
       }
+      
+      // 글작성이 성공한 경우에 사진을 업로드한다.
       if(row > 0) {
          claimFileSave(photos, claim_id, 2);
       }
