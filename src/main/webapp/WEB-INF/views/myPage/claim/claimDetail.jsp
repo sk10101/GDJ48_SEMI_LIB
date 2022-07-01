@@ -18,12 +18,12 @@
 	<div class="body">
 	    <div class="myPageTab" id="myPage_menu">
 	        <h3>마이페이지</h3>
-	        <hr style="border:none; height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
 	        <a href="/brwHistory">도서내역</a><br/>
 	        <br/>
 	        <a class="tabSelect" href="claimList">건의사항</a><br/>
 	        <br/>
-	        <a href="#">회원정보</a>
+	        <a href="myUpdateDetail.go">회원정보</a>
 	    </div>
 	    <div class="section" id="main_content">
 		    <div class="claimTable-area">

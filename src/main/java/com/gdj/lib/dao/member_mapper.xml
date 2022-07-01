@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
-		SELECT mb_id, mb_pw, name, phone, email FROM member
+		SELECT mb_id, mb_pw, name, phone, email FROM member where mb_id = #{mb_id}
 		
 	</select>
 	
@@ -36,10 +36,18 @@
 		update member set mb_status = '탈퇴신청', leave_date = now() where mb_id = #{param1}
 	</update>
 	
-	<update id="MySecessionTwo" parameterType="String">
+	<update id="MySecessionTwo" parameterType="String" >
 		update member set mb_status = '탈퇴완료' where mb_status = '탈퇴신청'
 			and leave_date >= date_add(leave_date, interval 7 day)
 	</update>
+	
+	<select id="notSecession" parameterType="String" resultType="Integer" >
+	select sum(id) from (
+	select count(r.mb_id) as id  from reservation r where reason is null and mb_id = #{param1}
+	union all
+	select count(b.mb_id) as id from borrow b where brw_status = '대출' and mb_id = #{param1}
+	) as id
+	</select>
 
 	<select id="memberList" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT mb_id, name, mb_status FROM member where mb_class = '일반회원'
@@ -269,31 +277,33 @@
 		WHERE br.b_id = b.b_id AND br.brw_status="대출" AND mb_id=#{mb_id}
 	</select>
 	
-	<select id="hisList" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="hisList" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status, renew
 		FROM borrow br, book b 
-		WHERE br.b_id = b.b_id AND br.brw_status="반납" AND mb_id=#{mb_id}
+		WHERE br.b_id = b.b_id AND br.brw_status="반납" AND mb_id=#{param3}
+			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="reserveList" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT reserve_id, b.b_id, b.b_title, reserve_date, reason
-		FROM reservation r, book b 
-		WHERE r.b_id = b.b_id AND mb_id=#{param3}
+		FROM reservation br, book b 
+		WHERE br.b_id = b.b_id AND mb_id=#{param3}
+			ORDER BY reserve_date DESC
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="reserveTitleSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT reserve_id, b.b_id, b.b_title, reserve_date, reason
-		FROM reservation r, book b 
-		WHERE r.b_id = b.b_id AND mb_id=#{param4} 
+		FROM reservation br, book b 
+		WHERE br.b_id = b.b_id AND mb_id=#{param4} 
 			AND b.b_title LIKE CONCAT ('%', #{param3} ,'%')
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="reserveReasonSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
 		SELECT reserve_id, b.b_id, b.b_title, reserve_date, reason
-		FROM reservation r, book b 
-		WHERE r.b_id = b.b_id AND mb_id=#{param4} 
+		FROM reservation br, book b 
+		WHERE br.b_id = b.b_id AND mb_id=#{param4} 
 			AND reason LIKE CONCAT ('%', #{param3} ,'%')
 		LIMIT #{param1} OFFSET #{param2}
 	</select>
@@ -307,6 +317,23 @@
 		WHERE reserve_id = #{param1};
 	</update>
 	
+	<select id="allHisCount" resultType="int">
+		SELECT COUNT(brw_id) FROM borrow WHERE brw_status="반납" AND mb_id=#{param1}
+	</select>
+	
+	<select id="allBookTSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status, renew 
+		FROM borrow br, book b 
+			WHERE br.b_id = b.b_id AND b.b_title LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{param4}
+				LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<!-- 연체여부 디비에서 가져올 수가 없음 -->
+	<select id="allBookRSearch" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT * FROM borrow br, book b 
+			WHERE status LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{param4}
+				claim_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
 	
 	
 	
@@ -318,6 +345,7 @@
 	
 	
 	
+
 	
 	
 </mapper>

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gdj.lib.dao.MemberDAO;
 import com.gdj.lib.service.LoginService;
+import com.gdj.lib.service.MyService;
 
 @Controller
 public class LoginController {
@@ -22,7 +24,7 @@ public class LoginController {
 	 Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	// 로그인 페이지
-	@RequestMapping(value = "/member/login")
+	@RequestMapping(value = "login.go")
 	public String memberhome( Model model) {
 		logger.info("로그인 페이지 이동");
 		
@@ -105,7 +107,7 @@ public class LoginController {
 		
 		
 		// 로그인 
-		@RequestMapping(value = "member/login.do")
+		@RequestMapping(value = "login.do")
 		public String login(Model model,HttpSession session ,@RequestParam String id, @RequestParam String pw) {
 			logger.info("로그인 요청 :{},{}",id,pw);
 			String page="login/login"; 
@@ -113,6 +115,7 @@ public class LoginController {
 			String loginId =service.login(id,pw); 
 			String mb_class = service.getMbClass(id,pw);
 			logger.info("로그인한 아이디 : "+loginId+" > "+mb_class);
+			
 			
 			
 			if(loginId != null) {
@@ -129,7 +132,7 @@ public class LoginController {
 	
 		
 		// 로그아웃
-		@RequestMapping(value = "member/logout.do")
+		@RequestMapping(value = "logout.do")
 		public String logout(Model model,HttpSession session) {
 				session.removeAttribute("loginId");
 				model.addAttribute("msg", "로그아웃 되었습니다");

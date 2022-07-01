@@ -3,34 +3,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>블랙리스트 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-    .detail {
-        right: 0;
-    }
-    table.bbs {
-      width: 50%;
-   }
-   table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-   }
-   th, td {
-      padding: 10px 10px;
-   }
-   textarea {
-      width: 100%;
-      height: 150px;
-      resize: none;
-   }
-    a:link {
-        text-decoration: none;
-    }
+
 </style>
 </head>
 <body>
-
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div>
    <h3>블랙리스트 회원 상세보기</h3>
    <form action="blackUpdate.do" method="post">
    <input type ="hidden" id ="black_id" name = "black_id" value = "${param.black_id}"/>
@@ -69,12 +68,13 @@
 	             value="${dto.end_reason} "/></td>
 	         </tr>
 
-    </table>
-    </form>
-
-    <div> 
-        <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
-        <input type="button"  onclick="update();return false;" value="수정"/>
+	    </table>
+	    </form>
+	
+	    <div> 
+	        <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
+	        <input type="button"  onclick="update();return false;" value="수정"/>
+	    </div>
     </div>
 </body>
 <script>

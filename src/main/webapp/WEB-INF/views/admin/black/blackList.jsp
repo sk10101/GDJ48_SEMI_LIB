@@ -3,37 +3,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>블랙리스트</title>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-    .detail {
-        right: 0;
-    }
-    table.bbs {
-		width: 50%;
-	}
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th, td {
-		padding: 10px 10px;
-	}
-	textarea {
-		width: 100%;
-		height: 150px;
-		resize: none;
-	}
-    a:link {
-        text-decoration: none;
-    }
 </style>
 </head>
 <body>
-	<h3>블랙리스트 기본</h3>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div>
 	    <table>
 	        <thead>
 	            <tr>
@@ -74,11 +72,12 @@
 				       		<option value="해제한관리자ID">해제한 관리자 ID</option>
 				       	</select>
 			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 				 </td>
 		 	</tr>
 	    </table>
 	<input type="button" value="추가" onclick="location.href='blackAdd.go'">
+	</div>
 </body>
 <script>
 
@@ -190,11 +189,6 @@
 		var option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
 		
-		// 검색어 저장
-		/*
-		sessionStorage.setItem("word",word);
-		sessionStorage.setItem("option",option);
-		*/
 		
 		$.ajax({
 			type: 'GET',

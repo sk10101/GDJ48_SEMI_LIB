@@ -59,4 +59,17 @@
 		UPDATE penalty SET penalty_end = adddate(now(),interval 7 day) WHERE category_id = '5' AND penalty_end IS NULL AND mb_id = #{param1} 
 	</update>
 	
+	<select id="chkReturnOver" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT count(brw_id) FROM borrow WHERE mb_id = #{param1} AND brw_status = '대출' AND return_date < now()	
+		]]> 
+	</select>
+	
+	<select id="chkPenalty" parameterType="String">
+		SELECT count(penalty_id) FROM penalty p WHERE mb_id = #{param1} AND penalty_end is null
+	</select>
+	
+	<insert id="insertPenalty" parameterType="String">
+		INSERT INTO penalty(category_id, mb_id, penalty_start,cancel) VALUES('5',#{param1},now(), false);
+	</insert>
 </mapper>
