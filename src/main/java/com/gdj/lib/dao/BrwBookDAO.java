@@ -75,6 +75,10 @@ public interface BrwBookDAO {
 
 	void insertPenalty(String mb_id);
 
+	ArrayList<BrwBookDTO> brwlist(HashMap<String, String> params);
+
+	
+
 	
 
 

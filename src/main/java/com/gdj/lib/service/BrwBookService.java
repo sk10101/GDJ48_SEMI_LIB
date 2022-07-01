@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.gdj.lib.dao.BrwBookDAO;
 import com.gdj.lib.dto.BrwBookDTO;
+import com.gdj.lib.dto.KioskDTO;
 import com.gdj.lib.dto.PhotoDTO;
 
 
@@ -216,6 +218,12 @@ public class BrwBookService {
 		dao.insertPenalty(mb_id);
 		
 	}
+
+	public ArrayList<BrwBookDTO> brwlist(HashMap<String, String> params) {
+		return dao.brwlist(params);
+	}
+
+	
 
 	
 

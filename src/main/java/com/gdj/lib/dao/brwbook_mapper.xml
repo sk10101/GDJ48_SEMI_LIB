@@ -103,6 +103,17 @@
  			VALUES(#{b_id},#{loginId})
  	</insert>
  	
+ 	<select id="brwlist" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+		select 
+			b_id
+			, m.mb_id
+		from 
+			reservation r3 
+		inner join member m on
+			 r3.mb_id = m.mb_id
+			and r3.mb_id = #{loginId}
+	</select>
+ 	
  	<insert id="reserveBookBrw" parameterType="hashmap">
  		SELECT * FROM reservation WHERE reserve_id = #{reserve_id} 
  	</insert>

@@ -87,7 +87,10 @@ table {
                   <td>
                          <c:choose>
                                <c:when test="${dto.b_status eq '대출가능'}">
-                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">대출신청</button>
+                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">
+								<a href="bookDetail.do?b_id=${dto.b_id}">대출신청</a>
+
+                           </button>
                                </c:when>
                                <c:when test="${dto.b_status eq '대출불가'}">
                                   <input type="hidden">
@@ -146,7 +149,7 @@ var msg = "${msg}"
          },
          dataType:'JSON',
          success:function(data) {
-            
+        	 location.reload(true);
          },
          error:function(e) {
             console.log(e);
@@ -169,12 +172,12 @@ function bookreason(brwId) {
          url:'bookreason.ajax',
          data:{
             b_id : bookID,
-            loginId : loginId
-
+            loginId : loginId            
          },
          dataType:'JSON',
          success:function(data) {
             alert(data);
+            location.reload(true);
          },
          error:function(e) {
             
@@ -184,7 +187,6 @@ function bookreason(brwId) {
    }
 
    $(".brwBtn").on("click",function(){
-         $(this).hide();
          alert("대출신청이 완료되었습니다");
    });
       

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdj.lib.dto.BrwBookDTO;
+import com.gdj.lib.dto.KioskDTO;
 import com.gdj.lib.dto.PhotoDTO;
 import com.gdj.lib.service.BrwBookService;
 
@@ -133,7 +134,7 @@ public class BrwBookController {
 		String msg = "";
 		
 		
-		
+		//현재대출신청 기간..
 		long miliseconds = System.currentTimeMillis(); 
 		Date date = new Date(miliseconds);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -156,8 +157,18 @@ public class BrwBookController {
 				service.insertPenalty(mb_id);
 			}
 		}
+		
+		ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+		model.addAttribute("brwlist", brwlist);
+		logger.info("list 갯수: "+brwlist.size());
+		if(brwlist.size() <= 5 ) {
 			service.bookDetailBrw(params);
-				return "/";
+		} else {
+			msg = "도서권수가 초과되었습니다.";
+		}
+		
+		
+				return msg;
 	}
 		
 //		 int reserveCheck =service.reserveCheck(mb_id); 

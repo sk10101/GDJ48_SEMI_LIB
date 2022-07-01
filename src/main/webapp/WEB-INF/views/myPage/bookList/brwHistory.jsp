@@ -101,7 +101,7 @@
 	                                    			<button class="extensionBtn" 
 	                                    				onclick="updateExtension(this)"
 	                                    				whetherValue ="${brwdto.brw_id}">
-	                                    				연장
+	                                    				<a href="brwHistory">연장</a>
 	                                    			</button>
 	                                    		</c:when>
                                     		</c:choose>
@@ -148,7 +148,8 @@ function updateExtension(whethe_id) {
 		},
 		dataType:'JSON',
 		success:function(data) {
-			console.log(data)
+			console.log(data);
+			location.reload(true);
 		},
 		error:function(e) {
 			console.log(e);
