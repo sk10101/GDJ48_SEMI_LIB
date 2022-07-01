@@ -5,12 +5,11 @@
 <meta charset="UTF-8">
 <title>예약내역(관리자)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="../resources/css/admin.css">
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
-
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 
 <style>
@@ -21,17 +20,20 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-    <aside id="menu">
-        <h1>관리자페이지</h1>
-        <hr/>
-        <ul class="admin_menu">
-            <li><a href="memberList.go">회원관리</a></li>
-            <li><a href="bookList.go">도서관리</a></li>
-            <li><a href="adminClaimList">건의사항</a></li>
-            <li><a href="blackList.go">블랙리스트</a></li>
-            <li><a href="penaltyList.go">이용정지내역</a></li>
-        </ul>
-    </aside>
+    <div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a class="tabSelect" href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div>
 	<section>
 		<h3>대출내역</h3>
 		<ul class="book_menu">
@@ -81,6 +83,7 @@
 			 	</tr>
 		</table>
 	</section>
+	</div>
 </body>
 <script>
 
