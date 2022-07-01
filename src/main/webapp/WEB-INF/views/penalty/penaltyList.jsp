@@ -45,48 +45,58 @@
 			                <th class="col6">취소</th>
 			            </tr>
 			       </thead>
-       	 	<tbody id="penaltyList">
-       
-			</tbody>
-	 		</table>
-			<div class="container">
-                  <nav aria-label="Page navigation" style="text-align:center">
-                        <ul class="pagination" id="pagination"></ul>               
-                  </nav>
-	        </div>
-			<div class="noticeSearchOption">
-				<select class="selectBtn" id="pagePerNum">
-					<option value="5">5</option>
-					<option value="10" selected="selected">10</option>
-					<option value="15">15</option>
-					<option value="20">20</option>
-				</select>
-		     	<select class="selectBtn" id="option" name="option">
-		     		 <option value="회원ID">회원ID</option>
-   					 <option value="제한내역">제한내역</option>
-		     	</select>
-		     	<input class="noticeSearchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
-		     	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
-	 		</div>
+	       	 	<tbody id="penaltyList">
+	       
+				</tbody>
+		 		</table>
+				<div class="container">
+	                  <nav aria-label="Page navigation" style="text-align:center">
+	                        <ul class="pagination" id="pagination"></ul>               
+	                  </nav>
+		        </div>
+				<div class="noticeSearchOption">
+					<select class="selectBtn" id="pagePerNum">
+						<option value="5">5</option>
+						<option value="10" selected="selected">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select>
+			     	<select class="selectBtn" id="option" name="option">
+			     		 <option value="회원ID">회원ID</option>
+	   					 <option value="제한내역">제한내역</option>
+			     	</select>
+			     	<input class="noticeSearchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
+			     	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+		 		</div>
    		 	</div>
    		 </div>
    	</div>
 </body>
 <script>
-
-
-
-var currPage=1;
-	
+	var msg = "${msg}"
+	if (msg != "") {
+		alert(msg);
+	}
+	// 관리자 임을 알 수 있는 회원등급과 현재 페이지 정보를 변수에 담는다.
+	var mb_id = "${sessionScope.loginId}";
+	var mb_class = "${sessionScope.mb_class}";
+	var currPage=1;
     listCall(currPage);
         
-        $('#pagePerNum').on('change', function(){
-            console.log("currPage : " + currPage);
-            //페이지당 보여줄 수를 변경시 계산된 페이지 적용이 안된다. (플러그인의 문제)
-            //페이지당 보여줄 수를 변경시 기존 페이징 요소를 없애고 다시 만들어 준다.
-            $("#pagination").twbsPagination('destroy');
-            listCall(currPage);
-        });
+  //게시물 갯수 선택 요소에 이벤트 걸어줌 - 갯수 변경 -> change 이벤트
+    $('#pagePerNum').on('change',function(){ //pagePerNum 에 change가 일어나게 되면
+    	var word = $('#word').val();
+    	console.log(word);
+    	console.log("currPage : " +currPage);		
+    	// 페이지당 보여줄 수 변경 시 계산된 페이지 적용이 안된다. (플러그인의 문제)
+    	// 페이지당 보여줄 수 변경 시 기존 페이징 요소를 없애고 다시 만들어 준다.
+    	$("#pagination").twbsPagination('destroy');
+    	if(word==null || word==""){
+    		listCall(currPage);
+    	} else {
+    		searchList(currPage)
+    	}
+    });
         
     function listCall(page){	
         
@@ -96,8 +106,10 @@ var currPage=1;
             type:'GET',
             url:'penaltyList.ajax',
             data:{
-                cnt : pagePerNum,
-                page : page
+            	cnt : pagePerNum,
+				page : page,
+				mb_id : mb_id,
+				mb_class : mb_class
             },
             dataType:'json',
             success:function(data){
@@ -129,7 +141,7 @@ var currPage=1;
     function drawList(penaltyList){
         var content = '';
         penaltyList.forEach(function(dto){
-            console.log(dto);
+            // console.log(dto);
             if(dto.penalty_end != null) {
 	            content += '<tr>';
 	            content += '<td>'+dto.penalty_id+'</td>';
@@ -178,6 +190,57 @@ var currPage=1;
         $('#penaltyList').empty();
         $('#penaltyList').append(content); //tbody에 뿌려줌
         
+    }
+    
+    
+    function searchList(page){
+    	var word = $('#word').val();
+    	
+    	var option = $('#option').val();
+   
+    	
+    	
+    	var pagePerNum = $('#pagePerNum').val();
+    	console.log(word);
+    	
+    	$.ajax({
+    		type: 'GET',
+    		url: 'penaltyList.ajax',
+    		data:{
+    			cnt : pagePerNum,
+				page : page,
+				word : word,
+				option : option,
+				mb_id : mb_id,
+				mb_class : mb_class
+    		},
+    		dataType:'JSON',
+    		success: function(data){
+    			// 테이블 초기화
+    			$("#penaltyList").empty();
+    			drawList(data.penaltyList);
+    			console.log(data);
+    			currPage = 1;
+    			// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+    			$("#pagination").twbsPagination({
+    				startPage: 1, // 시작 페이지
+    				totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+    				visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+    				onPageClick: function(e, page) {
+    					console.log(page); // 사용자가 클릭한 페이지
+    					currPage = page;
+    					listCall(page);
+    				}
+    			})
+    		},
+    		error:function(e){
+    			console.log(e);
+    		}
+    	});	
+    }
+
+    function test (btn) {
+    	console.log($(this).text());
     }
     
 

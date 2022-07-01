@@ -7,7 +7,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-
 </style>
 </head>
 <body>
@@ -15,9 +14,7 @@
       <jsp:include page="../commons/header.jsp"/>
    </div>
    <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-         <div class="logo">
-            <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
-        </div>
+        
         <nav>
             <ul>
                 <li loginId="${sessionScope.loginId}">${sessionScope.loginId}님 반갑습니다.</li>
@@ -66,21 +63,21 @@
                     <td>예약신청</td>
                    
                 <tr>
-                  <td id="brw_b_id">${detail.b_id}</td>
-                      <td id="b_status">${detail.b_status}</td>
-                  <td>
-                         <c:choose>
-                               <c:when test="${detail.b_status eq '대출가능'}">
-                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">대출신청</button>
-                               </c:when>
-                               <c:when test="${detail.b_status eq '대출불가'}">
-                                  <input type="hidden">
-                               </c:when> 
-                               <c:when test="${detail.b_status eq '대출중'}">
-                           <input type="hidden">
-                               </c:when>
-                     </c:choose>
-                      </td>
+
+                   <td>
+                   <c:forEach items="${detail}" var="dto">
+                      <c:choose>
+                            <c:when test="${dto.b_status eq '대출중' && dto.reserve_able eq true}">
+                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
+                            </c:when>
+                            <c:when test="${dto.b_status eq '대출불가' && dto.reserve_able eq false}">
+                               <input type="hidden">
+                            </c:when>
+                            <c:when test="${dto.b_status eq '대출신청' && dto.reserve_able eq false}">
+                        <input type="hidden">
+                            </c:when>
+                  </c:choose>
+               </c:forEach>
                    
                    <td>
                       <c:choose>
@@ -106,6 +103,36 @@
 </body>
 <script>
 var msg = "${msg}"
+   if (msg != "") {
+      alert(msg);
+   }
+
+
+ 
+   function bookbrw(brwId) {
+      var bookID = $(brwId).attr("bookID");
+       console.log(bookID);
+       var loginId = $(brwId).attr("loginId");
+       console.log(loginId);
+      
+      $.ajax({
+         type:'get',
+         url:'bookDetailBrw.ajax',
+         data:{
+            b_id : bookID,
+            loginId : loginId
+         },
+         dataType:'JSON',
+         success:function(data) {
+            
+         },
+         error:function(e) {
+            console.log(e);
+         }
+      });
+    }
+      
+
 if (msg != "") {
    alert(msg);
 }
@@ -149,6 +176,40 @@ function bookreason(brwId) {
        console.log(bookID);
        var loginId = $(brwId).attr("loginId");
        console.log(loginId);
+       var msg = "";
+       
+      $.ajax({
+         type:'get',
+         url:'bookreason.ajax',
+         data:{
+            b_id : bookID,
+            loginId : loginId,
+			msg : msg
+         },
+         dataType:'JSON',
+         success:function(data) {
+           // alert(data.msg);
+         },
+         error:function(e) {
+            
+         }
+      });
+
+   }
+
+   $(".brwBtn").on("click",function(){
+         $(this).hide();
+         alert("대출신청이 완료되었습니다");
+   });
+      
+/* function bookreason(this){
+	     alert(msg);
+   }; */
+   
+   $(".bookreason").on("click",function(){
+       $(this).hide();
+       alert("예약신청이 완료되었습니다");
+ });
        
        if(loginId == null || loginId == ''){
          console.log("비회원");

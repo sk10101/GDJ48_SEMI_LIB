@@ -33,9 +33,16 @@ public class BrwBookDTO {
 		private String publisher;
 		private int issue;
 		private String b_status;
+		private boolean reserve_able;
 
 		
 		
+		public boolean isReserve_able() {
+			return reserve_able;
+		}
+		public void setReserve_able(boolean reserve_able) {
+			this.reserve_able = reserve_able;
+		}
 		public int getB_id() {
 			return b_id;
 		}
