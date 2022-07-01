@@ -96,15 +96,8 @@
 		
 	if(!$("#chk").val("true")) {
 		$("#chk").prop("checked" , false);
-<<<<<<< HEAD
 	} 
 	
-=======
-	}else{
-		$("#chk").prop("checked" , true);
-	}
-		
->>>>>>> origin/master
 		$("#chk").change(function(){       
 			
 			 if($("#chk").is(":checked")){           
