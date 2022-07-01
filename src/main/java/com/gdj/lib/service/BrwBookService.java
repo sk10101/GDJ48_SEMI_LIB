@@ -113,7 +113,7 @@ public class BrwBookService {
 
 
 	public void bookreason(HashMap<String, String> params) {
-		logger.info("도서 예약"+params);
+		logger.info("도서 예약"+params.get("loginId"));
 		dao.bookreason(params);
 		
 	}

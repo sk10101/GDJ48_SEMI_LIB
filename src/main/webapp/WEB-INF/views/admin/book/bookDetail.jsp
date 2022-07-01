@@ -62,6 +62,10 @@
                         <td><input type="text" name="b_date" value="${book.b_date}"></td>
                     </tr>
                     <tr>
+                        <th>예약대기자</th>
+                        <td><input type="text" name="b_date" value="${book.reserve_able}"></td>
+                    </tr>             
+                    <tr>
                         <th>도서상태</th>
                         <td><select name="b_status" id="selectBox">
                             <option value="대출가능" ${book.b_status == '대출가능' ? 'selected="selected" ' : '' } >대출가능</option>

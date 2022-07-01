@@ -15,8 +15,8 @@
 
  	
  	<insert id="bookreason" parameterType="hashmap">
- 	 	INSERT INTO reservation(b_id,mb_id)
- 			VALUES(#{b_id},#{loginId})
+ 	 	INSERT INTO reservation(b_id, mb_id)
+ 			VALUES(#{b_id}, #{loginId})
  	</insert>
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">

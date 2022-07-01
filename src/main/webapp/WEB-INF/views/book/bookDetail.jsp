@@ -72,7 +72,7 @@
                   <td>
                          <c:choose>
                                <c:when test="${detail.b_status eq '대출가능'}">
-                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">대출신청</button>
+                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${detail.b_id}">대출신청</button>
                                </c:when>
                                <c:when test="${detail.b_status eq '대출불가'}">
                                   <input type="hidden">
@@ -86,7 +86,7 @@
                    <td>
                       <c:choose>
                             <c:when test="${detail.b_status eq '대출중'}">
-                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
+                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${detail.b_id}" >예약신청</button>
                             </c:when>
                             <c:when test="${detail.b_status eq '대출불가'}">
                                <input type="hidden">
@@ -158,23 +158,24 @@ function bookreason(brwId) {
       }else {
          
          $.ajax({
-                  type:'get',
-                  url:'bookreason.ajax',
-                  data:{
-                     b_id : bookID,
-                     loginId : loginId
+             type:'get',
+             url:'bookreason.ajax',
+             data:{
+                b_id : bookID,
+                loginId : loginId
 
-                  },
-                  dataType:'JSON',
-                  success:function(data) {
-                     alert(data);
-                  },
-                  error:function(e) {
-                     
-                  }
-               });
+             },
+             dataType:'JSON',
+             success:function(data) {
+           	  alert(data.msg);
+                 location.reload(true);
+             },
+             error:function(e) {
+                
+             }
+          });
          
-      }
+     }
                
    }
 
@@ -187,7 +188,7 @@ $(".brwBtn").on("click",function(){
 });
       
    $(".bookreason").on("click",function(){
-      alert("예약신청이 완료되었습니다.");
+      //alert("예약신청이 완료되었습니다.");
    });
    
  function back() {

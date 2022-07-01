@@ -144,37 +144,36 @@ public class BrwBookController {
 			logger.info("책번호 아이디 : "+ params);
 			
 			if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
-				logger.info("회원 : 도서대출 서비스 컨트롤러");
-				// loginId가 대출한 책이 연체 되었는지 확인
-				int chkReturnOver = service.chkReturnOver(mb_id);
-				if(chkReturnOver > 0) {
-					// 연체 페널티가 부과되었는지 확인
-					int chkPenalty = service.chkPenalty(mb_id);
-					// 페널티 부과된 내용이 없다면
-					if (chkPenalty == 0) {
-						// 연체 페널티 부과
-						service.insertPenalty(mb_id);
-					}
-					
-				ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
-				model.addAttribute("brwlist", brwlist);
-				logger.info("list 갯수: "+brwlist.size());
-				if(brwlist.size() <= 5 ) {
-					service.bookDetailBrw(params);
-					msg = "도서대출 신청완료";
-				} else {
-					msg = "도서권수가 초과되었습니다.";
-				}
-					
-				} 
-			
-				} else { // 회원x 관리자
-				msg = "일반회원만 이용가능한 서비스입니다.";
-				}
-			
-			
-			map.put("msg", msg);
-			return map;
+	            logger.info("회원 : 도서대출 서비스 컨트롤러");
+	            // loginId가 대출한 책이 연체 되었는지 확인
+	            int chkReturnOver = service.chkReturnOver(mb_id);
+	            if(chkReturnOver > 0) {
+	               // 연체 페널티가 부과되었는지 확인
+	               int chkPenalty = service.chkPenalty(mb_id);
+	               // 페널티 부과된 내용이 없다면
+	               if (chkPenalty == 0) {
+	                  // 연체 페널티 부과
+	                  service.insertPenalty(mb_id);
+	               }               
+	            } else {
+	               
+	               ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+	               model.addAttribute("brwlist", brwlist);
+	               logger.info("list 갯수: "+brwlist.size());
+	               if(brwlist.size() <= 5 ) {
+	                  service.bookDetailBrw(params);
+	                  msg = "도서대출 완료";
+	               } else {
+	                  msg = "도서권수가 초과되었습니다.";
+	               }               
+	            
+	            } 
+	         } else { // 회원x 관리자
+	            msg = "일반회원만 이용가능한 서비스입니다.";
+	         }
+	         
+	         map.put("msg", msg);
+	         return map;
 		}
 		
 		
@@ -198,19 +197,19 @@ public class BrwBookController {
 		
 		
 	}
- 
-	  @RequestMapping(value = "/bookreason.ajax")
 	
-
-	  @ResponseBody public String bookreason(HttpSession session, Model model,
-	  
-	  @RequestParam HashMap<String, String> params) {
+	
+	@RequestMapping(value = "/bookreason.ajax")
+	@ResponseBody 
+	public HashMap<String, String> bookreason(HttpSession session, Model model,
+			@RequestParam HashMap<String, String> params) {
+		
+		String msg = "도서예약이 완료되었습니다.";
+		HashMap<String, String> map = new HashMap<String, String>();
 		  
-		String mb_id = (String) session.getAttribute("loginId");
+		String mb_id = (String)session.getAttribute("loginId");
 		logger.info(mb_id);
-		model.addAttribute("mb_id",mb_id);
-	  String page = "redirect:/"; logger.info("받아온 책번호 : "+ params ); 
-	  String msg =""; 
+	    logger.info("받아온 책번호 : "+ params ); 
 	  
 	  long miliseconds = System.currentTimeMillis(); 
 	  Date date = new Date(miliseconds);
@@ -221,42 +220,48 @@ public class BrwBookController {
 		 * if(params.get("mb_id") == null) { params.put("mb_id", mb_id); }
 		 */
 	  
-	  
-	  // 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 
-	  int reserveCheck =service.reserveCheck(mb_id); 
-	  logger.info("예약만료인 책 권수: "+reserveCheck);
-	  if(reserveCheck >= 1) { 
-		  long expiry = service.expiry(mb_id); 
-		  logger.info("예약 만료일 "+expiry);
-		 
-	  // 만료일이지났을 경우
-	  
-	  // expiry db 에서 데이트 타입으로 가져와야 비교 가능 
-	  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
-		  if(expiry < nowtime) { 
-			  service.expiryPenalty(mb_id);
-			  logger.info("1");
-			  service.reserveCancel(mb_id);
-			  service.addPenalty(mb_id);
-			  msg = "이용정지 3일입니다";
-			  logger.info(msg);
-			  model.addAttribute("msg", msg);
-	  }else { 		
-		  msg = "예약신청이 완료되었습니다."; 
-		  model.addAttribute("msg", msg);
-		  service.bookreason(params);
+	  if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
+		  
+		// 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 
+		  int reserveCheck =service.reserveCheck(mb_id); 
+		  logger.info("예약만료인 책 권수: "+reserveCheck);
+		  if(reserveCheck >= 1) { 
+			  long expiry = service.expiry(mb_id); 
+			  logger.info("예약 만료일 "+expiry);
+			 
+		  // 만료일이지났을 경우
+		  
+		  // expiry db 에서 데이트 타입으로 가져와야 비교 가능 
+		  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
+			  if(expiry < nowtime) { 
+				  service.expiryPenalty(mb_id);
+				  logger.info("1");
+				  service.reserveCancel(mb_id);
+				  service.addPenalty(mb_id);
+				  msg = "이용정지 3일입니다";
+				  logger.info(msg);
+				  map.put("msg", msg);
+			  }else { 		
+				  msg = "예약신청이 완료되었습니다."; 
+				  map.put("msg", msg);
+				  service.bookreason(params);
+			  }
+		  	}  else{  	 
+			  service.bookreason(params);
+			  msg = "예약신청이 완료되었습니다."; 
+			  map.put("msg", msg);
+			 }
+		  
+	  } else { // 회원x 관리자
+	      msg = "일반회원만 이용가능한 서비스입니다.";
+	   }
+	   
+	   map.put("msg", msg);
+	   return map;
+  
 	  }
-	  	}  else{  	 
-		  service.bookreason(params);
-		  msg = "예약신청이 완료되었습니다."; 
-		  model.addAttribute("msg", msg);
-		 }
-	  
-	  return msg;
-	  
-	  
-	  
-	  }
+ 
+  
 
 		//이전대출 내역
 		@RequestMapping(value = "/brwList")
