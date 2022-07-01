@@ -59,7 +59,7 @@
 			 		<td colspan="4" id="paging">
 				 		<!-- plugin 사용법 -->
 				 		<div class="container">
-				 			<nav arial-label="page navigation">
+				 			<nav arial-label="page navigation" style="text-align:center">
 				 				<ul class="pagination" id="pagination"></ul>
 				 			</nav>
 				 		</div>
