@@ -8,6 +8,7 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="resources/css/adminClaim.css">
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
