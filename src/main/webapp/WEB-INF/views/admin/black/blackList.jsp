@@ -32,7 +32,6 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-	<h3>블랙리스트 기본</h3>
 	    <table>
 	        <thead>
 	            <tr>
