@@ -5,11 +5,11 @@
 	
 
 	<select id="memberUpdateDetailMy" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
-		Select mb_id, mb_pw, name, phone, email , mb_status FROM member WHERE mb_id = #{mb_id}
+		Select mb_id, mb_pw, name, phone, email FROM member WHERE mb_id = #{mb_id}
 	</select>
 	
 	<select id="memberUpdateListMy" resultType="com.gdj.lib.dto.MemberDTO" parameterType="String">
-		SELECT mb_id, mb_pw, name, phone, email FROM member where mb_id = #{mb_id}
+		SELECT mb_id, mb_pw, name, phone, email , mb_status FROM member where mb_id = #{mb_id}
 		
 	</select>
 	
@@ -32,13 +32,22 @@
 		update member set mb_status = null , leave_date = null where mb_id = #{param1}
 	</update>
 	
-	<update id="MySecession" parameterType="String">
+	<update id="mySecession" parameterType="String">
 		update member set mb_status = '탈퇴신청', leave_date = now() where mb_id = #{param1}
 	</update>
 	
-	<update id="MySecessionTwo" parameterType="String" >
-		update member set mb_status = '탈퇴완료' where mb_status = '탈퇴신청'
-			and leave_date >= date_add(leave_date, interval 7 day)
+	<select id="mb_status"  resultType="String">
+		SELECT mb_status from member where mb_id = #{param1}
+	</select>
+	
+	<select id="leave_date" resultType="long">
+		SELECT date_format(leave_date,'%Y%m%d') from member where mb_id = #{param1}
+	</select>
+	
+	
+	<update id="mySecessionCheck">
+		update member set mb_status = '탈퇴완료' where mb_id = #{param1}
+			and now() >= date_add(leave_date, interval 7 day)
 	</update>
 	
 	<select id="notSecession" parameterType="String" resultType="Integer" >
@@ -147,6 +156,11 @@
 		INSERT INTO blacklist (mb_id,admin_start, black_reason) 
 			VALUES(#{mb_id},#{admin_start},#{black_reason})
 	</insert>
+	
+	<select id="blackCon" resultType="Integer">
+		SELECT COUNT(black_id) FROM blacklist b 
+			WHERE mb_id = #{param1} and black_cancel is null
+	</select >
 
 
 

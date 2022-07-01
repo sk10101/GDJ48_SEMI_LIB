@@ -58,8 +58,8 @@
 				<div class="searchOption">
 			        <select class="selectBtn" id="pagePerNum">
 						<option value="5">5</option>
-						<option value="10" selected="selected">10</option>
-						<option value="15">15</option>
+						<option value="10" >10</option>
+						<option value="15" selected="selected">15</option>
 						<option value="20">20</option>
 					</select>
 			       	<select class="selectBtn" id="option" name="option">
@@ -73,7 +73,6 @@
         </div>
 	</div>
 </body>       
-</body>
 <script>
 var msg = "${msg}"
 if (msg != "") {
@@ -154,9 +153,9 @@ $('#pagePerNum').on('change',function(){
 			console.log(item.brw_id);
 			content += '	<tr>';
 			content += '		<td>'+item.brw_id+'</td>';
-			content += '		<td><a href="bookDetail.do?b_id='+item.b_id+'">'+item.b_title+'</a></td>';
+			content += '		<td class="brwBookTitle"><a href="bookDetail.do?b_id='+item.b_id+'">'+item.b_title+'</a></td>';
 			content += '		<td>'+item.brw_date+'</td>';
-			content += '		<td>'+item.return_date+'</td>';
+			content += '		<td>'+item.return_finish+'</td>';
 			content += '		<td>'+item.brw_status+'</td>';
 			content += '	</tr>';
 		});

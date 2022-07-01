@@ -6,9 +6,9 @@
 <title>회원정보상세보기(회원)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/myInfo.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-	  	
 </style>
 </head>
 <body>
@@ -26,62 +26,62 @@
 	        <br/>
 	        <a class="tabSelect" href="myUpdateDetail.go">회원정보</a>
 	    </div>
-	  <h3>${sessionScope.loginId }님의 상세 정보</h3>
-	  <form action="myUpdate" method="post">
-	 <table>
-	 		
-            <tr>
-                <th>ID</th>
-                <td><input type="hidden" name="mb_id" value="${sessionScope.loginId }">${sessionScope.loginId }</td>
-            </tr>
-            <tr>
-                <th>PW</th>
-                <td>
-                    <textarea name="mb_pw" value="${myUpdateDetail.mb_pw}"></textarea>
-                      ※ 4자리 이상,비밀번호 수정시에만 작성
-                </td>
-            </tr>
-            <tr>
-                <th>이름</th>
-                <td><textarea name="name" value="${myUpdateDetail.name}">${myUpdateDetail.name}</textarea></td>
-            </tr>
-            <tr>
-                <th>전화번호</th>
-                <td>
-                    <textarea name="phone" value="${myUpdateDetail.phone}">${myUpdateDetail.phone}</textarea>
-                    ※ ‘-’ 를 제외하고 입력
-                </td>
-            </tr>
-            <tr>
-                <th>이메일</th>
-                <td>${myUpdateDetail.email }</td>
-            </tr>
-            <tr>
-                <th>회원탈퇴신청</th>
-                <td>
-                <div>
-                <input type="checkbox" id="chk"  name="secession"  <c:if test = "${myUpdateDetail.mb_status eq '탈퇴신청' || myUpdateDetail.mb_status eq '탈퇴완료'}"> checked </c:if> value="true" />
-                <input type="hidden" id="chk" name="secession" value="false" />
-                    ※ 체크하신 후 수정버튼을 누르시면 탈퇴신청이 접수됩니다.<br/>
-                    (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)
-                 </div>                
-                </td>
-            </tr>
-        </table>
-
-        <br/>
-
-        <table>
-            <tr>
-                <th>PW 확인</th>
-                <td><textarea name="pw_chk" value=""></textarea>
-                <input type="hidden" name="Oripw_chk" value="${myUpdateDetail.mb_pw}" /></td>
-            </tr>
-        </table>
-
-        <br/>
-        <input type="submit" value="수정" >
-        </form>
+	    <div class="info-area">
+		  <form action="myUpdate" method="post">
+		 	<table class="bbs">
+	            <tr>
+	                <th class="memberDetailTh">ID</th>
+	                <td><input type="hidden" name="mb_id" id="mb_id" value="${sessionScope.loginId }">${sessionScope.loginId }</td>
+	            </tr>
+	            <tr>
+	                <th>PW</th>
+	                <td>
+	                    <input type="text" name="mb_pw" value="">
+	                      ※ 4자리 이상,비밀번호 수정시에만 작성
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>이름</th>
+	                <td><input type="text" name="name" value="${myUpdateDetail.name}"></td>
+	            </tr>
+	            <tr>
+	                <th>전화번호</th>
+	                <td>
+	                    <input type="text" name="phone" value="${myUpdateDetail.phone}">
+	                    ※ ‘-’ 를 제외하고 입력
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>이메일</th>
+	                <td>${myUpdateDetail.email }</td>
+	            </tr>
+	            <tr>
+	                <th>회원탈퇴신청</th>
+	                <td>
+	                <div>
+	                <input type="checkbox" id="chk"  name="secession"  <c:if test = "${myUpdateDetail.mb_status eq '탈퇴신청' || myUpdateDetail.mb_status eq '탈퇴완료'}"> checked </c:if> value="true" />
+	                <input type="hidden" id="chk" name="secession" value="false" />
+	                    ※ 체크하신 후 수정버튼을 누르시면 탈퇴신청이 접수됩니다.<br/>
+	                    (신청일 포함 7일 동안 체크해제를 하지 않으셨다면 탈퇴처리가 완료됩니다.)
+	                 </div>                
+	                </td>
+	            </tr>
+	        </table>
+	
+	        <br/>
+	
+	        <table class = bbw>
+	            <tr>
+	                <th>기존 PW 확인</th>
+	                <td><input type="password" name="pw_chk" value="">
+	                <input type="hidden" name="Oripw_chk" value="${myUpdateDetail.mb_pw}" /></td>
+	            </tr>
+	        </table>
+		        <div class="memberDetailBtn-area">
+		        <input class="memberDetailUpdateBtn" type="submit" value="수정" >
+		        </div>
+	        </form>
+	     </div>
      </div>
 </body>
 <script>
@@ -93,11 +93,10 @@
 	
 	$(document).ready(function(){    
 		
-	
 	if(!$("#chk").val("true")) {
 		$("#chk").prop("checked" , false);
 	}
-		
+
 		$("#chk").change(function(){       
 			
 			 if($("#chk").is(":checked")){           

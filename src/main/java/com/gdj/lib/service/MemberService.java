@@ -485,6 +485,11 @@ public class MemberService {
 		
 	}
 
+	public int blackCon(String s_id) {
+		
+		return dao.blackCon(s_id);
+	}
+
 	
 	
 	
