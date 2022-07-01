@@ -3,13 +3,11 @@ package com.gdj.lib.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdj.lib.dto.BrwBookDTO;
-import com.gdj.lib.dto.KioskDTO;
-import com.gdj.lib.dto.PhotoDTO;
 import com.gdj.lib.service.BrwBookService;
 
 @Controller
@@ -220,7 +216,7 @@ public class BrwBookController {
 	  logger.info("이용정지 리스트에 있나?"+ penaltyCheck +"건");
 	  
 	  if(penaltyCheck >=1 ) {
-	  // 이용정지 내역에 아이디 있으면 ㄱㄱ
+	  // 이용정지 내역에 아이디 있으면 
 		  
 		  long penaltyDate = service.penaltyDate(mb_id);
 		  logger.info("이용정지 끝나는 날 : "+penaltyDate+"오늘 날짜 :"+nowtime);
