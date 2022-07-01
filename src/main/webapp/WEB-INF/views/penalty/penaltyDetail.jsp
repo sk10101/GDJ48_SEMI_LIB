@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <title>이용정지내역상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
   
@@ -15,7 +17,20 @@
 		<jsp:include page="../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-	<h3>이용정지내역 회원상세보기</h3>
+	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="penaltyList.go">이용정지내역</a>
+	    </div>
 	<form action="penaltyUpdate.do" method="get">
 	<input type ="hidden" id ="penalty_id" name = "penalty_id" value = "${param.penalty_id}"/>
     <table class="bbs">
@@ -64,6 +79,7 @@
         </tr>
     </table>
     </form>
+    </div>
 </body>
 <script>
 
