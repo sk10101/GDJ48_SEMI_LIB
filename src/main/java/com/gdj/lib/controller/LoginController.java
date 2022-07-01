@@ -1,5 +1,8 @@
 package com.gdj.lib.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -115,6 +118,44 @@ public class LoginController {
 			String loginId =service.login(id,pw); 
 			String mb_class = service.getMbClass(id,pw);
 			logger.info("로그인한 아이디 : "+loginId+" > "+mb_class);
+			
+			
+			// 회원탈퇴 신청을 탈퇴로 만드는 기능
+			String mb_status = String.valueOf(service.mb_status(id));
+			
+			logger.info(loginId+" 의 회원 상태 : "+mb_status);
+			
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
+			
+			String format_time1 = format1.format(System.currentTimeMillis());
+			
+			logger.info("현재 시간 :"+format_time1);
+			
+			if(mb_status.equals("탈퇴신청")) {
+				
+				long leave_date = Long.valueOf(service.leave_date(loginId));
+				logger.info("탈퇴신청 한 날짜 : "+leave_date);
+				
+				long seven = 7;
+				
+				long leave_dateTwo = leave_date + seven;
+				
+				logger.info(" + 7 은 :"+leave_dateTwo);
+				
+				
+				if(leave_dateTwo < Integer.valueOf(format_time1)) {
+					service.mySecessionCheck(id);
+				}
+				
+				
+			}
+			
+			if(mb_status.equals("탈퇴완료")) {
+				model.addAttribute("msg", "탈퇴완료가 된 아이디 입니다.");
+				return "main";
+			}
+			
+			
 			
 			
 			

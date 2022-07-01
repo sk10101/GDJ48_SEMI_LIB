@@ -93,11 +93,10 @@
 	
 	$(document).ready(function(){    
 		
-	
 	if(!$("#chk").val("true")) {
 		$("#chk").prop("checked" , false);
 	}
-		
+
 		$("#chk").change(function(){       
 			
 			 if($("#chk").is(":checked")){           

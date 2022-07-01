@@ -156,7 +156,7 @@ public class MyController {
 		} else {
 			
 			if(secession.equals("true")) {
-				service.MySecession(mb_id);
+				service.mySecession(mb_id);
 			} 
 			
 			if (secession.equals("false")) {
@@ -179,12 +179,10 @@ public class MyController {
 				page = "myPage/info/memberDetail";
 				
 			}
-			
-			
+				
 		}
 		
-		
-		
+			
 		return page;
 	}
 	
