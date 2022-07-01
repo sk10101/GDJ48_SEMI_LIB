@@ -34,7 +34,7 @@
 		        </tr>
 		        <tr>
 		            <th>내용</th>
-		            <td style="vertical-align:top">${notice.notice_content}</td>
+		            <td style="vertical-align:top; height:150px;">${notice.notice_content}</td>
 		        </tr>
 		        <c:if test="${noticeList.size() >0 }">
 		        <tr>

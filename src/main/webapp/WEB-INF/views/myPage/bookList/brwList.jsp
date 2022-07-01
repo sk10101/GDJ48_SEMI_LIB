@@ -73,7 +73,6 @@
         </div>
 	</div>
 </body>       
-</body>
 <script>
 var msg = "${msg}"
 if (msg != "") {
@@ -154,7 +153,7 @@ $('#pagePerNum').on('change',function(){
 			console.log(item.brw_id);
 			content += '	<tr>';
 			content += '		<td>'+item.brw_id+'</td>';
-			content += '		<td><a href="bookDetail.do?b_id='+item.b_id+'">'+item.b_title+'</a></td>';
+			content += '		<td class="brwBookTitle"><a href="bookDetail.do?b_id='+item.b_id+'">'+item.b_title+'</a></td>';
 			content += '		<td>'+item.brw_date+'</td>';
 			content += '		<td>'+item.return_date+'</td>';
 			content += '		<td>'+item.brw_status+'</td>';
