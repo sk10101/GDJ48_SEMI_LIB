@@ -8,6 +8,10 @@
 		SELECT * FROM book WHERE b_id = #{b_id}
 	</select>
 	
+	<!-- <select id="aaa" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+		SELECT mb_id FROM reservation WHERE b_id = #{b_id} and reason is null
+	</select> -->
+	
 	<select id="photoList" parameterType="String" resultType="com.gdj.lib.dto.PhotoDTO">
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
@@ -45,7 +49,7 @@
 				brw_id
 				, b.b_title
 				, brw_date
-				, return_date
+				, return_finish
 				, brw_status
 				, renew
 				, b.b_id
@@ -54,9 +58,9 @@
 			inner join book b on
 				b.b_id  = br.b_id
 			where
-				br.brw_status = '반납'
+				br.brw_status = '반납' and return_finish is not null
 				and br.mb_id = #{param3}
-				ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}
+				ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}				
 	</select>
 	
 	<select id="allCount" resultType="Integer">
@@ -103,15 +107,48 @@
  			VALUES(#{b_id},#{loginId})
  	</insert>
  	
+ 	<select id="bookCheck" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+		 select
+			reserve_id 
+			,mb_id 
+			,b2.b_id 
+			,reason 
+		from 
+			reservation r 
+		inner join book b2 on 
+			r.b_id = b2.b_id
+		where
+			b2.b_id = #{b_id}
+		and reason is null 
+ 	</select>
+ 	
+ 	<select id="idCheck" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
+		 select
+			reserve_id 
+			,mb_id 
+			,b2.b_id 
+			,reason 
+		from 
+			reservation r 
+		inner join book b2 on 
+			r.b_id = b2.b_id
+		where
+			b2.b_id = #{b_id}
+		and mb_id = #{loginId}
+		and reason is null 
+ 	</select>
+ 	
  	<select id="brwlist" parameterType="hashmap" resultType="com.gdj.lib.dto.BrwBookDTO">
 		select 
 			b_id
+			, reason
 			, m.mb_id
 		from 
 			reservation r3 
 		inner join member m on
 			 r3.mb_id = m.mb_id
-			and r3.mb_id = #{loginId}
+		where reason is null
+		and r3.mb_id = #{loginId}
 	</select>
  	
  	<insert id="reserveBookBrw" parameterType="hashmap">
@@ -165,7 +202,7 @@
 		]]> 
 	</select>
 	
-	<select id="chkPenalty" parameterType="String" resultType="com.gdj.lib.dto.BrwBookDTO">
+	<select id="chkPenalty" parameterType="String">
 		SELECT count(penalty_id) FROM penalty p WHERE mb_id = #{loginId} AND penalty_end is null
 	</select>
 	

@@ -91,6 +91,7 @@ public class BrwBookController {
 		
 		logger.info("도서 상세보기" + b_id); 
 		service.detail(model, b_id);
+		
 				
 		return "book/bookDetail";
 				
@@ -129,6 +130,8 @@ public class BrwBookController {
 	public HashMap<String, String> bookDetailBrw(HttpSession session, Model model, 
 			@RequestParam HashMap<String, String> params) {
 			
+			
+			
 			String msg = "";
 			HashMap<String, String> map = new HashMap<String, String>();
 		
@@ -143,8 +146,10 @@ public class BrwBookController {
 			logger.info(mb_id);
 			logger.info("책번호 아이디 : "+ params);
 			
+			
 			if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
 	            logger.info("회원 : 도서대출 서비스 컨트롤러");
+	            
 	            // loginId가 대출한 책이 연체 되었는지 확인
 	            int chkReturnOver = service.chkReturnOver(mb_id);
 	            if(chkReturnOver > 0) {
@@ -154,14 +159,35 @@ public class BrwBookController {
 	               if (chkPenalty == 0) {
 	                  // 연체 페널티 부과
 	                  service.insertPenalty(mb_id);
-	                  msg = "이용정지 대상입니다.";
+	                  msg = "이용정지 입니다.";
 	               }               
 	            } else {
+	            	
+	            	//예약한 아이디가 있다면 체크
+//	            	String bookCheck = service.bookCheck(params);
+//	            	
+//	            	if (bookCheck > 1) {
+//		            	logger.info("예약가능 아이디체크 : " + params);
+//	            		service.bookCheck(params);
+//	            		service.bookDetailBrw(params);
+//	            	} else {
+//						msg = "예약중인 도서 입니다.";
+//					}
+	            	
+	            	ArrayList<BrwBookDTO> bookCheck = service.bookCheck(params);
+		            model.addAttribute("bookCheck", bookCheck);
+		            logger.info("예약된 책 권수: "+bookCheck.size());
+		            if(bookCheck.size() > 0) {
+		            	service.idCheck(params);
+		            	logger.info("예약된 책 번호와 아이디 가 일치시 : " + params);
+		            } else {
+						msg = "예약중인 도서입니다.";
+					}
 	               
 	               ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
 	               model.addAttribute("brwlist", brwlist);
 	               logger.info("list 갯수: "+brwlist.size());
-	               if(brwlist.size() <= 5 ) {
+	               if(brwlist.size() < 5 ) {
 	                  service.bookDetailBrw(params);
 	                  msg = "도서대출 완료";
 	               } else {
@@ -172,6 +198,9 @@ public class BrwBookController {
 	         } else { // 회원x 관리자
 	            msg = "일반회원만 이용가능한 서비스입니다.";
 	         }
+			
+			
+			
 	         
 	         map.put("msg", msg);
 	         return map;
@@ -190,6 +219,12 @@ public class BrwBookController {
 	@ResponseBody
 	public String reserveBookBrw(HttpSession session, Model model, 
 			@RequestParam HashMap<String, String> params) {
+		
+		
+		
+		
+		
+		
 		
 		logger.info("받아온 예약번호, 책번호 : "+ params );
 		service.reserveBookBrw(params);

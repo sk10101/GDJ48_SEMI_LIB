@@ -69,10 +69,15 @@
                 <tr>
                   <td id="brw_b_id">${detail.b_id}</td>
                       <td id="b_status">${detail.b_status}</td>
+                      <input type="button" id="test" value="${aaa.mb_id}"/>
                   <td>
                          <c:choose>
                                <c:when test="${detail.b_status eq '대출가능'}">
-                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${dto.b_id}">대출신청</button>
+                         			<%-- <c:if test="${detail.reserve_able eq false and aaa.mb_id eq sessionScope.loginId}"> --%>
+                         				<button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${detail.b_id}">대출신청</button>
+                         			<%-- </c:if> --%>
+                         			<%-- <c:if test="${detail.reserve_able eq false and aaa.mb_id ne sessionScope.loginId}">
+                         			</c:if> --%>
                                </c:when>
                                <c:when test="${detail.b_status eq '대출불가'}">
                                   <input type="hidden">
@@ -86,7 +91,7 @@
                    <td>
                       <c:choose>
                             <c:when test="${detail.b_status eq '대출중'}">
-                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
+                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${detail.b_id}" >예약신청</button>
                             </c:when>
                             <c:when test="${detail.b_status eq '대출불가'}">
                                <input type="hidden">
@@ -106,6 +111,8 @@
 </html>
 </body>
 <script>
+
+console.log(aaa);
 var msg = "${msg}"
 if (msg != "") {
    alert(msg);

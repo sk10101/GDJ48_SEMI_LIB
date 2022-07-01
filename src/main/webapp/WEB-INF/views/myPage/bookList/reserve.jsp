@@ -93,7 +93,7 @@
                                     			<c:when test="${brwdto.b_status eq '대출중'}">
                                     			<input type="hidden">
                                     			</c:when>
-                                    			<c:when test="${brwdto.b_status eq '대출가능'}">
+                                    			<c:when test="${brwdto.b_status eq '대출불가'}">
                                     				
 													<button class="brwBtn" onclick="bookbrw(this)"
 															brwValue="${brwdto.reserve_id}"
@@ -102,7 +102,7 @@
 													</button>
 													
 												</c:when>
-												<c:when test="${brwdto.b_status eq '대출불가'}">
+												<c:when test="${brwdto.b_status eq '대출가능'}">
 													<input type="hidden">
 												</c:when>
 												

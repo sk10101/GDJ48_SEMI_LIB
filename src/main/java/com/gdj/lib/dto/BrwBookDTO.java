@@ -141,7 +141,14 @@ public class BrwBookDTO {
 		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 		private Date reserve_date;
 		private String reason;
+		private boolean reserve_able;
 
+		public boolean isReserve_able() {
+			return reserve_able;
+		}
+		public void setReserve_able(boolean reserve_able) {
+			this.reserve_able = reserve_able;
+		}
 		public int getReserve_id() {
 			return reserve_id;
 		}
