@@ -75,7 +75,7 @@
 		    </form>
 		
 			    <div class="blackDetailBtn-area"> 
-			        <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
+			        <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
 			        <input type="button"  onclick="update();return false;" value="수정"/>
 			    </div>
 		    </div>

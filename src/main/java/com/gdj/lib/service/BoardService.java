@@ -60,9 +60,9 @@ public class BoardService {
 		map.put("cnt", cnt);
 		map.put("mb_id", mb_id);
 		map.put("mb_class", mb_class);
-		map.put("word", word);
 		
 		if (word != null && word != "") {
+			map.put("word", word);
 			map.put("option", option);
 		}
 		
