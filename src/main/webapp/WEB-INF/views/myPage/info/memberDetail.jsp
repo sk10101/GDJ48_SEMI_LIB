@@ -43,7 +43,7 @@
             </tr>
             <tr>
                 <th>이메일</th>
-                <td>${myUpdateDetail.email }</td>
+                <td>${myUpdateDetail.email}</td>
             </tr>
             <tr>
                 <th>회원탈퇴신청</th>
@@ -81,11 +81,10 @@
 	
 	$(document).ready(function(){    
 		
-	
 	if(!$("#chk").val("true")) {
 		$("#chk").prop("checked" , false);
-	}
-		
+	} 
+	
 		$("#chk").change(function(){       
 			
 			 if($("#chk").is(":checked")){           
