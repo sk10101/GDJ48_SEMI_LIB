@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>회원정보상세보기(회원)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 	  	
@@ -15,6 +16,16 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+	    <div class="myPageTab" id="myPage_menu">
+	        <h3>마이페이지</h3>
+	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="/brwHistory">도서내역</a><br/>
+	        <br/>
+	        <a href="claimList">건의사항</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="myUpdateDetail.go">회원정보</a>
+	    </div>
 	  <h3>${sessionScope.loginId }님의 상세 정보</h3>
 	  <form action="myUpdate" method="post">
 	 <table>
@@ -71,6 +82,7 @@
         <br/>
         <input type="submit" value="수정" >
         </form>
+     </div>
 </body>
 <script>
 	var msg = "${msg}";
