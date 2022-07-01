@@ -73,9 +73,9 @@
 	var overChkId = false; // 중복체크 여부
 
 	function overaly(){
-		var id = $("#id").val();
+		var id = $("#joinId").val();
 		var idChk = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g; 
-	      if(idChk.test($("#id").val())){
+	      if(idChk.test($("#joinId").val())){
 	          alert("아이디는 한글이 불가능합니다.");
 	          return false; 
 	       }
