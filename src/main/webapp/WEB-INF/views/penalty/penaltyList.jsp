@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <title>이용정지내역</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
@@ -51,24 +50,24 @@
 			</tbody>
 	 		</table>
 			<div class="container">
-                 <nav aria-label="Page navigation" style="text-align:center">
-                       <ul class="pagination" id="pagination"></ul>               
-                 </nav>
+                  <nav aria-label="Page navigation" style="text-align:center">
+                        <ul class="pagination" id="pagination"></ul>               
+                  </nav>
 	        </div>
-				<div class="noticeSearchOption">
-                   	   <select class="selectBtn" id="pagePerNum">
-							<option value="5">5</option>
-							<option value="10" selected="selected">10</option>
-							<option value="15">15</option>
-							<option value="20">20</option>
-						</select>
-				       	<select class="selectBtn" id="option" name="option">
-				       		 <option value="회원ID">회원ID</option>
-           					 <option value="제한내역">제한내역</option>
-				       	</select>
-			        	<input class="noticeSearchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
-   		 		</div>
+			<div class="noticeSearchOption">
+				<select class="selectBtn" id="pagePerNum">
+					<option value="5">5</option>
+					<option value="10" selected="selected">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+				</select>
+		     	<select class="selectBtn" id="option" name="option">
+		     		 <option value="회원ID">회원ID</option>
+   					 <option value="제한내역">제한내역</option>
+		     	</select>
+		     	<input class="noticeSearchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
+		     	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+	 		</div>
    		 	</div>
    		 </div>
    	</div>
