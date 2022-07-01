@@ -1,0 +1,98 @@
+@charset "UTF-8";
+.upBtn-area{
+	width:100%;
+	text-align:right;
+	margin-bottom:10px;
+}
+.btn_bookAdd{
+	background:#86b049;
+	padding:2px 5px;
+	color:#fff;
+	font-size:16px;
+	font-weight:700;
+	border-radius:5px;
+}
+.btn_bookAdd:hover{
+	cursor:pointer;
+	background:#476930;
+}
+.book_table{
+	width:95%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.book_table th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
+}
+.book_table .bookIdTh{
+	width:40px;
+}
+.book_table .bookDateTh{
+	width:116px;
+}
+.book_table td a{
+	text-decoration-line:none;
+	color:#333;
+}
+.book_table td a:hover{
+	color:blue;
+}
+
+
+
+.bookDetail-area{
+	width:100%;
+}
+.book{
+	width:95%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.book th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
+}
+.book th{
+	width:15%;
+}
+.book td input{
+	width:100%;
+	border:1px solid #333;
+	border-radius:5px;
+	padding:5px;
+	
+}
+.book .bookStatus{
+	text-align:left;
+}
+.book .bookStatus .bookStatusSelect{
+	border:2px solid #333;
+	border-radius:5px;
+}
+.downBtn-area{
+	width:100%;
+	text-align:center;
+	padding:15px;
+}
+.downBtn-area input{
+	background:#86b049;
+	color:#fff;
+	padding:2px 5px;
+	font-size:16px;
+	font-weight:700;
+	border-radius:5px;
+}
+.downBtn-area input:hover{
+	cursor:pointer;
+	background:#476930;
+}
+
+
+.content{
+	width:100%;
+}

@@ -28,7 +28,7 @@
         </form>
         
         <div class="content"> 
-           <div class="content-pagination">
+           <div class="content-pagination" style="text-align:center">
              <select id="pagePerNum"> <!-- pagePerNum 을 ajax로 controller로 보내서 이에 따라 게시물 수 바꿔줄 것임 -->
                 <option value="5">5</option>
                 <option value="10" selected="selected">10</option>

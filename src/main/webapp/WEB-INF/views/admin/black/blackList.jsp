@@ -32,7 +32,6 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-	<h3>블랙리스트 기본</h3>
 	    <table>
 	        <thead>
 	            <tr>
@@ -52,7 +51,7 @@
 		 		<td colspan="5" id="paging">
 		 			<!-- plugin 사용법 -->
 		 			<div class="container">
-		 				<nav aria-label="Page navigation">
+		 				<nav aria-label="Page navigation" style="text-align:center">
 		 					<ul class="pagination" id="pagination">
 		 					</ul>
 		 				</nav>

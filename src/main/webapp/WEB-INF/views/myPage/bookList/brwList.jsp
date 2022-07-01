@@ -9,48 +9,27 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
-
-
-
 <style>
 	
 </style>
 </head>
 <body>
-	
-	<div class="container">
-            <!-- TOP -->
-            <div class="top">
-                    <nav>
-                        <ul>
-							<li>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.<a href="/member/logout.do">로그아웃</a></li>
-                            <li>로그아웃</li>
-                            <li>마이페이지</li>
-                        </ul>
-                    </nav> 
-            </div>
-            <!--MIDDLE-->
-            <div class="middle">
-                
-                <div class="middle-left">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>마이페이지</th>
-                                </tr>
-                                <tr>
-                                    <th><a href="/brwHistory">도서내역</a></th>
-                                </tr>
-                                <tr>
-                                    <th><a href="/claimList">건의사항</a></th>
-                                </tr>
-                                <tr>
-                                    <th>회원정보</th>
-                                </tr>
-                            </thead>
-                        </table>
-                </div>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="body">
+	    <div class="myPageTab" id="myPage_menu">
+	        <h3>마이페이지</h3>
+	        <hr style="border:1px solid #333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a class="tabSelect" href="/brwHistory">도서내역</a><br/>
+	        <br/>
+	        <a href="claimList">건의사항</a><br/>
+	        <br/>
+	        <a href="myUpdateDetail.go">회원정보</a>
+	    </div>
                 <div class="middle-right">
                     <div class="middle-right-1">
                             <table>
@@ -65,8 +44,6 @@
                         
                     </div>
                  </div>    
-            </div>
-        </div>
 <table class="">
 
     	<thead>
@@ -84,7 +61,7 @@
 	    	<tr>
 				<td colspan="5" id="paging">
 					<div class="container">
-						<nav aria-label="Page navigation">
+						<nav aria-label="Page navigation" style="text-align:center">
 								<ul class="pagination" id="pagination" >
 								</ul>					
 						</nav>
@@ -108,6 +85,7 @@
 				</td>
 			</tr>
         </table>
+        </div>
 </body>
 
       	

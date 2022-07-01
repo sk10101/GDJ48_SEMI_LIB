@@ -9,6 +9,7 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/adminBook.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style></style>
 </head>
@@ -32,16 +33,18 @@
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div> 
 	    <div class="section"> 
+	    	<div class="upBtn-area">
 	            <button class="btn_bookAdd" onclick="location.href='bookAdd.go' ">도서추가</button>
+	        </div>
 	            <table class="book_table">
 	                <thead>
 	                	<tr>
-	                		<td>ID</td>
-	                		<td>제목</td>
-	                		<td>저자</td>
-	                		<td>출판사</td>
-	                		<td>도서상태</td>
-	                		<td>등록일</td>
+	                		<th class="bookIdTh">ID</th>
+	                		<th>제목</th>
+	                		<th>저자</th>
+	                		<th>출판사</th>
+	                		<th>도서상태</th>
+	                		<th class="bookDateTh">등록일</th>
 	                	</tr>
 	                </thead>
 	                <tbody id="bookList">
@@ -49,12 +52,12 @@
 	                </tbody>
 	            </table>
 				<div class="container">
-					<nav arial-label="page navigation" style="text-align:center">
+					<nav aria-label="page navigation" style="text-align:center">
 						<ul class="pagination" id="pagination"></ul>
 					</nav>
 				</div>
 				<div class="searchOption">
-					<select class="selectBtn" sid="pagePerNum">
+					<select class="selectBtn" id="pagePerNum">
 						<option value="5">5</option>
 						<option value="10" selected="selected">10</option>
 						<option value="15">15</option>
@@ -144,7 +147,7 @@ function drawList(bookList){
 		console.log(item);
 		content += '<tr>';
 		content += '<td>'+item.b_id+'</td>';
-		content += ' <td><a href="AdbookDetail.do?b_id= '+item.b_id+' "> '+item.b_title+'</a></td>';
+		content += '<td><a href="AdbookDetail.do?b_id= '+item.b_id+' "> '+item.b_title+'</a></td>';
 		content += '<td>'+item.writer+'</td>';
 		content += '<td>'+item.publisher+'</td>';
 		content += '<td>'+item.b_status+'</td>';

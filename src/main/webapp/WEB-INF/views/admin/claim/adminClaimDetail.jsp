@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>관리자 페이지 / 건의사항 / 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
    
@@ -15,19 +16,20 @@
 		<jsp:include page="../../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-    <div id="myPage_menu">
-        <h3>관리자 페이지</h3>
-        <hr/>
-        <a href="memberList.go">회원관리</a><br/>
-        <br/>
-        <a href="bookList.go">도서관리</a><br/>
-        <br/>
-        <a href="adminClaimList">건의사항</a><br/>
-        <br/>
-        <a href="blackList.go">블랙리스트</a><br/>
-        <br/>
-        <a href="penaltyList.go">이용정지내역</a>
-    </div>
+   	<div class="body">
+		<div class="myPageTab" id="myPage_menu">
+	        <h3>관리자 페이지</h3>
+	        <hr style="height: 1px !important; background:#333; display: block !important; width: 140px !important; margin:10px 5px 20px 5px;"/>
+	        <a href="memberList.go">회원관리</a><br/>
+	        <br/>
+	        <a href="bookList.go">도서관리</a><br/>
+	        <br/>
+	        <a class="tabSelect" href="adminClaimList">건의사항</a><br/>
+	        <br/>
+	        <a href="blackList.go">블랙리스트</a><br/>
+	        <br/>
+	        <a href="penaltyList.go">이용정지내역</a>
+	    </div>
     <div id="main_content">
     	<form action="adminClaimUpdate.do" method="post" enctype="multipart/form-data">
         <table id="claim_detail">
@@ -121,6 +123,7 @@
 				</tr>
 	        </table>
 		</form>
+    </div>
     </div>
 </body>
 <script>

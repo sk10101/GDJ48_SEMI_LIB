@@ -35,20 +35,54 @@
     flex-direction:column;
     width:850px;
 }
-
-
-/* 옵션별 검색 박스 */
-.searchOption{
+.penaltyTable-area{
+	width:100%;
+}
+.penalty_table{
+	width:90%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.penalty_table th,td{
+	border:1px solid #333;
+	padding:5px;
+	height:36px;
+}
+.penalty_table .col1, col6{
+	width:8%;
+}
+.penalty_table .col4{
+	width:12%;
+}
+.penalty_table .col5{
+	width:20%;
+}
+.penalty_table .penaltyTitle{
+	text-align:left;
+}
+.penalty_table .penaltyTitle a{
+	text-decoration-line:none;
+	color:#333;
+}
+.penalty_table .penaltyTitle a:hover{
+	color:blue;
+}
+.noticeSearchOption{
 	text-align:center;	
 }
+.penaltyBtnSection{
+	margin:10px;
+	text-align:center;
+}
 .selectBtn{
-	width: auto;
+	width: 70px;
     height: 40px;
     border: 4px solid #86b049;
     border-radius: 5px;
     background-color:#fff;
 }
-.searchBlock{
+.noticeSearchBlock{
 	width:300px;
 	height:40px;
 	border: 4px solid #86b049;
@@ -56,7 +90,7 @@
     background-color:#fff;
     padding-left:5px;
 }
-.searchDo{
+.noticeSearchDo{
 	width:60px;
 	height:40px;
 	border: none;
@@ -66,9 +100,17 @@
     font-size:15px;
     font-weight:700;
 }
-.searchDo:hover{
+.noticeSearchDo:hover{
 	cursor:pointer;
 	background-color:#476930;
+}
+.penalty_table .delBtn{
+	padding:3px;
+}
+.penalty_table .delBtn:hover{
+	cursor:pointer;
+	background-color:#476930;
+	color:#fff;
 }
 
 
