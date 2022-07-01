@@ -129,7 +129,7 @@ public class BrwBookController {
 	public HashMap<String, String> bookDetailBrw(HttpSession session, Model model, 
 			@RequestParam HashMap<String, String> params) {
 			
-			String msg = "도서대출이 완료되었습니다.";
+			String msg = "";
 			HashMap<String, String> map = new HashMap<String, String>();
 		
 			//현재대출신청 기간..
@@ -144,37 +144,37 @@ public class BrwBookController {
 			logger.info("책번호 아이디 : "+ params);
 			
 			if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
-				logger.info("회원 : 도서대출 서비스 컨트롤러");
-				// loginId가 대출한 책이 연체 되었는지 확인
-				int chkReturnOver = service.chkReturnOver(mb_id);
-				if(chkReturnOver > 0) {
-					// 연체 페널티가 부과되었는지 확인
-					int chkPenalty = service.chkPenalty(mb_id);
-					// 페널티 부과된 내용이 없다면
-					if (chkPenalty == 0) {
-						// 연체 페널티 부과
-						service.insertPenalty(mb_id);
-					}
-					
-				ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
-				model.addAttribute("brwlist", brwlist);
-				logger.info("list 갯수: "+brwlist.size());
-				if(brwlist.size() <= 5 ) {
-					service.bookDetailBrw(params);
-					msg = "도서대출 신청완료";
-				} else {
-					msg = "도서권수가 초과되었습니다.";
-				}
-					
-				} 
-			
-				} else { // 회원x 관리자
-				msg = "일반회원만 이용가능한 서비스입니다.";
-				}
-			
-			
-			map.put("msg", msg);
-			return map;
+	            logger.info("회원 : 도서대출 서비스 컨트롤러");
+	            // loginId가 대출한 책이 연체 되었는지 확인
+	            int chkReturnOver = service.chkReturnOver(mb_id);
+	            if(chkReturnOver > 0) {
+	               // 연체 페널티가 부과되었는지 확인
+	               int chkPenalty = service.chkPenalty(mb_id);
+	               // 페널티 부과된 내용이 없다면
+	               if (chkPenalty == 0) {
+	                  // 연체 페널티 부과
+	                  service.insertPenalty(mb_id);
+	                  msg = "이용정지 대상입니다.";
+	               }               
+	            } else {
+	               
+	               ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+	               model.addAttribute("brwlist", brwlist);
+	               logger.info("list 갯수: "+brwlist.size());
+	               if(brwlist.size() <= 5 ) {
+	                  service.bookDetailBrw(params);
+	                  msg = "도서대출 완료";
+	               } else {
+	                  msg = "도서권수가 초과되었습니다.";
+	               }               
+	            
+	            } 
+	         } else { // 회원x 관리자
+	            msg = "일반회원만 이용가능한 서비스입니다.";
+	         }
+	         
+	         map.put("msg", msg);
+	         return map;
 		}
 		
 		
