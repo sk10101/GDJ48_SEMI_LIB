@@ -12,10 +12,10 @@
 </style>
 </head>
 <body>
-	<div id="header">
-		<jsp:include page="../commons/header.jsp"/>
-	</div>
-	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+   <div id="header">
+      <jsp:include page="../commons/header.jsp"/>
+   </div>
+   <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
          <div class="logo">
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
         </div>
@@ -32,29 +32,29 @@
 
        <table>
             <thead id="head">
-	            <tr>
-	               <td>
-	               <c:forEach items="${list}" var="path">
-						<p><img src="/image/${path.newFileName}" height="200"/>
-					</c:forEach>
-	            </td>
-	            </tr>      
-	            <tr>
-	                <td>책제목</td>
-	                <td>${detail.b_title}</td>
-	            </tr>
-	            <tr>
-	                <td>저자</td>
-	                <td>${detail.writer}</td>
-	            </tr>
-	            <tr>
-	                <td>출판사</td>
-	                <td>${detail.publisher}</td>
-	            </tr>
-	            <tr>
-	                <td>발행년도</td>
-	                <td>${detail.issue}</td>
-	            </tr>
+               <tr>
+                  <td>
+                  <c:forEach items="${list}" var="path">
+                  <p><img src="/image/${path.newFileName}" height="200"/>
+               </c:forEach>
+               </td>
+               </tr>      
+               <tr>
+                   <td>책제목</td>
+                   <td>${detail.b_title}</td>
+               </tr>
+               <tr>
+                   <td>저자</td>
+                   <td>${detail.writer}</td>
+               </tr>
+               <tr>
+                   <td>출판사</td>
+                   <td>${detail.publisher}</td>
+               </tr>
+               <tr>
+                   <td>발행년도</td>
+                   <td>${detail.issue}</td>
+               </tr>
             </thead>
         </table>
 
@@ -108,39 +108,39 @@
 <script>
 var msg = "${msg}"
 if (msg != "") {
-	alert(msg);
+   alert(msg);
 }
 
 function bookbrw(brwId) { 
-	   var bookID = $(brwId).attr("bookID");
-	   console.log(bookID);
-	   var loginId = $(brwId).attr("loginId");
-	   console.log(loginId);
-	   
-	   if(loginId == null || loginId == ''){
-		   console.log("비회원");
-		   alert("도서대출은 로그인 후 이용가능한 서비스입니다.");
-		   location.href="/login/login";
-	   } else {
-		   $.ajax({
-		         type:'get',
-		         url:'bookDetailBrw.ajax',
-		         data:{
-		            b_id : bookID,
-		            loginId : loginId
-		         },
-		         dataType:'JSON',
-		         success:function(data) {
-		        	 alert(data.msg);
-		        	 location.reload(true);
-		         },
-		         error:function(e) {
-		            console.log(e);
-		            //location.reload(true);
-		         }
-		      });
-	   }
-	   
+      var bookID = $(brwId).attr("bookID");
+      console.log(bookID);
+      var loginId = $(brwId).attr("loginId");
+      console.log(loginId);
+      
+      if(loginId == null || loginId == ''){
+         console.log("비회원");
+         alert("도서대출은 로그인 후 이용가능한 서비스입니다.");
+         location.href="/login/login";
+      } else {
+         $.ajax({
+               type:'get',
+               url:'bookDetailBrw.ajax',
+               data:{
+                  b_id : bookID,
+                  loginId : loginId
+               },
+               dataType:'JSON',
+               success:function(data) {
+                  alert(data.msg);
+                  location.reload(true);
+               },
+               error:function(e) {
+                  console.log(e);
+                  //location.reload(true);
+               }
+            });
+      }
+      
       
 }      
    
@@ -150,44 +150,51 @@ function bookreason(brwId) {
        console.log(bookID);
        var loginId = $(brwId).attr("loginId");
        console.log(loginId);
-            
-    	  
-   	  $.ajax({
-   	         type:'get',
-   	         url:'bookreason.ajax',
-   	         data:{
-   	            b_id : bookID,
-   	            loginId : loginId
+       
+       if(loginId == null || loginId == ''){
+         console.log("비회원");
+         alert("도서예약은 로그인 후 이용가능한 서비스입니다.");
+         location.href="/login/login";
+      }else {
+         
+         $.ajax({
+                  type:'get',
+                  url:'bookreason.ajax',
+                  data:{
+                     b_id : bookID,
+                     loginId : loginId
 
-   	         },
-   	         dataType:'JSON',
-   	         success:function(data) {
-   	            alert(data);
-   	         },
-   	         error:function(e) {
-   	            
-   	         }
-   	      });	  
-      
+                  },
+                  dataType:'JSON',
+                  success:function(data) {
+                     alert(data);
+                  },
+                  error:function(e) {
+                     
+                  }
+               });
+         
+      }
+               
    }
 
-  $(".brwBtn").on("click",function(){
+$(".brwBtn").on("click",function(){
 
-		  //$(this).hide();
-	  
-        
-         
-   });
+     //$(this).hide();
+
+  
+   
+});
       
    $(".bookreason").on("click",function(){
       alert("예약신청이 완료되었습니다.");
    });
    
  function back() {
-	 
-	 var referrer = document.referrer;
-	 console.log(referrer);
-	 location.href = referrer;
+    
+    var referrer = document.referrer;
+    console.log(referrer);
+    location.href = referrer;
   
   //histiory.go(-1);
  }

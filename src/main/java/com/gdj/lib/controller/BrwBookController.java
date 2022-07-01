@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdj.lib.dto.BrwBookDTO;
+import com.gdj.lib.dto.KioskDTO;
 import com.gdj.lib.dto.PhotoDTO;
 import com.gdj.lib.service.BrwBookService;
 
@@ -123,10 +124,10 @@ public class BrwBookController {
 	}
 	
 	//도서 상세보기 대출신청
-		@RequestMapping(value = "/bookDetailBrw.ajax")
-		@ResponseBody
-		public HashMap<String, String> bookDetailBrw(HttpSession session, Model model, 
-				@RequestParam HashMap<String, String> params) {
+	@RequestMapping(value = "/bookDetailBrw.ajax")
+	@ResponseBody
+	public HashMap<String, String> bookDetailBrw(HttpSession session, Model model, 
+			@RequestParam HashMap<String, String> params) {
 			
 			String msg = "도서대출이 완료되었습니다.";
 			HashMap<String, String> map = new HashMap<String, String>();
@@ -155,17 +156,33 @@ public class BrwBookController {
 						service.insertPenalty(mb_id);
 					}
 					
-				} else {
+				ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+				model.addAttribute("brwlist", brwlist);
+				logger.info("list 갯수: "+brwlist.size());
+				if(brwlist.size() <= 5 ) {
 					service.bookDetailBrw(params);
-					msg = "도서대출 완료";
+					msg = "도서대출 신청완료";
+				} else {
+					msg = "도서권수가 초과되었습니다.";
+				}
+					
 				} 
-			} else { // 회원x 관리자
+			
+				} else { // 회원x 관리자
 				msg = "일반회원만 이용가능한 서비스입니다.";
-			}
+				}
+			
 			
 			map.put("msg", msg);
 			return map;
-	}
+		}
+		
+		
+		
+				
+			
+			
+	
 
 	
 	//예약내역에 대출신청
