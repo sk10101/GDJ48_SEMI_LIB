@@ -35,7 +35,7 @@ public interface BrwBookDAO {
 
 	
 
-	Object penaltyDate(String mb_id);
+	long penaltyDate(String mb_id);
 
 	void bookBrwDetail(String b_id);
 
@@ -64,6 +64,10 @@ public interface BrwBookDAO {
 
 
 	ArrayList<BrwBookDTO> history(HashMap<String, String> params, String mb_id);
+
+	void reserve_able(HashMap<String, String> params);
+
+	int penaltyCheck(String mb_id);
 
 	ArrayList<BrwBookDTO> brwBookList(int cnt, int offset, String mb_id);
 

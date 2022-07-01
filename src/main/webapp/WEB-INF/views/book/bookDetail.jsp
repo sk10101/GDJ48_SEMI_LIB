@@ -11,12 +11,14 @@
 </style>
 </head>
 <body>
+
    <div id="header">
       <jsp:include page="../commons/header.jsp"/>
    </div>
    <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
          <div class="logo">
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
+
         </div>
         <nav>
             <ul>
@@ -84,13 +86,13 @@
                    
                    <td>
                       <c:choose>
-                            <c:when test="${detail.b_status eq '대출중'}">
+                            <c:when test="${detail.b_status eq '대출중' && detail.reserve_able eq true}">
                                <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${detail.b_id}" >예약신청</button>
                             </c:when>
-                            <c:when test="${detail.b_status eq '대출불가'}">
+                            <c:when test="${detail.b_status eq '대출불가' && detail.reserve_able eq false}">
                                <input type="hidden">
                             </c:when>
-                            <c:when test="${detail.b_status eq '대출신청'}">
+                            <c:when test="${detail.b_status eq '대출신청' && detail.reserve_able eq false}">
                         <input type="hidden">
                             </c:when>
                   </c:choose>
@@ -106,6 +108,36 @@
 </body>
 <script>
 var msg = "${msg}"
+   if (msg != "") {
+      alert(msg);
+   }
+
+
+ 
+   function bookbrw(brwId) {
+      var bookID = $(brwId).attr("bookID");
+       console.log(bookID);
+       var loginId = $(brwId).attr("loginId");
+       console.log(loginId);
+      
+      $.ajax({
+         type:'get',
+         url:'bookDetailBrw.ajax',
+         data:{
+            b_id : bookID,
+            loginId : loginId
+         },
+         dataType:'JSON',
+         success:function(data) {
+            
+         },
+         error:function(e) {
+            console.log(e);
+         }
+      });
+    }
+      
+
 if (msg != "") {
    alert(msg);
 }
@@ -135,6 +167,7 @@ function bookbrw(brwId) {
                },
                error:function(e) {
                   console.log(e);
+     
                   //location.reload(true);
                }
             });
@@ -149,55 +182,38 @@ function bookreason(brwId) {
        console.log(bookID);
        var loginId = $(brwId).attr("loginId");
        console.log(loginId);
+       var msg = "";
        
        if(loginId == null || loginId == ''){
-         console.log("비회원");
-         alert("도서예약은 로그인 후 이용가능한 서비스입니다.");
-         location.href="/login/login";
-      }else {
-         
-         $.ajax({
-             type:'get',
-             url:'bookreason.ajax',
-             data:{
-                b_id : bookID,
-                loginId : loginId
+           console.log("비회원");
+           alert("도서대출은 로그인 후 이용가능한 서비스입니다.");
+           location.href="/login/login";
+        } else {
+        	
+        	$.ajax({
+                type:'get',
+                url:'bookreason.ajax',
+                data:{
+                   b_id : bookID,
+                   loginId : loginId,
+       			msg : msg
+                },
+                dataType:'JSON',
+                success:function(data) {
+                  alert(data.msg);
+                  location.reload(true);
+                },
+                error:function(e) {
+                   
+                }
+             });
+        	
+        }
 
-             },
-             dataType:'JSON',
-             success:function(data) {
-           	  alert(data.msg);
-                 location.reload(true);
-             },
-             error:function(e) {
-                
-             }
-          });
-         
-     }
-               
    }
 
-$(".brwBtn").on("click",function(){
 
-     //$(this).hide();
 
-  
-   
-});
-      
-   $(".bookreason").on("click",function(){
-      //alert("예약신청이 완료되었습니다.");
-   });
-   
- function back() {
-    
-    var referrer = document.referrer;
-    console.log(referrer);
-    location.href = referrer;
-  
-  //histiory.go(-1);
- }
 
 </script>
 </html>

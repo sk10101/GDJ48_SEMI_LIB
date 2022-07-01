@@ -12,12 +12,6 @@
 		SELECT * FROM photo WHERE category_id = "4" and post_id = #{b_id}
 	</select>
 	
-
- 	
- 	<insert id="bookreason" parameterType="hashmap">
- 	 	INSERT INTO reservation(b_id, mb_id)
- 			VALUES(#{b_id}, #{loginId})
- 	</insert>
  	
  	<select id="history" resultType="com.gdj.lib.dto.BrwBookDTO">
 		select
@@ -123,6 +117,14 @@
  		update book set b_status = "대출불가" where b_id = #{b_id}	
  	</update>
 
+ 	
+ 	
+ 	
+	<select id="penaltyCheck" parameterType="String" resultType="int">
+		SELECT COUNT(mb_id) FROM penalty where mb_id=#{mb_id}
+	</select>
+
+
  
  	<select id="reserveCheck" parameterType="String" resultType="int">
 		SELECT COUNT(reserve_id) from reservation WHERE mb_id = #{param1} AND reason is null 
@@ -133,6 +135,13 @@
 		AND reason is null ORDER BY reserve_date DESC limit 1
 	
 	</select>
+	
+	<select id="penaltyDate" parameterType="String" resultType="long">
+		SELECT 
+		date_format(penalty_end,'%Y%m%d')
+		FROM penalty WHERE mb_id=#{mb_id}
+	</select>
+	
 	
 	<update id="expiryPenalty" parameterType="String">
 		UPDATE reservation SET reason ='만료'
@@ -148,6 +157,19 @@
 	   INSERT INTO penalty (mb_id,category_id,penalty_start,penalty_end,cancel) VALUES(#{param1},'6',now(),adddate(now(),interval 3 day),false);
 		
 	</insert>
+	
+	
+ 	<insert id="bookreason" parameterType="hashmap">
+ 	 	INSERT INTO reservation(b_id,mb_id)
+ 			VALUES(#{b_id},#{loginId})
+ 	</insert>
+	
+	
+	<update id="reserve_able" parameterType="hashmap">
+		UPDATE book SET reserve_able = false where b_id = #{b_id} AND reserve_able = true
+	</update>
+	
+	
  	
 	<update id="reserveBtn" parameterType="String">						
 		UPDATE

@@ -197,71 +197,93 @@ public class BrwBookController {
 		
 		
 	}
+
+
+	  @RequestMapping(value = "/bookreason.ajax")
+	  @ResponseBody 
+	  public HashMap<String, String> bookreason(HttpSession session, Model model, @RequestParam HashMap<String, String> params) {
 	
 	
-	@RequestMapping(value = "/bookreason.ajax")
-	@ResponseBody 
-	public HashMap<String, String> bookreason(HttpSession session, Model model,
-			@RequestParam HashMap<String, String> params) {
+			String msg = "도서예약이 완료되었습니다.";
+			HashMap<String, String> map = new HashMap<String, String>();
+		  String mb_id = (String) session.getAttribute("loginId");
+		  logger.info(mb_id);
+		  model.addAttribute("mb_id",mb_id);
+		  String page = "redirect:/"; 
+		  logger.info("받아온 책번호 : "+ params ); 
+	  
+		  long miliseconds = System.currentTimeMillis(); 
+		  Date date = new Date(miliseconds);
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		  String nowTime = sdf.format(date);
+		  long nowtime = Long.parseLong(nowTime);
 		
-		String msg = "도서예약이 완료되었습니다.";
-		HashMap<String, String> map = new HashMap<String, String>();
+
+	  if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {		  
 		  
-		String mb_id = (String)session.getAttribute("loginId");
-		logger.info(mb_id);
-	    logger.info("받아온 책번호 : "+ params ); 
-	  
-	  long miliseconds = System.currentTimeMillis(); 
-	  Date date = new Date(miliseconds);
-	  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-	  String nowTime = sdf.format(date);
-	  long nowtime = Long.parseLong(nowTime);
-		/*
-		 * if(params.get("mb_id") == null) { params.put("mb_id", mb_id); }
-		 */
-	  
-	  if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
+		// 이용정지 내역에 해당 아이디가 있나 조회
+		  int penaltyCheck = service.penaltyCheck(mb_id);
+		  //model.addAttribute("penaltyCheck",penaltyCheck);
+		  logger.info("이용정지 리스트에 있나?"+ penaltyCheck +"건");
 		  
-		// 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 
-		  int reserveCheck =service.reserveCheck(mb_id); 
-		  logger.info("예약만료인 책 권수: "+reserveCheck);
-		  if(reserveCheck >= 1) { 
-			  long expiry = service.expiry(mb_id); 
-			  logger.info("예약 만료일 "+expiry);
-			 
-		  // 만료일이지났을 경우
+		  if(penaltyCheck >=1 ) {
+		  // 이용정지 내역에 아이디 있으면 ㄱㄱ
+			  
+			  long penaltyDate = service.penaltyDate(mb_id);
+			  logger.info("이용정지 끝나는 날 : "+penaltyDate+"오늘 날짜 :"+nowtime);
+			  if(penaltyDate > nowtime) {
+				  // 이용정지 날짜가 지났으면 다시 예약 가능
+				  
+				  // 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 
+				  int reserveCheck =service.reserveCheck(mb_id); 
+				  logger.info("예약만료인 책 권수: "+reserveCheck);
+				  if(reserveCheck >= 1) {
+					  long expiry = service.expiry(mb_id); 
+					  logger.info("예약 만료일 "+expiry);
+					 // expiry == 예약날 +22
+					  
+					  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
+					  if(expiry < nowtime) { 
+						  service.expiryPenalty(mb_id);
+						  service.reserveCancel(mb_id);
+						  service.addPenalty(mb_id);
+						  msg = "이용정지 3일입니다";
+						  logger.info(msg);
+						  map.put("msg", msg);
+					  }else { 		
+						  msg = "예약신청이 완료되었습니다."; 
+						  map.put("msg", msg);
+						  service.bookreason(params);
+						  service.reserve_able(params);
+					  }
+				  }  else { 		
+					  msg = "예약신청이 완료되었습니다."; 
+					  map.put("msg", msg);
+					  service.bookreason(params);
+					  service.reserve_able(params);
+				  }
+
 		  
-		  // expiry db 에서 데이트 타입으로 가져와야 비교 가능 
-		  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
-			  if(expiry < nowtime) { 
-				  service.expiryPenalty(mb_id);
-				  logger.info("1");
-				  service.reserveCancel(mb_id);
-				  service.addPenalty(mb_id);
-				  msg = "이용정지 3일입니다";
-				  logger.info(msg);
-				  map.put("msg", msg);
-			  }else { 		
-				  msg = "예약신청이 완료되었습니다."; 
-				  map.put("msg", msg);
-				  service.bookreason(params);
+			  }else {
+				 logger.info("아직 정지중입니다 ㅠㅠ");
+				 msg = penaltyDate+"까지 정지기간입니다.";
 			  }
-		  	}  else{  	 
-			  service.bookreason(params);
-			  msg = "예약신청이 완료되었습니다."; 
-			  map.put("msg", msg);
-			 }
-		  
-	  } else { // 회원x 관리자
-	      msg = "일반회원만 이용가능한 서비스입니다.";
-	   }
-	   
-	   map.put("msg", msg);
-	   return map;
-  
+		
+
+	  }else{  	 
+		  service.bookreason(params);
+		  service.reserve_able(params);
+		  msg = "예약신청이 완료되었습니다."; 
+		  map.put("msg", msg);
+		 }
+	  
+	 
+	  }else{  	 
+		  msg = "일반회원만 이용가능합니다."; 
+		  map.put("msg", msg);
 	  }
- 
-  
+	  return map;
+ } 
 
 		//이전대출 내역
 		@RequestMapping(value = "/brwList")
@@ -300,15 +322,4 @@ public class BrwBookController {
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
 
