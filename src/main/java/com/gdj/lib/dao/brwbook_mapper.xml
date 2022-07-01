@@ -126,6 +126,13 @@
 	
 	</select>
 	
+	<select id="penaltyDate" parameterType="String" resultType="long">
+		SELECT 
+		date_format(penalty_end,'%Y%m%d')
+		FROM penalty WHERE mb_id=#{mb_id}
+	</select>
+	
+	
 	<update id="expiryPenalty" parameterType="String">
 		UPDATE reservation SET reason ='만료'
 		WHERE mb_id = #{param1} AND reserve_date ORDER BY reserve_date DESC limit 1

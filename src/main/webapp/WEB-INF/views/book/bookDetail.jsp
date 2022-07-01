@@ -188,9 +188,14 @@ function bookreason(brwId) {
          alert("대출신청이 완료되었습니다");
    });
       
-function bookreason(btn){
+/* function bookreason(this){
 	     alert(msg);
-   };
+   }; */
+   
+   $(".bookreason").on("click",function(){
+       $(this).hide();
+       alert("예약신청이 완료되었습니다");
+ });
 
 </script>
 </html>

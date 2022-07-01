@@ -38,7 +38,7 @@ public interface BrwBookDAO {
 
 	
 
-	Object penaltyDate(String mb_id);
+	long penaltyDate(String mb_id);
 
 	void bookBrwDetail(String b_id);
 
