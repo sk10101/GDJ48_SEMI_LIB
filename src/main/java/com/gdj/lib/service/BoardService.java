@@ -51,7 +51,7 @@ public class BoardService {
 		logger.info("로그인한 아이디 : " + mb_id);
 		
 		ArrayList<BoardDTO> claimList = new ArrayList<BoardDTO>();
-		ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
+		// ArrayList<BoardDTO> searchList = new ArrayList<BoardDTO>();
 		
 		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
 		int allCnt = 0;
@@ -88,6 +88,9 @@ public class BoardService {
 		logger.info("offset : "+offset);
 		
 		
+		claimList = dao.claimList(map);
+		map.put("claimList", claimList);
+		/*
 		// 검색 관련 설정하는 조건문
 		if(word == null || word.equals("")) {
 			// 관리자 건의사항 목록 페이지에선 아이디 상관없이 모두 보여줘야함
@@ -130,6 +133,7 @@ public class BoardService {
 			map.put("claimList", searchList);
 			
 		}
+		*/
 		logger.info("서비스 체크포인트");
 		return map;
 	}
