@@ -349,13 +349,21 @@ public class MemberController {
 //	관리자 > 회원의 도서내역
 	
 	@RequestMapping("/memberBrw.go")
-	public String memberBook(@RequestParam String mb_id) {
+	public String memberBook(@RequestParam String mb_id, HttpSession session, Model model) {
 
 		logger.info("관리자 > 대출내역 요청 :"+mb_id);
-		
+		String page = "login/login";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			page = "admin/member/memberBrw";
+		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			page = "/main";
+		}else {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+		}
 		//session.setAttribute("mb_id", mb_id);
 		//String page = "admin/member/memberBrw?mb_id="+mb_id;
-		return "admin/member/memberBrw";
+		return page;
 	}
 	
 	@RequestMapping("/memberBrw.ajax")
@@ -372,10 +380,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberHis.go")
-	public String memberHis(@RequestParam String mb_id) {
+	public String memberHis(@RequestParam String mb_id, HttpSession session, Model model) {
 
-		logger.info("관리자 > 이전대출내역 요청 :"+mb_id);
-		return "admin/member/memberHis";
+		String page = "login/login";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			page = "admin/member/memberHis";
+			logger.info("관리자 > 이전대출내역 요청 :"+mb_id);
+		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			page = "/main";
+		}else {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+		}
+		return page;
 	}
 	
 	@RequestMapping("/memberHis.ajax")
@@ -391,24 +408,31 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberReserve.go")
-	public String memberReserve(@RequestParam String mb_id) {
-
-		logger.info("관리자 > 예약내역 요청 :"+mb_id);
+	public String memberReserve(@RequestParam String mb_id, HttpSession session, Model model) {
+		
+		String page = "login/login";
+		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+			page = "admin/member/memberReserve";
+			logger.info("관리자 > 예약내역 요청 :"+mb_id);
+		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+			page = "/main";
+		}else {
+			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
+		}
 		//session.setAttribute("mb_id", mb_id);
-		return "admin/member/memberReserve";
+		return page;
 	}
 	
 	@RequestMapping("/memberReserve.ajax")
 	@ResponseBody
-	public HashMap<String, Object> memberReserveList(@RequestParam String mb_id) {
-
-		HashMap<String, Object> map = new HashMap<String, Object>();
+	public HashMap<String, Object> memberReserveList(@RequestParam HashMap<String, String> params) {
 		
-		logger.info("예약내역 목록 요청:"+mb_id);
-		//ArrayList<BrwBookDTO> list = service.reserveList(mb_id);
-		//map.put("list", list);
-		//logger.info("완료:"+list);
-		return null;
+		logger.info("예약내역 목록 요청:"+params);
+		
+		HashMap<String, Object> map = service.reserveList(params);
+		logger.info("컨트롤러 체크포인트");
+		return map;
 	}
 	
 	@RequestMapping("/reserveCancel.ajax")

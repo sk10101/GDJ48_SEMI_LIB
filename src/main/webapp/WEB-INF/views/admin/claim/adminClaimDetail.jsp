@@ -5,106 +5,28 @@
 <meta charset="UTF-8">
 <title>관리자 페이지 / 건의사항 / 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-        #header {
-            width: 100%;
-            height: 150px;
-            border: 2px solid #999;
-            background-color: #b0f592;
-        }
-
-        #main_content {
-            margin-top: 15px;
-            width: 1000px;
-            height: 800px;
-        }
-
-        #myPage_menu {
-            width: 125px;
-            height: 500px;
-            background-color: #b0f592;
-            text-align: center;
-            float: left;
-            border: 2px solid #999;
-            margin-top: 15px;
-            margin-right: 10px;
-        }
-        a[href='#'] {
-            margin-bottom: 15px;
-        }
-
-        #claim_detail, #claim_reply {
-            width: 800px;
-            text-align: center;
-        }
-
-        #claim_detail, th, td, #claim_reply {
-            border: 2px solid #999;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-
-        #claim_reply {
-            margin-left: 139px;
-        }
-
-        th {
-            padding: 15px;
-            width: 125px;
-        }
-
-        td {
-            text-align: left;
-        }
-
-        #claim_write {
-            margin-top: 15px;
-            margin-bottom: 10px;
-        }
-
-        #claim_no {
-            width: 15px;
-        }
-
-        #subject {
-            text-align: left;
-            padding-left: 5px;
-        }
-
-        #delete {
-            width: 55px;
-        }
-
-        #date, #status {
-            width: 100px;
-        }
-
-        input[type='text'] {
-            margin: 5px;
-            width: 610px;
-            height: 35px;
-            border-radius: 5px;
-        }
-
+   
 </style>
 </head>
 <body>
-    <div id="header">
-        <a href="#">도서관 로고 들어갈 위치</a>
-        ${sessionScope.loginId} 관리자님 환영합니다.
-    </div>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
     <div id="myPage_menu">
         <h3>관리자 페이지</h3>
         <hr/>
-        <a href="#">회원관리</a><br/>
+        <a href="memberList.go">회원관리</a><br/>
         <br/>
-        <a href="#">도서관리</a><br/>
+        <a href="bookList.go">도서관리</a><br/>
         <br/>
-        <a href="claimList">건의사항</a><br/>
+        <a href="adminClaimList">건의사항</a><br/>
         <br/>
-        <a href="#">블랙리스트</a><br/>
+        <a href="blackList.go">블랙리스트</a><br/>
         <br/>
-        <a href="#">이용정지내역</a>
+        <a href="penaltyList.go">이용정지내역</a>
     </div>
     <div id="main_content">
     	<form action="adminClaimUpdate.do" method="post" enctype="multipart/form-data">
@@ -131,8 +53,8 @@
                 </td>
             </tr>
             <tr>
-                <th style="height: 300px;">내용</th>
-                <td style="vertical-align: top;">${claim.claim_content}</td>
+                <th>내용</th>
+                <td>${claim.claim_content}</td>
             </tr>
             <c:if test="${claimList.size()>0}">
 	            <tr>
@@ -171,8 +93,8 @@
 	                <td>${reply.reply_date}</td>
 	            </tr>
 	            <tr>
-	                <th style="height: 300px;">답변 내용</th>
-	                <td style="vertical-align:top">${reply.reply_content}</td>
+	                <th>답변 내용</th>
+	                <td>${reply.reply_content}</td>
 	            </tr>
 	            <c:if test="${replyList.size()>0}">
 		            <tr>

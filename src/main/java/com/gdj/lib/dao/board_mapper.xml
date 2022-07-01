@@ -56,12 +56,12 @@
 			ORDER BY claim_id DESC
 	</select>
 	  -->
-	 <select id="allCount" resultType="int">
-		SELECT count(claim_id) FROM claim
+	<select id="allCount" resultType="Integer">
+		SELECT COUNT(claim_id) FROM claim
 	</select>
 	
 	<select id="claimCount" resultType="int">
-		SELECT count(claim_id) FROM claim
+		SELECT COUNT(claim_id) FROM claim
 			WHERE mb_id = #{param1}
 	</select>
 	 
@@ -203,5 +203,7 @@
 	<delete id="replyPhotoDel">
 		DELETE FROM photo WHERE post_id = #{param1} and category_id = '3'
 	</delete>
+	
+	<select id=""></select>
 	
 </mapper>

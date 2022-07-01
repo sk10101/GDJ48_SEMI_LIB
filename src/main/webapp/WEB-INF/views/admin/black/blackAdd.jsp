@@ -3,33 +3,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>블랙리스트 추가</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
 <style>
-    .detail {
-        right: 0;
-    }
-    table.bbs {
-		width: 50%;
-	}
-	table, th, td {
-		border: 1px solid black;
-		border-collapse: collapse;
-	}
-	th, td {
-		padding: 10px 10px;
-	}
-	textarea {
-		width: 100%;
-		height: 150px;
-		resize: none;
-	}
-    a:link {
-        text-decoration: none;
-    }
 </style>
 </head>
 <body>
+	<div id="header">
+		<jsp:include page="../../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
 	<h3>블랙리스트 지정</h3>
 	<form action="blackAdd.do" method="post">
 	    <table class="bbs">
