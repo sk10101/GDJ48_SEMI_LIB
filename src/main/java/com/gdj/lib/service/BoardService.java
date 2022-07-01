@@ -96,7 +96,6 @@ public class BoardService {
 			logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
 			
 			if (mb_class.equals("관리자")) {
-				
 				if(option.equals("제목")) {
 					searchList = dao.allSubjectSearch(cnt,offset,word);
 					logger.info("제목 옵션 설정");
@@ -107,9 +106,8 @@ public class BoardService {
 					searchList = dao.allWriterSearch(cnt,offset,word);
 					logger.info("작성자 옵션 설정");	
 				}
-				
 			} else {
-				
+				// 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음
 				if(option.equals("제목")) {
 					searchList = dao.subjectSearch(cnt,offset,word,mb_id);
 					logger.info("제목 옵션 설정");
@@ -120,11 +118,18 @@ public class BoardService {
 					searchList = dao.writerSearch(cnt,offset,word,mb_id);
 					logger.info("작성자 옵션 설정");	
 				}
-				
 			}
-			
-			
 			logger.info("검색결과 건수 : " +searchList.size());
+			allCnt = searchList.size();
+			pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+			
+			logger.info("검색 결과 pages : " + pages);
+			if (page > pages) {
+				page = pages;
+			}
+			map.remove("pages");
+			map.put("pages", pages);
+			
 			map.put("claimList", searchList);
 			
 		}

@@ -74,6 +74,8 @@
 	// 로그인한 아이디와 현재 페이지 정보를 변수에 담는다.
 	var mb_id = "${sessionScope.loginId}";
 	var mb_class = "${sessionScope.mb_class}";
+	var word = $('#word').val();
+	var option = $('#option').val();
 	var currPage = 1;
 	listCall(currPage);
 	
@@ -84,15 +86,15 @@
 	
 	// select 의 option 변경
 	$('#pagePerNum').on('change',function(){
-		var word = $('#word').val();
+		word = $('#word').val();
 		console.log(currPage);
 		console.log(word);
 		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
 		$("#pagination").twbsPagination('destroy');
 		// 검색어가 들어갔을 때와 아닐때를 구분
-		if(word==null || word==""){
+		if(word == null){
 			listCall(currPage);
-		} else {
+		} else if (word != null) {
 			searchList(currPage)
 		}
 		
@@ -128,10 +130,10 @@
 						console.log("입력한 검색어 : "+word);
 						currPage = page;
 						
-						if(word==null){
-							listCall(page);
-						} else {
-							searchList(page);
+						if(word == null){
+							listCall(currPage);
+						} else if (word != null) {
+							searchList(currPage)
 						}
 					}
 				});
@@ -191,51 +193,56 @@
 	
 	// 검색 결과 출력
 	function searchList(page) {
-		var word = $('#word').val();
-		var option = $('#option').val();
-		var pagePerNum = $('#pagePerNum').val();
+		word = $('#word').val();
+		option = $('#option').val();
 		
-		// 검색어 저장
-		/*
-		sessionStorage.setItem("word",word);
-		sessionStorage.setItem("option",option);
-		*/
-		
-		$.ajax({
-			type: 'GET',
-			url: 'claimList.ajax',
-			data:{
-				cnt : pagePerNum,
-				page : page,
-				word : word,
-				option : option,
-				mb_id : mb_id,
-				mb_class : mb_class
-			},
-			dataType:'JSON',
-			success: function(data){
-				// 테이블 초기화
-				$("#claimList").empty();
-				drawList(data.claimList);
-				currPage = 1;
-				// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
-				$("#pagination").twbsPagination({
-					startPage: 1, // 시작 페이지
-					totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
-					visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
-					onPageClick: function(e, page) {
-						console.log(page); // 사용자가 클릭한 페이지
-						currPage = page;
-						searchList(page);
-					}
-				});
-			},
-			error:function(e){
-				console.log(e);
-			}
-		})
+		if(word != null) {
+			var pagePerNum = $('#pagePerNum').val();
+			
+			// 검색어 저장
+			/*
+			sessionStorage.setItem("word",word);
+			sessionStorage.setItem("option",option);
+			*/
+			
+			$.ajax({
+				type: 'GET',
+				url: 'claimList.ajax',
+				data:{
+					cnt : pagePerNum,
+					page : page,
+					word : word,
+					option : option,
+					mb_id : mb_id,
+					mb_class : mb_class
+				},
+				dataType:'JSON',
+				success: function(data){
+					// 테이블 초기화
+					$("#claimList").empty();
+					drawList(data.claimList);
+					currPage = 1;
+					// 불러오기를 성공하면 플러그인을 이용해 페이징 처리를 한다.
+					$("#pagination").twbsPagination({
+						startPage: 1, // 시작 페이지
+						totalPages: data.pages, // 총 페이지 수(전체 게시물 수 / 한 페이지에 보여줄 게시물 수)
+						visiblePages: 5, // 한 번에 보여줄 페이지 수 ( ex)[1],[2],[3],[4],[5] ...)
+						onPageClick: function(e, page) {
+							console.log("클릭한 페이지 : " + page); // 사용자가 클릭한 페이지
+							currPage = page;
+							searchList(page);
+						}
+					});
+					console.log("보여줄 페이지 수 : " + data.pages);
+				},
+				error:function(e){
+					console.log(e);
+				}
+			})
+		} else {
+			console.log("searchList 스킵");
+		}
 	}
-	
 	// 삭제 버튼 기능구현 (동적으로 생성한 버튼은 javascript 로 구현)
 	function clickEvt(btn) {
 		var claim_id = $(btn).parent().parent().attr("cID");

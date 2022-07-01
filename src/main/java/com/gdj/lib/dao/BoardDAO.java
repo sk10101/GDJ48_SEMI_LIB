@@ -96,8 +96,10 @@ public interface BoardDAO {
 
 	void replyPhotoDel(int reply_id);
 
-	ArrayList<BoardDTO> searchList(int cnt, int offset, String word, String mb_id);
 
+	// ArrayList<BoardDTO> searchList(int cnt, int offset, String word, String mb_id, String option);
+
+	// int searchCount(String mb_id, String word);
 
 
 	

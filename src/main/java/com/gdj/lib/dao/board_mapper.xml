@@ -8,12 +8,8 @@
 		ORDER BY notice_id DESC
 	</select>
 	-->
-	<delete id="noticeDelete" parameterType="int">
+	<delete id="noticeDelete" parameterType="String">
 		DELETE FROM notice WHERE notice_id = #{notice_id}
-	</delete>
-	
-	<delete id="noticePhotoDelete" >
-		DELETE FROM photo WHERE post_id = #{param1} and category_id = '1'
 	</delete>
 	
 	<insert id="noticeWrite" 
@@ -35,7 +31,7 @@
 	</select>
 	
 	<select id="noticePhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
-		SELECT * FROM photo WHERE post_id = #{notice_id} and category_id = '1'
+		SELECT * FROM photo WHERE post_id = #{post_id}
 	</select>
 	
 	<select id="noticeList" resultType="com.gdj.lib.dto.BoardDTO">
@@ -207,7 +203,11 @@
 	<delete id="replyPhotoDel">
 		DELETE FROM photo WHERE post_id = #{param1} and category_id = '3'
 	</delete>
-	
-	<select id=""></select>
-	
+	<!--
+	<select id="searchCount" resultType="int">
+		SELECT COUNT(claim_id) FROM claim
+			WHERE claim_title LIKE CONCAT('%',#{param2},'%')
+				AND mb_id = #{param1}
+	</select>
+	-->
 </mapper>
