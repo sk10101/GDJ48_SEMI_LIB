@@ -140,6 +140,10 @@ public class MyController {
 				 if(mb_pw == "") {
 					 service.myUpdateTwo(mb_id,name,phone);
 				 } else {
+					 if(mb_pw.length() < 4) {
+						 model.addAttribute("msg", "비밀번호는 4자리 이상이어야 합니다.");
+						 page = "myPage/info/memberDetail";
+					 }
 					 service.myUpdate(mb_id,mb_pw,name,phone);
 				 }
 					
@@ -170,6 +174,10 @@ public class MyController {
 				 if(mb_pw == "") {
 					 service.myUpdateTwo(mb_id,name,phone);
 				 } else {
+					 if(mb_pw.length() < 4) {
+						 model.addAttribute("msg", "비밀번호는 4자리 이상이어야 합니다.");
+						 page = "myPage/info/memberDetail";
+					 }
 					 service.myUpdate(mb_id,mb_pw,name,phone);
 				 }
 					
