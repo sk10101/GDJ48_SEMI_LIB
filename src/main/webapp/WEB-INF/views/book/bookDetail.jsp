@@ -7,6 +7,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
+<<<<<<< HEAD
+
+</style>
+</head>
+<body>
+
 
 </style>
 </head>
@@ -16,10 +22,12 @@
       <jsp:include page="../commons/header.jsp"/>
    </div>
    <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+
          <div class="logo">
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
 
         </div>
+        
         <nav>
             <ul>
                 <li loginId="${sessionScope.loginId}">${sessionScope.loginId}님 반갑습니다.</li>
@@ -111,36 +119,6 @@ var msg = "${msg}"
    if (msg != "") {
       alert(msg);
    }
-
-
- 
-   function bookbrw(brwId) {
-      var bookID = $(brwId).attr("bookID");
-       console.log(bookID);
-       var loginId = $(brwId).attr("loginId");
-       console.log(loginId);
-      
-      $.ajax({
-         type:'get',
-         url:'bookDetailBrw.ajax',
-         data:{
-            b_id : bookID,
-            loginId : loginId
-         },
-         dataType:'JSON',
-         success:function(data) {
-            
-         },
-         error:function(e) {
-            console.log(e);
-         }
-      });
-    }
-      
-
-if (msg != "") {
-   alert(msg);
-}
 
 function bookbrw(brwId) { 
       var bookID = $(brwId).attr("bookID");
