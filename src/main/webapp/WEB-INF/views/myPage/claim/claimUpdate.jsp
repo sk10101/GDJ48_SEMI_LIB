@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <title>건의사항 수정</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="resources/css/claim.css">
+<link rel="stylesheet" href="resources/css/myClaim.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>

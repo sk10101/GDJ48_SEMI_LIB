@@ -6,6 +6,7 @@
 <title>회원정보상세보기(회원)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/member.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 	  	
@@ -26,35 +27,34 @@
 	        <br/>
 	        <a class="tabSelect" href="myUpdateDetail.go">회원정보</a>
 	    </div>
-	  <h3>${sessionScope.loginId }님의 상세 정보</h3>
+    <div class="info-area">
 	  <form action="myUpdate" method="post">
-	 <table>
-	 		
+	 	<table class="bbs">
             <tr>
-                <th>ID</th>
-                <td><input type="hidden" name="mb_id" value="${sessionScope.loginId }">${sessionScope.loginId }</td>
+                <th class="memberDetailTh">ID</th>
+                <td><input type="hidden" name="mb_id" id="mb_id" value="${sessionScope.loginId }">${sessionScope.loginId }</td>
             </tr>
             <tr>
                 <th>PW</th>
                 <td>
-                    <textarea name="mb_pw" value="${myUpdateDetail.mb_pw}"></textarea>
+                    <input type="text" name="mb_pw" value="">
                       ※ 4자리 이상,비밀번호 수정시에만 작성
                 </td>
             </tr>
             <tr>
                 <th>이름</th>
-                <td><textarea name="name" value="${myUpdateDetail.name}">${myUpdateDetail.name}</textarea></td>
+                <td><input type="text" name="name" value="${myUpdateDetail.name}"></td>
             </tr>
             <tr>
                 <th>전화번호</th>
                 <td>
-                    <textarea name="phone" value="${myUpdateDetail.phone}">${myUpdateDetail.phone}</textarea>
+                    <input type="text" name="phone" value="${myUpdateDetail.phone}">
                     ※ ‘-’ 를 제외하고 입력
                 </td>
             </tr>
             <tr>
                 <th>이메일</th>
-                <td>${myUpdateDetail.email }</td>
+                <td>${myUpdateDetail.email}</td>
             </tr>
             <tr>
                 <th>회원탈퇴신청</th>
@@ -71,17 +71,18 @@
 
         <br/>
 
-        <table>
+        <table class = bbw>
             <tr>
-                <th>PW 확인</th>
-                <td><textarea name="pw_chk" value=""></textarea>
+                <th>기존 PW 확인</th>
+                <td><input type="password" name="pw_chk" value="">
                 <input type="hidden" name="Oripw_chk" value="${myUpdateDetail.mb_pw}" /></td>
             </tr>
         </table>
-
-        <br/>
-        <input type="submit" value="수정" >
+	        <div class="memberDetailBtn-area">
+	        <input type="submit" value="수정" >
+	        </div>
         </form>
+     </div>
      </div>
 </body>
 <script>
@@ -93,11 +94,10 @@
 	
 	$(document).ready(function(){    
 		
-	
 	if(!$("#chk").val("true")) {
 		$("#chk").prop("checked" , false);
-	}
-		
+	} 
+	
 		$("#chk").change(function(){       
 			
 			 if($("#chk").is(":checked")){           

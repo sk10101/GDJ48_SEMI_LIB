@@ -88,10 +88,10 @@ public interface MemberDAO {
 	void cancelMySecession(String mb_id);
 
 
-	void MySecession(String mb_id);
+	void mySecession(String mb_id);
 
 
-	void MySecessionTwo(String mb_id);
+	void mySecessionCheck(String loginId);
 
 	String getMbClass(String id, String pw);
 
@@ -172,14 +172,17 @@ public interface MemberDAO {
 
 
 	
-
-
 	int notSecession(String mb_id);
-
 
 
 	
 
+	String mb_status(String id);
+
+	long leave_date(String loginId);
+
+
+	
 
 
 

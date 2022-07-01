@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="resources/css/frame.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-	
 </style>
 </head>
 <body>

@@ -8,34 +8,26 @@
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 <<<<<<< HEAD
-table {
-      width: 100%;
-   }
-   table,th,td {
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 5px;   
-   }
-   
-=======
->>>>>>> origin/master
 
 </style>
 </head>
 <body>
-<<<<<<< HEAD
 
-         <div class="logo">
-            <a href="#"><img src="../resources/img/logo.png" class="logo"/><br/></a>
-=======
+
+</style>
+</head>
+<body>
+
    <div id="header">
       <jsp:include page="../commons/header.jsp"/>
    </div>
    <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+
          <div class="logo">
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
->>>>>>> origin/master
+
         </div>
+        
         <nav>
             <ul>
                 <li loginId="${sessionScope.loginId}">${sessionScope.loginId}님 반갑습니다.</li>
@@ -49,31 +41,6 @@ table {
 
        <table>
             <thead id="head">
-<<<<<<< HEAD
-            <tr>
-               <td>
-               <p><img src="/image/${dto.newFileName}" height="200"/>
-            </td>
-            </tr>
-            <c:forEach items="${detail}" var="dto">
-                <tr>
-                    <td>책제목</td>
-                    <td>${dto.b_title}</td>
-                </tr>
-                <tr>
-                    <td>저자</td>
-                    <td>${dto.writer}</td>
-                </tr>
-                <tr>
-                    <td>출판사</td>
-                    <td>${dto.publisher}</td>
-                </tr>
-                <tr>
-                    <td>발행년도</td>
-                    <td>${dto.issue}</td>
-                </tr>
-             </c:forEach>
-=======
                <tr>
                   <td>
                   <c:forEach items="${list}" var="path">
@@ -97,7 +64,6 @@ table {
                    <td>발행년도</td>
                    <td>${detail.issue}</td>
                </tr>
->>>>>>> origin/master
             </thead>
         </table>
 
@@ -110,31 +76,31 @@ table {
                     <td>예약신청</td>
                    
                 <tr>
-
-                   <td>
-                   <c:forEach items="${detail}" var="dto">
-                      <c:choose>
-                            <c:when test="${dto.b_status eq '대출중' && dto.reserve_able eq true}">
-                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
-                            </c:when>
-                            <c:when test="${dto.b_status eq '대출불가' && dto.reserve_able eq false}">
-                               <input type="hidden">
-                            </c:when>
-                            <c:when test="${dto.b_status eq '대출신청' && dto.reserve_able eq false}">
-                        <input type="hidden">
-                            </c:when>
-                  </c:choose>
-               </c:forEach>
+                  <td id="brw_b_id">${detail.b_id}</td>
+                      <td id="b_status">${detail.b_status}</td>
+                  <td>
+                         <c:choose>
+                               <c:when test="${detail.b_status eq '대출가능'}">
+                           <button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${detail.b_id}">대출신청</button>
+                               </c:when>
+                               <c:when test="${detail.b_status eq '대출불가'}">
+                                  <input type="hidden">
+                               </c:when> 
+                               <c:when test="${detail.b_status eq '대출중'}">
+                           <input type="hidden">
+                               </c:when>
+                     </c:choose>
+                      </td>
                    
                    <td>
                       <c:choose>
-                            <c:when test="${detail.b_status eq '대출중'}">
-                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${dto.b_id}" >예약신청</button>
+                            <c:when test="${detail.b_status eq '대출중' && detail.reserve_able eq true}">
+                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${detail.b_id}" >예약신청</button>
                             </c:when>
-                            <c:when test="${detail.b_status eq '대출불가'}">
+                            <c:when test="${detail.b_status eq '대출불가' && detail.reserve_able eq false}">
                                <input type="hidden">
                             </c:when>
-                            <c:when test="${detail.b_status eq '대출신청'}">
+                            <c:when test="${detail.b_status eq '대출신청' && detail.reserve_able eq false}">
                         <input type="hidden">
                             </c:when>
                   </c:choose>
@@ -153,36 +119,6 @@ var msg = "${msg}"
    if (msg != "") {
       alert(msg);
    }
-
-
- 
-   function bookbrw(brwId) {
-      var bookID = $(brwId).attr("bookID");
-       console.log(bookID);
-       var loginId = $(brwId).attr("loginId");
-       console.log(loginId);
-      
-      $.ajax({
-         type:'get',
-         url:'bookDetailBrw.ajax',
-         data:{
-            b_id : bookID,
-            loginId : loginId
-         },
-         dataType:'JSON',
-         success:function(data) {
-            
-         },
-         error:function(e) {
-            console.log(e);
-         }
-      });
-    }
-      
-
-if (msg != "") {
-   alert(msg);
-}
 
 function bookbrw(brwId) { 
       var bookID = $(brwId).attr("bookID");
@@ -209,6 +145,7 @@ function bookbrw(brwId) {
                },
                error:function(e) {
                   console.log(e);
+     
                   //location.reload(true);
                }
             });
@@ -225,86 +162,36 @@ function bookreason(brwId) {
        console.log(loginId);
        var msg = "";
        
-      $.ajax({
-         type:'get',
-         url:'bookreason.ajax',
-         data:{
-            b_id : bookID,
-            loginId : loginId,
-			msg : msg
-         },
-         dataType:'JSON',
-         success:function(data) {
-           // alert(data.msg);
-         },
-         error:function(e) {
-            
-         }
-      });
-
-   }
-
-   $(".brwBtn").on("click",function(){
-         $(this).hide();
-         alert("대출신청이 완료되었습니다");
-   });
-      
-/* function bookreason(this){
-	     alert(msg);
-   }; */
-   
-   $(".bookreason").on("click",function(){
-       $(this).hide();
-       alert("예약신청이 완료되었습니다");
- });
-       
        if(loginId == null || loginId == ''){
-         console.log("비회원");
-         alert("도서예약은 로그인 후 이용가능한 서비스입니다.");
-         location.href="/login/login";
-      }else {
-         
-         $.ajax({
-                  type:'get',
-                  url:'bookreason.ajax',
-                  data:{
-                     b_id : bookID,
-                     loginId : loginId
+           console.log("비회원");
+           alert("도서대출은 로그인 후 이용가능한 서비스입니다.");
+           location.href="/login/login";
+        } else {
+        	
+        	$.ajax({
+                type:'get',
+                url:'bookreason.ajax',
+                data:{
+                   b_id : bookID,
+                   loginId : loginId,
+       			msg : msg
+                },
+                dataType:'JSON',
+                success:function(data) {
+                  alert(data.msg);
+                  location.reload(true);
+                },
+                error:function(e) {
+                   
+                }
+             });
+        	
+        }
 
-                  },
-                  dataType:'JSON',
-                  success:function(data) {
-                     alert(data);
-                  },
-                  error:function(e) {
-                     
-                  }
-               });
-         
-      }
-               
    }
 
-$(".brwBtn").on("click",function(){
 
-     //$(this).hide();
 
-  
-   
-});
-      
-   $(".bookreason").on("click",function(){
-      alert("예약신청이 완료되었습니다.");
-   });
-   
- function back() {
-    
-    var referrer = document.referrer;
-    console.log(referrer);
-    location.href = referrer;
-  
-  //histiory.go(-1);
- }
 
 </script>
 </html>

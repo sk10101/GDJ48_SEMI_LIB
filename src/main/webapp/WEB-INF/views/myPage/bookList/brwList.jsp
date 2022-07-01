@@ -4,15 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <title>대출내역(회원)</title>
-<!-- <link rel="stylesheet" href="../resources/css/bookList.css"> -->
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/myBook.css"/>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-	
 </style>
 </head>
 <body>
@@ -30,66 +28,51 @@
 	        <br/>
 	        <a href="myUpdateDetail.go">회원정보</a>
 	    </div>
-                <div class="middle-right">
-                    <div class="middle-right-1">
-                            <table>
-                                <thead>
-                                    <tr>
-                                       <th><a href="/brwHistory">대출내역</a></th>
-                                        <th><a href="/brwList">이전대출내역</a></th>
-                                        <th><a href="/reserve">예약내역</a></th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        
-                    </div>
-                 </div>    
-<table class="">
-
-    	<thead>
-	         <tr>
-	            <th>대출번호</th>
-				<th>도서제목</th>
-				<th>대출일</th>
-				<th>반납일</th>
-				<th>상태</th>
-	         </tr>
-    	</thead>
-    	<tbody id="brwBookList">
-    	
-    	</tbody>
-	    	<tr>
-				<td colspan="5" id="paging">
-					<div class="container">
-						<nav aria-label="Page navigation" style="text-align:center">
-								<ul class="pagination" id="pagination" >
-								</ul>					
-						</nav>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan ="5" id="paging">
-				        <select id="pagePerNum">
-							<option value="5">5</option>
-							<option value="10" selected="selected">10</option>
-							<option value="15">15</option>
-							<option value="20">20</option>
-						</select>
-				       	<select id="option" name="option">
-				       		<option value="제목">제목</option>
-				       		<option value="상태">상태</option>
-				       	</select>
-			        	<input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
-				</td>
-			</tr>
-        </table>
+	    <div class="section">
+	    	<div class="brwSelect-area">
+		    	<a href="/brwHistory">대출내역</a>
+	            <a class="brwSelect" href="/brwList">이전대출내역</a>
+	            <a href="/reserve">예약내역</a>
+            </div>    
+            <div class="table-area">
+				<table class="borrow_table">
+			    	<thead>
+				         <tr>
+				            <th>대출번호</th>
+							<th>도서제목</th>
+							<th>대출일</th>
+							<th>반납일</th>
+							<th>상태</th>
+				         </tr>
+			    	</thead>
+			    	<tbody id="brwBookList">
+			    	
+			    	</tbody>
+		        </table>
+				<div class="container">
+					<nav aria-label="Page navigation" style="text-align:center">
+							<ul class="pagination" id="pagination" >
+							</ul>					
+					</nav>
+				</div>
+				<div class="searchOption">
+			        <select class="selectBtn" id="pagePerNum">
+						<option value="5">5</option>
+						<option value="10" selected="selected">10</option>
+						<option value="15">15</option>
+						<option value="20">20</option>
+					</select>
+			       	<select class="selectBtn" id="option" name="option">
+			       		<option value="제목">제목</option>
+			       		<option value="상태">상태</option>
+			       	</select>
+		        	<input class="searchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
+		        	<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+	        	</div>
+	        </div>	
         </div>
-</body>
-
-      	
-        
+	</div>
+</body>       
 </body>
 <script>
 var msg = "${msg}"

@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
-<link rel="stylesheet" href="resources/css/claim.css">
+<link rel="stylesheet" href="resources/css/myClaim.css">
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>

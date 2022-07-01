@@ -39,7 +39,7 @@
 	width:100%;
 }
 .penalty_table{
-	width:90%;
+	width:95%;
 	margin-left:5%;
 	text-align:center;
 	border-collapse:collapse;
@@ -112,7 +112,22 @@
 	background-color:#476930;
 	color:#fff;
 }
-
+.penalty_table .col1,.col6{
+	width:8%;
+}
+.penalty_table .col4,.col5{
+	width:20%;
+}
+.penalty_table .col3{
+	width:15%;
+}
+.penalty_table td a{
+	text-decoration-line:none;
+	color:#333;
+}
+.penalty_table td a:hover{
+	color:blue;
+}
 
 
 /*페이징*/
