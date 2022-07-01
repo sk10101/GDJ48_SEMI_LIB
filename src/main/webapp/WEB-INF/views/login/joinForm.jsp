@@ -80,10 +80,10 @@
 	          return false; 
 	       }
 	      
-	      if(id== ""|| id == null){
+	       if(id == ""|| id == null){
 	         alert("아이디를 입력해주세요");
 	         return false;
-	      }
+	      } 
 		console.log('아이디 중복 체크 : '+id);		
 		$.ajax({
 			type:'get',
@@ -141,10 +141,10 @@
 	
 	function join(){
 		console.log('회원가입');
-		var id = $('#id');
-		var pw = $('#pw');
-		var name = $('#name');
-		var phone = $('#phone');
+		var id = $('#joinId');
+		var pw = $('#joinPw');
+		var name = $('#joinName');
+		var phone = $('#joinPhone');
 		var email = $('#email');
 	    
 	    var pwdCheck = /^(?=.*[a-zA-Z]).{4,50}$/; 
@@ -153,18 +153,18 @@
 		
 	    if(overChkId && overChkEmail){
 			
-			 if(id.val() == ""){
+			 /* if(id.val() == ""){
 				alert("아이디를 입력해 주세요!");
-				
-				$id.focus();
-			}else if(pw.val() == ""){
+				id.focus();
+			}else */ if(pw.val() == ""){
 				alert("비밀번호를 입력해 주세요!");
 				pw.focus();
-			} else if(!pwdCheck.test($("#pw").val())) {
+			} else if(!pwdCheck.test($("#joinPw").val())) {
 			    alert("비밀번호는 한글을 제외한 4자리 이상이어야 합니다.");
 			    pwd.focus();
 			    return false;
 			  }  /* else if(pw.val().length <= 4){
+
 				  alert("비밀번호는 4자 이상입니다.")
 			  } */
 			
@@ -175,7 +175,7 @@
 				alert("번호를 입력해 주세요!");
 				phone.focus();
 				
-			} else if(!reg.test($("#phone").val())){
+			} else if(!reg.test($("#joinPhone").val())){
 				alert("전화번호는 숫자만 입력할 수 있습니다.");
 				phone.focus();
 			    return false;

@@ -161,13 +161,16 @@ public class BoardController {
    
    // 건의사항 삭제
    @RequestMapping(value = "/claimDel.do")
-   public String claimDel(Model model, @RequestParam int claim_id) {
+   public String claimDel(Model model, HttpSession session, @RequestParam int claim_id) {
       logger.info("삭제 요청 : " + claim_id);
-      
-      // 관리자가 삭제하면 관리자 건의사항 페이지로 이동하도록 수정(후에 id 기능 넣을때) ================================================
+
+      String page = "redirect:/claimList";
       service.claimDel(claim_id);
+      if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
+    	  page = "redirect:/adminClaimList";
+      }
       
-      return "redirect:/claimList";
+      return page;
    }
    
    /*
@@ -250,7 +253,7 @@ public class BoardController {
          logger.info("건의사항 답변 글쓰기 페이지 이동 (관리자만 가능)");
          model.addAttribute("claim_id",claim_id);
       } else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
-         model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+         model.addAttribute("msg","관리자 회원만 이용 가능한 서비스 입니다.");
          page = "/main";
       } else {
          model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
@@ -282,7 +285,7 @@ public class BoardController {
          service.claimDetail(model, claim_id);
          service.replyDetail(model, claim_id);
       } else if (session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
-         model.addAttribute("msg","일반 회원만 이용 가능한 서비스 입니다.");
+         model.addAttribute("msg","관리자 회원만 이용 가능한 서비스 입니다.");
          page = "main";
       } else {
          model.addAttribute("msg","로그인이 필요한 서비스 입니다.");
@@ -301,4 +304,5 @@ public class BoardController {
       
       return service.replyUpdate(photos, params);
    }
+   
 }

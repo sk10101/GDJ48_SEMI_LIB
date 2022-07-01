@@ -155,7 +155,7 @@ $('#pagePerNum').on('change',function(){
 			content += '		<td>'+item.brw_id+'</td>';
 			content += '		<td class="brwBookTitle"><a href="bookDetail.do?b_id='+item.b_id+'">'+item.b_title+'</a></td>';
 			content += '		<td>'+item.brw_date+'</td>';
-			content += '		<td>'+item.return_date+'</td>';
+			content += '		<td>'+item.return_finish+'</td>';
 			content += '		<td>'+item.brw_status+'</td>';
 			content += '	</tr>';
 		});
