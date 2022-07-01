@@ -2,6 +2,7 @@ package com.gdj.lib.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -134,13 +135,19 @@ public class MyController {
 			model.addAttribute("msg", "※ 미반납된 도서가 있습니다. 확인후 탈퇴 신청해 주시기 바랍니다. "
 					+ "  예약, 대출, 연체시 탈퇴 불가");
 			
+			
 			// pw 확인 if 문
 			 if(pw_chk.equals(Oripw_chk)) {
 				// 비밀번호가 공백일때 if 문
 				 if(mb_pw == "") {
 					 service.myUpdateTwo(mb_id,name,phone);
 				 } else {
+					 if(mb_pw.length() < 4) {
+						 model.addAttribute("msg", "비밀번호 형식에 맞게 입력해 주세요.");
+						 page = "myPage/info/memberDetail";
+					 } else {
 					 service.myUpdate(mb_id,mb_pw,name,phone);
+					 }
 				 }
 					
 			} else {
@@ -170,7 +177,12 @@ public class MyController {
 				 if(mb_pw == "") {
 					 service.myUpdateTwo(mb_id,name,phone);
 				 } else {
+					 if(mb_pw.length() < 4) {
+						 model.addAttribute("msg", "비밀번호 형식에 맞게 입력해 주세요.");
+						 page = "myPage/info/memberDetail";
+					 } else {
 					 service.myUpdate(mb_id,mb_pw,name,phone);
+					 }
 				 }
 					
 			} else {
@@ -182,6 +194,25 @@ public class MyController {
 				
 		}
 		
+		
+		
+		boolean password_check = Pattern.matches("^(?=.*[a-zA-Z]).{4,50}$", mb_pw);
+		
+		logger.info("비밀번호 체크 : " +password_check);
+		
+		if(!(password_check == true) && !(mb_pw == "")) {
+			model.addAttribute("msg", "비밀번호 형식에 맞게 입력해 주세요.");
+			 page = "myPage/info/memberDetail";
+		}
+		
+		boolean phone_check = Pattern.matches("^[0-9]*$", phone);
+		
+		if(phone_check == false) {
+			model.addAttribute("msg", "전화번호 형식에 맞게 입력해 주세요.");
+			 page = "myPage/info/memberDetail";
+		}
+		
+		logger.info("전화번호 체크 : "+phone_check);
 			
 		return page;
 	}

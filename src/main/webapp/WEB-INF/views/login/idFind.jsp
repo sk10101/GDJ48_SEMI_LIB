@@ -21,7 +21,7 @@
 	</table>
 	<div class="FindBtn-area">
 		<button class="FindBtn" type="button" onclick="idFind()">ID찾기</button>
-		<button class="FindBtn" type="button" onclick="location.href='/member/login'">취소</button>
+		<button class="FindBtn" type="button" onclick="location.href='../login.go'">취소</button>
 	</div>
 </body>
 <script>
@@ -35,7 +35,7 @@ function idFind(){
 		success:function(data){			
 			if(data){
 				alert("고객님의 아이디는 : "+ data + "입니다");
-				 location.href="/member/login"
+				 location.href="../login.go"
 			}else{
 				alert("고객님의 정보를 찾을수 없습니다.");				
 			}

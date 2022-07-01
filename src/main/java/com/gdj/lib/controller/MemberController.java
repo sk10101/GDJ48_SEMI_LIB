@@ -189,13 +189,18 @@ public class MemberController {
 			//2. 맞는 id라면 그 회원정보랑 블랙리스트 테이블 조인해서 블랙리스트 테이블에 값 넣어주기
 			if(s_id != null) {
 				logger.info("s_id 들어옴 : "+s_id);
-				if (service.blackAdd(params,session) == true) { 
-					model.addAttribute("msg","블랙리스트 목록에 추가되었습니다.");
-					page = "redirect:/blackList.do";
-				}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
-					logger.info("존재하지 않는 아이디");
-					model.addAttribute("msg","입력한 회원 ID 를 다시 확인해주세요.");
-					page = "admin/black/blackAdd";
+				int con = service.blackCon(s_id);
+				if(con > 1) {
+					logger.info("블랙리스트 중복확인 : " + con);
+					if (service.blackAdd(params,session) == true) { 
+						page = "redirect:/blackList.do";
+					}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
+						logger.info("존재하지 않는 아이디");
+						page = "admin/black/blackAdd";
+					}
+				}else {
+					
+					page = "redirect:/blackList.go";
 				}
 			}
 		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {

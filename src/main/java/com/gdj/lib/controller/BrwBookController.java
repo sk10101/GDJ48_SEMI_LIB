@@ -3,13 +3,11 @@ package com.gdj.lib.controller;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.mapping.ParameterMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdj.lib.dto.BrwBookDTO;
-import com.gdj.lib.dto.KioskDTO;
-import com.gdj.lib.dto.PhotoDTO;
 import com.gdj.lib.service.BrwBookService;
 
 @Controller
@@ -91,6 +87,7 @@ public class BrwBookController {
 		
 		logger.info("도서 상세보기" + b_id); 
 		service.detail(model, b_id);
+		
 				
 		return "book/bookDetail";
 				
@@ -129,7 +126,9 @@ public class BrwBookController {
 	public HashMap<String, String> bookDetailBrw(HttpSession session, Model model, 
 			@RequestParam HashMap<String, String> params) {
 			
-			String msg = "도서대출이 완료되었습니다.";
+			
+			
+			String msg = "";
 			HashMap<String, String> map = new HashMap<String, String>();
 		
 			//현재대출신청 기간..
@@ -143,38 +142,96 @@ public class BrwBookController {
 			logger.info(mb_id);
 			logger.info("책번호 아이디 : "+ params);
 			
+			
+//			if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
+//	            logger.info("회원 : 도서대출 서비스 컨트롤러");
+//
+//	            // loginId가 대출한 책이 연체 되었는지 확인
+//	            int chkReturnOver = service.chkReturnOver(mb_id);
+//	            if(chkReturnOver > 0) {
+//	               // 연체 페널티가 부과되었는지 확인
+//	               int chkPenalty = service.chkPenalty(mb_id);
+//	               // 페널티 부과된 내용이 없다면
+//	               if (chkPenalty == 0) {
+//	                  // 연체 페널티 부과
+//	                  service.insertPenalty(mb_id);
+//	                  msg = "이용정지 입니다.";
+//	               }               
+//	            } else {
+//	            	
+//	            	//예약한 아이디가 있다면 체크
+////	            	String bookCheck = service.bookCheck(params);
+////	            	
+////	            	if (bookCheck > 1) {
+////		            	logger.info("예약가능 아이디체크 : " + params);
+////	            		service.bookCheck(params);
+////	            		service.bookDetailBrw(params);
+////	            	} else {
+////						msg = "예약중인 도서 입니다.";
+////					}
+//	            	
+//	            	ArrayList<BrwBookDTO> bookCheck = service.bookCheck(params);
+//		            model.addAttribute("bookCheck", bookCheck);
+//		            logger.info("예약된 책 권수: "+bookCheck.size());
+//		            if(bookCheck.size() > 0) {
+//		            	service.idCheck(params);
+//		            	logger.info("예약된 책 번호와 아이디 가 일치시 : " + params);
+//		            } else {
+//						msg = "예약중인 도서입니다.";
+//					}
+//	               }               
+//	            } else {
+//	               
+//	               ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+//	               model.addAttribute("brwlist", brwlist);
+//	               logger.info("list 갯수: "+brwlist.size());
+//
+//	               if(brwlist.size() <= 5 ) {
+//	                  service.bookDetailBrw(params);
+//	                  msg = "도서대출 완료";
+//	               } else {
+//	                  msg = "도서권수가 초과되었습니다.";
+//	               }               
+//	         
+//	         } else { // 회원x 관리자
+//	            msg = "일반회원만 이용가능한 서비스입니다.";
+//	         }
+//
+//	         map.put("msg", msg);
+//	         return map;
+//		}
 			if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
-	            logger.info("회원 : 도서대출 서비스 컨트롤러");
-	            // loginId가 대출한 책이 연체 되었는지 확인
-	            int chkReturnOver = service.chkReturnOver(mb_id);
-	            if(chkReturnOver > 0) {
-	               // 연체 페널티가 부과되었는지 확인
-	               int chkPenalty = service.chkPenalty(mb_id);
-	               // 페널티 부과된 내용이 없다면
-	               if (chkPenalty == 0) {
-	                  // 연체 페널티 부과
-	                  service.insertPenalty(mb_id);
-	               }               
-	            } else {
-	               
-	               ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
-	               model.addAttribute("brwlist", brwlist);
-	               logger.info("list 갯수: "+brwlist.size());
-	               if(brwlist.size() <= 5 ) {
-	                  service.bookDetailBrw(params);
-	                  msg = "도서대출 완료";
+	               logger.info("회원 : 도서대출 서비스 컨트롤러");
+	               // loginId가 대출한 책이 연체 되었는지 확인
+	               int chkReturnOver = service.chkReturnOver(mb_id);
+	               if(chkReturnOver > 0) {
+	                  // 연체 페널티가 부과되었는지 확인
+	                  int chkPenalty = service.chkPenalty(mb_id);
+	                  // 페널티 부과된 내용이 없다면
+	                  if (chkPenalty == 0) {
+	                     // 연체 페널티 부과
+	                     service.insertPenalty(mb_id);
+	                  }               
 	               } else {
-	                  msg = "도서권수가 초과되었습니다.";
-	               }               
+	                  
+	                  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+	                  model.addAttribute("brwlist", brwlist);
+	                  logger.info("list 갯수: "+brwlist.size());
+	                  if(brwlist.size() <= 5 ) {
+	                     service.bookDetailBrw(params);
+	                     msg = "도서대출 완료";
+	                  } else {
+	                     msg = "도서권수가 초과되었습니다.";
+	                  }               
+	               
+	               } 
+	            } else { // 회원x 관리자
+	               msg = "일반회원만 이용가능한 서비스입니다.";
+	            }
 	            
-	            } 
-	         } else { // 회원x 관리자
-	            msg = "일반회원만 이용가능한 서비스입니다.";
-	         }
-	         
-	         map.put("msg", msg);
-	         return map;
-		}
+	            map.put("msg", msg);
+	            return map;
+	      }
 		
 		
 		
@@ -189,6 +246,12 @@ public class BrwBookController {
 	@ResponseBody
 	public String reserveBookBrw(HttpSession session, Model model, 
 			@RequestParam HashMap<String, String> params) {
+		
+		
+		
+		
+		
+		
 		
 		logger.info("받아온 예약번호, 책번호 : "+ params );
 		service.reserveBookBrw(params);
@@ -219,7 +282,9 @@ public class BrwBookController {
 		  long nowtime = Long.parseLong(nowTime);
 		
 
+
 	  if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {		  
+
 		  
 		// 이용정지 내역에 해당 아이디가 있나 조회
 		  int penaltyCheck = service.penaltyCheck(mb_id);
@@ -251,31 +316,53 @@ public class BrwBookController {
 						  logger.info(msg);
 						  map.put("msg", msg);
 					  }else { 		
-						  msg = "예약신청이 완료되었습니다."; 
-						  map.put("msg", msg);
-						  service.bookreason(params);
-						  service.reserve_able(params);
+						  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+				          logger.info("예약권수: "+brwlist.size());
+				          if(brwlist.size() <= 5 ) {
+				               service.bookreason(params);
+				               service.reserve_able(params);
+				               msg = "도서 예약신청이완료되었습니다.";
+				               map.put("msg", msg);
+				         } else {
+				               msg = "도서 예약권수가 초과되었습니다.";
+				               map.put("msg", msg);
+				            } 
 					  }
 				  }  else { 		
-					  msg = "예약신청이 완료되었습니다."; 
-					  map.put("msg", msg);
-					  service.bookreason(params);
-					  service.reserve_able(params);
+					  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+			          logger.info("예약권수: "+brwlist.size());
+			          if(brwlist.size() <= 5 ) {
+			               service.bookreason(params);
+			               service.reserve_able(params);
+			               msg = "도서 예약신청이완료되었습니다.";
+			               map.put("msg", msg);
+			         } else {
+			               msg = "도서 예약권수가 초과되었습니다.";
+			               map.put("msg", msg);
+			            } 
 				  }
 
 		  
 			  }else {
 				 logger.info("아직 정지중입니다 ㅠㅠ");
-				 msg = penaltyDate+"까지 정지기간입니다.";
+				 msg = penaltyDate+" 까지 정지기간입니다.";
+				 map.put("msg", msg);
 			  }
 		
 
-	  }else{  	 
-		  service.bookreason(params);
-		  service.reserve_able(params);
-		  msg = "예약신청이 완료되었습니다."; 
-		  map.put("msg", msg);
-		 }
+			  }else{  	 
+				  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+		          logger.info("예약권수: "+brwlist.size());
+		          if(brwlist.size() <= 5 ) {
+		               service.bookreason(params);
+		               service.reserve_able(params);
+		               msg = "도서 예약신청이완료되었습니다.";
+		               map.put("msg", msg);
+		         } else {
+		               msg = "도서 예약권수가 초과되었습니다.";
+		               map.put("msg", msg);
+		            } 
+				 }
 	  
 	 
 	  }else{  	 

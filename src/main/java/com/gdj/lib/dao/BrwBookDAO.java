@@ -76,6 +76,7 @@ public interface BrwBookDAO {
 	ArrayList<BrwBookDTO> brwStatusSearch(int cnt, int offset, String word, String mb_id);
 
 	int brwBookCount(String mb_id);
+	
 	int chkReturnOver(String mb_id);
 
 	int chkPenalty(String mb_id);
@@ -86,6 +87,17 @@ public interface BrwBookDAO {
 
 	
 	ArrayList<PhotoDTO> photoList(String b_id);
+
+	BrwBookDTO aaa(String b_id);
+
+	ArrayList<BrwBookDTO> duplicateCheck(HashMap<String, String> params);
+
+	ArrayList<BrwBookDTO> bookCheck(HashMap<String, String> params);
+
+	Object idCheck(HashMap<String, String> params);
+
+	
+
 
 	
 

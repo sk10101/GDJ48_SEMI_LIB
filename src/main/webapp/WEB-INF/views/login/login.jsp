@@ -23,12 +23,12 @@
 	        </div>
 	        <div class="btn-area">
 	            <input type="submit" id="login" value="로그인">
-	            <input type="button" id="join" value="회원가입" onclick="location.href='joinForm.go'"/>
+	            <input type="button" id="join" value="회원가입" onclick="location.href='./member/joinForm.go'"/>
 	        </div>
 	        <div class="links">
-		       	<a href="idFind">ID 찾기</a> 
+		       	<a href="./member/idFind">ID 찾기</a> 
 		       	 || 
-		       	<a href="pwFind">PW 찾기 </a>
+		       	<a href="./member/pwFind">PW 찾기 </a>
 	       	</div>
         </form>
     </div>
