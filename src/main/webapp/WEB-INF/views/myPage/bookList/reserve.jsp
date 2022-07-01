@@ -98,7 +98,7 @@
 													<button class="brwBtn" onclick="bookbrw(this)"
 															brwValue="${brwdto.reserve_id}"
 															bookID="${brwdto.b_id}"
-															loginId="${sessionScope.loginId}">대출신청
+															loginId="${sessionScope.loginId}"><a href="reserve">대출신청</a>
 													</button>
 													
 												</c:when>
@@ -111,7 +111,7 @@
 											<td id="del">
 												<button class="delBtn" onclick="bookDel(this)"
 														bookID="${brwdto.b_id}"
-														idValue="${brwdto.reserve_id}">취소
+														idValue="${brwdto.reserve_id}"><a href="reserve">취소</a>
 												</button>
 											</td>
                                     	<tr>
@@ -152,7 +152,7 @@ if (msg != "") {
 			},
 			dataType:'JSON',
 			success:function(data) {
-				consloe.log(data)
+				consloe.log(data);
 			},
 			error:function(e) {
 				console.log(e);

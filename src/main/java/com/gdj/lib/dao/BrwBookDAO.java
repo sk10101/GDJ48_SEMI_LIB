@@ -78,6 +78,9 @@ public interface BrwBookDAO {
 
 	void insertPenalty(String mb_id);
 
+	ArrayList<BrwBookDTO> brwlist(HashMap<String, String> params);
+
+	
 	ArrayList<PhotoDTO> photoList(String b_id);
 
 	
