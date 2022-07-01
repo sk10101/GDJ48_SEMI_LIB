@@ -1,0 +1,64 @@
+@charset "UTF-8";
+.info-area{
+	width:850px;
+}
+.bbs{
+	width:95%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.bbs th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
+}
+.bbw{
+	width:95%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.bbw th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
+}
+.bbs th{
+	width:130px;
+}
+.bbw th{
+	width:130px;
+}
+.bbs td{
+	text-align:left;
+}
+.bbs input{
+	border:1px solid #333;
+	border-radius:5px;
+	padding:5px;
+}
+.bbw td{
+	text-align:left;
+}
+.bbw input{
+	border:1px solid #333;
+	border-radius:5px;
+	padding:5px;
+}
+.memberDetailBtn-area{
+	width:100%;
+	text-align:center;
+	padding:15px;
+}
+.memberDetailUpdateBtn{
+	background:#86b049;
+	padding:2px 5px;
+	color:#fff;
+	font-size:16px;
+	font-weight:700;
+}
+.memberDetailUpdateBtn:hover{
+	cursor:pointer;
+	background-color:#476930;
+}
