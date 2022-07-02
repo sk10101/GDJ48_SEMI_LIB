@@ -37,7 +37,7 @@
 		    	<h3>블랙리스트 회원 상세보기</h3>
 		    </div>
 			   <div class="info-area">
-			   <form action="blackUpdate.do" method="post">
+			   <form action="blackUpdate.do" id="form" method="post">
 			   <input type ="hidden" id ="black_id" name = "black_id" value = "${param.black_id}"/>
 			    	<table class="bbs">
 				        <tr>
@@ -82,16 +82,16 @@
 	    </div>
     </div>
 </body>
-<script>
+<script 'type= text/javascript'>
 /* if(id== ""|| id == null){
     alert("아이디를 입력해주세요");
     return false; 
  }*/
  
  function update(){
-	var form = document.getElementById("form");
-	var id = document.getElementById("clear");  
-	const checkbox = document.getElementById('black_cancel');
+	var form = document.querySelector("#form");
+	var id = document.querySelector("#form #clear");  
+	const checkbox = document.querySelector('#form #black_cancel');
 	// 2. checked 속성을 체크합니다.
 	const is_checked = checkbox.checked;
 	if(is_checked){
