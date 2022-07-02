@@ -190,9 +190,10 @@ public class MemberController {
 			if(s_id != null) {
 				logger.info("s_id 들어옴 : "+s_id);
 				int con = service.blackCon(s_id);
-				if(con > 1) {
+				if(con < 1) {
 					logger.info("블랙리스트 중복확인 : " + con);
 					if (service.blackAdd(params,session) == true) { 
+						
 						page = "redirect:/blackList.do";
 					}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
 						logger.info("존재하지 않는 아이디");
