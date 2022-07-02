@@ -184,7 +184,7 @@ function drawList(reserveList) {
 			if (item.reason!=null){
 				content += ' ';
 			}else{
-				content += ' <button onclick="cancel(this)" id="' +item.reserve_id+ '">취소</button> ';
+				content += ' <button onclick="cancel(this)" id="' +item.reserve_id+ '" b_id=" ' +item.b_id+ ' ">취소</button> ';
 			}
 		content += '</td>';
 		content += '</tr>';
@@ -236,8 +236,8 @@ function searchList(page){
   
 function cancel(btn) {
 	var id = $(btn).attr("id");
-	console.log(id);
-	
+	var b_id = $(btn).attr("b_id");
+	console.log(b_id);
 	$.ajax({
 		type:'get',
 		url:'reserveCancel.ajax',

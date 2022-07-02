@@ -490,6 +490,12 @@ public class MemberService {
 		return dao.blackCon(s_id);
 	}
 
+	public int cancelUpdate(String b_id) {
+		
+		return dao.cancelUpdate(b_id);
+		
+	}
+
 	
 	
 	

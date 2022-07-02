@@ -326,9 +326,13 @@
 		SELECT COUNT(reserve_id) FROM reservation WHERE mb_id=#{param1}
 	</select>
 	
-	<update id="reserveCancel">
+	<update id="reserveCancel" >
 		UPDATE reservation SET reason = "정상" 
-		WHERE reserve_id = #{param1};
+		WHERE reserve_id = #{param1}
+	</update>
+	
+	<update id="cancelUpdate">
+		UPDATE book SET b_status = "대출가능" WHERE b_id = #{param1}
 	</update>
 	
 	<select id="allHisCount" resultType="int">

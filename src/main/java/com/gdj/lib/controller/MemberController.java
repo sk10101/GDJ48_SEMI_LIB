@@ -485,10 +485,12 @@ public class MemberController {
 	
 	@RequestMapping("/reserveCancel.ajax")
 	@ResponseBody
-	public int reserveCancel(@RequestParam String reserve_id) {
+	public int reserveCancel(@RequestParam String reserve_id, @RequestParam String b_id) {
 		
 		logger.info("예약 취소 요청:"+reserve_id);
 		int success = service.reserveCancel(reserve_id);
+		service.cancelUpdate(b_id);
+		
 		logger.info("완료:"+success);
 		return success;
 	}
