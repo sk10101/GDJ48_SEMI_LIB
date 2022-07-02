@@ -8,7 +8,7 @@
 		<div class="headerMyInfo">
 			<c:choose>
 				<c:when test="${sessionScope.loginId eq null}">
-					<a class="headerLoginTab" href="member/login">로그인</a>
+					<a class="headerLoginTab" href="login.go">로그인</a>
 				</c:when>
 				<c:otherwise>
 					<div>${sessionScope.loginId}(${sessionScope.mb_class})님, 반갑습니다.&nbsp;&nbsp;<a class="headerLoginTab" href="logout.do">[ 로그아웃 ]</a></div>

@@ -192,6 +192,7 @@
 	
 	
 	function drawList(noticeList) {
+		var mb_id = "${sessionScope.loginId}";
 		var mb_class = "${sessionScope.mb_class}";
 		console.log(mb_class);
 		var content = '';
@@ -199,7 +200,7 @@
 		noticeList.forEach(function(item){
 			//console.log(item.status);
 			content += '	<tr nID="' + item.notice_id + '">';
-			if(mb_class == "관리자") {
+			if(mb_class == "관리자" && mb_id != null) {
 				content += '		<td class="noticeCol"><input type="checkbox" id="chk" value="'+item.notice_id+'"/></td>';
 			} else {
 				
