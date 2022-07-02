@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.secionTitle{
+	width:100%;
+	text-align:left;
+	padding-left:10%;
+	padding-bottom:15px;
+}
+.brwSelect-area{
+	width:100%;
+	padding-left:10%;
+	padding-bottom:15px;
+}
+.brwSelect-area a{
+	text-decoration-line:none;
+	background:#c9dab2;
+	color:#333;
+	padding:2px 5px;
+	
+}
+.brwSelect-area a:hover{
+	background:#86b049;
+	color:#fff;
+}
+.brwSelect-area .brwSelect{
+	background:#86b049;
+	color:#fff;
+}
+.table-area{
+	width:100%;
+}
+.brw_table{
+	width:95%;
+	margin-left:5%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.brw_table th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
+}
+.brw_table td a{
+	text-decoration-line:none;
+	color:#333;
+}
+.brw_table td a:hover{
+	color:blue;
+}
+.brw_table .brwTitleTd{
+	text-align:left;
+}
+.hidden-area{
+	display:none;
+}

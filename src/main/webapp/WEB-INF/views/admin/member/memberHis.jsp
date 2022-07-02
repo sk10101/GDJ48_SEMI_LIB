@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <title>이전대출예약(관리자)</title>
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/adminMemberBrw.css"/>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -32,57 +32,54 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-	<section>
-		<h3>대출내역</h3>
-		<ul class="book_menu">
-			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
-			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
-			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
-			<li>회원 ID : <div id="mb_id">${param.mb_id}</div></li>
-		</ul>
-	    <table class="brw_table">
-		    <thead>
-		        <tr>
-		            <td>대출번호</td>          
-		            <td>도서제목</td>           
-		            <td>대출일</td>           
-		            <td>반납일</td>       
-		            <td>연체여부</td>      
-		        </tr>
-		    </thead>
-		    <tbody id="hisList">
-		        
-		    </tbody>
-		    
-		    <tr>
-		 		<td colspan="5" id="paging">
-		 			<!-- plugin 사용법 -->
-		 			<div class="container">
-		 				<nav aria-label="Page navigation" style="text-align:center">
-		 					<ul class="pagination" id="pagination">
-		 					</ul>
-		 				</nav>
-		 			</div>
-		 		</td>
-		 	</tr>
-		 	<tr>
-		 		<td colspan="5">
-			 		<select id="pagePerNum">
-					 	<option value="5">5</option>
-					 	<option value="10" selected="selected">10</option>
-					 	<option value="15">15</option>
-					 	<option value="20">20</option>
-					 </select>
-					 <select id="option" name="option">
-				       		<option value="도서제목">도서제목</option>
-				       		<option value="연체여부">연체여부</option>
-				       	</select>
-					 <input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        <input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
-				  </td>
-		 	</tr>
-		</table>
-	</section>
+		<div class="section">
+			<div class="secionTitle">
+				<h3>회원 대출내역</h3>
+			</div>
+			<div class="brwSelect-area">
+		    	<a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a>
+	            <a class="brwSelect" href="/memberHis.go?mb_id=${param.mb_id}">이전대출내역</a>
+	            <a href="/memberReserve.go?mb_id=${param.mb_id}">예약내역</a>
+	            &nbsp;&nbsp;회원 ID : ${param.mb_id}
+            </div>
+            <div class="hidden-area">
+				회원 ID : <div id="mb_id">${param.mb_id}</div>
+			</div>
+		    <table class="brw_table">
+			    <thead>
+			        <tr>
+			            <th>대출번호</th>          
+			            <th>도서제목</th>           
+			            <th>대출일</th>           
+			            <th>반납일</th>       
+			            <th>연체여부</th>      
+			        </tr>
+			    </thead>
+			    <tbody id="hisList">
+			        
+			    </tbody>
+			</table>
+ 			<div class="container">
+ 				<nav aria-label="Page navigation" style="text-align:center">
+ 					<ul class="pagination" id="pagination">
+ 					</ul>
+ 				</nav>
+ 			</div>
+ 			<div class="searchOption">
+		 		<select class="selectBtn" id="pagePerNum">
+				 	<option value="5">5</option>
+				 	<option value="10" selected="selected">10</option>
+				 	<option value="15">15</option>
+				 	<option value="20">20</option>
+				 </select>
+				 <select class="selectBtn" id="option" name="option">
+			       		<option value="도서제목">도서제목</option>
+			       		<option value="연체여부">연체여부</option>
+			       	</select>
+				 <input class="searchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
+		        <input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+			</div>
+		</div>		
 	</div>
 </body>
 <script>
@@ -162,7 +159,7 @@ function drawList(hisList) {
 		console.log(item);
 		content += '<tr>';
 		content += '<td>' +item.brw_id+ '</td>';
-		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
+		content += '<td class="brwTitleTd"><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_finish+'</td>';
 		content += '<td class="delay">';
