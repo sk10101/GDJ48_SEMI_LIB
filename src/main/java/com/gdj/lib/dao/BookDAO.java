@@ -42,6 +42,8 @@ public interface BookDAO {
 
 	Object delPhoto(String b_id);
 
+	int bookHide(String b_id);
+
 	
 
 	

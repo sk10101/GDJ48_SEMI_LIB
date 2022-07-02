@@ -150,6 +150,28 @@ public class BookController {
 		return page;
 	}
 	
+	@RequestMapping("/bookHide.ajax")
+	@ResponseBody
+	public HashMap<String, Object> bookHide(HttpSession session, 
+			@RequestParam(value="hideList[]") ArrayList<String> hideList) {
+		
+		String msg = "";
+		String mb_id = (String) session.getAttribute("loginId");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		logger.info("hideList : "+hideList);
+		
+		if (mb_id != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("관리자 : 도서 숨김 기능 컨트롤러");
+			int cnt = service.bookHide(hideList);
+			msg = hideList.size()+"개 중 " +cnt+"개 삭제 완료";
+		} else {
+			msg = "관리자만 이용가능합니다.";
+		}
+		map.put("msg", msg);
+		
+		return map;
+	}
+	
 	
 	
 }

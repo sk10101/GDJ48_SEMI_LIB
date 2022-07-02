@@ -262,6 +262,18 @@ public class BookService {
 		
 	}
 
+
+	public int bookHide(ArrayList<String> hideList) {
+
+		int cnt = 0;
+		for (String b_id : hideList) {
+			cnt += dao.bookHide(b_id);
+		}
+		
+		return cnt;
+		
+	}
+
 	
 
 	
