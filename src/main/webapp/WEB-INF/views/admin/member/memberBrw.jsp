@@ -30,31 +30,6 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-<<<<<<< HEAD
-	<section>
-		<h3>대출내역</h3>
-		<ul class="book_menu">
-			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
-			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
-			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
-			<li>회원 ID : ${param.mb_id}</li>
-		</ul>
-	    <table class="brw_table">
-	        <thead>
-	            <tr>
-	                <td>대출번호</td>          
-	                <td>도서제목</td>           
-	                <td>대출일</td>           
-	                <td>반납예정일</td>           
-	                <td>연장여부</td>
-	            </tr>
-	        </thead>
-	        <tbody id="list">
-
-			</tbody>
-	    </table>
-	</section>
-=======
 		<div class="section">
 			<div class="secionTitle">
 				<h3>회원 대출내역</h3>
@@ -75,8 +50,7 @@
 			                <th>대출번호</th>          
 			                <th>도서제목</th>           
 			                <th>대출일</th>           
-			                <th>반납예정일</th>       
-			                <th>대출상태</th>      
+			                <th>반납예정일</th>    
 			                <th>연장여부</th>
 			            </tr>
 			        </thead>
@@ -86,7 +60,7 @@
 			    </table>
 			</div>
 		</div>
->>>>>>> origin/master
+
 	</div>
 </body>
 <script>
