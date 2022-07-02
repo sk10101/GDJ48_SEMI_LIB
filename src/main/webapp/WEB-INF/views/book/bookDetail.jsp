@@ -173,7 +173,14 @@ function bookreason(brwId) {
 
    }
 
-
+function back() {
+    
+    var referrer = document.referrer;
+    console.log(referrer);
+    location.href = referrer;
+  
+  //histiory.go(-1);
+ }
 
 
 </script>

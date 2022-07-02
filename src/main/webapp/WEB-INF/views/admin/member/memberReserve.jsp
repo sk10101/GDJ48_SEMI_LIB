@@ -5,6 +5,10 @@
 <meta charset="UTF-8">
 <title>예약내역(관리자)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<<<<<<< HEAD
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+=======
+>>>>>>> origin/master
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
@@ -32,6 +36,57 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
+<<<<<<< HEAD
+	<section>
+		<h3>대출내역</h3>
+		<ul class="book_menu">
+			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
+			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
+			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
+			<li>회원 ID : ${param.mb_id}</li>
+		</ul>
+	    <table class="brw_table">
+		    <thead>
+		        <tr>
+		            <td>예약번호</td>          
+		            <td>도서제목</td>           
+		            <td>신청기간</td>           
+		            <td>예약종료사유</td>       
+		            <td>취소</td>      
+		        </tr>
+		    </thead>
+		    <tbody id="reserveList">
+		        
+		    </tbody>
+		    <tr>
+			 		<td colspan="4" id="paging">
+				 		<!-- plugin 사용법 -->
+				 		<div class="container">
+				 			<nav arial-label="page navigation" style="text-align:center">
+				 				<ul class="pagination" id="pagination"></ul>
+				 			</nav>
+				 		</div>
+			 		</td>
+			 	</tr>
+			 	<tr>
+				 	<td colspan ="6" id="paging">
+				        <select id="pagePerNum">
+							<option value="5">5</option>
+							<option value="10" selected="selected">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+						</select>
+						<select id="option">
+							<option value="b_title">도서제목</option>
+							<option value="reason">예약종료사유</option>
+						</select>
+						<input id="word" type="search" placeholder="검색" name="word" value=""/>
+			        	<input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
+					</td>
+			 	</tr>
+		</table>
+	</section>
+=======
 		<div class="section">
 			<div class="secionTitle">
 				<h3>회원 예약내역</h3>
@@ -79,6 +134,7 @@
 	        	<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 			</div>			
 		</div>
+>>>>>>> origin/master
 	</div>
 </body>
 <script>
@@ -89,7 +145,9 @@ if (msg != "") {
 	alert(msg);
 }
 
-var mb_id=$('#mb_id').html();
+let query = window.location.search; //url query 부분 가져오기 
+var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
+var mb_id=param.get("mb_id");
 console.log(mb_id);
 
 var currPage = 1;
@@ -167,7 +225,7 @@ function drawList(reserveList) {
 			d.setDate(d.getDate() + 22);
 			var date = d.toISOString().substring(0,10);
 			console.log(date);			
-		content += '<br/>' +date; 
+		content += '<br/>' +date;
 		content += '</td>';
 		content += '<td>';
 			if(item.reason==null) {
@@ -180,7 +238,11 @@ function drawList(reserveList) {
 			if (item.reason!=null){
 				content += ' ';
 			}else{
+<<<<<<< HEAD
+				content += ' <button onclick="cancel(this)" id="' +item.reserve_id+ '" b_id=" ' +item.b_id+ ' ">취소</button> ';
+=======
 				content += ' <button class="delBtn" onclick="cancel(this)" id="' +item.reserve_id+ '">취소</button> ';
+>>>>>>> origin/master
 			}
 		content += '</td>';
 		content += '</tr>';
@@ -232,8 +294,8 @@ function searchList(page){
   
 function cancel(btn) {
 	var id = $(btn).attr("id");
-	console.log(id);
-	
+	var b_id = $(btn).attr("b_id");
+	console.log(b_id);
 	$.ajax({
 		type:'get',
 		url:'reserveCancel.ajax',

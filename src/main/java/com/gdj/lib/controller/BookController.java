@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
 
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.service.BookService;
@@ -141,6 +142,37 @@ public class BookController {
 		return page;
 	}
 	
+
+	@RequestMapping(value = "/delPhoto.ajax")
+	public String delPhoto(
+			@RequestParam HashMap<String, String> params) {
+		logger.info("사진삭제 요청 : {}",params);
+		service.delPhoto(params);
+		String page = "redirect:/AdbookDetail.do?b_id="+params.get("b_id");
+		logger.info("사진 삭제 완료");
+		return page;
+	}
 	
+	@RequestMapping("/bookHide.ajax")
+	@ResponseBody
+	public HashMap<String, Object> bookHide(HttpSession session, 
+			@RequestParam(value="hideList[]") ArrayList<String> hideList) {
+		
+		String msg = "";
+		String mb_id = (String) session.getAttribute("loginId");
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		logger.info("hideList : "+hideList);
+		
+		if (mb_id != null && session.getAttribute("mb_class").equals("관리자")) {
+			logger.info("관리자 : 도서 숨김 기능 컨트롤러");
+			int cnt = service.bookHide(hideList);
+			msg = hideList.size()+"개 중 " +cnt+"개 삭제 완료";
+		} else {
+			msg = "관리자만 이용가능합니다.";
+		}
+		map.put("msg", msg);
+		
+		return map;
+	}	
 	
 }
