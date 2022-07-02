@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<th class="col1">PW확인</th>
-				<td class="col2" colspan="2"><input class="joinInput" type="password" id="joinPw2" /><font id="checkPw" size="2"></font></td>
+				<td class="col2" colspan="2"><input class="joinInput" type="password" id="joinPw2" />&nbsp;&nbsp;&nbsp;&nbsp;<font id="checkPw" size="2"></font></td>
 			</tr>
 			<tr>
 				<th class="col1">이름</th>
