@@ -66,16 +66,10 @@
 						<option value="20">20</option>
 					</select>
 					<select class="selectBtn" id="option" name="option">
-<<<<<<< HEAD
-						<option value="b_title">제목</option>
-						<option value="writer">저자</option>
-						<option value="publisher">출판사</option>
-						<option value="b_status">도서상태</option>
-=======
 						<option value="제목">제목</option>
 						<option value="저자">저자</option>
 						<option value="출판사">출판사</option>
->>>>>>> origin/master
+						<option value="도서상태">도서상태</option>
 					</select>
 					<input class="searchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
 					<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>

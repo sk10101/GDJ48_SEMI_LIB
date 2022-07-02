@@ -253,25 +253,17 @@ public class MemberController {
 	    		  params.put("admin_end", loginId);  
 	    		  
 	    		  
-	    	  }
 
-		      if(params.get("black_cancel") == null) {
-		         params.put("black_cancel", "false");  
-		        
-		      }else {
-		    	 
-		         params.put("admin_end", admin_end);  
-		         
-		         
-		      }
-	      
+	    	  }	     
+	      if(params.get("clear") != null) {
+	    	  params.put("end_reason", params.get("clear"));
+	      		}
+		     
 		      	if(params.get("end_reason") != null) {
 		    	  params.put("end_reason", params.get("end_reason"));
 	
 		    	  
-		    	  if(params.get("end_reason") != null) {
-		    		  params.put("end_reason", "");
-		    	  }
+
 	    	  
 	    	  service.blackUpdate(params);
 	    	  page = "redirect:/blackDetail.do?black_id="+params.get("black_id");

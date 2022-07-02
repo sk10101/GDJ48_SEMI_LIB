@@ -158,6 +158,9 @@
 			<when test="option.equals('출판사')">
 				AND publisher LIKE CONCAT('%',#{word},'%')
 			</when>
+			<when test="option.equals('도서상태')">
+				AND b_status LIKE CONCAT('%',#{word},'%')
+			</when>
 			<otherwise>
 			</otherwise>
 		</choose>

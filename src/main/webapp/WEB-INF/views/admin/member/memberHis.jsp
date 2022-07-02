@@ -32,58 +32,6 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-<<<<<<< HEAD
-	<section>
-		<h3>대출내역</h3>
-		<ul class="book_menu">
-			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
-			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
-			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
-			<li>회원 ID : ${param.mb_id} </li>
-		</ul>
-	    <table class="brw_table">
-		    <thead>
-		        <tr>
-		            <td>대출번호</td>          
-		            <td>도서제목</td>           
-		            <td>대출일</td>           
-		            <td>반납일</td>       
-		            <td>연체여부</td>      
-		        </tr>
-		    </thead>
-		    <tbody id="hisList">
-		        
-		    </tbody>
-		    
-		    <tr>
-		 		<td colspan="5" id="paging">
-		 			<!-- plugin 사용법 -->
-		 			<div class="container">
-		 				<nav aria-label="Page navigation" style="text-align:center">
-		 					<ul class="pagination" id="pagination">
-		 					</ul>
-		 				</nav>
-		 			</div>
-		 		</td>
-		 	</tr>
-		 	<tr>
-		 		<td colspan="5">
-			 		<select id="pagePerNum">
-					 	<option value="5">5</option>
-					 	<option value="10" selected="selected">10</option>
-					 	<option value="15">15</option>
-					 	<option value="20">20</option>
-					 </select>
-					 <select id="option" name="option">
-				       		<option value="도서제목">도서제목</option>
-				       	</select>
-					 <input id="word" type="search" placeholder="검색" name="word" value=""/>
-			        <input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>
-				  </td>
-		 	</tr>
-		</table>
-	</section>
-=======
 		<div class="section">
 			<div class="secionTitle">
 				<h3>회원 대출내역</h3>
@@ -94,9 +42,6 @@
 	            <a href="/memberReserve.go?mb_id=${param.mb_id}">예약내역</a>
 	            &nbsp;&nbsp;회원 ID : ${param.mb_id}
             </div>
-            <div class="hidden-area">
-				회원 ID : <div id="mb_id">${param.mb_id}</div>
-			</div>
 		    <table class="brw_table">
 			    <thead>
 			        <tr>
@@ -132,7 +77,6 @@
 		        <input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
 			</div>
 		</div>		
->>>>>>> origin/master
 	</div>
 </body>
 <script>
