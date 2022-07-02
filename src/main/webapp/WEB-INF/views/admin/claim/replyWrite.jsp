@@ -6,6 +6,7 @@
 <title>관리자 페이지 / 답변 글쓰기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/adminClaim.css"/>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -30,26 +31,24 @@
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
 	    <div class="section" id="main_content">
-	    	<form action="replyWrite.do" method="post" enctype="multipart/form-data">
-	         <table id="reply_writeForm">
-	             <tr>
-	                 <th>내용</th>
-	                 <td>
-		                 <input type="hidden" name="claim_id" value="${claim_id}"/>
-		                 <textarea name="reply_content">${reply.reply_content}</textarea>
-	                 </td>
-	             </tr>
-	             <tr>
-	                 <th>이미지</th>
-	                 <td><input type="file" name="photos" multiple="multiple"/></td>
-	             </tr>
-	             <tr>
-		           <th colspan="2">
-			            <input type="submit" value="저장"/>
-						<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim_id}'"/>
-					</th>
-				</tr>			
-	         </table>
+	    	<form class="replyForm" action="replyWrite.do" method="post" enctype="multipart/form-data">
+		         <table id="reply_writeForm">
+		             <tr>
+		                 <th>내용</th>
+		                 <td>
+			                 <input type="hidden" name="claim_id" value="${claim_id}"/>
+			                 <textarea name="reply_content">${reply.reply_content}</textarea>
+		                 </td>
+		             </tr>
+		             <tr>
+		                 <th>이미지</th>
+		                 <td><input type="file" name="photos" multiple="multiple"/></td>
+		             </tr>
+		         </table>
+		         <div class="replyFormBtn">
+		            <input type="submit" value="저장"/>
+					<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim_id}'"/>		
+				</div>
 	        </form>
 	    </div>
     </div>
