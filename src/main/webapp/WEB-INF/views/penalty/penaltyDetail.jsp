@@ -77,11 +77,12 @@
 					
 			        </tr>
 			        </table>
-	    			</form>
-		        <div class="penaltyDetailBtn-area">
+			          <div class="penaltyDetailBtn-area">
 		                <input type="button" value="돌아가기" onclick="location.href='penaltyList.go'"/>
 		                <input type="submit" value="수정"/>
-		        </div>	
+		     		   </div>	
+	    			</form>
+		      
     		</div>
     	</div>
     </div>
