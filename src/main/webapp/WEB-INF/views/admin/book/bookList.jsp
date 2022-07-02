@@ -59,8 +59,8 @@
 				<div class="searchOption">
 					<select class="selectBtn" id="pagePerNum">
 						<option value="5">5</option>
-						<option value="10" selected="selected">10</option>
-						<option value="15">15</option>
+						<option value="10">10</option>
+						<option value="15" selected="selected">15</option>
 						<option value="20">20</option>
 					</select>
 					<select class="selectBtn" id="option" name="option">
@@ -147,7 +147,7 @@ function drawList(bookList){
 		console.log(item);
 		content += '<tr>';
 		content += '<td>'+item.b_id+'</td>';
-		content += '<td><a href="AdbookDetail.do?b_id= '+item.b_id+' "> '+item.b_title+'</a></td>';
+		content += '<td class="brwTitleTd"><a href="AdbookDetail.do?b_id= '+item.b_id+' "> '+item.b_title+'</a></td>';
 		content += '<td>'+item.writer+'</td>';
 		content += '<td>'+item.publisher+'</td>';
 		content += '<td>'+item.b_status+'</td>';

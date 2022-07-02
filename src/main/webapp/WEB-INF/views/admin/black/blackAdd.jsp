@@ -6,6 +6,7 @@
 <title>블랙리스트 추가</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/adminBlack.css"/>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -29,21 +30,29 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-	<h3>블랙리스트 지정</h3>
-	<form action="blackAdd.do" method="post">
-	    <table class="bbs">
-	        <tr>
-	            <td>회원ID</td>          
-	            <th><input type="text" name="mb_id" value="${dto.mb_id }"/></th>            
-	        </tr>
-	        <tr>        
-	            <td>지정사유</td>
-	            <th><input type="text"  name="black_reason" value="${dto.black_reason }"/></th>                        
-	        </tr>
-	    </table>
-	    <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
-	    <input type="submit" value="추가"/>
-    </form>
+	    <div class="section">
+	    	<div class="title-area">
+		    	<h3>블랙리스트 지정</h3>
+		    </div>
+		   	<div class="blackAdd-area">
+				<form action="blackAdd.do" method="post">
+				    <table class="bbs">
+				        <tr>
+				            <th>회원ID</th>          
+				            <td><input type="text" name="mb_id" value="${dto.mb_id }"/></td>            
+				        </tr>
+				        <tr>        
+				            <th>지정사유</th>
+				            <td><input type="text"  name="black_reason" value="${dto.black_reason }"/></td>                        
+				        </tr>
+				    </table>
+				    <div class="addBtn-area">
+					    <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
+					    <input type="submit" value="추가"/>
+				    </div>
+			    </form>
+		    </div>
+    	</div>
     </div>
 </body>
 <script>

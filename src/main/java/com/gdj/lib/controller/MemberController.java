@@ -321,6 +321,7 @@ public class MemberController {
 		
 		logger.info("리스트 요청 : {}",params);
 		HashMap<String, Object> penaltyList = service.penaltyList(params);
+		
 		logger.info("컨트롤러 체크포인트");
 		
 		
@@ -332,7 +333,7 @@ public class MemberController {
 	@RequestMapping(value = "/penaltyDetail.do")
 	public String penaltyDetail(HttpSession session,Model model ,@RequestParam String penalty_id) {
 		
-		logger.info(penalty_id+"번 이용정지리스트 상세보기 요청 :");
+		logger.info(penalty_id+"번 이용정지리스트 상세보기 요청");
 
 		String page = "login/login";
 

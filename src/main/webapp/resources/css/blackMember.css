@@ -64,11 +64,19 @@
 
 .blackDetailBtn-area input{
 	background:#86b049;
-	padding:2px 5px;
+	padding:5px;
 	color:#fff;
 	border-radius:5px;
+	font-size:16px;
+	font-weight:700;
 }
 .blackDetailBtn-area input:hover{
 	cursor:pointer;
 	background-color:#476930;
+}
+.blackUnlockReason{
+	width:100%;
+	border:1px solid #333;
+	border-radius:5px;
+	padding:5px;
 }

@@ -223,7 +223,7 @@
 						
 						if(data.success){
 							alert("회원가입에 성공 했습니다.");
-							location.href='/member/login';
+							location.href='../login.go';
 						}else{
 							alert("회원가입에 실패 했습니다.");
 						}
