@@ -53,3 +53,23 @@
 .hidden-area{
 	display:none;
 }
+.brw_table .delBtn{
+	padding:3px;
+}
+.brw_table .delBtn:hover{
+	cursor:pointer;
+	background-color:#476930;
+	color:#fff;
+}
+.brw_table .col1{
+	width:12%;
+}
+.brw_table .col3{
+	width:18%;
+}
+.brw_table .col4{
+	width:18%;
+}
+.brw_table .col5{
+	width:9%;
+}
