@@ -194,10 +194,10 @@ public class MemberController {
 					logger.info("블랙리스트 중복확인 : " + con); //1은 이미 지정이 되어있는 상태, 0은 지정되어있지 않은 상태
 					if (service.blackAdd(params,session) == true) { 
 						logger.info("블랙리스트 추가 성공");
-						page =  "redirect:/blackList.go";
+						page =  "admin/black/blackList";
 					} else {
 						logger.info("블랙리스트 추가 실패");
-						page = "redirect:/blackList.go";
+						page = "admin/black/blackList";
 					}
 				}else {
 					logger.info("이미 블랙리스트로 지정되어 있음");
@@ -242,7 +242,7 @@ public class MemberController {
 		
 		String page = "login/login";
 		String admin_end = (String) session.getAttribute("loginId");
-	      logger.info("params : {}", params);
+	      logger.info("블랙리스트 수정 params : {}", params);
 
 	      if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
 	    	  if(params.get("black_cancel") == null) {
