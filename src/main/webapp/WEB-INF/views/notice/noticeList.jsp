@@ -79,6 +79,9 @@
     </div>
 </body>
 <script>
+	var word = $('#word').val();
+	var option = $('#option').val();
+
 	//체크박스 전체 선택시 모두선택 / 헤제
 	$('#all').click(function() {
 	    var $chk = $('input[type="checkbox"]');
@@ -147,6 +150,11 @@
 		
 	});
 	
+	// 검색 버튼 클릭했을 때 한 번 초기화
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	});
 	
 	function listCall(page) {
 		var pagePerNum = $('#pagePerNum').val();
@@ -240,8 +248,8 @@
 	
 	// 검색 결과 출력
 	function searchList(page) {
-		var word = $('#word').val();
-		var option = $('#option').val();
+		word = $('#word').val();
+		option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
 		
 		// 검색어 저장
