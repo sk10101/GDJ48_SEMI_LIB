@@ -65,7 +65,7 @@
 				        </tr>
 				        <tr>
 				            <th>해제사유</th>
-				             <td><input class="blackUnlockReason" type="text" id="clear" name="clear" value="${dto.end_reason}"/></td>
+				             <td><input class="blackUnlockReason" type="text" id="end_reason" name="end_reason" value="${dto.end_reason}"/></td>
 				         </tr>
 				    </table>
 				    <div class="blackDetailBtn-area"> 
@@ -85,7 +85,7 @@
  
  function update(){
 	var form = document.getElementById("form");
-	var id = document.getElementById("clear");  
+	var id = document.getElementById("end_reason");  
 	const checkbox = document.getElementById('black_cancel');
 	// 2. checked 속성을 체크합니다.
 	const is_checked = checkbox.checked;
