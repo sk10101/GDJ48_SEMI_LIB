@@ -101,7 +101,7 @@
 	</if>
 	 -->
 	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
-		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+		SELECT * FROM claim
 			WHERE 1=1
 			<if test="word != null and word != ''">
 				<choose>
@@ -124,7 +124,7 @@
 					ORDER BY claim_id DESC LIMIT #{cnt} OFFSET #{offset}
 	</select>
 	
-	<!--
+	<!-- 위에 더 효율적인 코드를 작성해서 주석 처리함
 	<select id="subjectSearch" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT * FROM claim
 			WHERE claim_title LIKE CONCAT('%',#{param3},'%') and mb_id = #{param4}

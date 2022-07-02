@@ -40,6 +40,9 @@
 .book_table td a:hover{
 	color:blue;
 }
+.book_table .brwTitleTd{
+	text-align:left;
+}
 
 
 
