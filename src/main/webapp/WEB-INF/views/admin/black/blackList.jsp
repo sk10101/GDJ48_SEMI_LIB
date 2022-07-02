@@ -58,8 +58,8 @@
 			<div class="searchOption">
 				<select class="selectBtn" id="pagePerNum">
 					<option value="5">5</option>
-					<option value="10" selected="selected">10</option>
-					<option value="15">15</option>
+					<option value="10">10</option>
+					<option value="15" selected="selected">15</option>
 					<option value="20">20</option>
 				</select>
 				<select class="selectBtn" id="option" name="option">

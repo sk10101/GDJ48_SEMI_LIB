@@ -40,3 +40,48 @@
 .black_table td a:hover{
 	color:blue;
 }
+.title-area{
+	width:100%;
+	text-align:left;
+	margin-left:10%;
+	margin-bottom:10px;
+}
+.blackAdd-area{
+	width:100%;
+}
+.bbs{
+	width:95%;
+	margin-left:5%;
+	border-collapse:collapse;
+}
+.bbs th,td{
+	border:1px solid #333;
+	padding:5px;
+	color:#333;
+}
+.bbs th{
+	width:15%;
+}
+.bbs td input{
+	width:100%;
+	border:1px solid #333;
+	border-radius:5px;
+	padding:5px;
+}
+.addBtn-area{
+	width:100%;
+	text-align:center;
+	padding:20px;
+}
+.addBtn-area input{
+	background:#86b049;
+	padding:5px;
+	color:#fff;
+	font-size:16px;
+	font-weight:700;
+	border-radius:5px;
+}
+.addBtn-area input:hover{
+	cursor:pointer;
+	background:#476930;
+}

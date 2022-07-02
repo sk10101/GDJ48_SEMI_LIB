@@ -73,16 +73,24 @@
 		        <tr>
 		            <th>취소</th>
 		            <td> <input type="checkbox" id='cancel' name="cancel"<c:if test = "${dto.cancel}"> checked </c:if> value="true"/>
-		</td> 
+					</td> 
 					
 			        </tr>
 			        </table>
+<<<<<<< HEAD
 			          <div class="penaltyDetailBtn-area">
 		                <input type="button" value="돌아가기" onclick="location.href='penaltyList.go'"/>
 		                <input type="submit" value="수정"/>
 		     		   </div>	
 	    			</form>
 		      
+=======
+			        <div class="penaltyDetailBtn-area">
+			                <input type="button" value="돌아가기" onclick="location.href='penaltyList.go'"/>
+			                <input type="submit" value="수정"/>
+			        </div>	
+	    			</form>
+>>>>>>> origin/master
     		</div>
     	</div>
     </div>
