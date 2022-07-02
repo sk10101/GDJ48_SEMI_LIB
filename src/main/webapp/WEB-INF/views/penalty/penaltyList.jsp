@@ -63,7 +63,7 @@
 					</select>
 			     	<select class="selectBtn" id="option" name="option">
 			     		 <option value="회원ID">회원ID</option>
-	   					 <option value="제한내역">제한내역</option>
+	   				     <option value="제한내역">제한내역</option> 
 			     	</select>
 			     	<input class="noticeSearchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
 			     	<input class="noticeSearchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
@@ -197,8 +197,12 @@
     	var word = $('#word').val();
     	
     	var option = $('#option').val();
-   
-    	
+   		
+    	if(word.indexOf('대출') == 0){
+    		word = "5";
+    	}else if(word.indexOf('예약') == 0){
+    		word = "6";
+    	}
     	
     	var pagePerNum = $('#pagePerNum').val();
     	console.log(word);

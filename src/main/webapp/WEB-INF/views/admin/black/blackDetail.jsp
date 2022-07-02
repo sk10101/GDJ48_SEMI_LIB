@@ -33,6 +33,7 @@
 	    </div>
 	    <div class="section">
 	    	<div class="title-area">
+
 		    	<h3>블랙리스트 회원 상세보기</h3>
 		    </div>
 			   <div class="info-area">
@@ -70,20 +71,13 @@
 				             </c:if> 
 				             value="${dto.end_reason} "/></td>
 				         </tr>
-		
-<<<<<<< HEAD
-			    <div class="blackDetailBtn-area"> 
-			        <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
-			        <input type="button"  onclick="update();return false;" value="수정"/>
-			    </div>
-=======
 				    </table>
 				    <div class="blackDetailBtn-area"> 
 				        <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
 				        <input type="button"  onclick="update();return false;" value="수정"/>
 				    </div>
 			    </form>
->>>>>>> origin/master
+
 		    </div>
 	    </div>
     </div>
@@ -111,6 +105,7 @@
 	}  
 	form.submit();
  }
+ 
  var msg = "${msg}";
    if(msg != ""){
       alert(msg);
