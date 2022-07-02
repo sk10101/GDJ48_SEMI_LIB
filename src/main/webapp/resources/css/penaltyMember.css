@@ -21,7 +21,7 @@
 	width:100%;
 }
 .bbs{
-	width:90%;
+	width:95%;
 	margin-left:5%;
 	text-align:center;
 	border-collapse:collapse;
@@ -58,9 +58,11 @@
 }
 .penaltyDetailBtn-area input{
 	background:#86b049;
-	padding:2px 5px;
+	padding:5px;
 	color:#fff;
 	border-radius:5px;
+	font-size:16px;
+	font-weight:700;
 }
 .penaltyDetailBtn-area input:hover{
 	cursor:pointer;
