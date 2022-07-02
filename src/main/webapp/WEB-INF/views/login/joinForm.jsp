@@ -47,6 +47,7 @@
 		<div class="joinBtn-area">
 			<input class="submit-btn" type="button" value="회원가입" onclick="join()"/>
 			<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='../login.go'"/>
+
 		</div>
     </div>
 </body>
