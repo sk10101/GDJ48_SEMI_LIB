@@ -37,11 +37,11 @@
                    <td>${detail.writer}</td>
                </tr>
                <tr>
-                   <td>출판사</td>
+                   <th>출판사</th>
                    <td>${detail.publisher}</td>
                </tr>
                <tr>
-                   <td>발행년도</td>
+                   <th>발행년도</th>
                    <td>${detail.issue}</td>
                </tr>
             </thead>
