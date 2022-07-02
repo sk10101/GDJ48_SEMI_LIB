@@ -33,7 +33,6 @@
 	    </div>
 	    <div class="section">
 	    	<div class="title-area">
-
 		    	<h3>블랙리스트 회원 상세보기</h3>
 		    </div>
 			   <div class="info-area">
@@ -66,15 +65,12 @@
 				        </tr>
 				        <tr>
 				            <th>해제사유</th>
-				             <td><input class="blackUnlockReason" type="text" id="clear" name="clear" <c:if test="${dto.end_reason eq '' || dto.end_reason eq null}">
-				           
-				             </c:if> 
-				             value="${dto.end_reason} "/></td>
+				             <td><input class="blackUnlockReason" type="text" id="clear" name="clear" value="${dto.end_reason}"/></td>
 				         </tr>
 				    </table>
 				    <div class="blackDetailBtn-area"> 
 				        <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
-				        <input type="button"  onclick="update();return false;" value="수정"/>
+				        <input type="submit"  onclick="update()" value="수정"/>
 				    </div>
 			    </form>
 		    </div>
@@ -94,15 +90,16 @@
 	// 2. checked 속성을 체크합니다.
 	const is_checked = checkbox.checked;
 	if(is_checked){
-		var blank_pattern = /^\s+|\s+$/g;				
+		var blank_pattern = /^\s+|\s+$/g;
 		if(id.value == null || id.value == "" || id.value.replace(blank_pattern, '' ) == "" ){
 			alert("해제사유를 입력해주세요.");
 			return false;
+		} else{
+			form.submit();
 		}
 	}else{
-		id.value = "";	
-	}  
-	form.submit();
+		alert("해제를 선택해주세요");	
+	}
  }
  
  var msg = "${msg}";

@@ -145,6 +145,8 @@ public class LoginController {
 				
 				if(leave_dateTwo < Integer.valueOf(format_time1)) {
 					service.mySecessionCheck(id);
+					model.addAttribute("msg", "탈퇴완료가 된 아이디 입니다.");
+					return "main";
 				}
 				
 				
