@@ -7,7 +7,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-<<<<<<< HEAD
 
 </style>
 </head>

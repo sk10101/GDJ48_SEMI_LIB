@@ -169,7 +169,7 @@
 	
 	<select id="expiry" parameterType="String" resultType="long">
 		SELECT date_format(adddate(reserve_date,interval 22 day),'%Y%m%d')  FROM reservation WHERE mb_id = #{param1} 
-		AND reason is null ORDER BY reserve_date DESC limit 1
+		AND reason is null limit 1
 	
 	</select>
 	
