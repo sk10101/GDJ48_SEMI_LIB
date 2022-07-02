@@ -99,4 +99,9 @@
 		WHERE category_id = "4" AND post_id = #{param3};
 	</update>
 <!-- 관리자 도서관리 끝 -->	
+
+	
+
+
+
 </mapper>
