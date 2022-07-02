@@ -30,43 +30,43 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-    <div id="main_content">
-    	<form action="replyUpdate.do" method="post" enctype="multipart/form-data">
-         <table id="reply_writeForm">
-         	<tr>
-                <th>관리자</th>
-                <td>
-                	<input type="hidden" name="claim_id" value="${claim.claim_id}"/>
-                	<input type="hidden" name="reply_id" value="${reply.reply_id}"/>
-                	${reply.mb_id}
-                </td>
-            </tr>
-            <tr>
-                <th>작성일</th>
-                <td>${reply.reply_date}</td>
-            </tr>
-            <tr>
-                <th>답변 내용</th>
-                <td><textarea name="reply_content">${reply.reply_content}</textarea></td>
-            </tr>
-	            <tr>
-	                <th>이미지</th>
+	    <div class="section" id="main_content">
+	    	<form action="replyUpdate.do" method="post" enctype="multipart/form-data">
+	         <table id="reply_writeForm">
+	         	<tr>
+	                <th>관리자</th>
 	                <td>
-	                	<input type="file" name="photos" multiple="multiple"/>	
-		                <c:forEach items="${replyList}" var="pathR">
-							<img src="/image/${pathR.newFileName}" width="640"/>
-						</c:forEach>
-					</td>
+	                	<input type="hidden" name="claim_id" value="${claim.claim_id}"/>
+	                	<input type="hidden" name="reply_id" value="${reply.reply_id}"/>
+	                	${reply.mb_id}
+	                </td>
 	            </tr>
-            <tr>
-	          	<th colspan="2">
-		            <input type="submit" value="수정"/>
-					<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim.claim_id}'"/>
-				</th>
-			</tr>			
-         </table>
-        </form>
-    </div>
+	            <tr>
+	                <th>작성일</th>
+	                <td>${reply.reply_date}</td>
+	            </tr>
+	            <tr>
+	                <th>답변 내용</th>
+	                <td><textarea name="reply_content">${reply.reply_content}</textarea></td>
+	            </tr>
+		            <tr>
+		                <th>이미지</th>
+		                <td>
+		                	<input type="file" name="photos" multiple="multiple"/>	
+			                <c:forEach items="${replyList}" var="pathR">
+								<img src="/image/${pathR.newFileName}" width="640"/>
+							</c:forEach>
+						</td>
+		            </tr>
+	            <tr>
+		          	<th colspan="2">
+			            <input type="submit" value="수정"/>
+						<input type="button" value="취소" onclick="location.href='adminClaimDetail?claim_id=${claim.claim_id}'"/>
+					</th>
+				</tr>			
+	         </table>
+	        </form>
+	    </div>
     </div>
 </body>
 <script></script>
