@@ -60,12 +60,12 @@ public class BoardService {
 		map.put("cnt", cnt);
 		map.put("mb_id", mb_id);
 		map.put("mb_class", mb_class);
-		map.put("word", word);
 		
 		if (word != null && word != "") {
+			map.put("word", word);
 			map.put("option", option);
 		}
-		
+		// 출력할 게시글의 개수를 세어준다.
 		ArrayList<BoardDTO> allCount = dao.allCount(map);
 		allCnt = allCount.size();
 		logger.info("allCnt : " + allCnt);
@@ -87,7 +87,7 @@ public class BoardService {
 		
 		logger.info("offset : "+offset);
 		
-		
+		// 리스트 작성
 		claimList = dao.claimList(map);
 		map.put("claimList", claimList);
 		/*

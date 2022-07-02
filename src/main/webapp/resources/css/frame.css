@@ -39,7 +39,8 @@
 
 /* 옵션별 검색 박스 */
 .searchOption{
-	text-align:center;	
+	text-align:center;
+	margin-bottom:20px;	
 }
 .selectBtn{
 	width: auto;

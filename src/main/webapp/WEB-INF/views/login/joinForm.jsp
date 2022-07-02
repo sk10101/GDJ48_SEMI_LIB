@@ -46,7 +46,8 @@
 		</table>
 		<div class="joinBtn-area">
 			<input class="submit-btn" type="button" value="회원가입" onclick="join()"/>
-			<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='/member/login'"/>
+			<input class="submit-btn" type="button" value="돌아가기" onclick="location.href='../login.go'"/>
+
 		</div>
     </div>
 </body>
@@ -223,7 +224,7 @@
 						
 						if(data.success){
 							alert("회원가입에 성공 했습니다.");
-							location.href='/member/login';
+							location.href='../login.go';
 						}else{
 							alert("회원가입에 실패 했습니다.");
 						}

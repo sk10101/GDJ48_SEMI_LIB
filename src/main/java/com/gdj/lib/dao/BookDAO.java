@@ -30,7 +30,7 @@ public interface BookDAO {
 
 	int bookAdd(BookDTO dto);
 
-	int allCount();
+	ArrayList<BookDTO> allCount(HashMap<String, Object> map);
 
 	void fileWrite(String oriFileName, String newFileName, int b_id);
 
@@ -40,9 +40,14 @@ public interface BookDAO {
 
 	int photoChk(BookDTO dto);
 
+
 	Object delPhoto(String b_id);
 
 	int bookHide(String b_id);
+	
+	ArrayList<BookDTO> allBookCount(HashMap<String, Object> map);
+
+
 
 	
 

@@ -156,7 +156,7 @@ public class MemberService {
 			  logger.info("검색어 (옵션) : " + word+ " (" + option + ")");
 			  
 			  // 검색 옵션에 따라 SQL 문이 달라지기 때문에 조건문으로 분리했음 
-			  if(option.equals("member")) { 
+			  if(option.equals("회원ID")) { 
 				  searchList= dao.memberSearch(cnt,offset,word); 
 				  logger.info("회원 옵션 설정"); 
 			  }  else { 

@@ -189,20 +189,24 @@ public class MemberController {
 			//2. 맞는 id라면 그 회원정보랑 블랙리스트 테이블 조인해서 블랙리스트 테이블에 값 넣어주기
 			if(s_id != null) {
 				logger.info("s_id 들어옴 : "+s_id);
-				int con = service.blackCon(s_id);
-				if(con > 1) {
-					logger.info("블랙리스트 중복확인 : " + con);
+				int con = service.blackCon(s_id); 
+				if(con < 1) { //이미 블랙리스트로 지정되어있는 회원이라면 해제할때까지 계속 지정하지 못하도록 하기
+					logger.info("블랙리스트 중복확인 : " + con); //1은 이미 지정이 되어있는 상태, 0은 지정되어있지 않은 상태
 					if (service.blackAdd(params,session) == true) { 
-						page = "redirect:/blackList.do";
-					}else {	//3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
-						logger.info("존재하지 않는 아이디");
-						page = "admin/black/blackAdd";
+						logger.info("블랙리스트 추가 성공");
+						page =  "admin/black/blackList";
+					} else {
+						logger.info("블랙리스트 추가 실패");
+						page = "admin/black/blackList";
 					}
 				}else {
-					
+					logger.info("이미 블랙리스트로 지정되어 있음");
 					page = "redirect:/blackList.go";
 				}
-			}
+			}else { //3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
+				logger.info("존재하지 않는 아이디");
+				page = "admin/black/blackAdd";
+			}	
 		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
 			page = "/main";
@@ -238,7 +242,7 @@ public class MemberController {
 		
 		String page = "login/login";
 		String admin_end = (String) session.getAttribute("loginId");
-	      logger.info("params : {}", params);
+	      logger.info("블랙리스트 수정 params : {}", params);
 
 	      if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
 	    	  if(params.get("black_cancel") == null) {
@@ -251,36 +255,34 @@ public class MemberController {
 	    		  
 	    	  }
 
-	      if(params.get("black_cancel") == null) {
-	         params.put("black_cancel", "false");  
-	        
-	      }else {
-	    	 
-	         params.put("admin_end", admin_end);  
-	         
-	         
-	      }
+		      if(params.get("black_cancel") == null) {
+		         params.put("black_cancel", "false");  
+		        
+		      }else {
+		    	 
+		         params.put("admin_end", admin_end);  
+		         
+		         
+		      }
 	      
-	      if(params.get("clear") != null) {
-	    	  params.put("end_reason", params.get("clear"));
-
-	    	  
-	    	  if(params.get("clear") != null) {
-	    		  params.put("end_reason", "");
-	    		  
-	    		  
-	    	  }
+		      	if(params.get("end_reason") != null) {
+		    	  params.put("end_reason", params.get("end_reason"));
+	
+		    	  
+		    	  if(params.get("end_reason") != null) {
+		    		  params.put("end_reason", "");
+		    	  }
 	    	  
 	    	  service.blackUpdate(params);
 	    	  page = "redirect:/blackDetail.do?black_id="+params.get("black_id");
-	    	  
+	      	}
 	      }else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
 				page = "/main";
 			}else {
 				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
 			}
-	      }
+	      
 	      return page;
 	   }
 
@@ -320,6 +322,7 @@ public class MemberController {
 		
 		logger.info("리스트 요청 : {}",params);
 		HashMap<String, Object> penaltyList = service.penaltyList(params);
+		
 		logger.info("컨트롤러 체크포인트");
 		
 		
@@ -331,7 +334,7 @@ public class MemberController {
 	@RequestMapping(value = "/penaltyDetail.do")
 	public String penaltyDetail(HttpSession session,Model model ,@RequestParam String penalty_id) {
 		
-		logger.info(penalty_id+"번 이용정지리스트 상세보기 요청 :");
+		logger.info(penalty_id+"번 이용정지리스트 상세보기 요청");
 
 		String page = "login/login";
 

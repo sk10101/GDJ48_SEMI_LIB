@@ -6,6 +6,7 @@
 <title>대출내역(관리자)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
+<link rel="stylesheet" href="resources/css/adminMemberBrw.css"/>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
 </style>
@@ -29,6 +30,7 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
+<<<<<<< HEAD
 	<section>
 		<h3>대출내역</h3>
 		<ul class="book_menu">
@@ -52,6 +54,39 @@
 			</tbody>
 	    </table>
 	</section>
+=======
+		<div class="section">
+			<div class="secionTitle">
+				<h3>회원 대출내역</h3>
+			</div>
+			<div class="brwSelect-area">
+		    	<a class="brwSelect" href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a>
+	            <a href="/memberHis.go?mb_id=${param.mb_id}">이전대출내역</a>
+	            <a href="/memberReserve.go?mb_id=${param.mb_id}">예약내역</a>
+	            &nbsp;&nbsp;회원 ID : ${param.mb_id}
+            </div>
+            <div class="hidden-area">
+				회원 ID : <div id="mb_id">${param.mb_id}</div>
+			</div>
+            <div class="table-area">
+			    <table class="brw_table">
+			        <thead>
+			            <tr>
+			                <th>대출번호</th>          
+			                <th>도서제목</th>           
+			                <th>대출일</th>           
+			                <th>반납예정일</th>       
+			                <th>대출상태</th>      
+			                <th>연장여부</th>
+			            </tr>
+			        </thead>
+			        <tbody id="list">
+		
+					</tbody>
+			    </table>
+			</div>
+		</div>
+>>>>>>> origin/master
 	</div>
 </body>
 <script>

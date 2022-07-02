@@ -24,7 +24,6 @@
 		WHERE publisher LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
 <!-- 검색 옵션 쿼리문 끝 -->
 
 <!-- 관리자 도서관리 시작 -->
@@ -52,6 +51,7 @@
 		WHERE b_title LIKE CONCAT('%', #{param3}, '%')
 			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
+
 	
 	<select id="bookb_statusSearch" resultType="com.gdj.lib.dto.BookDTO">
 		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book
@@ -59,14 +59,14 @@
 			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+
+	<!-- 검색 기능 개선하기 위해 주석 처리하고 새 코드 작성
+
 	<select id="allCount" resultType="Integer">
-		SELECT COUNT(b_id) FROM book;
+		SELECT COUNT(b_id) FROM book
 	</select>
-	
-	<update id="bookHide" parameterType="String">
-		UPDATE book SET hide = 1 WHERE b_id = #{b_id} 
-	</update>
-	
+	 -->
+
 	<!-- 도서 목록 페이징 끝-->	
 	
 	<select id="detail" parameterType="String" resultType="com.gdj.lib.dto.BookDTO">
@@ -108,11 +108,61 @@
 	<update id="fileUpdate" >
 		Update photo SET oriFileName = #{param1}
 			, newFileName = #{param2}
-		WHERE category_id = "4" AND post_id = #{param3};
+		WHERE category_id = "4" AND post_id = #{param3}
 	</update>
 	
 	<delete id="delPhoto">
 		DELETE FROM photo WHERE category_id="4" AND post_id = #{param1}
 	</delete>
+	
+	<update id="bookHide" parameterType="String">
+		UPDATE book SET hide = 1 WHERE b_id = #{b_id} 
+	</update>
 <!-- 관리자 도서관리 끝 -->	
+
+<!-- 도서 검색 개선을 위해 새로 작성한 코드 -->	
+<select id="allCount" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+	SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
+			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
+	WHERE 1=1
+	<if test="word != null and word != ''">
+		<choose>
+			<when test="option.equals('제목')">
+				AND b_title LIKE CONCAT('%',#{word},'%')
+			</when>
+			<when test="option.equals('저자')">
+				AND writer LIKE CONCAT('%',#{word},'%')
+			</when>
+			<when test="option.equals('출판사')">
+				AND publisher LIKE CONCAT('%',#{word},'%')
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</if>
+	AND p.post_id = b.b_id
+</select>
+
+<!-- 관리자 페이지는 임시로 별도의 count 를 세어 사용한다. -->
+<select id="allBookCount" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+	SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book 
+	WHERE 1=1
+	<if test="word != null and word != ''">
+		<choose>
+			<when test="option.equals('제목')">
+				AND b_title LIKE CONCAT('%',#{word},'%')
+			</when>
+			<when test="option.equals('저자')">
+				AND writer LIKE CONCAT('%',#{word},'%')
+			</when>
+			<when test="option.equals('출판사')">
+				AND publisher LIKE CONCAT('%',#{word},'%')
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</if>
+</select>
+
+
 </mapper>
