@@ -166,8 +166,7 @@ function bookreason(brwId) {
         }
 
    }
-<<<<<<< HEAD
-=======
+
 
 function back() {
     
@@ -178,7 +177,5 @@ function back() {
   //histiory.go(-1);
  }
 
-
->>>>>>> origin/master
 </script>
 </html>
