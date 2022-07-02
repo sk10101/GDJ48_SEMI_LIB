@@ -38,7 +38,7 @@
 			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
 			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
 			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
-			<li>회원 ID : <div id="mb_id">${param.mb_id}</div></li>
+			<li>회원 ID : ${param.mb_id} </li>
 		</ul>
 	    <table class="brw_table">
 		    <thead>
@@ -93,7 +93,9 @@ if (msg != "") {
 	alert(msg);
 }
 
-var mb_id=$('#mb_id').html();
+let query = window.location.search; //url query 부분 가져오기 
+var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
+var mb_id=param.get("mb_id");
 console.log(mb_id);
 
 var currPage=1;

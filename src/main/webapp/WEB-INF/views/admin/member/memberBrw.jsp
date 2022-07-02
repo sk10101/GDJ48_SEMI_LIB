@@ -35,7 +35,7 @@
 			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
 			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
 			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
-			<li>회원 ID : <div id="mb_id">${param.mb_id}</div></li>
+			<li>회원 ID : ${param.mb_id}</li>
 		</ul>
 	    <table class="brw_table">
 	        <thead>
@@ -43,8 +43,7 @@
 	                <td>대출번호</td>          
 	                <td>도서제목</td>           
 	                <td>대출일</td>           
-	                <td>반납예정일</td>       
-	                <td>대출상태</td>      
+	                <td>반납예정일</td>           
 	                <td>연장여부</td>
 	            </tr>
 	        </thead>
@@ -98,7 +97,6 @@ function drawList(brwList) {
 		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_date+'</td>';
-		content += '<td>'+item.brw_status+'</td>';
 		content += '<td>';
 			if(item.renew==true) {
 				content += 'Y';
