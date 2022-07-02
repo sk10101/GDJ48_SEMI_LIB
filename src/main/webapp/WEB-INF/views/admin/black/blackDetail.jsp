@@ -72,12 +72,11 @@
 		         </tr>
 
 		    </table>
-		    </form>
-		
 			    <div class="blackDetailBtn-area"> 
 			        <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
 			        <input type="button"  onclick="update();return false;" value="수정"/>
 			    </div>
+		    </form>
 		    </div>
 	    </div>
     </div>
@@ -105,6 +104,7 @@
 	}  
 	form.submit();
  }
+ 
  var msg = "${msg}";
    if(msg != ""){
       alert(msg);

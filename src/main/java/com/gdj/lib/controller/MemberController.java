@@ -320,6 +320,7 @@ public class MemberController {
 		
 		logger.info("리스트 요청 : {}",params);
 		HashMap<String, Object> penaltyList = service.penaltyList(params);
+		
 		logger.info("컨트롤러 체크포인트");
 		
 		
