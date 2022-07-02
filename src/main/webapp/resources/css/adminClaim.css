@@ -139,6 +139,34 @@
 .contentArea{
 	text-align:left;
 }
+.replyForm{
+	width:100%;
+}
+#reply_writeForm{
+	margin-left:5%;
+	width:95%;
+	border-collapse:collapse;
+}
+#reply_writeForm th,td{
+	border:1px solid #333;
+}
+#reply_writeForm th{
+	width:15%;
+}
+#reply_writeForm textarea{
+	width:100%;
+	height:200px;
+	border:1px solid #333;
+	border-radius:5px;
+	padding:5px;
+}
+.replyFormBtn{
+	width:100%;
+	text-align:center;
+}
+
+
+
 
 /*페이징*/
 .pagination {
