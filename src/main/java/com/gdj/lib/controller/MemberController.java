@@ -256,36 +256,34 @@ public class MemberController {
 	    		  
 	    	  }
 
-	      if(params.get("black_cancel") == null) {
-	         params.put("black_cancel", "false");  
-	        
-	      }else {
-	    	 
-	         params.put("admin_end", admin_end);  
-	         
-	         
-	      }
+		      if(params.get("black_cancel") == null) {
+		         params.put("black_cancel", "false");  
+		        
+		      }else {
+		    	 
+		         params.put("admin_end", admin_end);  
+		         
+		         
+		      }
 	      
-	      if(params.get("clear") != null) {
-	    	  params.put("end_reason", params.get("clear"));
-
-	    	  
-	    	  if(params.get("clear") != null) {
-	    		  params.put("end_reason", "");
-	    		  
-	    		  
-	    	  }
+		      	if(params.get("end_reason") != null) {
+		    	  params.put("end_reason", params.get("end_reason"));
+	
+		    	  
+		    	  if(params.get("end_reason") != null) {
+		    		  params.put("end_reason", "");
+		    	  }
 	    	  
 	    	  service.blackUpdate(params);
 	    	  page = "redirect:/blackDetail.do?black_id="+params.get("black_id");
-	    	  
+	      	}
 	      }else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
 				page = "/main";
 			}else {
 				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
 			}
-	      }
+	      
 	      return page;
 	   }
 

@@ -7,7 +7,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="icon" href="resources/img/favicon.png">
 <style>
-
 </style>
 </head>
 <body>
@@ -20,7 +19,6 @@
       <jsp:include page="../commons/header.jsp"/>
    </div>
    <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-
          <div class="logo">
             <a href="/"><img src="../resources/img/logo.png" class="logo"/><br/></a>
 
@@ -47,11 +45,11 @@
                </td>
                </tr>      
                <tr>
-                   <td>책제목</td>
+                   <th>책제목</th>
                    <td>${detail.b_title}</td>
                </tr>
                <tr>
-                   <td>저자</td>
+                   <th>저자</th>
                    <td>${detail.writer}</td>
                </tr>
                <tr>
