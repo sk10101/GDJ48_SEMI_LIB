@@ -1,144 +1,70 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&family=Roboto:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@300;400;500;700&display=swap');
 
-*{margin:0; padding:0; border:0;}
-.body{
-    display: flex;
-    justify-content:center;
-    margin-top: 20px;
-    width:100%;
-}
-.myPageTab{
-	padding-top:20px;
-	width:150px;
-	height:600px;
-	text-align: center;
-	background-color:#c9dab2;
-}
-.myPageTab h3{
-	font-size:20px;
-	font-weight:700;
-	color:#333;
-}
-.myPageTab a{
-	text-decoration-line:none;
-	color:#828282;
-	font-size:18px;
-	font-weight:700;
-}
-.myPageTab .tabSelect{
-	color:#333;
-}
 .section{
-	display: flex;
-    align-items: center;
-    flex-direction:column;
-    width:850px;
-}
-.claimTable-area{
+	margin:0; padding:0; box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.claim_table{
-	width:95%;
-	margin-left:5%;
-	text-align:center;
-	border-collapse:collapse;
+
+.search {
+    width: 80%;
+    text-align:center;
+    margin:30px;
 }
-.claim_table th,td{
-	border:1px solid #333;
-	padding:5px;
-	height:36px;
-}
-.claim_table .col1, col6{
-	width:8%;
-}
-.claim_table .col4{
-	width:12%;
-}
-.claim_table .col5{
-	width:20%;
-}
-.claim_table .claimTitle{
-	text-align:left;
-}
-.claim_table .claimTitle a{
-	text-decoration-line:none;
-	color:#333;
-}
-.claim_table .claimTitle a:hover{
-	color:blue;
-}
-.noticeSearchOption{
-	text-align:center;
-	margin-bottom:20px;	
-}
-.claimBtnSection{
-	margin:10px;
-	text-align:center;
-}
-.selectBtn{
-	width: 70px;
-    height: 40px;
+select {
+    width: 70px;
+    height: 50px;
     border: 4px solid #86b049;
     border-radius: 5px;
     background-color:#fff;
 }
-.noticeSearchBlock{
-	width:300px;
-	height:40px;
-	border: 4px solid #86b049;
+.searchBlock{
+    width: 60%;
+    height: 50px;
+    margin-right: 5px;
+    border: 4px solid #86b049;
     border-radius: 5px;
+    padding:5px;
     background-color:#fff;
-    padding-left:5px;
 }
-.noticeSearchDo{
-	width:60px;
-	height:40px;
-	border: none;
-    border-radius: 5px;
-    background-color:#86b049;
-    color:#fff;
-    font-size:15px;
-    font-weight:700;
+.btn_search {
+    width: 50px;
+    height: 50px;
+    background-image: url("../img/searchIcon.png");
+    background-size: 45px;
+    background-repeat: no-repeat;
+    border: none;
+    position: absolute;
+    cursor: pointer;
+    background-color:#fff;
 }
-.noticeSearchDo:hover{
-	cursor:pointer;
-	background-color:#476930;
-}
-.claim_table .delBtn{
-	padding:3px;
-}
-.claim_table .delBtn:hover{
-	cursor:pointer;
-	background-color:#476930;
-	color:#fff;
-}
-.claim_table .col1{
-	width:10%;
-}
-.claim_table .col6{
-	width:10%;
-}
-.Btnarea{
-	width:100%;
+.bookSearchTable{
+	width:1000px;
 	text-align:center;
-	padding:20px;
+	border-collapse:collapse;
 }
-.Btnarea input{
-	background:#86b049;
+.bookSearchTable th,td{
+	border:1px solid #333;
 	padding:5px;
+	color:#333;
 	font-size:16px;
 	font-weight:700;
-	color:#fff;
-	border-radius:5px;
 }
-.Btnarea input:hover{
-	cursor:pointer;
-	background:#476930;
+.bookSearchTable td a{
+	text-decoration-line:none;
+	color:#333;
 }
-.contentArea{
-	text-align:left;
+.bookSearchTable td a:hover{
+	color:blue;
 }
+
+
 
 /*페이징*/
 .pagination {
