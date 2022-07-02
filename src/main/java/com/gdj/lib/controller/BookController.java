@@ -2,7 +2,9 @@ package com.gdj.lib.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -138,5 +140,7 @@ public class BookController {
 		String page = "redirect:/AdbookDetail.do?b_id="+params.get("b_id");
 		return page;
 	}
+	
+	
 	
 }

@@ -33,10 +33,10 @@ public class MemberDTO {
 
 	private int penalty_id;
 	private int category_id;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 
 	private Date penalty_start;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date penalty_end;
 	private String admin_cancel;
 	private boolean cancel;
