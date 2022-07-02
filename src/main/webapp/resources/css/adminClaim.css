@@ -69,7 +69,8 @@
 	color:blue;
 }
 .noticeSearchOption{
-	text-align:center;	
+	text-align:center;
+	margin-bottom:20px;	
 }
 .claimBtnSection{
 	margin:10px;
@@ -112,8 +113,32 @@
 	background-color:#476930;
 	color:#fff;
 }
-
-
+.claim_table .col1{
+	width:10%;
+}
+.claim_table .col6{
+	width:10%;
+}
+.Btnarea{
+	width:100%;
+	text-align:center;
+	padding:20px;
+}
+.Btnarea input{
+	background:#86b049;
+	padding:5px;
+	font-size:16px;
+	font-weight:700;
+	color:#fff;
+	border-radius:5px;
+}
+.Btnarea input:hover{
+	cursor:pointer;
+	background:#476930;
+}
+.contentArea{
+	text-align:left;
+}
 
 /*페이징*/
 .pagination {

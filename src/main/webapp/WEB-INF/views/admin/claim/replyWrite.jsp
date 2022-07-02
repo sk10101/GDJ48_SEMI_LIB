@@ -2,14 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>관리자 페이지 / 답변 글쓰기</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<link rel="stylesheet" href="resources/css/frame.css">
-	<link rel="icon" href="resources/img/favicon.png">
-	<style>
-	   
-	</style>
+<meta charset="UTF-8">
+<title>관리자 페이지 / 답변 글쓰기</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="resources/css/frame.css">
+<link rel="icon" href="resources/img/favicon.png">
+<style>
+</style>
 </head>
 <body>
 	<div id="header">
@@ -30,7 +29,7 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
-	    <div id="main_content">
+	    <div class="section" id="main_content">
 	    	<form action="replyWrite.do" method="post" enctype="multipart/form-data">
 	         <table id="reply_writeForm">
 	             <tr>

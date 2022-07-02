@@ -70,20 +70,12 @@
 				             </c:if> 
 				             value="${dto.end_reason} "/></td>
 				         </tr>
-		
-<<<<<<< HEAD
-			    <div class="blackDetailBtn-area"> 
-			        <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
-			        <input type="button"  onclick="update();return false;" value="수정"/>
-			    </div>
-=======
 				    </table>
 				    <div class="blackDetailBtn-area"> 
 				        <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
 				        <input type="button"  onclick="update();return false;" value="수정"/>
 				    </div>
 			    </form>
->>>>>>> origin/master
 		    </div>
 	    </div>
     </div>
