@@ -33,6 +33,7 @@
 	    </div>
 	    <div class="section">
 	    	<div class="title-area">
+
 		    	<h3>블랙리스트 회원 상세보기</h3>
 		    </div>
 			   <div class="info-area">
@@ -103,6 +104,7 @@
 	}  
 	form.submit();
  }
+ 
  var msg = "${msg}";
    if(msg != ""){
       alert(msg);
