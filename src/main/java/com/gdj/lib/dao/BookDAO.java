@@ -38,6 +38,8 @@ public interface BookDAO {
 
 	int photoChk(BookDTO dto);
 
+	ArrayList<BookDTO> allBookCount(HashMap<String, Object> map);
+
 	
 
 	
