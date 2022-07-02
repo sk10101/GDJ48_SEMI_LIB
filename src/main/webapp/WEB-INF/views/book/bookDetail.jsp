@@ -166,5 +166,19 @@ function bookreason(brwId) {
         }
 
    }
+<<<<<<< HEAD
+=======
+
+function back() {
+    
+    var referrer = document.referrer;
+    console.log(referrer);
+    location.href = referrer;
+  
+  //histiory.go(-1);
+ }
+
+
+>>>>>>> origin/master
 </script>
 </html>

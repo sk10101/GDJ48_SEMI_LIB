@@ -30,6 +30,31 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
+<<<<<<< HEAD
+	<section>
+		<h3>대출내역</h3>
+		<ul class="book_menu">
+			<li><a href="/memberBrw.go?mb_id=${param.mb_id}">대출내역</a></li>
+			<li><a href="/memberHis.go?mb_id=${param.mb_id}">이전 대출내역</a></li>
+			<li><a href=" /memberReserve.go?mb_id=${param.mb_id}">예약내역</a></li>
+			<li>회원 ID : ${param.mb_id}</li>
+		</ul>
+	    <table class="brw_table">
+	        <thead>
+	            <tr>
+	                <td>대출번호</td>          
+	                <td>도서제목</td>           
+	                <td>대출일</td>           
+	                <td>반납예정일</td>           
+	                <td>연장여부</td>
+	            </tr>
+	        </thead>
+	        <tbody id="list">
+
+			</tbody>
+	    </table>
+	</section>
+=======
 		<div class="section">
 			<div class="secionTitle">
 				<h3>회원 대출내역</h3>
@@ -61,6 +86,7 @@
 			    </table>
 			</div>
 		</div>
+>>>>>>> origin/master
 	</div>
 </body>
 <script>
@@ -72,7 +98,11 @@ if (msg != "") {
 }
 
 
-var mb_id=$('#mb_id').html();
+let query = window.location.search; //url query 부분 가져오기 
+var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
+var mb_id=param.get("mb_id");
+console.log(mb_id);
+//var mb_id=$('#mb_id').html();
 console.log(mb_id);
 
 listCall();
@@ -106,7 +136,6 @@ function drawList(brwList) {
 		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_date+'</td>';
-		content += '<td>'+item.brw_status+'</td>';
 		content += '<td>';
 			if(item.renew==true) {
 				content += 'Y';
