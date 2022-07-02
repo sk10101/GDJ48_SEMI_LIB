@@ -62,6 +62,8 @@ let query = window.location.search; //url query 부분 가져오기 ?option=writ
 var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
 var option = param.get("option");
 var word = param.get("word");
+var mb_id = "${sessionScope.loginId}";
+var mb_class = "${sessionScope.mb_class}";
 
 console.log(option, word);
 var currPage = 1;
