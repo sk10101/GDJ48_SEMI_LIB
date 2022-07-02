@@ -1,6 +1,7 @@
 package com.gdj.lib.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.PhotoDTO;
@@ -27,7 +28,7 @@ public interface BookDAO {
 
 	int bookAdd(BookDTO dto);
 
-	int allCount();
+	ArrayList<BookDTO> allCount(HashMap<String, Object> map);
 
 	void fileWrite(String oriFileName, String newFileName, int b_id);
 
