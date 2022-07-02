@@ -112,7 +112,7 @@
 			type: 'POST',
 			url: '/noticeDelete.ajax',
 			data : {
-				noticedeleteList:noticeArray,
+				noticedeleteList:noticeArray
 				
 				},
 			dataType: 'JSON',

@@ -8,8 +8,12 @@
 		ORDER BY notice_id DESC
 	</select>
 	-->
-	<delete id="noticeDelete" parameterType="String">
+	<delete id="noticeDelete" parameterType="int">
 		DELETE FROM notice WHERE notice_id = #{notice_id}
+	</delete>
+	
+	<delete id="noticePhotoDelete" >
+		DELETE FROM photo WHERE post_id = #{param1} and category_id = '1'
 	</delete>
 	
 	<insert id="noticeWrite" 
