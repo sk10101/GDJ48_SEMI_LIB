@@ -12,7 +12,9 @@ public class MemberDTO {
 	private String name;
 	private String email;
 	private String phone;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date reg_date;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date leave_date;
 	private String mb_class;
 	
@@ -20,11 +22,11 @@ public class MemberDTO {
 
 	private int black_id;
 	private String admin_start;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date black_start;
 	private String black_reason;
 	private String admin_end;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date black_end;
 	private String end_reason;
 	private boolean black_cancel;
