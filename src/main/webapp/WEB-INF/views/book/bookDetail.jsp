@@ -3,99 +3,92 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>bookDetail</title>
+<title>도서 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="icon" href="resources/img/favicon.png">
+<link rel="stylesheet" href="resources/css/bookSearch.css"/>
 <style>
 </style>
 </head>
 <body>
-   <div id="header">
-      <jsp:include page="../commons/header.jsp"/>
-   </div>
-   <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-
-        <div class="image">
-            
-        </div>
-
-       <table>
-            <thead id="head">
-               <tr>
-                  <td>
-                  <c:forEach items="${list}" var="path">
-                  <p><img src="/image/${path.newFileName}" height="200"/>
-               </c:forEach>
-               </td>
-               </tr>      
-               <tr>
-                   <th>책제목</th>
-                   <td>${detail.b_title}</td>
-               </tr>
-               <tr>
-                   <th>저자</th>
-                   <td>${detail.writer}</td>
-               </tr>
-               <tr>
-                   <td>출판사</td>
-                   <td>${detail.publisher}</td>
-               </tr>
-               <tr>
-                   <td>발행년도</td>
-                   <td>${detail.issue}</td>
-               </tr>
-            </thead>
-        </table>
-
-        <table>
-            <thead id="botom">
-                <tr>
-                    <td>책ID</td>
-                    <td>도서상태</td>
-                    <td>대출신청</td>
-                    <td>예약신청</td>
-                   
-                <tr>
-                  <td id="brw_b_id">${detail.b_id}</td>
-                      <td id="b_status">${detail.b_status}</td>
-                      <input type="button" id="test" value="${aaa.mb_id}"/>
-                  <td>
-                         <c:choose>
-                               <c:when test="${detail.b_status eq '대출가능'}">
-                         				<button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${detail.b_id}">대출신청</button>
-                               </c:when>
-                               <c:when test="${detail.b_status eq '대출불가'}">
-                                  <input type="hidden">
-                               </c:when> 
-                               <c:when test="${detail.b_status eq '대출중'}">
-                           <input type="hidden">
-                               </c:when>
-                     </c:choose>
-                      </td>
-                   
-                   <td>
-                      <c:choose>
-
-                            <c:when test="${detail.b_status eq '대출중' && detail.reserve_able eq true}">
-                               <button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${detail.b_id}" >예약신청</button>
-                            </c:when>
-                            <c:when test="${detail.b_status eq '대출불가' && detail.reserve_able eq false}">
-                               <input type="hidden">
-                            </c:when>
-                            <c:when test="${detail.b_status eq '대출신청' && detail.reserve_able eq false}">
-                        <input type="hidden">
-                            </c:when>
-                  </c:choose>
-                   </td>
-                </tr>
-            </thead>
-        </table>
-        <input type="button" value="돌아가기" onclick="back()"/>
-
-
-    </body>
-</html>
+	<div id="header">
+	   <jsp:include page="../commons/header.jsp"/>
+	</div>
+	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+	<div class="detailSection">
+		<div class="bookDetail-area">
+			<table class="bookDetailTable">
+				<thead id="head">
+					<tr>
+						<td rowspan="5" class="col1">
+							<c:forEach items="${list}" var="path">
+								<img src="/image/${path.newFileName}" height="200"/>
+							</c:forEach>
+						</td>
+					</tr>      
+					<tr>
+					    <th class="col2">책제목</th>
+					    <td class="col3">${detail.b_title}</td>
+					</tr>
+					<tr>
+					    <th>저자</th>
+					    <td class="col3">${detail.writer}</td>
+					</tr>
+					<tr>
+					    <th>출판사</th>
+					    <td class="col3">${detail.publisher}</td>
+					</tr>
+					<tr>
+					    <th>발행년도</th>
+					    <td class="col3">${detail.issue}</td>
+					</tr>
+			    </thead>
+			</table>
+			<table class="bookStatusBtn">
+			    <thead id="botom">
+			        <tr>
+			            <th>책 ID</th>
+			            <th>도서상태</th>
+			            <th>대출신청</th>
+			            <th>예약신청</th>
+			        </tr>
+			        <tr>
+			        	<td id="brw_b_id">${detail.b_id}</td>
+						<td id="b_status">${detail.b_status}</td>
+						<td>
+			       			<c:choose>
+								<c:when test="${detail.b_status eq '대출가능'}">
+									<button class="brwBtn" onclick="bookbrw(this)" loginId="${sessionScope.loginId}" bookID="${detail.b_id}">대출신청</button>
+								</c:when>
+								<c:when test="${detail.b_status eq '대출불가'}">
+									<input type="hidden">
+								</c:when> 
+								<c:when test="${detail.b_status eq '대출중'}">
+									<input type="hidden">
+								</c:when>
+							</c:choose>
+			   			</td>
+						<td>
+							<c:choose>
+								<c:when test="${detail.b_status eq '대출중' && detail.reserve_able eq true}">
+									<button class="bookreason"  onclick="bookreason(this)" loginId="${sessionScope.loginId}" bookId="${detail.b_id}" >예약신청</button>
+								</c:when>
+								<c:when test="${detail.b_status eq '대출불가' && detail.reserve_able eq false}">
+									<input type="hidden">
+								</c:when>
+								<c:when test="${detail.b_status eq '대출신청' && detail.reserve_able eq false}">
+									<input type="hidden">
+								</c:when>
+							</c:choose>
+			           </td>
+			        </tr>
+			    </thead>
+			</table>
+			<input class="backBtn" type="button" value="돌아가기" onclick="back()"/>
+		</div>
+	</div>
 </body>
+</html>
 <script>
 
 console.log(aaa);
@@ -175,7 +168,14 @@ function bookreason(brwId) {
    }
 
 
-
+function back() {
+    
+    var referrer = document.referrer;
+    console.log(referrer);
+    location.href = referrer;
+  
+  //histiory.go(-1);
+ }
 
 </script>
 </html>

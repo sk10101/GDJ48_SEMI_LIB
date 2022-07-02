@@ -66,6 +66,72 @@ select {
 
 
 
+.detailSection{
+	width:100%;
+	margin:0; padding:0; box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bookDetail-area{
+	margin-top:30px;
+	width:1000px;
+	text-align:center;
+}
+.bookDetailTable{
+	width:100%;
+	text-align:center;
+	border-collapse:collapse;
+}
+.bookDetailTable th,td{
+	border:1px solid #333;
+}
+.bookDetailTable .col1, .col2{
+	width:20%;
+}
+.bookDetailTable .col3{
+	text-align:left;
+}
+.bookStatusBtn{
+	margin-top:30px;
+	width:100%;
+	text-align:center;
+	border-collapse:collapse;
+	padding:10px;
+}
+.bookStatusBtn th,td{
+	border:1px solid #333;
+}
+.bookStatusBtn td button{
+	background:#86b049;
+	font-size:16px;
+	font-weight:700;
+	color:#fff;
+	padding:5px;
+	border-radius:5px;
+}
+.bookStatusBtn td button:hover{
+	background:#476930;
+	cursor:pointer;
+}
+.bookDetail-area .backBtn{
+	margin:20px;
+	background:#86b049;
+	font-size:16px;
+	font-weight:700;
+	color:#fff;
+	padding:5px;
+	border-radius:5px;
+}
+.bookDetail-area .backBtn:hover{
+	background:#476930;
+	cursor:pointer;
+}
+
+
 /*페이징*/
 .pagination {
   display: inline-block;

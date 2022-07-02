@@ -183,6 +183,8 @@ public interface MemberDAO {
 
 	long leave_date(String loginId);
 
+	int cancelUpdate(String b_id);
+
 
 	
 

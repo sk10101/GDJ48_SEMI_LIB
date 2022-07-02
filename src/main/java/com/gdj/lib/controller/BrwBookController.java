@@ -219,7 +219,7 @@ public class BrwBookController {
 	                  logger.info("list 갯수: "+brwlist.size());
 	                  if(brwlist.size() <= 5 ) {
 	                     service.bookDetailBrw(params);
-	                     msg = "도서대출 완료";
+	                     msg = "도서대출신청 완료";
 	                  } else {
 	                     msg = "도서권수가 초과되었습니다.";
 	                  }               
