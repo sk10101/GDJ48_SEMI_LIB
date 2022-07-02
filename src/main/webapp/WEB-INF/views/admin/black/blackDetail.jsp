@@ -75,7 +75,7 @@
 		    </form>
 		
 			    <div class="blackDetailBtn-area"> 
-			        <input type="button" value="돌아가기" onclick="location.href='blackList.do'"/>
+			        <input type="button" value="돌아가기" onclick="location.href='blackList.go'"/>
 			        <input type="button"  onclick="update();return false;" value="수정"/>
 			    </div>
 		    </div>
@@ -95,7 +95,7 @@
 	// 2. checked 속성을 체크합니다.
 	const is_checked = checkbox.checked;
 	if(is_checked){
-		var blank_pattern = /^\s+|\s+$/g;				
+		var blank_pattern = /^\s+|\s+$/g;
 		if(id.value == null || id.value == "" || id.value.replace(blank_pattern, '' ) == "" ){
 			alert("해제사유를 입력해주세요.");
 			return false;
@@ -105,6 +105,7 @@
 	}  
 	form.submit();
  }
+ 
  var msg = "${msg}";
    if(msg != ""){
       alert(msg);
