@@ -139,8 +139,10 @@ public class BookService {
 					searchList = dao.bookTitleSearch(cnt,offset,word);
 				} else if (option.equals("저자")) {
 					searchList = dao.bookWriterSearch(cnt,offset,word);
-				} else {
+				} else if (option.equals("출판사")){
 					searchList = dao.bookPublisherSearch(cnt,offset,word);
+				} else {
+					searchList = dao.bookb_statusSearch(cnt,offset,word);
 				}		
 				map.put("bookList", searchList);
 			}
