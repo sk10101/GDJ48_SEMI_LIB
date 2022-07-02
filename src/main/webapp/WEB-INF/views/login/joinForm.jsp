@@ -22,8 +22,12 @@
 			</tr>
 			<tr>
 				<th class="col1">PW</th>
-				<td class="col2"><input class="joinInput" type="text" id="joinPw"/></td>
+				<td class="col2"><input class="joinInput" type="password" id="joinPw"/></td>
 				<td class="col3">※ 4글자 이상 (한글 제외)</td>
+			</tr>
+			<tr>
+				<th class="col1">PW확인</th>
+				<td class="col2" colspan="2"><input class="joinInput" type="password" id="joinPw2" /><font id="checkPw" size="2"></font></td>
 			</tr>
 			<tr>
 				<th class="col1">이름</th>
@@ -67,6 +71,22 @@
    	alert("아이디는 한글이 불가능합니다.");
    	return false; 
    }  */
+   
+   
+   $('.joinInput').keyup(function(){
+       var pass1 = $("#joinPw").val();
+       var pass2 = $("#joinPw2").val();
+
+       if(pass1 != "" || pass2 != ""){
+           if(pass1 == pass2){
+               $("#checkPw").html('일치');
+               $("#checkPw").attr('color','green');
+           }else{
+               $("#checkPw").html('불일치');
+               $("#checkPw").attr('color','red');
+           }
+       }
+   })
 	
 	
 	

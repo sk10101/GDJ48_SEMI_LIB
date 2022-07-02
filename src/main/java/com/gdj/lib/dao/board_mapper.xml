@@ -8,12 +8,8 @@
 		ORDER BY notice_id DESC
 	</select>
 	-->
-	<delete id="noticeDelete" parameterType="int">
+	<delete id="noticeDelete" parameterType="String">
 		DELETE FROM notice WHERE notice_id = #{notice_id}
-	</delete>
-	
-	<delete id="noticePhotoDelete" >
-		DELETE FROM photo WHERE post_id = #{param1} and category_id = '1'
 	</delete>
 	
 	<insert id="noticeWrite" 
@@ -35,7 +31,7 @@
 	</select>
 	
 	<select id="noticePhotoList" parameterType="int" resultType="com.gdj.lib.dto.PhotoDTO">
-		SELECT * FROM photo WHERE post_id = #{notice_id} and category_id = '1'
+		SELECT * FROM photo WHERE post_id = #{post_id}
 	</select>
 	
 	<select id="noticeList" resultType="com.gdj.lib.dto.BoardDTO">
@@ -60,6 +56,7 @@
 			ORDER BY claim_id DESC
 	</select>
 	  -->
+	 <!-- 아래에 더 효율적인 코드를 작성해서 주석 처리함
 	<select id="allCount" resultType="Integer">
 		SELECT COUNT(claim_id) FROM claim
 	</select>
@@ -68,14 +65,62 @@
 		SELECT COUNT(claim_id) FROM claim
 			WHERE mb_id = #{param1}
 	</select>
+	 -->
+	 <select id="allCount" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+	 	SELECT claim_id FROM claim
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('제목')">
+						AND claim_title LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('처리상태')">
+						AND status LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('작성자')">
+						AND mb_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+			<if test="mb_class.equals('일반회원') and mb_id != null and mb_id != ''">
+					AND mb_id = #{mb_id}
+			</if>
+	 </select>
 	 
 	 <!-- 페이징 처리한 목록 (마이페이지 건의사항) -->
-	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT * FROM claim 
-			WHERE mb_id = #{param3}
-				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
+	<!--  만약 검색은 하지 않았으나 관리자 계정으로 들어왔을 때 경우의수가 필요하다면 아래 코드를 활용
+	<if test="word == null and word == ''">
+				<if test="mb_class.equals('관리자') and mb_id != null and mb_id != ''">
+				</if>
+	</if>
+	 -->
+	<select id="claimList" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+		SELECT claim_id,claim_title,claim_content,claim_date,status FROM claim
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('제목')">
+						AND claim_title LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('처리상태')">
+						AND status LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('작성자')">
+						AND mb_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+			<if test="mb_class.equals('일반회원') and mb_id != null and mb_id != ''">
+					AND mb_id = #{mb_id}
+			</if>
+					ORDER BY claim_id DESC LIMIT #{cnt} OFFSET #{offset}
 	</select>
 	
+	<!--
 	<select id="subjectSearch" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT * FROM claim
 			WHERE claim_title LIKE CONCAT('%',#{param3},'%') and mb_id = #{param4}
@@ -93,8 +138,9 @@
 			WHERE mb_id LIKE CONCAT('%',#{param3},'%') and mb_id = #{param4}
 				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
+	-->
 	<!-- 페이징 처리한 목록 (관리자 페이지 건의사항) -->
+	<!-- 
 	<select id="allClaimList" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT * FROM claim
 				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
@@ -117,7 +163,7 @@
 			WHERE mb_id LIKE CONCAT('%',#{param3},'%')
 				ORDER BY claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
+	-->
 	
 	<insert id="claimWrite" 
 		useGeneratedKeys="true"
@@ -207,7 +253,11 @@
 	<delete id="replyPhotoDel">
 		DELETE FROM photo WHERE post_id = #{param1} and category_id = '3'
 	</delete>
-	
-	<select id=""></select>
-	
+	<!--
+	<select id="searchCount" resultType="int">
+		SELECT COUNT(claim_id) FROM claim
+			WHERE claim_title LIKE CONCAT('%',#{param2},'%')
+				AND mb_id = #{param1}
+	</select>
+	-->
 </mapper>

@@ -78,29 +78,37 @@
    if (msg != "") {
       alert(msg);
    }
+   
    // 관리자 임을 알 수 있는 회원등급과 현재 페이지 정보를 변수에 담는다.
-   var mb_id = "${sessionScope.loginId}";
-   var mb_class = "${sessionScope.mb_class}";
-   var currPage = 1;
-   listCall(currPage);
+	var mb_id = "${sessionScope.loginId}";
+	var mb_class = "${sessionScope.mb_class}";
+	var word = $('#word').val();
+	var option = $('#option').val();
+	var currPage = 1;
+	
+	listCall(currPage);
    
-   // select 의 option 변경
-   $('#pagePerNum').on('change',function(){
-      var word = $('#word').val();
-      console.log(currPage);
-      console.log(word);
-      // 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
-      $("#pagination").twbsPagination('destroy');
-      if(word==null || word==""){
-         listCall(currPage);
-      } else {
-         searchList(currPage)
-      }
-      
-   })
+	// cnt 변경 (한 번에 보여줄 게시글 수 변경) 시에 초기화
+	$('#pagePerNum').on('change',function(){
+		console.log(currPage);
+		// 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
+		$("#pagination").twbsPagination('destroy');
+		// 검색어가 들어갔을 때와 아닐때를 구분
+		if(word == null && word == ''){
+			listCall(currPage);
+		} else if (word != null && word != '') {
+			searchList(currPage)
+			console.log(word);
+		}
+	});
    
+	// 검색 버튼 클릭했을 때 한 번 초기화
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	});
    
-   
+	
    function listCall(page) {
       
       var pagePerNum = $('#pagePerNum').val();
@@ -129,12 +137,7 @@
                   console.log("클릭한 페이지 : "+page); // 사용자가 클릭한 페이지
                   console.log("입력한 검색어 : "+word);
                   currPage = page;
-                  
-                  if(word==null){
-                     listCall(page);
-                  } else {
-                     searchList(page);
-                  }
+                  listCall(page);
                }
             });
             
@@ -146,44 +149,11 @@
    }
    
    
-   function drawList(claimList) {
-      var content = '';
-      var date = new Date();
-      claimList.forEach(function(item){
-         //console.log(item.status);
-         content += '   <tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
-         content += '      <td id="claimID">'+item.claim_id+'</td>';
-         content += '      <td class="claimTitle"><a href="adminClaimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
-         content += '      <td class="mbID">'+item.mb_id+'</td>';
-         content += '      <td class="claimStatus">'+item.status+'</td>';
-         content += '      <td>'+item.claim_date+'</td>';
-         content += '      <td class="delete">';
-         if(item.status=="미처리") {
-            content += '         <button class="delBtn" onclick="clickEvt(this)">삭제</button>';
-         }
-         content += '      </td>';
-         content += '   </tr>';
-      });
-      // 혹시 모를 상황을 대비해 깨끗하게 비워두고 쌓는다. (append 는 있는 것에 계속해서 이어 붙이는 기능이기 때문)
-      $("#claimList").empty();
-      $("#claimList").append(content);
-   }
-   
-   /*
-   $('#searchBtn').on('click',function(){
-      console.log(currPage);
-      // 페이지 당 보여줄 게시글 수 변경시에 기존 페이징 요소를 없애고 다시 만들어 준다. (다시 처음부터 그리기)
-      $("#pagination").twbsPagination('destroy');
-      searchList(currPage);
-   })
-   */
-   
-   
    // 검색 결과 출력
    function searchList(page) {
-      var word = $('#word').val();
-      var option = $('#option').val();
       var pagePerNum = $('#pagePerNum').val();
+      word = $('#word').val();
+      option = $('#option').val();
       
       $.ajax({
          type: 'GET',
@@ -210,7 +180,7 @@
                onPageClick: function(e, page) {
                   console.log(page); // 사용자가 클릭한 페이지
                   currPage = page;
-                  listCall(page);
+                  searchList(page);
                }
             });
          },
@@ -220,6 +190,28 @@
       })
    }
    
+   function drawList(claimList) {
+      var content = '';
+      var date = new Date();
+      claimList.forEach(function(item){
+         //console.log(item.status);
+         content += '   <tr cID="' + item.claim_id + '" cSt="' + item.status + '">';
+         content += '      <td id="claimID">'+item.claim_id+'</td>';
+         content += '      <td class="claimTitle"><a href="adminClaimDetail?claim_id='+item.claim_id+'">'+item.claim_title+'</a></td>';
+         content += '      <td class="mbID">'+item.mb_id+'</td>';
+         content += '      <td class="claimStatus">'+item.status+'</td>';
+         content += '      <td>'+item.claim_date+'</td>';
+         content += '      <td class="delete">';
+         if(item.status=="미처리") {
+            content += '         <button class="delBtn" onclick="clickEvt(this)">삭제</button>';
+         }
+         content += '      </td>';
+         content += '   </tr>';
+      });
+      // 혹시 모를 상황을 대비해 깨끗하게 비워두고 쌓는다. (append 는 있는 것에 계속해서 이어 붙이는 기능이기 때문)
+      $("#claimList").empty();
+      $("#claimList").append(content);
+   }
    // 삭제 버튼 기능구현 (동적으로 생성한 버튼은 javascript 로 구현)
    function clickEvt(btn) {
       var claim_id = $(btn).parent().parent().attr("cID");
