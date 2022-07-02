@@ -122,8 +122,27 @@
 	</if>
 	AND p.post_id = b.b_id
 </select>
-	
 
+<!-- 관리자 페이지는 임시로 별도의 count 를 세어 사용한다. -->
+<select id="allBookCount" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+	SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book 
+	WHERE 1=1
+	<if test="word != null and word != ''">
+		<choose>
+			<when test="option.equals('제목')">
+				AND b_title LIKE CONCAT('%',#{word},'%')
+			</when>
+			<when test="option.equals('저자')">
+				AND writer LIKE CONCAT('%',#{word},'%')
+			</when>
+			<when test="option.equals('출판사')">
+				AND publisher LIKE CONCAT('%',#{word},'%')
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</if>
+</select>
 
 
 </mapper>
