@@ -5,10 +5,11 @@
 <meta charset="UTF-8">
 <title>도서검색</title>
 <script src = "https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="icon" href="resources/img/favicon.png">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
+<link rel="icon" href="resources/img/favicon.png">
+<link rel="stylesheet" href="resources/css/bookSearch.css"/>
 <style></style>
 </head>
 <body>
@@ -16,54 +17,43 @@
 		<jsp:include page="../commons/header.jsp"/>
 	</div>
 	<hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
-	<section>
+	<div class="section">        
         <form class="search" action="bookSearch.go" method="get">
-            <select name="option">
-                <option value="제목">제목</option>
-                <option value="저자">저자</option>
-                <option value="출판사">출판사</option>
-            </select>
-            <input type="text" name="word" placeholder="도서 검색"/>
-            <input type="submit" class="btn_search" onclick=""/>
-        </form>
-        
-        <div class="content"> 
-           <div class="content-pagination" style="text-align:center">
              <select id="pagePerNum"> <!-- pagePerNum 을 ajax로 controller로 보내서 이에 따라 게시물 수 바꿔줄 것임 -->
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="15" selected="selected">15</option>
                 <option value="20">20</option>
              </select>
-         </div>
-         <!-- <p>"${param.option }"에서 "${param.word }"로 검색한 결과입니다.</p>  -->
-       </div>       
-           <table border="1">
-               <thead>
-                  <tr>
-                      <th>책표지</th>
-                      <th>제목</th>
-                      <th>저자</th>
-                      <th>출판사</th>
-                      <th>도서상태</th>
-                      <th>예약가능여부</th>                 
-                  </tr>
-               </thead>
-               <tbody id="searchList">
-               		
-               </tbody>
-               		<tr>
-				<td colspan="6" id="paging">
-					<div class="container">
-						<nav aria-label="Page navigation">
-								<ul class="pagination" id="pagination" >
-								</ul>					
-						</nav>
-					</div>
-				</td>
-			</tr>
-           </table>
-   </section>	
+            <select name="option">
+                <option value="제목">제목</option>
+                <option value="저자">저자</option>
+                <option value="출판사">출판사</option>
+            </select>
+            <input class="searchBlock" type="text" name="word" placeholder="도서 검색"/>
+            <input type="submit" class="btn_search" value=" "/>
+        </form>      
+		<table class="bookSearchTable">
+		    <thead>
+		       <tr>
+		           <th>책표지</th>
+		           <th>제목</th>
+		           <th>저자</th>
+		           <th>출판사</th>
+		           <th>도서상태</th>
+		           <th>예약가능여부</th>                 
+		       </tr>
+		    </thead>
+		    <tbody id="searchList">
+		    		
+		    </tbody>
+		</table>	
+		<div class="container">
+			<nav aria-label="Page navigation">
+					<ul class="pagination" id="pagination" ></ul>					
+			</nav>
+		</div>
+	</div>
 </body>
 <script>
 //URL 에서 파라미터 가져오기
@@ -72,6 +62,8 @@ let query = window.location.search; //url query 부분 가져오기 ?option=writ
 var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
 var option = param.get("option");
 var word = param.get("word");
+var mb_id = "${sessionScope.loginId}";
+var mb_class = "${sessionScope.mb_class}";
 
 console.log(option, word);
 var currPage = 1;
@@ -146,7 +138,7 @@ function drawList(searchList){
    searchList.forEach(function(item) {
       console.log(item.reserve_able);
       content += '<tr>';
-      content += ' <td><img src="/image/'+item.newFileName+' " height="200"/></td>';
+      content += ' <td><img src="/image/'+item.newFileName+' " height="100"/></td>';
       content += '<td><a href="bookDetail.do?b_id='+item.b_id +' ">'+item.b_title+'</a></td>';
       content += '<td>'+item.writer+'</td>';
       content += '<td>'+item.publisher+'</td>';

@@ -64,9 +64,9 @@
 						<option value="20">20</option>
 					</select>
 					<select class="selectBtn" id="option" name="option">
-						<option value="b_title">제목</option>
-						<option value="writer">저자</option>
-						<option value="publisher">출판사</option>
+						<option value="제목">제목</option>
+						<option value="저자">저자</option>
+						<option value="출판사">출판사</option>
 					</select>
 					<input class="searchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
 					<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
@@ -80,6 +80,8 @@ if (msg != "") {
 	alert(msg);
 }
 
+var mb_id = "${sessionScope.loginId}";
+var mb_class = "${sessionScope.mb_class}";
 var currPage = 1;
 listCall(currPage);
 
@@ -98,6 +100,12 @@ $('#pagePerNum').on('change',function(){ //pagePerNum 에 change가 일어나게
 	}
 })
 
+// 검색 버튼 클릭했을 때 한 번 초기화
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	});
+
 function listCall(page){
 	
 	var pagePerNum = $('#pagePerNum').val();
@@ -108,7 +116,9 @@ function listCall(page){
 		url:'bookList.ajax',
 		data:{
 			cnt : pagePerNum, //5,10,15,20
-			page : page // 현재페이지(이동한 페이지)
+			page : page, // 현재페이지(이동한 페이지)
+			mb_id : mb_id,
+			mb_class : mb_class
 		},
 		dataType:'json',
 		success:function(data){
@@ -171,6 +181,8 @@ function searchList(page){
 			page : page,
 			word : word,
 			option : option,
+			mb_id : mb_id,
+			mb_class : mb_class
 		},
 		dataType:'JSON',
 		success: function(data){
@@ -187,7 +199,7 @@ function searchList(page){
 				onPageClick: function(e, page) {
 					console.log(page); // 사용자가 클릭한 페이지
 					currPage = page;
-					listCall(page);
+					searchList(page);
 				}
 			})
 		},
