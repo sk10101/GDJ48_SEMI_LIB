@@ -6,7 +6,6 @@
 <title>예약내역(관리자)</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="resources/js/jquery.twbsPagination.js"></script>
 <link rel="stylesheet" href="resources/css/frame.css">
@@ -173,7 +172,7 @@ function drawList(reserveList) {
 			d.setDate(d.getDate() + 22);
 			var date = d.toISOString().substring(0,10);
 			console.log(date);			
-		content += '<br/>' +date; 
+		content += '<br/>' +date;
 		content += '</td>';
 		content += '<td>';
 			if(item.reason==null) {

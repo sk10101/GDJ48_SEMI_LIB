@@ -75,7 +75,6 @@
 					 </select>
 					 <select id="option" name="option">
 				       		<option value="도서제목">도서제목</option>
-				       		<option value="연체여부">연체여부</option>
 				       	</select>
 					 <input id="word" type="search" placeholder="검색" name="word" value=""/>
 			        <input id="searchBtn" type="button" onclick="searchList(currPage)" value="검색" style="width: 60px; margin-top: 10px;"/>

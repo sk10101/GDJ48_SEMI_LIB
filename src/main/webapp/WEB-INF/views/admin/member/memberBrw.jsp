@@ -63,7 +63,11 @@ if (msg != "") {
 }
 
 
-var mb_id=$('#mb_id').html();
+let query = window.location.search; //url query 부분 가져오기 
+var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
+var mb_id=param.get("mb_id");
+console.log(mb_id);
+//var mb_id=$('#mb_id').html();
 console.log(mb_id);
 
 listCall();

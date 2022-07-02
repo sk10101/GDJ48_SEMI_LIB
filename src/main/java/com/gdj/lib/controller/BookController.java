@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
 
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.service.BookService;
@@ -138,5 +139,17 @@ public class BookController {
 		String page = "redirect:/AdbookDetail.do?b_id="+params.get("b_id");
 		return page;
 	}
+	
+	@RequestMapping(value = "/delPhoto.ajax")
+	public String delPhoto(
+			@RequestParam HashMap<String, String> params) {
+		logger.info("사진삭제 요청 : {}",params);
+		service.delPhoto(params);
+		String page = "redirect:/AdbookDetail.do?b_id="+params.get("b_id");
+		logger.info("사진 삭제 완료");
+		return page;
+	}
+	
+	
 	
 }

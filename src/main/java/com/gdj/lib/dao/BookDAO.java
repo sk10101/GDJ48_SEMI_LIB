@@ -1,6 +1,7 @@
 package com.gdj.lib.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.PhotoDTO;
@@ -20,6 +21,8 @@ public interface BookDAO {
 	ArrayList<BookDTO> bookWriterSearch(int cnt, int offset, String word);
 
 	ArrayList<BookDTO> bookPublisherSearch(int cnt, int offset, String word);
+	
+	ArrayList<BookDTO> bookb_statusSearch(int cnt, int offset, String word);
 
 	BookDTO detail(String b_id);
 
@@ -36,6 +39,8 @@ public interface BookDAO {
 	void fileUpdate(String oriFileName, String newFileName, int b_id);
 
 	int photoChk(BookDTO dto);
+
+	Object delPhoto(String b_id);
 
 	
 

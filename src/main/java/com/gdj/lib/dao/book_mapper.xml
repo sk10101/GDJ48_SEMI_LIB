@@ -52,6 +52,12 @@
 			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
+	<select id="bookb_statusSearch" resultType="com.gdj.lib.dto.BookDTO">
+		SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book
+		WHERE b_status LIKE CONCAT('%', #{param3}, '%')
+			ORDER BY b_id DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
 	<select id="allCount" resultType="Integer">
 		SELECT COUNT(b_id) FROM book;
 	</select>
@@ -98,5 +104,9 @@
 			, newFileName = #{param2}
 		WHERE category_id = "4" AND post_id = #{param3};
 	</update>
+	
+	<delete id="delPhoto">
+		DELETE FROM photo WHERE category_id="4" AND post_id = #{param1}
+	</delete>
 <!-- 관리자 도서관리 끝 -->	
 </mapper>

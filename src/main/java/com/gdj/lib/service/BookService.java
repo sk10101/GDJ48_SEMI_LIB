@@ -125,9 +125,11 @@ public class BookService {
 					searchList = dao.bookTitleSearch(cnt,offset,word);
 				} else if (option.equals("writer")) {
 					searchList = dao.bookWriterSearch(cnt,offset,word);
-				} else {
+				} else if (option.equals("publisher")) {
 					searchList = dao.bookPublisherSearch(cnt,offset,word);
-				}		
+				} else {
+					searchList = dao.bookb_statusSearch(cnt,offset,word);
+				}
 				map.put("bookList", searchList);
 			}
 			
@@ -249,6 +251,14 @@ public class BookService {
 				}				
 			}
 		}
+		
+	}
+
+
+	public Object delPhoto(HashMap<String, String> params) {
+		logger.info("도서 사진 삭제 요청 서비스 도착");
+		String b_id = params.get("b_id");
+		return dao.delPhoto(b_id);
 		
 	}
 
