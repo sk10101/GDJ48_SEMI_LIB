@@ -58,7 +58,6 @@
                 <tr>
                   <td id="brw_b_id">${detail.b_id}</td>
                       <td id="b_status">${detail.b_status}</td>
-                      <input type="button" id="test" value="${aaa.mb_id}"/>
                   <td>
                          <c:choose>
                                <c:when test="${detail.b_status eq '대출가능'}">
