@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.gdj.lib.dao.BrwBookDAO;
+import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dto.PhotoDTO;
 
@@ -150,6 +151,7 @@ public class BrwBookService {
 		String option = params.get("option");
 		String word = params.get("word");
 		String mb_id = params.get("mb_id");
+		String mb_class = params.get("mb_class");
 		logger.info("서비스 리스트 요청 : {}", params);
 		logger.info("보여줄 페이지 : "+page);
 		logger.info("로그인한 아이디 : " + mb_id);
@@ -157,8 +159,26 @@ public class BrwBookService {
 		ArrayList<BrwBookDTO> brwBookList = new ArrayList<BrwBookDTO>();
 		ArrayList<BrwBookDTO> brwBookSearchList = new ArrayList<BrwBookDTO>();
 		
-		int allCnt = dao.brwBookCount(mb_id);
-		logger.info("allCnt : "+allCnt);
+		int allCnt = 0;
+		
+		brwBookPageMap.put("mb_id", mb_id);
+		brwBookPageMap.put("mb_class", mb_class);
+		
+		if (word != null && word != "") {
+			brwBookPageMap.put("word", word);
+			brwBookPageMap.put("option", option);
+		}
+		// 출력할 게시글의 개수를 세어준다.
+		ArrayList<BrwBookDTO> brwBookCount = dao.brwBookCount(brwBookPageMap);
+		allCnt = brwBookCount.size();
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			logger.info("검색결과가 없어 임의로 예외처리함");
+			allCnt = 1;
+		}
+		logger.info("allCnt : " + allCnt);
+
 		int pages = allCnt % cnt> 0 ? (allCnt / cnt)+1 : (allCnt/ cnt);
 		logger.info("pages : "+pages);
 		
