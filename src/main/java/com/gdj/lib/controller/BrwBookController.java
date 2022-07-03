@@ -217,7 +217,7 @@ public class BrwBookController {
 	                  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
 	                  model.addAttribute("brwlist", brwlist);
 	                  logger.info("list 갯수: "+brwlist.size());
-	                  if(brwlist.size() <= 5 ) {
+	                  if(brwlist.size() < 5 ) {
 	                     service.bookDetailBrw(params);
 	                     msg = "도서대출 완료";
 	                  } else {
@@ -309,7 +309,7 @@ public class BrwBookController {
 				  }else { 		
 					  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
 			          logger.info("예약권수: "+brwlist.size());
-		          if(brwlist.size() <= 5 ) {
+		          if(brwlist.size() < 5 ) {
 		              service.bookreason(params);
 		              service.reserve_able(params);
 		              msg = "도서 예약신청이완료되었습니다.";
