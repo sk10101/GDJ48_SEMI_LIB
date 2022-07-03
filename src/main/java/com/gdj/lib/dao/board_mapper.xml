@@ -42,16 +42,30 @@
 		SELECT notice_id, notice_title, notice_date FROM notice
 			ORDER BY notice_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
+	<!-- 검색 기능 개선을 위해 주석 처리함
 	<select id="noticeAllCount" resultType="Integer">
 		SELECT COUNT(notice_id) FROM notice
 	</select>
-	
+	-->
 	<select id="subjectNoticeSearch" resultType="com.gdj.lib.dto.BoardDTO">
 		SELECT * FROM notice
 			WHERE notice_title LIKE CONCAT('%',#{param3},'%')
 			 	ORDER BY notice_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
+	
+	<select id="allNoticeCount" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+	 	SELECT notice_id FROM notice
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('제목')">
+						AND notice_title LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+	 </select>
 	
 	
 	<!-- 여기서부터 건의사항 관련 쿼리문 ==========================================

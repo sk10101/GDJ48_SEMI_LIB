@@ -13,8 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-
+import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 import com.gdj.lib.dto.BrwBookDTO;
 import com.gdj.lib.dao.MemberDAO;
@@ -246,13 +245,27 @@ public class MemberService {
 		int page = Integer.parseInt(params.get("page"));
 		String option = params.get("option");
 		String word = params.get("word");
+		String mb_id = params.get("mb_id");
+		String mb_class = params.get("mb_class");
+		
 		logger.info("보여줄 페이지 : "+page);
 		
 		ArrayList<MemberDTO> memberList = new ArrayList<MemberDTO>();
 		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
 		
+		map.put("cnt", cnt);
+		map.put("mb_id", mb_id);
+		map.put("mb_class", mb_class);
+		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
-		int allCnt = dao.allMemeberCount();
+		if (word != null && word != "") {
+			map.put("word", word);
+			map.put("option", option);
+		}
+		// 출력할 게시글의 개수를 세어준다.
+		ArrayList<MemberDTO> allMemeberCount = dao.allMemeberCount(map);
+		
+		int allCnt = allMemeberCount.size();
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {
@@ -303,13 +316,27 @@ public class MemberService {
 		int page = Integer.parseInt(params.get("page"));
 		String option = params.get("option");
 		String word = params.get("word");
+		String mb_id = params.get("mb_id");
+		String mb_class = params.get("mb_class");
+		
 		logger.info("보여줄 페이지 : "+page);
 		
 		ArrayList<MemberDTO> adminList = new ArrayList<MemberDTO>();
 		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
 		
+		map.put("cnt", cnt);
+		map.put("mb_id", mb_id);
+		map.put("mb_class", mb_class);
+		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
-		int allCnt = dao.allAdminCount();
+		if (word != null && word != "") {
+			map.put("word", word);
+			map.put("option", option);
+		}
+		// 출력할 게시글의 개수를 세어준다.
+		ArrayList<MemberDTO> allMemeberCount = dao.allMemeberCount(map);
+		
+		int allCnt = allMemeberCount.size();
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {

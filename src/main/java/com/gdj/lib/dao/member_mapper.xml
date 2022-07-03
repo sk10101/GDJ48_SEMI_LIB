@@ -220,7 +220,7 @@
 		SELECT COUNT(black_id) FROM blacklist
 	</select>
 	
-	
+	<!-- 검색 기능을 개선하기 위해 주석 처리함
 	<select id="allMemeberCount" resultType="int">
 		SELECT COUNT(mb_id) FROM member WHERE mb_class = '일반회원'
 	</select>
@@ -228,7 +228,36 @@
 	<select id="allAdminCount" resultType="int">
 		SELECT COUNT(mb_id) FROM member WHERE mb_class = '관리자'
 	</select>
+	-->
 	
+	<select id="allMemeberCount" resultType="com.gdj.lib.dto.MemberDTO" parameterType="hashmap">
+	 	SELECT mb_id FROM member
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('회원ID') or option.equals('관리자ID')">
+						AND mb_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('회원이름') or option.equals('관리자이름')">
+						AND name LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('회원상태')">
+						AND mb_status LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('전화번호')">
+						AND phone LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+			<if test="mb_class.equals('일반회원') and mb_id != null and mb_id != ''">
+					AND mb_class = '일반회원'
+			</if>
+			<if test="mb_class.equals('관리자') and mb_id != null and mb_id != ''">
+					AND mb_class = '관리자'
+			</if>
+	 </select>
 	
 	
 	
