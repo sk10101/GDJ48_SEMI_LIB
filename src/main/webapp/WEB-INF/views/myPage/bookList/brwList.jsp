@@ -81,6 +81,7 @@ if (msg != "") {
 
 
 var mb_id = "${sessionScope.loginId}";
+var mb_class = "${sessionScope.mb_class}";
 var currPage = 1;
 listCall(currPage);
 
@@ -101,6 +102,12 @@ $('#pagePerNum').on('change',function(){
 });
 
 
+// 검색 버튼 클릭했을 때 한 번 초기화
+$('#searchBtn').on('click',function(){	
+	$("#pagination").twbsPagination('destroy');
+	searchList(currPage);
+});
+
 	function listCall(page) {
 		var pagePerNum = $('#pagePerNum').val();
 		console.log("param page : " + page);
@@ -111,7 +118,8 @@ $('#pagePerNum').on('change',function(){
 			data:{
 				cnt : pagePerNum,
 				page : page,
-				mb_id : mb_id
+				mb_id : mb_id,
+				mb_class : mb_class
 			},
 			dataType:'JSON',
 			success:function(data){
@@ -179,7 +187,8 @@ $('#pagePerNum').on('change',function(){
 				page : page,
 				word : word,
 				option : option,
-				mb_id : mb_id
+				mb_id : mb_id,
+				mb_class : mb_class
 			},
 			dataType:'JSON',
 			success: function(data){

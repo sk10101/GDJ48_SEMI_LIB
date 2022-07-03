@@ -97,7 +97,13 @@
     		searchList(currPage)
     	}
     });
-        
+       
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	});
+
+  
     function listCall(page){	
         
         var pagePerNum = $('#pagePerNum').val();
@@ -233,7 +239,7 @@
     				onPageClick: function(e, page) {
     					console.log(page); // 사용자가 클릭한 페이지
     					currPage = page;
-    					listCall(page);
+    					searchList(page);
     				}
     			})
     		},
