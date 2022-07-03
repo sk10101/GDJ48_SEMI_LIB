@@ -163,8 +163,20 @@
 .replyFormBtn{
 	width:100%;
 	text-align:center;
+	padding:20px;
 }
-
+.replyFormBtn input{
+	background:#86b049;
+	padding:5px;
+	font-size:16px;
+	font-weight:700;
+	color:#fff;
+	border-radius:5px;
+}
+.replyFormBtn input:hover{
+	cursor:pointer;
+	background:#476930;
+}
 
 
 

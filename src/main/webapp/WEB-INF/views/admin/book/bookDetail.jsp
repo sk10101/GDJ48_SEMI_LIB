@@ -71,8 +71,8 @@
 	                        <th>도서예약상태</th>
 	                        <td>
 	                        	<c:choose>
-	                        		<c:when test="${book.reserve_able eq true}"><p>예약중</p></c:when>
-	                        		<c:otherwise><p>예약자없음</p></c:otherwise>
+	                        		<c:when test="${book.reserve_able eq true}"><p>예약자없음</p></c:when>
+	                        		<c:otherwise><p>예약중도서</p></c:otherwise>
 	                        	</c:choose>
 	                        </td>
 	                    </tr>
