@@ -124,7 +124,7 @@
 <!-- 관리자 도서관리 끝 -->	
 
 <!-- 도서 검색 개선을 위해 새로 작성한 코드 -->	
-<select id="allCount" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+<select id="allCount" resultType="com.gdj.lib.dto.BookDTO" parameterType="hashmap">
 	SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 	WHERE 1=1
@@ -147,7 +147,7 @@
 </select>
 
 <!-- 관리자 페이지는 임시로 별도의 count 를 세어 사용한다. -->
-<select id="allBookCount" resultType="com.gdj.lib.dto.BoardDTO" parameterType="hashmap">
+<select id="allBookCount" resultType="com.gdj.lib.dto.BookDTO" parameterType="hashmap">
 	SELECT b_id, b_title, writer, publisher, b_status, b_date FROM book 
 	WHERE 1=1
 	<if test="word != null and word != ''">
