@@ -75,7 +75,7 @@ public interface BrwBookDAO {
 
 	ArrayList<BrwBookDTO> brwStatusSearch(int cnt, int offset, String word, String mb_id);
 
-	int brwBookCount(String mb_id);
+	ArrayList<BrwBookDTO> brwBookCount(HashMap<String, Object> brwBookPageMap);
 	
 	int chkReturnOver(String mb_id);
 
