@@ -8,6 +8,7 @@
 		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE b_title LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
+		ORDER BY b_title
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
@@ -15,6 +16,7 @@
 		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE writer LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
+		ORDER BY b_title
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
@@ -22,6 +24,7 @@
 		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE publisher LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
+		ORDER BY b_title
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
 <!-- 검색 옵션 쿼리문 끝 -->
