@@ -171,11 +171,11 @@
 				ORDER BY penalty_id DESC limit #{param1} offset #{param2}
 		
 	</select>
-	
+	<!-- 검색 기능을 개선하기 위해 주석 처리함
 	<select id="allCount" resultType="Integer">
 		SELECT COUNT(penalty_id) FROM penalty
 	</select>
-	
+	 -->
 	
 	<select id="memberSearch" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT * FROM penalty
@@ -381,8 +381,23 @@
 			WHERE status LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{param4}
 				claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
-	
+	<!-- 이용정지 내역 검색기능 개선 -->
+	<select id="allCount" resultType="com.gdj.lib.dto.MemberDTO" parameterType="hashmap">
+	 	SELECT penalty_id FROM penalty
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('회원ID')">
+						AND mb_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('제한내역')">
+						AND category_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+	 </select>
 	
 	
 	

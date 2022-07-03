@@ -127,8 +127,19 @@ public class MemberService {
 		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
 		
 		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
-		int allCnt = dao.allCount();
+		int allCnt = 0;
+		
+		map.put("cnt", cnt);
+		
+		if (word != null && word != "") {
+			map.put("word", word);
+			map.put("option", option);
+		}
+		// 출력할 게시글의 개수를 세어준다.
+		ArrayList<BoardDTO> allCount = dao.allCount(map);
+		allCnt = allCount.size();
 		logger.info("allCnt : " + allCnt);
+		
 		
 		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
 		

@@ -68,6 +68,10 @@ public class BoardService {
 		// 출력할 게시글의 개수를 세어준다.
 		ArrayList<BoardDTO> allCount = dao.allCount(map);
 		allCnt = allCount.size();
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 할 땐 메세지를 띄워줘야 할 듯 
+			logger.info("다시 검색해 주세요");
+		}
 		logger.info("allCnt : " + allCnt);
 		
 		
