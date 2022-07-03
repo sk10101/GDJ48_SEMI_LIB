@@ -99,7 +99,7 @@ public interface MemberDAO {
 	
 	
 	// =====================================
-	int allCount();
+	ArrayList<BoardDTO> allCount(HashMap<String, Object> map);
 
 	ArrayList<MemberDTO> blackList (int cnt, int offset);
 

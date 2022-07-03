@@ -55,6 +55,12 @@ public class BookService {
 		int allCnt = allCount.size();
 		logger.info("allCnt : " + allCnt);
 		
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			allCnt = 1;
+		}
+		
 		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
 		
 		logger.info("pages : " + pages);
@@ -110,10 +116,22 @@ public class BookService {
 			// 총 갯수(allCnt) / 페이지당 보여줄 갯수(cnt) = 생성가능한 페이지(pages)
 			//int allCnt = dao.allCount();
 			
+			if (word != null && word != "") {
+				map.put("word", word);
+				map.put("option", option);
+			}
+			
 			// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
-			ArrayList<BookDTO> allCount = dao.allBookCount(map);
-			int allCnt = allCount.size();
-			logger.info("allCnt : "+allCnt);		
+			ArrayList<BookDTO> allBookCount = dao.allBookCount(map);
+			int allCnt = allBookCount.size();
+			logger.info("allCnt : "+allCnt);
+			
+			// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+			if(allCnt == 0) {
+				// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+				allCnt = 1;
+			}
+			
 			int pages = allCnt%cnt > 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
 			logger.info("pages : "+pages);
 			

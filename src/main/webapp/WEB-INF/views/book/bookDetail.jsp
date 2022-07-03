@@ -91,7 +91,6 @@
 </html>
 <script>
 
-console.log(aaa);
 var msg = "${msg}"
    if (msg != "") {
       alert(msg);
@@ -106,7 +105,7 @@ function bookbrw(brwId) {
       if(loginId == null || loginId == ''){
          console.log("비회원");
          alert("도서대출은 로그인 후 이용가능한 서비스입니다.");
-         location.href="/login/login";
+         location.href="/login.go";
       } else {
          $.ajax({
                type:'get',
@@ -118,7 +117,7 @@ function bookbrw(brwId) {
                dataType:'JSON',
                success:function(data) {
                   alert(data.msg);
-                  location.reload(true);
+                  location.href="bookDetail.do?b_id="+bookID;
                },
                error:function(e) {
                   console.log(e);
@@ -169,12 +168,14 @@ function bookreason(brwId) {
 
 
 function back() {
-    
+	/*
     var referrer = document.referrer;
     console.log(referrer);
     location.href = referrer;
+  */
+  history.go(-1);
   
-  //histiory.go(-1);
+  
  }
 
 </script>
