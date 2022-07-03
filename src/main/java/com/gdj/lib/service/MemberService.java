@@ -140,6 +140,12 @@ public class MemberService {
 		allCnt = allCount.size();
 		logger.info("allCnt : " + allCnt);
 		
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			allCnt = 1;
+		}
+		
 		
 		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
 		
@@ -208,6 +214,13 @@ public class MemberService {
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
 		int allCnt = dao.allBlackCount();
 		logger.info("allCnt : "+allCnt);
+		
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			allCnt = 1;
+		}
+		
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {
 			page = pages;
@@ -278,6 +291,13 @@ public class MemberService {
 		
 		int allCnt = allMemeberCount.size();
 		logger.info("allCnt : "+allCnt);
+		
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			allCnt = 1;
+		}
+		
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {
 			page = pages;
@@ -349,6 +369,13 @@ public class MemberService {
 		
 		int allCnt = allMemeberCount.size();
 		logger.info("allCnt : "+allCnt);
+		
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			allCnt = 1;
+		}
+		
 		int pages = allCnt % cnt > 0 ? (allCnt / cnt)+1 : (allCnt / cnt);
 		if (page > pages) {
 			page = pages;
