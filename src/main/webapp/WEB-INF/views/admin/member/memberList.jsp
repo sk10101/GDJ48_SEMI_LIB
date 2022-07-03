@@ -76,7 +76,8 @@
 	</div>
 </body>
 <script>
-
+	var mb_id = "${sessionScope.loginId}";
+	var mb_class = $(".memberClassBtnChk").text();
 	var msg ="${msg}";
 	
 	if (msg != "") {
@@ -101,6 +102,11 @@
 		}
 	});
 	
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	});
+	
 	function listCall(page){	
 		
 		var pagePerNum = $('#pagePerNum').val();
@@ -110,7 +116,9 @@
 			url:'memberPaging.ajax',
 			data:{
 				cnt : pagePerNum,
-				page : page
+				page : page,
+				mb_id : mb_id,
+	            mb_class : mb_class
 			},
 			dataType:'json',
 			success:function(data){
@@ -178,7 +186,9 @@
 				cnt : pagePerNum,
 				page : page,
 				word : word,
-				option : option
+				option : option,
+				mb_id : mb_id,
+	            mb_class : mb_class
 			},
 			dataType:'JSON',
 			success: function(data){
