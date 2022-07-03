@@ -180,7 +180,7 @@ function drawList(reserveList) {
 			if (item.reason!=null){
 				content += ' ';
 			}else{
-				content += ' <button class="delBtn" onclick="cancel(this)" id="' +item.reserve_id+ '">취소</button> ';
+				content += ' <button class="delBtn" onclick="cancel(this)" id="' +item.reserve_id+ '" b_id ="' +item.b_id+ '">취소</button> ';
 			}
 		content += '</td>';
 		content += '</tr>';

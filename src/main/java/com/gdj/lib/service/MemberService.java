@@ -523,6 +523,16 @@ public class MemberService {
 		
 	}
 
+	public int bookStatus(String b_id) {
+		
+		return dao.bookStatus(b_id);
+	}
+
+	public Object reserveUpdate(String b_id) {
+		// TODO Auto-generated method stub
+		return dao.reserveUpdate(b_id);
+	}
+
 	
 	
 	

@@ -360,8 +360,16 @@
 		WHERE reserve_id = #{param1}
 	</update>
 	
+	<select id="bookStatus" resultType="int">
+		SELECT count(b_id) FROM book where b_id=#{param1} AND b_status = '대출불가'
+	</select>
+	
 	<update id="cancelUpdate">
-		UPDATE book SET b_status = "대출가능" WHERE b_id = #{param1}
+		UPDATE book SET b_status = "대출가능" , reserve_able = 0 WHERE b_id = #{param1}
+	</update>
+	
+	<update id="reserveUpdate">
+		UPDATE book SET reserve_able = 1 WHERE b_id = #{param1}
 	</update>
 	
 	<select id="allHisCount" resultType="int">
