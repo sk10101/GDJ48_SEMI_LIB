@@ -1,6 +1,7 @@
 package com.gdj.lib.dao;
 
 
+import com.gdj.lib.dto.BoardDTO;
 import com.gdj.lib.dto.BookDTO;
 
 import java.util.ArrayList;
@@ -133,9 +134,9 @@ public interface MemberDAO {
 
 	ArrayList<MemberDTO> adEndSearch(int cnt, int offset, String word);
 
-	int allMemeberCount();
+	ArrayList<MemberDTO> allMemeberCount(HashMap<String, Object> map);
 
-	int allAdminCount();
+	// int allAdminCount();
 
 
 	ArrayList<MemberDTO> mbIDSearch(int cnt, int offset, String word);
