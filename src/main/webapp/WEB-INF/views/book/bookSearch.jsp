@@ -144,11 +144,15 @@ function drawList(searchList){
       content += '<td>'+item.publisher+'</td>';
       content += '<td>'+item.b_status+'</td>';
       content += '<td>';
+      if(item.b_status == '도서준비중' || ){
+    	  content += 'N';
+      }else {
       	if(item.reserve_able == true) {
       		content += 'Y';
       	} else {
       		content += 'N';
-      	}
+      	}  	  
+      }
       content += '</td>';
       content += '</tr>';
    });
