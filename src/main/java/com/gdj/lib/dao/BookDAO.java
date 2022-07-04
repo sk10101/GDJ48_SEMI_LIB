@@ -21,6 +21,8 @@ public interface BookDAO {
 	ArrayList<BookDTO> bookWriterSearch(int cnt, int offset, String word);
 
 	ArrayList<BookDTO> bookPublisherSearch(int cnt, int offset, String word);
+	
+	ArrayList<BookDTO> bookb_statusSearch(int cnt, int offset, String word);
 
 	BookDTO detail(String b_id);
 
@@ -38,9 +40,14 @@ public interface BookDAO {
 
 	int photoChk(BookDTO dto);
 
+
+	Object delPhoto(String b_id);
+
+	int bookHide(String b_id);
+	
 	ArrayList<BookDTO> allBookCount(HashMap<String, Object> map);
 
-	
+
 
 	
 

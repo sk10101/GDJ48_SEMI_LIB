@@ -254,25 +254,17 @@ public class MemberController {
 	    		  params.put("admin_end", loginId);  
 	    		  
 	    		  
-	    	  }
 
-		      if(params.get("black_cancel") == null) {
-		         params.put("black_cancel", "false");  
-		        
-		      }else {
-		    	 
-		         params.put("admin_end", admin_end);  
-		         
-		         
-		      }
-	      
+	    	  }	     
+	      if(params.get("clear") != null) {
+	    	  params.put("end_reason", params.get("clear"));
+	      		}
+		     
 		      	if(params.get("end_reason") != null) {
 		    	  params.put("end_reason", params.get("end_reason"));
 	
 		    	  
-		    	  if(params.get("end_reason") != null) {
-		    		  params.put("end_reason", "");
-		    	  }
+
 	    	  
 	    	  service.blackUpdate(params);
 	    	  page = "redirect:/blackDetail.do?black_id="+params.get("black_id");
@@ -489,10 +481,12 @@ public class MemberController {
 	
 	@RequestMapping("/reserveCancel.ajax")
 	@ResponseBody
-	public int reserveCancel(@RequestParam String reserve_id) {
+	public int reserveCancel(@RequestParam String reserve_id, @RequestParam String b_id) {
 		
 		logger.info("예약 취소 요청:"+reserve_id);
 		int success = service.reserveCancel(reserve_id);
+		service.cancelUpdate(b_id);
+		
 		logger.info("완료:"+success);
 		return success;
 	}

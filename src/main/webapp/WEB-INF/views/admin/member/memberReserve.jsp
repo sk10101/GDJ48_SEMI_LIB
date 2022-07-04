@@ -32,6 +32,7 @@
 	        <br/>
 	        <a href="penaltyList.go">이용정지내역</a>
 	    </div>
+
 		<div class="section">
 			<div class="secionTitle">
 				<h3>회원 예약내역</h3>
@@ -42,9 +43,6 @@
 	            <a class="brwSelect" href="/memberReserve.go?mb_id=${param.mb_id}">예약내역</a>
 	            &nbsp;&nbsp;회원 ID : ${param.mb_id}
             </div>
-            <div class="hidden-area">
-				회원 ID : <div id="mb_id">${param.mb_id}</div>
-			</div>
 		    <table class="brw_table">
 			    <thead>
 			        <tr>
@@ -89,7 +87,9 @@ if (msg != "") {
 	alert(msg);
 }
 
-var mb_id=$('#mb_id').html();
+let query = window.location.search; //url query 부분 가져오기 
+var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
+var mb_id=param.get("mb_id");
 console.log(mb_id);
 
 var currPage = 1;
@@ -167,7 +167,7 @@ function drawList(reserveList) {
 			d.setDate(d.getDate() + 22);
 			var date = d.toISOString().substring(0,10);
 			console.log(date);			
-		content += '<br/>' +date; 
+		content += '<br/>' +date;
 		content += '</td>';
 		content += '<td>';
 			if(item.reason==null) {
@@ -232,8 +232,8 @@ function searchList(page){
   
 function cancel(btn) {
 	var id = $(btn).attr("id");
-	console.log(id);
-	
+	var b_id = $(btn).attr("b_id");
+	console.log(b_id);
 	$.ajax({
 		type:'get',
 		url:'reserveCancel.ajax',

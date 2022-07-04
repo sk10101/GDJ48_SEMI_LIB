@@ -101,6 +101,8 @@ public interface BoardDAO {
 
 	ArrayList<BoardDTO> claimList(HashMap<String, Object> map);
 
+	ArrayList<BoardDTO> allNoticeCount(HashMap<String, Object> noticePageMap);
+
 
 	// ArrayList<BoardDTO> searchList(int cnt, int offset, String word, String mb_id, String option);
 

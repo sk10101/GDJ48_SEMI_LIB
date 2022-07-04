@@ -113,7 +113,7 @@ function updateExtension(whethe_id) {
 
 $(".extensionBtn").on("click",function(){
 	   $(this).hide();
-	   alert("예약신청이 완료되었습니다");
+	   alert("연장신청이 완료되었습니다");
 });
 
 

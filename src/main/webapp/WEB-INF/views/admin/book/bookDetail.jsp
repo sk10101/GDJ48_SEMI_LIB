@@ -44,6 +44,7 @@
 	                        	<c:forEach items="${list}" var="path">
 									<p><img src="/image/${path.newFileName}" height="200"/>
 								</c:forEach>
+								<button id="b_id" value="${book.b_id}" onclick="deleteBtn(this)">삭제</button>
 	                        </td>
 	                    </tr>
 	                    <tr>
@@ -70,8 +71,8 @@
 	                        <th>도서예약상태</th>
 	                        <td>
 	                        	<c:choose>
-	                        		<c:when test="${book.reserve_able eq true}"><p>예약중</p></c:when>
-	                        		<c:otherwise><p>예약자없음</p></c:otherwise>
+	                        		<c:when test="${book.reserve_able eq true}"><p>예약자없음</p></c:when>
+	                        		<c:otherwise><p>예약중도서</p></c:otherwise>
 	                        	</c:choose>
 	                        </td>
 	                    </tr>
@@ -101,5 +102,26 @@ var msg = "${msg}"
 if (msg != "") {
 	alert(msg);
 }	
+
+function deleteBtn(btn) {
+	var b_id = $("#b_id").val();
+	console.log(b_id);
+	
+	$.ajax({
+		type:'get',
+		url:'delPhoto.ajax',
+		data: {
+			b_id : b_id
+		},
+		dataType:'json',
+		success:function(data){
+			
+		},
+		error:function(error){
+			console.log(error);
+		}
+	});
+	
+}
 </script>
 </html>

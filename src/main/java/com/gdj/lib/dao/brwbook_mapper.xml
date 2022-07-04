@@ -265,9 +265,33 @@
 					WHERE br.brw_status LIKE CONCAT('%',#{param3},'%') and br.mb_id = #{param4} and (br.brw_status = '반납' OR br.brw_status='연체')
 						ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
+	<!-- 검색기능 개선을 위해 주석 처리함
 	<select id="brwBookCount" resultType="Integer">
 		SELECT COUNT(b_id) FROM borrow WHERE mb_id = #{param1} and brw_status = '반납'
 	</select>
+	-->
 	
+	<select id="brwBookCount" resultType="com.gdj.lib.dto.BrwBookDTO" parameterType="hashmap">
+	 	SELECT br.b_id FROM borrow br
+	 		<if test="word != null and word != ''">
+				INNER JOIN book b 
+					ON b.b_id = br.b_id
+			</if>
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('제목')">
+						AND b.b_title LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('상태')">
+						AND br.brw_status LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+			<if test="mb_class.equals('일반회원') and mb_id != null and mb_id != ''">
+					AND mb_id = #{mb_id} AND (brw_status = '반납' OR brw_status = '연체')
+			</if>
+	 </select>
 </mapper>

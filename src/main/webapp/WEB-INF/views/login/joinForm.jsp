@@ -27,7 +27,7 @@
 			</tr>
 			<tr>
 				<th class="col1">PW확인</th>
-				<td class="col2" colspan="2"><input class="joinInput" type="password" id="joinPw2" /><font id="checkPw" size="2"></font></td>
+				<td class="col2" colspan="2"><input class="joinInput" type="password" id="joinPw2" />&nbsp;&nbsp;&nbsp;&nbsp;<font id="checkPw" size="2"></font></td>
 			</tr>
 			<tr>
 				<th class="col1">이름</th>
@@ -163,6 +163,7 @@
 		console.log('회원가입');
 		var id = $('#joinId');
 		var pw = $('#joinPw');
+		var pw2 = $('#joinPw2');
 		var name = $('#joinName');
 		var phone = $('#joinPhone');
 		var email = $('#email');
@@ -181,13 +182,13 @@
 				pw.focus();
 			} else if(!pwdCheck.test($("#joinPw").val())) {
 			    alert("비밀번호는 한글을 제외한 4자리 이상이어야 합니다.");
-			    pwd.focus();
+			    pw.focus();
 			    return false;
-			  }  /* else if(pw.val().length <= 4){
-
-				  alert("비밀번호는 4자 이상입니다.")
-			  } */
-			
+			  }  else if(pw.val() != pw2.val() ){
+				  alert("비밀번호가 불일치 합니다.");
+				  pw.focus();
+			  }
+			 
 			else if(name.val() == ""){
 				alert("이름을 입력해 주세요!");
 				name.focus();

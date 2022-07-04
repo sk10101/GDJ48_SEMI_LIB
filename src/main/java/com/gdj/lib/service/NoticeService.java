@@ -163,7 +163,14 @@ public class NoticeService {
 		
 		ArrayList<BoardDTO> noticeSearchList = new ArrayList<BoardDTO>();
 		
-		int allCnt = dao.noticeAllCount();
+		if (word != null && word != "") {
+			noticePageMap.put("word", word);
+			noticePageMap.put("option", option);
+		}
+		
+		ArrayList<BoardDTO> allNoticeCount = dao.allNoticeCount(noticePageMap);
+		
+		int allCnt = allNoticeCount.size();
 		logger.info("allCnt : "+allCnt);
 		int pages = allCnt % cnt> 0 ? (allCnt / cnt)+1 : (allCnt/ cnt);
 		logger.info("pages : "+pages);

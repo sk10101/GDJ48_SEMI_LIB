@@ -55,6 +55,12 @@ public class BookService {
 		int allCnt = allCount.size();
 		logger.info("allCnt : " + allCnt);
 		
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			allCnt = 1;
+		}
+		
 		int pages = allCnt%cnt != 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
 		
 		logger.info("pages : " + pages);
@@ -89,68 +95,79 @@ public class BookService {
 	
 
 	// 관리자 도서관리 서비스 시작
-	public HashMap<String, Object> bookList(
-			HashMap<String, String> params) {
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		int cnt = Integer.parseInt(params.get("cnt"));
-		int page = Integer.parseInt(params.get("page"));
-		String word = params.get("word");
-		String option = params.get("option");
-		String mb_id = params.get("mb_id");
-		String mb_class = params.get("mb_class");
-		logger.info("서비스 리스트 요청 : {}", params);
-		logger.info("보여줄 페이지 : " + page);
-		
-		ArrayList<BookDTO> bookList = new ArrayList<BookDTO>();
-		ArrayList<BookDTO> searchList = new ArrayList<BookDTO>();
-		map.put("cnt", cnt);
-		map.put("mb_id", mb_id);
-		map.put("mb_class", mb_class);
-		
-		if (word != null && word != "") {
-			map.put("word", word);
-			map.put("option", option);
-		}
-		// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
-		ArrayList<BookDTO> allCount = dao.allBookCount(map);
-		int allCnt = allCount.size();
-		logger.info("allCnt : "+allCnt);		
-		int pages = allCnt%cnt > 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
-		logger.info("pages : "+pages);
-		
-		if(page > pages) {
-			page = pages;
-		}
-		
-		map.put("pages", pages); // 만들 수 있는 최대 페이지 수
-		map.put("currPage", page); // 현재 페이지
-		
-		int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
-		//map.put("offset", offset);
-		logger.info("offset : " + offset);
-		
-		//검색 관련 설정하는 조건문
-		if(word == null || word.equals("")) {
-			bookList = dao.bookList(cnt,offset);
-			map.put("bookList", bookList);
-		}else {
-			logger.info("검색어 (옵션): "+word+ " (" + option + ") ");
+		public HashMap<String, Object> bookList(
+				HashMap<String, String> params) {
 			
-			if(option.equals("제목")) {
-				searchList = dao.bookTitleSearch(cnt,offset,word);
-			} else if (option.equals("저자")) {
-				searchList = dao.bookWriterSearch(cnt,offset,word);
-			} else {
-				searchList = dao.bookPublisherSearch(cnt,offset,word);
-			}		
-			map.put("bookList", searchList);
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			int cnt = Integer.parseInt(params.get("cnt"));
+			int page = Integer.parseInt(params.get("page"));
+			String word = params.get("word");
+			String option = params.get("option");
+			String mb_id = params.get("mb_id");
+			String mb_class = params.get("mb_class");
+			logger.info("서비스 리스트 요청 : {}", params);
+			logger.info("보여줄 페이지 : " + page);
+
+			
+			ArrayList<BookDTO> bookList = new ArrayList<BookDTO>();
+			ArrayList<BookDTO> searchList = new ArrayList<BookDTO>();
+			
+			// 총 갯수(allCnt) / 페이지당 보여줄 갯수(cnt) = 생성가능한 페이지(pages)
+			//int allCnt = dao.allCount();
+			
+			if (word != null && word != "") {
+				map.put("word", word);
+				map.put("option", option);
+			}
+			
+			// 총 게시글의 개수(allCnt) / 페이지당 보여줄 개수(cnt) = 생성할 수 있는 총 페이지 수(pages)
+			ArrayList<BookDTO> allBookCount = dao.allBookCount(map);
+			int allCnt = allBookCount.size();
+			logger.info("allCnt : "+allCnt);
+			
+			// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+			if(allCnt == 0) {
+				// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+				allCnt = 1;
+			}
+			
+			int pages = allCnt%cnt > 0 ? (allCnt/cnt)+1 : (allCnt/cnt);
+			logger.info("pages : "+pages);
+			
+			if(page > pages) {
+				page = pages;
+			}
+			
+			map.put("pages", pages); // 만들 수 있는 최대 페이지 수
+			map.put("currPage", page); // 현재 페이지
+			
+			int offset = (page-1)*cnt; //1p - 0 , 2p-5, 3p-10 , 4p-15
+			//map.put("offset", offset);
+			logger.info("offset : " + offset);
+			
+			//검색 관련 설정하는 조건문
+			if(word == null || word.equals("")) {
+				bookList = dao.bookList(cnt,offset);
+				map.put("bookList", bookList);
+			}else {
+				logger.info("검색어 (옵션): "+word+ " (" + option + ") ");
+				
+				if(option.equals("제목")) {
+					searchList = dao.bookTitleSearch(cnt,offset,word);
+				} else if (option.equals("저자")) {
+					searchList = dao.bookWriterSearch(cnt,offset,word);
+				} else if (option.equals("출판사")){
+					searchList = dao.bookPublisherSearch(cnt,offset,word);
+				} else {
+					searchList = dao.bookb_statusSearch(cnt,offset,word);
+				}		
+				map.put("bookList", searchList);
+			}
+			
+			logger.info("검색결과 건수 : " +searchList.size());		
+			return map;
 		}
-		
-		logger.info("검색결과 건수 : " +searchList.size());		
-		return map;
-	}
 
 	public void detail(Model model, String b_id) {
 		
@@ -266,6 +283,27 @@ public class BookService {
 				}				
 			}
 		}
+		
+	}
+
+
+
+	public Object delPhoto(HashMap<String, String> params) {
+		logger.info("도서 사진 삭제 요청 서비스 도착");
+		String b_id = params.get("b_id");
+		return dao.delPhoto(b_id);
+		
+	}
+
+
+	public int bookHide(ArrayList<String> hideList) {
+
+		int cnt = 0;
+		for (String b_id : hideList) {
+			cnt += dao.bookHide(b_id);
+		}
+		
+		return cnt;
 		
 	}
 

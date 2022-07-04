@@ -171,11 +171,11 @@
 				ORDER BY penalty_id DESC limit #{param1} offset #{param2}
 		
 	</select>
-	
+	<!-- 검색 기능을 개선하기 위해 주석 처리함
 	<select id="allCount" resultType="Integer">
 		SELECT COUNT(penalty_id) FROM penalty
 	</select>
-	
+	 -->
 	
 	<select id="memberSearch" resultType="com.gdj.lib.dto.MemberDTO">
 		SELECT * FROM penalty
@@ -220,7 +220,7 @@
 		SELECT COUNT(black_id) FROM blacklist
 	</select>
 	
-	
+	<!-- 검색 기능을 개선하기 위해 주석 처리함
 	<select id="allMemeberCount" resultType="int">
 		SELECT COUNT(mb_id) FROM member WHERE mb_class = '일반회원'
 	</select>
@@ -228,7 +228,36 @@
 	<select id="allAdminCount" resultType="int">
 		SELECT COUNT(mb_id) FROM member WHERE mb_class = '관리자'
 	</select>
+	-->
 	
+	<select id="allMemeberCount" resultType="com.gdj.lib.dto.MemberDTO" parameterType="hashmap">
+	 	SELECT mb_id FROM member
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('회원ID') or option.equals('관리자ID')">
+						AND mb_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('회원이름') or option.equals('관리자이름')">
+						AND name LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('회원상태')">
+						AND mb_status LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('전화번호')">
+						AND phone LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+			<if test="mb_class.equals('일반회원') and mb_id != null and mb_id != ''">
+					AND mb_class = '일반회원'
+			</if>
+			<if test="mb_class.equals('관리자') and mb_id != null and mb_id != ''">
+					AND mb_class = '관리자'
+			</if>
+	 </select>
 	
 	
 	
@@ -326,9 +355,13 @@
 		SELECT COUNT(reserve_id) FROM reservation WHERE mb_id=#{param1}
 	</select>
 	
-	<update id="reserveCancel">
+	<update id="reserveCancel" >
 		UPDATE reservation SET reason = "정상" 
-		WHERE reserve_id = #{param1};
+		WHERE reserve_id = #{param1}
+	</update>
+	
+	<update id="cancelUpdate">
+		UPDATE book SET b_status = "대출가능" WHERE b_id = #{param1}
 	</update>
 	
 	<select id="allHisCount" resultType="int">
@@ -348,8 +381,23 @@
 			WHERE status LIKE CONCAT('%',#{param3},'%') AND  br.brw_status="반납" AND mb_id=#{param4}
 				claim_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
-	
+	<!-- 이용정지 내역 검색기능 개선 -->
+	<select id="allCount" resultType="com.gdj.lib.dto.MemberDTO" parameterType="hashmap">
+	 	SELECT penalty_id FROM penalty
+			WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('회원ID')">
+						AND mb_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('제한내역')">
+						AND category_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+	 </select>
 	
 	
 	

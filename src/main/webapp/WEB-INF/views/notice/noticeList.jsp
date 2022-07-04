@@ -79,6 +79,9 @@
     </div>
 </body>
 <script>
+	var word = $('#word').val();
+	var option = $('#option').val();
+
 	//체크박스 전체 선택시 모두선택 / 헤제
 	$('#all').click(function() {
 	    var $chk = $('input[type="checkbox"]');
@@ -147,6 +150,11 @@
 		
 	});
 	
+	// 검색 버튼 클릭했을 때 한 번 초기화
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	});
 	
 	function listCall(page) {
 		var pagePerNum = $('#pagePerNum').val();
@@ -192,6 +200,7 @@
 	
 	
 	function drawList(noticeList) {
+		var mb_id = "${sessionScope.loginId}";
 		var mb_class = "${sessionScope.mb_class}";
 		console.log(mb_class);
 		var content = '';
@@ -199,7 +208,7 @@
 		noticeList.forEach(function(item){
 			//console.log(item.status);
 			content += '	<tr nID="' + item.notice_id + '">';
-			if(mb_class == "관리자") {
+			if(mb_class == "관리자" && mb_id != null) {
 				content += '		<td class="noticeCol"><input type="checkbox" id="chk" value="'+item.notice_id+'"/></td>';
 			} else {
 				
@@ -239,8 +248,8 @@
 	
 	// 검색 결과 출력
 	function searchList(page) {
-		var word = $('#word').val();
-		var option = $('#option').val();
+		word = $('#word').val();
+		option = $('#option').val();
 		var pagePerNum = $('#pagePerNum').val();
 		
 		// 검색어 저장

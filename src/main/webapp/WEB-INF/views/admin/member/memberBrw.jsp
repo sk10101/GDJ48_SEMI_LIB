@@ -50,8 +50,7 @@
 			                <th>대출번호</th>          
 			                <th>도서제목</th>           
 			                <th>대출일</th>           
-			                <th>반납예정일</th>       
-			                <th>대출상태</th>      
+			                <th>반납예정일</th>    
 			                <th>연장여부</th>
 			            </tr>
 			        </thead>
@@ -61,6 +60,7 @@
 			    </table>
 			</div>
 		</div>
+
 	</div>
 </body>
 <script>
@@ -72,7 +72,11 @@ if (msg != "") {
 }
 
 
-var mb_id=$('#mb_id').html();
+let query = window.location.search; //url query 부분 가져오기 
+var param = new URLSearchParams(query); // url query의 파라미터 부분 가져오기
+var mb_id=param.get("mb_id");
+console.log(mb_id);
+//var mb_id=$('#mb_id').html();
 console.log(mb_id);
 
 listCall();
@@ -106,7 +110,6 @@ function drawList(brwList) {
 		content += '<td><a href="bookDetail.do?b_id='+item.b_id+' ">' +item.b_title+'</a></td>';
 		content += '<td>' +item.brw_date+ '</td>';
 		content += '<td>'+item.return_date+'</td>';
-		content += '<td>'+item.brw_status+'</td>';
 		content += '<td>';
 			if(item.renew==true) {
 				content += 'Y';

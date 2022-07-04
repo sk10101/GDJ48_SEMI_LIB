@@ -35,10 +35,12 @@
 	    <div class="section"> 
 	    	<div class="upBtn-area">
 	            <button class="btn_bookAdd" onclick="location.href='bookAdd.go' ">도서추가</button>
+	            <button class="btn_bookAdd" onclick="bookDel()">도서삭제</button>
 	        </div>
 	            <table class="book_table">
 	                <thead>
 	                	<tr>
+	                		<th id="chk">체크</th>
 	                		<th class="bookIdTh">ID</th>
 	                		<th>제목</th>
 	                		<th>저자</th>
@@ -67,6 +69,7 @@
 						<option value="제목">제목</option>
 						<option value="저자">저자</option>
 						<option value="출판사">출판사</option>
+						<option value="도서상태">도서상태</option>
 					</select>
 					<input class="searchBlock" id="word" type="search" placeholder="검색" name="word" value=""/>
 					<input class="searchDo" id="searchBtn" type="button" onclick="searchList(currPage)" value="검색"/>
@@ -156,6 +159,7 @@ function drawList(bookList){
 	bookList.forEach(function(item){
 		console.log(item);
 		content += '<tr>';
+		content += '<td><input type="checkbox" value=" '+item.b_id +' "></td>';
 		content += '<td>'+item.b_id+'</td>';
 		content += '<td class="brwTitleTd"><a href="AdbookDetail.do?b_id= '+item.b_id+' "> '+item.b_title+'</a></td>';
 		content += '<td>'+item.writer+'</td>';
@@ -208,6 +212,41 @@ function searchList(page){
 		}
 	});	
 }
+
+function bookDel() {
+	var chkArr = [];
+	var checkbox = $('input[type="checkbox"]:checked');
+	//var no = $(this).val();
+	//console.log(no);
+	
+	checkbox.each(function(b_id,item) {
+		
+		chkArr.push($(this).val());
+
+	});
+	
+	console.log(chkArr);
+	
+	$.ajax({
+		type:'post',
+		url:'bookHide.ajax',
+		data : {
+			hideList:chkArr
+		},
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			alert(data.msg);
+			location.reload(true);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+	
+	
+}
+
 
 </script>
 </html>
