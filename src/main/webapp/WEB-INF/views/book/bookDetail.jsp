@@ -11,10 +11,16 @@
 </style>
 </head>
 <body>
+
+
+</head>
+<body>
+
    <div id="header">
       <jsp:include page="../commons/header.jsp"/>
    </div>
    <hr style="height: 1px !important; background:#333; display: block !important; width: 100% !important; margin:0;"/>
+
    <div class="detailSection">
       <div class="bookDetail-area">
          <table class="bookDetailTable">

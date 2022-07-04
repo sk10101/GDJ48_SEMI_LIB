@@ -52,7 +52,7 @@
 			inner join book b on
 				b.b_id  = br.b_id
 			where
-				br.brw_status = '반납' and return_finish is not null
+				return_finish is not null
 				and br.mb_id = #{param3}
 				ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}				
 	</select>
@@ -138,11 +138,11 @@
 			, reason
 			, m.mb_id
 		from 
-			reservation r3 
+			reservation r
 		inner join member m on
-			 r3.mb_id = m.mb_id
+			 r.mb_id = m.mb_id
 		where reason is null
-		and r3.mb_id = #{loginId}
+		and r.mb_id = #{loginId}
 	</select>
  	
  	<insert id="reserveBookBrw" parameterType="hashmap">

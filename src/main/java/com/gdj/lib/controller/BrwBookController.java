@@ -217,7 +217,7 @@ public class BrwBookController {
 	                  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
 	                  model.addAttribute("brwlist", brwlist);
 	                  logger.info("list 갯수: "+brwlist.size());
-	                  if(brwlist.size() <= 5 ) {
+	                  if(brwlist.size() < 5 ) {
 	                     service.bookDetailBrw(params);
 	                     msg = "도서대출신청 완료";
 	                  } else {
@@ -283,32 +283,29 @@ public class BrwBookController {
 		
 
 
-	  if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {
+	  if (mb_id != null && session.getAttribute("mb_class").equals("일반회원")) {		  
+
 		  
-		  // 이용정지 내역에 해당 아이디가 있나 조회
-		  int penaltyCheck = service.penaltyCheck(mb_id);
-		  //model.addAttribute("penaltyCheck",penaltyCheck);
-		  logger.info("이용정지 리스트에 있나?"+ penaltyCheck +"건");
-		  // 이용정지 날짜가 지났으면 다시 예약 가능				  
+		
 		  // 예약 내역 확인을 위해 예약 테이블에서 회원 id 를 통해 예약 조회 
-		  int reserveCheck =service.reserveCheck(mb_id); 
-		  logger.info("예약만료인 책 권수: "+reserveCheck);
-		  if(reserveCheck >= 1) {
-			  long expiry = service.expiry(mb_id); 
-			  logger.info("예약 만료일 "+expiry);
-			  // expiry == 예약날 +22					  
-			  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
-			  if(expiry < nowtime) { 
-				  service.expiryPenalty(mb_id);
-				  service.reserveCancel(mb_id);
-				  service.addPenalty(mb_id);
-				  msg = "이용정지 3일입니다";
-				  logger.info(msg);
-				  map.put("msg", msg);
-			  }else { 		
-				  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
-		          logger.info("예약권수: "+brwlist.size());
-		          if(brwlist.size() <= 5 ) {
+			  int reserveCheck =service.reserveCheck(mb_id); 
+			  logger.info("예약만료인 책 권수: "+reserveCheck);
+			  if(reserveCheck >= 1) {
+				  long expiry = service.expiry(mb_id); 
+				  logger.info("예약 만료일 "+expiry);
+				 // expiry == 예약날 +22					  
+				  // 예약 신청을 하려고 할 때 예약 후 22일이 지난 날짜와 현재날짜를 비교	  
+				  if(expiry < nowtime) { 
+					  service.expiryPenalty(mb_id);
+					  service.reserveCancel(mb_id);
+					  service.addPenalty(mb_id);
+					  msg = "이용정지 3일입니다";
+					  logger.info(msg);
+					  map.put("msg", msg);
+				  }else { 		
+					  ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+			          logger.info("예약권수: "+brwlist.size());
+		          if(brwlist.size() < 5 ) {
 		              service.bookreason(params);
 		              service.reserve_able(params);
 		              msg = "도서 예약신청이완료되었습니다.";
@@ -316,23 +313,24 @@ public class BrwBookController {
 		         }else {
 		              msg = "도서 예약권수가 초과되었습니다.";
 		              map.put("msg", msg);
-	             } 
-			  }
-	      } else { 		
-			  		 ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
-			  		 logger.info("예약권수: "+brwlist.size());
-		          if(brwlist.size() <= 5 ) {
-		             service.bookreason(params);
-		             service.reserve_able(params);
-		             msg = "도서 예약신청이완료되었습니다.";
-		             map.put("msg", msg);
-		       } else {
-		             msg = "도서 예약권수가 초과되었습니다.";
-		             map.put("msg", msg);
-		          } 
-			}
-		  /*
+		            } 
+		          
+			 }
+				  
+			} /*
+				 * else { ArrayList<BrwBookDTO> brwlist = service.brwlist(params);
+				 * logger.info("예약권수: "+brwlist.size()); if(brwlist.size() <= 5 ) {
+				 * service.bookreason(params); service.reserve_able(params); msg =
+				 * "도서 예약신청이완료되었습니다."; map.put("msg", msg); } else { msg = "도서 예약권수가 초과되었습니다.";
+				 * map.put("msg", msg); } }
+				 */
+			  // 이용정지 내역에 해당 아이디가 있나 조회
+			  int penaltyCheck = service.penaltyCheck(mb_id);
+			  //model.addAttribute("penaltyCheck",penaltyCheck);
+			  logger.info("이용정지 리스트에 있나?"+ penaltyCheck +"건");
+			  // 이용정지 날짜가 지났으면 다시 예약 가능				  
 			  	 if(penaltyCheck >=1 ) {
+			  		 
 		  // 이용정지 내역에 아이디 있으면 ㄱㄱ
 			  
 				    long penaltyDate = service.penaltyDate(mb_id);
@@ -367,7 +365,7 @@ public class BrwBookController {
 		               map.put("msg", msg);
 		            } 
 				 }
-	  */
+	  
 	 
 	  }else{  	 
 		  msg = "일반회원만 이용가능합니다."; 

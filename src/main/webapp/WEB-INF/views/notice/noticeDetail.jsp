@@ -32,6 +32,10 @@
 		            <th>작성일</th>
 		            <td>${notice.notice_date }</td>
 		        </tr>
+		      	<tr>
+		      		<th>조회수</th>
+		      		<td></td>
+		      	</tr>
 		        <tr>
 		            <th>내용</th>
 		            <td style="vertical-align:top; height:150px;">${notice.notice_content}</td>
