@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -239,6 +240,7 @@ public class BookService {
 		dto.setPublisher(params.get("publisher"));
 		dto.setIssue(Integer.parseInt((params.get("issue"))));
 		dto.setB_status(params.get("b_status"));
+		dto.setB_date(dto.getB_date());
 		
 		int row = dao.bookUpdate(dto);
 		int b_id = dto.getB_id();

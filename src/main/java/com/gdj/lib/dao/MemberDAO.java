@@ -186,6 +186,10 @@ public interface MemberDAO {
 
 	int cancelUpdate(String b_id);
 
+	int bookStatus(String b_id);
+
+	Object reserveUpdate(String b_id);
+
 
 	
 

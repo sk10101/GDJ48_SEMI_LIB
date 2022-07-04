@@ -485,8 +485,13 @@ public class MemberController {
 		
 		logger.info("예약 취소 요청:"+reserve_id);
 		int success = service.reserveCancel(reserve_id);
-		service.cancelUpdate(b_id);
-		
+		int brw = service.bookStatus(b_id); // 예약취소요청하는 책이 대출신청인지 예약신청인지 확인
+		if (brw > 0) { // b_status = '대출불가' 이면 대출신청했던 책
+			service.cancelUpdate(b_id); // 대출가능, 예약가능여부 N
+		} else { // 예약신청취소 -> 예약가능여부 Y
+			service.reserveUpdate(b_id);
+		}
+				
 		logger.info("완료:"+success);
 		return success;
 	}
