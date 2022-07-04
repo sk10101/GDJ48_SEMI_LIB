@@ -34,7 +34,7 @@
 		        </tr>
 		      	<tr>
 		      		<th>조회수</th>
-		      		<td></td>
+		      		<td>${notice.hit}</td>
 		      	</tr>
 		        <tr>
 		            <th>내용</th>

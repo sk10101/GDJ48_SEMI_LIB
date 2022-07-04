@@ -103,6 +103,8 @@ public interface BoardDAO {
 
 	ArrayList<BoardDTO> allNoticeCount(HashMap<String, Object> noticePageMap);
 
+	void upHit(int notice_id);
+
 
 	// ArrayList<BoardDTO> searchList(int cnt, int offset, String word, String mb_id, String option);
 
