@@ -90,10 +90,19 @@ public class KioskController {
 	public String kioskBorrowPage(HttpSession session, Model model) {
 		logger.info("키오스크 대출신청 아이디: "+session.getAttribute("loginId"));
 		String loginId = (String) session.getAttribute("loginId");
+		
+		String page = "kiosk/borrow";
+		int chkPenalty = service.chkPenalty(loginId);
+		if(chkPenalty > 0) {
+			page = "kiosk/main";
+			model.addAttribute("msg","연체이력이 존재해 대출서비스를 이용할 수 없습니다.");
+		}
+		
+		
 		ArrayList<KioskDTO> list = service.list(loginId);
 		logger.info("list 갯수: "+list.size());
 		model.addAttribute("list", list);
-		return "kiosk/borrow";
+		return page;
 	}
 	
 	

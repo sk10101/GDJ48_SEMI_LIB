@@ -128,7 +128,8 @@ public class MemberController {
 		
 		if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
 			service.update(params);
-			page = "redirect:/memberDetail.do?mb_id="+params.get("mb_id");
+			logger.info("블랙리스트 수정 : "+params);
+			page = "redirect:/blackList.go";
 		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
 			page = "/main";
@@ -196,17 +197,20 @@ public class MemberController {
 					if (service.blackAdd(params,session) == true) { 
 						logger.info("블랙리스트 추가 성공");
 						page =  "admin/black/blackList";
+						model.addAttribute("msg", "블랙리스트에 추가되었습니다.");
 					} else {
 						logger.info("블랙리스트 추가 실패");
 						page = "admin/black/blackList";
 					}
 				}else {
 					logger.info("이미 블랙리스트로 지정되어 있음");
-					page = "redirect:/blackList.go";
+					page = "admin/black/blackList";
+					model.addAttribute("msg","이미 블랙리스트로 지정되어있는 회원입니다.");
 				}
 			}else { //3. 맞는 id가 아니라면 id 확인하라는 경고창이랑 페이지 유지
 				logger.info("존재하지 않는 아이디");
 				page = "admin/black/blackAdd";
+				model.addAttribute("msg", "존재하지 않는 아이디입니다.");
 			}	
 		}else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 			model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
