@@ -213,4 +213,9 @@ public class NoticeService {
 		
 	}
 
+	public void upHit(int notice_id) {
+		logger.info("공지사항 조회수 올리기 서비스");
+		dao.upHit(notice_id);
+	}
+
 }

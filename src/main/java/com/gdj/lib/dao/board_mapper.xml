@@ -21,8 +21,8 @@
 	keyColumn="notice_id"
 	keyProperty="notice_id"
 	parameterType="com.gdj.lib.dto.BoardDTO">
-		INSERT INTO notice(mb_id,notice_title,notice_content)
-	VALUES(#{mb_id},#{notice_title},#{notice_content})
+		INSERT INTO notice(mb_id,notice_title,notice_content , hit)
+	VALUES(#{mb_id},#{notice_title},#{notice_content}, '0')
 	</insert>
 	
 	<insert id="noticeFileWrite">
@@ -39,9 +39,15 @@
 	</select>
 	
 	<select id="noticeList" resultType="com.gdj.lib.dto.BoardDTO">
-		SELECT notice_id, notice_title, notice_date FROM notice
+		SELECT notice_id, notice_title, notice_date , hit FROM notice
 			ORDER BY notice_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
+	
+	<update id="upHit">
+		UPDATE notice SET hit = hit+1 WHERE notice_id = #{param1}
+	</update>
+	
+	
 	<!-- 검색 기능 개선을 위해 주석 처리함
 	<select id="noticeAllCount" resultType="Integer">
 		SELECT COUNT(notice_id) FROM notice
