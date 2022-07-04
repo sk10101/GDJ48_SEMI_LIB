@@ -178,6 +178,7 @@ public class LoginController {
 		@RequestMapping(value = "logout.do")
 		public String logout(Model model,HttpSession session) {
 				session.removeAttribute("loginId");
+				session.removeAttribute("mb_class");
 				model.addAttribute("msg", "로그아웃 되었습니다");
 				
 			return "login/login"; 
