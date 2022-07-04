@@ -38,5 +38,9 @@ public interface KioskDAO {
 
 	void insertPenalty(String loginId);
 
+<<<<<<< HEAD
+=======
+	String getMbClass(String id, String pw);
+>>>>>>> origin/master
 
 }
