@@ -320,7 +320,7 @@
 
 	
 	<select id="getMbClass" resultType="String">
-	SELECT mb_class FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
+		SELECT mb_class FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
 	

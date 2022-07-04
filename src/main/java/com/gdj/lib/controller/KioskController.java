@@ -43,6 +43,7 @@ public class KioskController {
 		String page="kiosk/loginFail";
 		String loginId = service.login(id,pw);
 		String loginIdSeat = service.loginSeat(id);
+		String mb_class = service.getMbClass(id,pw);
 		// logger.info(loginIdSeat);
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
