@@ -104,6 +104,12 @@ public class KioskController {
 		return "kiosk/main";
 	}
 	
+	// 키오스크 메인 화면 (좌석 반납) 돌아가기
+	@RequestMapping(value = "/ki_mainSeatOut.go")
+	public String kioskMainSeatOut(Model model) {
+		logger.info("키오스크 메인 페이지");
+		return "kiosk/mainSeatOut";
+	}
 	
 	
 	// 키오스크 대출하기

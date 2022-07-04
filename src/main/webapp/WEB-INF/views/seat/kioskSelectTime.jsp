@@ -68,7 +68,7 @@
 				useTime:useTime},
 			success:function(data){
 				console.log(data);
-				location.href='ki_main.go';
+				location.href='ki_mainSeatOut.go';
 			},
 			error:function(e){
 				console.log(e);
