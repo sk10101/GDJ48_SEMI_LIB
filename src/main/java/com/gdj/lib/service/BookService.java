@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -234,13 +235,13 @@ public class BookService {
 	public void bookUpdate(MultipartFile[] b_img, HashMap<String, String> params) {
 		logger.info("도서 관리 수정 서비스 요청");
 		BookDTO dto = new BookDTO();
+		
 		dto.setB_id(Integer.parseInt(params.get("b_id")));
 		dto.setB_title(params.get("b_title"));
 		dto.setWriter(params.get("writer"));
 		dto.setPublisher(params.get("publisher"));
 		dto.setIssue(Integer.parseInt((params.get("issue"))));
 		dto.setB_status(params.get("b_status"));
-		dto.setB_date(dto.getB_date());
 		
 		int row = dao.bookUpdate(dto);
 		int b_id = dto.getB_id();
