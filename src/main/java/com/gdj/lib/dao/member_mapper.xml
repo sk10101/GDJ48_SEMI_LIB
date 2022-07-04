@@ -199,7 +199,7 @@
    </select>
    
 	
-	  <update id="penaltyUpdate" parameterType="hashmap">
+  <update id="penaltyUpdate" parameterType="hashmap">
       UPDATE penalty SET cancel  = #{cancel} 
       , admin_cancel = #{admin_cancel}
       ,penalty_end = now()
@@ -215,11 +215,11 @@
       WHERE black_id = #{black_id}
    </update>
    
-   
+   <!-- 검색 기능을 개선하기 위해 주석 처리함
    <select id="allBlackCount" resultType="int">
 		SELECT COUNT(black_id) FROM blacklist
 	</select>
-	
+	-->
 	<!-- 검색 기능을 개선하기 위해 주석 처리함
 	<select id="allMemeberCount" resultType="int">
 		SELECT COUNT(mb_id) FROM member WHERE mb_class = '일반회원'
@@ -259,7 +259,25 @@
 			</if>
 	 </select>
 	
-	
+	<select id="allBlackCount" resultType="com.gdj.lib.dto.MemberDTO" parameterType="hashmap">
+		SELECT black_id FROM blacklist
+		WHERE 1=1
+			<if test="word != null and word != ''">
+				<choose>
+					<when test="option.equals('회원ID')">
+						AND mb_id LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('지정한관리자ID')">
+						AND admin_start LIKE CONCAT('%',#{word},'%')
+					</when>
+					<when test="option.equals('해제한관리자ID')">
+						AND admin_end LIKE CONCAT('%',#{word},'%')
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+			</if>
+	</select>
 	
 	
 	
