@@ -11,8 +11,8 @@ import com.gdj.lib.dao.MemberDAO;
 
 @Service
 public class LoginService {
-	 Logger logger = LoggerFactory.getLogger(this.getClass());
-	 @Autowired MemberDAO dao;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired MemberDAO dao;
 	public HashMap<String, Object> memberjoin(HashMap<String, String> params) {
 		logger.info("회원 가입 요청 서비스");
 		HashMap<String, Object> result = new HashMap<String, Object>();
