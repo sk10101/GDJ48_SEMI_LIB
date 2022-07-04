@@ -238,7 +238,7 @@
 		SELECT brw_id
 				, b.b_title
 				, brw_date
-				, return_date
+				, return_finish
 				, brw_status
 				, renew
 				, b.b_id

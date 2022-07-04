@@ -165,7 +165,7 @@ function drawList(bookList){
 		content += '<td>'+item.writer+'</td>';
 		content += '<td>'+item.publisher+'</td>';
 		content += '<td>'+item.b_status+'</td>';
-		content += '<td>'+String(item.b_date)+'</td>';
+		content += '<td>'+item.b_date+'</td>';
 	});
 	$('#bookList').empty();
 	$('#bookList').append(content); //tbody에 뿌려줌

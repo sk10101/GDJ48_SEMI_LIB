@@ -8,6 +8,7 @@
 		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE b_title LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
+		AND hide = 0
 		ORDER BY b_title
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
@@ -16,6 +17,7 @@
 		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE writer LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
+			AND hide = 0
 		ORDER BY b_title
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
@@ -24,6 +26,7 @@
 		SELECT p.newFileName, post_id, b_id, b_title, writer, publisher, b_status, b.reserve_able FROM book b,
 			(SELECT newFileName, post_id FROM photo WHERE category_id ="4") p 
 		WHERE publisher LIKE CONCAT('%', #{param3}, '%') AND p.post_id = b.b_id
+			AND hide = 0
 		ORDER BY b_title
 			LIMIT #{param1} OFFSET #{param2}
 	</select>
@@ -99,7 +102,7 @@
 	<update id="bookUpdate" parameterType="com.gdj.lib.dto.BookDTO">
 		UPDATE book SET b_title = #{b_title}
 			,writer = #{writer} , publisher = #{publisher}
-			,issue = #{issue} , b_date = now()
+			,issue = #{issue}, b_date = #{b_date}
 			,b_status = #{b_status}
 		WHERE b_id = #{b_id}
 	</update>
