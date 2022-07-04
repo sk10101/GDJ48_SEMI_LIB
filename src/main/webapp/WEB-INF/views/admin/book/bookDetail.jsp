@@ -90,7 +90,7 @@
 	                </table>
 	                <div class="downBtn-area">
 		       			<input type="submit" value="수정하기"/>
-		         		<input type="button" value="리스트" onclick="location.href='bookList.go' "/>
+		         		<input type="button" value="리스트" onclick="history.go(-1)"/>
 	         		</div>
 	            </form>
 	    	</div>
