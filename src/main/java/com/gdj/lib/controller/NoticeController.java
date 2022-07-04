@@ -107,7 +107,7 @@ public class NoticeController {
 			
 			logger.info("공지사항 상세보기 서비스 요청 : "+notice_id);
 			service.noticeDetail(model, notice_id);
-			
+			service.upHit(notice_id);
 			return "notice/noticeDetail";
 		}
 		
