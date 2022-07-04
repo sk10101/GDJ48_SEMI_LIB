@@ -27,7 +27,7 @@ public class BookDTO {
 	//도서 정보
 	private int b_id;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd",timezone = "Asia/Seoul")
 	private Date b_date;
 	private String b_title;
 	private String writer;

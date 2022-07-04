@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -233,6 +235,7 @@ public class BookService {
 	public void bookUpdate(MultipartFile[] b_img, HashMap<String, String> params) {
 		logger.info("도서 관리 수정 서비스 요청");
 		BookDTO dto = new BookDTO();
+		
 		dto.setB_id(Integer.parseInt(params.get("b_id")));
 		dto.setB_title(params.get("b_title"));
 		dto.setWriter(params.get("writer"));
