@@ -73,11 +73,9 @@
 		INSERT INTO penalty(category_id, mb_id, penalty_start,cancel) VALUES('5',#{param1},now(), false);
 	</insert>
 	
-<<<<<<< HEAD
-=======
 	<select id="getMbClass" resultType="String">
 		SELECT mb_class FROM member WHERE mb_id = #{param1} AND mb_pw= #{param2};
 
 	</select>
->>>>>>> origin/master
+
 </mapper>
