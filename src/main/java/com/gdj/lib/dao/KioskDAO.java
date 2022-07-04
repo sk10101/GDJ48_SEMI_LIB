@@ -38,4 +38,5 @@ public interface KioskDAO {
 
 	void insertPenalty(String loginId);
 
+
 }

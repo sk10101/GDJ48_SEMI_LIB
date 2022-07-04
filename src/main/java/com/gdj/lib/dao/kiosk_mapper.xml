@@ -65,11 +65,12 @@
 		]]> 
 	</select>
 	
-	<select id="chkPenalty" parameterType="String">
+	<select id="chkPenalty" parameterType="String" resultType="int">
 		SELECT count(penalty_id) FROM penalty p WHERE mb_id = #{param1} AND penalty_end is null
 	</select>
 	
 	<insert id="insertPenalty" parameterType="String">
 		INSERT INTO penalty(category_id, mb_id, penalty_start,cancel) VALUES('5',#{param1},now(), false);
 	</insert>
+	
 </mapper>
