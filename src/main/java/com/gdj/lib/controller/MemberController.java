@@ -189,6 +189,7 @@ public class MemberController {
 			//2. 맞는 id라면 그 회원정보랑 블랙리스트 테이블 조인해서 블랙리스트 테이블에 값 넣어주기
 			if(s_id != null) {
 				logger.info("s_id 들어옴 : "+s_id);
+
 				int con = service.blackCon(s_id); 
 				if(con < 1) { //이미 블랙리스트로 지정되어있는 회원이라면 해제할때까지 계속 지정하지 못하도록 하기
 					logger.info("블랙리스트 중복확인 : " + con); //1은 이미 지정이 되어있는 상태, 0은 지정되어있지 않은 상태

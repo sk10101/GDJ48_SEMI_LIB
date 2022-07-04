@@ -98,7 +98,13 @@
 			searchList(currPage)
 		}
 	});
-		
+	
+	// 검색 버튼 클릭했을 때 한 번 초기화
+	$('#searchBtn').on('click',function(){	
+		$("#pagination").twbsPagination('destroy');
+		searchList(currPage);
+	});
+	
 	function listCall(page){	
 		
 		var pagePerNum = $('#pagePerNum').val();
