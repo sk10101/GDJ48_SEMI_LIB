@@ -212,8 +212,21 @@ public class MemberService {
 		ArrayList<MemberDTO> searchList = new ArrayList<MemberDTO>();
 		
 		//총 갯수(allCnt) / 페이지 당 보여줄 갯수(cnt) = 생성 가능한 페이지(pages)
-		int allCnt = dao.allBlackCount();
-		logger.info("allCnt : "+allCnt);
+		int allCnt = 0;
+		if (word != null && word != "") {
+			map.put("word", word);
+			map.put("option", option);
+		}
+		// 출력할 게시글의 개수를 세어준다.
+		ArrayList<MemberDTO> allBlackCount = dao.allBlackCount(map);
+		allCnt = allBlackCount.size();
+		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
+		if(allCnt == 0) {
+			// 임시 예외 처리... 다음에 코드 작성할 때 처리해봐야 할 듯
+			logger.info("검색결과가 없어 임의로 예외처리함");
+			allCnt = 1;
+		}
+		logger.info("allCnt : " + allCnt);
 		
 		// 검색결과가 없다면 SQL 문 오류가 뜨는 현상이 있음
 		if(allCnt == 0) {
