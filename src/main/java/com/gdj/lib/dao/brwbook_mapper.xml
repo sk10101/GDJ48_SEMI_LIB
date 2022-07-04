@@ -91,7 +91,8 @@
 		 DELETE FROM reservation WHERE reserve_id = #{reserve_id}
 	</delete>
  	<update id="bookdelStatusUpdate" parameterType="hashmap">
- 		update book set b_status = "대출가능" where b_id = #{b_id}	
+ 		update book set b_status = "대출중" where b_id = #{b_id}	
+ 			and reserve_able = false
  	</update>
  	
  	
