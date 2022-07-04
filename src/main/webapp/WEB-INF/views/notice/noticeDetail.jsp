@@ -34,7 +34,7 @@
 		        </tr>
 		      	<tr>
 		      		<th>조회수</th>
-		      		<td></td>
+		      		<td>${notice.hit}</td>
 		      	</tr>
 		        <tr>
 		            <th>내용</th>
@@ -51,7 +51,7 @@
 		        </tr>
 		        </c:if>
 		</table>
-		<button class="noticeBack" onclick="location.href='noticeList'">돌아가기</button>
+		<input type ="button" class="noticeBack" value="돌아가기" onclick="history.back()" />
 	</div>
 </body>
 <script>

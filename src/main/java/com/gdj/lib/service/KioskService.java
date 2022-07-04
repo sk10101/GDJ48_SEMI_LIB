@@ -112,5 +112,11 @@ public class KioskService {
 		
 	}
 
+	public String getMbClass(String id, String pw) {
+		
+		return dao.getMbClass(id,pw);
+	}
+
+
 
 }

@@ -102,7 +102,7 @@
 	<update id="bookUpdate" parameterType="com.gdj.lib.dto.BookDTO">
 		UPDATE book SET b_title = #{b_title}
 			,writer = #{writer} , publisher = #{publisher}
-			,issue = #{issue}, b_date = #{b_date}
+			,issue = #{issue}
 			,b_status = #{b_status}
 		WHERE b_id = #{b_id}
 	</update>

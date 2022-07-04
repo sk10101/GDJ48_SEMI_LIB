@@ -73,7 +73,7 @@
 			        </table>
 			        <div class="Btnarea">
 						<input type="submit" value="처리상태 수정"/>
-						<input type="button" value="목록" onclick="location.href='/adminClaimList'"/>
+						<input type="button" value="목록" onclick="history.back()"/>
 					</div>
 		        </form>
 				<form action="replyWrite.go" method="post" enctype="multipart/form-data">

@@ -43,6 +43,7 @@ public class KioskController {
 		String page="kiosk/loginFail";
 		String loginId = service.login(id,pw);
 		String loginIdSeat = service.loginSeat(id);
+		String mb_class = service.getMbClass(id,pw);
 		// logger.info(loginIdSeat);
 		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -89,10 +90,19 @@ public class KioskController {
 	public String kioskBorrowPage(HttpSession session, Model model) {
 		logger.info("키오스크 대출신청 아이디: "+session.getAttribute("loginId"));
 		String loginId = (String) session.getAttribute("loginId");
+		
+		String page = "kiosk/borrow";
+		int chkPenalty = service.chkPenalty(loginId);
+		if(chkPenalty > 0) {
+			page = "kiosk/main";
+			model.addAttribute("msg","연체이력이 존재해 대출서비스를 이용할 수 없습니다.");
+		}
+		
+		
 		ArrayList<KioskDTO> list = service.list(loginId);
 		logger.info("list 갯수: "+list.size());
 		model.addAttribute("list", list);
-		return "kiosk/borrow";
+		return page;
 	}
 	
 	
@@ -104,6 +114,12 @@ public class KioskController {
 		return "kiosk/main";
 	}
 	
+	// 키오스크 메인 화면 (좌석 반납) 돌아가기
+	@RequestMapping(value = "/ki_mainSeatOut.go")
+	public String kioskMainSeatOut(Model model) {
+		logger.info("키오스크 메인 페이지");
+		return "kiosk/mainSeatOut";
+	}
 	
 	
 	// 키오스크 대출하기
