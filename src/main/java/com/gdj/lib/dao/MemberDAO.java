@@ -124,7 +124,7 @@ public interface MemberDAO {
 
 	int reserveCancel(String reserve_id);
 
-	int allBlackCount();
+	ArrayList<MemberDTO> allBlackCount(HashMap<String, Object> map);
 
 	
 	
