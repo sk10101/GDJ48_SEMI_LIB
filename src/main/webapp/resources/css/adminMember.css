@@ -10,12 +10,18 @@
 	background:#c9dab2;
 	color:#333;
 	padding:2px 5px;
+	font-size:16px;
+	font-weight:700;
+	border-radius:5px;
 }
 .memberClassBtnChk{
 	text-decoration-line:none;
 	background:#86b049;
 	color:#fff;
 	padding:2px 5px;
+	font-size:16px;
+	font-weight:700;
+	border-radius:5px;
 }
 .table-area{
 	width:100%;
