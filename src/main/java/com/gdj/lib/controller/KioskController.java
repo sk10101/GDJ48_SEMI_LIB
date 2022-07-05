@@ -58,13 +58,6 @@ public class KioskController {
 			session.setAttribute("loginId", loginId);
 			session.setAttribute("mb_class", mb_class);
 			
-			if(mb_class.equals("블랙리스트")) {
-				session.removeAttribute("loginId");
-				session.removeAttribute("mb_class");
-				model.addAttribute("msg", "귀하는 블랙리스트로 선정되어 로그인이 불가합니다. 관리자에게 문의하세요.");
-				page="kiosk/login";
-			}
-			
 			if (loginIdSeat == null) {
 				page = "kiosk/main";				
 			} else {
@@ -77,6 +70,13 @@ public class KioskController {
 					page = "kiosk/main";
 				}
 			}
+			if(mb_class.equals("블랙리스트")) {
+				session.removeAttribute("loginId");
+				session.removeAttribute("mb_class");
+				model.addAttribute("msg", "귀하는 블랙리스트로 선정되어 로그인이 불가합니다. 관리자에게 문의하세요.");
+				page="kiosk/login";
+			}
+			
 		}
 		
 		
