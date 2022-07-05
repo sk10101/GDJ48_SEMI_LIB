@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<th class="col1">이메일</th>
-				<td class="col2"><input class="joinInput" type="text" id="email"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="email" placeholder="ex) example@email.com"/></td>
 				<td class="col3"><button class="chkBtn" onclick="overalys()">중복 확인</button></td>
 			</tr>
 		</table>
