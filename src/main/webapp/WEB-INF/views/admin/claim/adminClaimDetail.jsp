@@ -58,7 +58,7 @@
 			            </tr>
 			            <tr>
 			                <th>내용</th>
-			                <td class="contentArea">${claim.claim_content}</td>
+			                <td class="contentArea" style="height : 200px">${claim.claim_content}</td>
 			            </tr>
 			            <c:if test="${claimList.size()>0}">
 				            <tr>
@@ -92,7 +92,7 @@
 			            </tr>
 			            <tr>
 			                <th>답변 내용</th>
-			                <td class="contentArea">${reply.reply_content}</td>
+			                <td class="contentArea" style="height : 200px">${reply.reply_content}</td>
 			            </tr>
 			            <c:if test="${replyList.size()>0}">
 				            <tr>
