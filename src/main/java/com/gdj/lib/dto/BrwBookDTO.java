@@ -82,14 +82,13 @@ public class BrwBookDTO {
 		
 		
 
-
 		private int brw_id;
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 		private Date brw_date;
 		private boolean renew;
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 		private Date return_date;
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone = "Asia/Seoul")
 		private Date return_finish;
 		private String brw_status;
 
