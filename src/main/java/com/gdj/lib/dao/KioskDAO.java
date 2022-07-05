@@ -40,4 +40,5 @@ public interface KioskDAO {
 
 	String getMbClass(String id, String pw);
 
+
 }
