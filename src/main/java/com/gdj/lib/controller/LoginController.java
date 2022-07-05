@@ -165,9 +165,17 @@ public class LoginController {
 				session.setAttribute("loginId", loginId);
 				// 관리자와 일반 사용자가 이용할 수 있는 서비스가 다르기 때문에 회원 등급도 같이 가져온다.
 				session.setAttribute("mb_class", mb_class);
+				logger.info("로그인한 고객의 회원등급 : " + mb_class);
 				page="main"; // 테스트용 페이지 만들어서 로그아웃 기능 확인
-			}else {
+			} else {
 				model.addAttribute("msg", "아이디 또는 비밀번호를 확인하세요");
+			}
+			
+			if(mb_class.equals("블랙리스트")) {
+				session.removeAttribute("loginId");
+				session.removeAttribute("mb_class");
+				model.addAttribute("msg", "귀하는 블랙리스트로 선정되어 로그인이 불가합니다. 관리자에게 문의하세요.");
+				page="main";
 			}
 			
 			return page;

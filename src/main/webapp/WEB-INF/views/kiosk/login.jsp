@@ -22,5 +22,11 @@
         </div>
     </form>
 </body>
-<script></script>
+<script>
+var msg = "${msg}";
+
+if (msg != "") {
+	alert(msg);
+}
+</script>
 </html>

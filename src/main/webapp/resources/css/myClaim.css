@@ -69,6 +69,7 @@
 }
 .claim_table .tableTextLeft{
 	text-align:left;
+	vertical-align:top;
 }
 .claimTableTh{
 	width:85px;
