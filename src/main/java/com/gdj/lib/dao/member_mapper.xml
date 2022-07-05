@@ -342,7 +342,7 @@
 		SELECT brw_id, b.b_id, b.b_title, brw_date, return_date, return_finish, brw_status, renew
 		FROM borrow br, book b 
 		WHERE br.b_id = b.b_id AND br.brw_status="반납" AND mb_id=#{param3}
-			LIMIT #{param1} OFFSET #{param2}
+			ORDER BY br.brw_id DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="reserveList" resultType="com.gdj.lib.dto.BrwBookDTO">
