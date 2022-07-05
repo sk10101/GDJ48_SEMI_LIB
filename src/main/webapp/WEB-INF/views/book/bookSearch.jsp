@@ -144,7 +144,7 @@ function drawList(searchList){
       content += '<td>'+item.publisher+'</td>';
       content += '<td>'+item.b_status+'</td>';
       content += '<td>';
-      if(item.b_status == '도서준비중' || item.b_status == '대출불가'){
+      if(item.b_status == '도서준비중' || item.b_status == '대출불가' || item.b_status == '대출가능'){
     	  content += 'N';
       }else {
       	if(item.reserve_able == true) {
