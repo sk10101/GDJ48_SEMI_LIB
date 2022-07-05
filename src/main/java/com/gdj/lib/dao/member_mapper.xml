@@ -161,7 +161,18 @@
 		SELECT COUNT(black_id) FROM blacklist b 
 			WHERE mb_id = #{param1} and black_cancel is null
 	</select >
+	
+	<update id="updateMember" parameterType="String">
+		UPDATE member SET mb_class ='블랙리스트' WHERE mb_id = #{param1}
+	</update>
+	
+	<update id="blackClass" parameterType="String">
+		UPDATE member SET mb_class ='일반회원' WHERE mb_id = #{param1}
+	</update>
 
+	<select id="getId" parameterType="hashmap" resultType="String">
+		SELECT mb_id FROM blacklist b WHERE black_id = #{black_id}
+	</select>
 
 
 	

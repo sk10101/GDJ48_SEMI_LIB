@@ -584,6 +584,21 @@ public class MemberService {
 		return dao.reserveUpdate(b_id);
 	}
 
+	public void updateMember(String id) {
+		dao.updateMember(id);
+		
+	}
+
+	public void blackClass(String id) {
+		dao.blackClass(id);
+		
+	}
+
+	public String getId(HashMap<String, String> params) {
+		
+		return dao.getId(params);
+	}
+
 	
 	
 	

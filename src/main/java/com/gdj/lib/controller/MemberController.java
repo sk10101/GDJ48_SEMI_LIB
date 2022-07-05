@@ -198,6 +198,7 @@ public class MemberController {
 						logger.info("블랙리스트 추가 성공");
 						page =  "admin/black/blackList";
 						model.addAttribute("msg", "블랙리스트에 추가되었습니다.");
+						service.updateMember(id);
 					} else {
 						logger.info("블랙리스트 추가 실패");
 						page = "admin/black/blackList";
@@ -247,6 +248,7 @@ public class MemberController {
 		
 		String page = "login/login";
 		String admin_end = (String) session.getAttribute("loginId");
+		String id = service.getId(params);
 	      logger.info("블랙리스트 수정 params : {}", params);
 
 	      if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("관리자")) {
@@ -271,7 +273,10 @@ public class MemberController {
 
 	    	  
 	    	  service.blackUpdate(params);
-	    	  page = "redirect:/blackDetail.do?black_id="+params.get("black_id");
+	    	  logger.info("블랙리스트 업데이트 파람 : "+params);
+	    	  page = "admin/black/blackList";
+	    	  service.blackClass(id);
+	    	  logger.info("일반회원 업데이트 아이디 : "+id);
 	      	}
 	      }else if(session.getAttribute("loginId") != null && session.getAttribute("mb_class").equals("일반회원")) {
 				model.addAttribute("msg","관리자 회원만 이용가능한 서비스 입니다.");
