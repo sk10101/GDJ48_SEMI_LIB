@@ -190,6 +190,12 @@ public interface MemberDAO {
 
 	Object reserveUpdate(String b_id);
 
+	void updateMember(String id);
+
+	void blackClass(String id);
+
+	String getId(HashMap<String, String> params);
+
 
 	
 
