@@ -206,9 +206,9 @@
    		
     	
     	
-    	if(option == '제한내역' && word.indexOf('대출') == 0){
+    	if(option == '제한내역' && (word.indexOf('대출') == 0 || word.indexOf('연체') == 0)){
     		word = "5";
-    	}else if(word.indexOf('예약') == 0){
+    	}else if(word.indexOf('예약') == 0 ||word.indexOf('만료') == 0){
     		word = "6";
     	}
     	
