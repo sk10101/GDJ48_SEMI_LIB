@@ -54,8 +54,15 @@ public class KioskController {
 		// System.out.println(val1);
 		// System.out.println(val2);
 		
-		if (loginId != null) {
+		if (loginId != null && mb_class != null) {
 			session.setAttribute("loginId", loginId);
+			session.setAttribute("mb_class", mb_class);
+			if(mb_class.equals("블랙리스트")) {
+				session.removeAttribute("loginId");
+				session.removeAttribute("mb_class");
+				model.addAttribute("msg", "귀하는 블랙리스트로 선정되어 로그인이 불가합니다. 관리자에게 문의하세요.");
+				page="kiosk/login";
+			}
 			if (loginIdSeat == null) {
 				page = "kiosk/main";				
 			} else {
@@ -69,6 +76,8 @@ public class KioskController {
 				}
 			}
 		}
+		
+		
 		return page;
 	}
 
@@ -93,6 +102,7 @@ public class KioskController {
 		
 		String page = "kiosk/borrow";
 		int chkPenalty = service.chkPenalty(loginId);
+		logger.info("이용정지내역 건수 : " + chkPenalty);
 		if(chkPenalty > 0) {
 			page = "kiosk/main";
 			model.addAttribute("msg","연체이력이 존재해 대출서비스를 이용할 수 없습니다.");
