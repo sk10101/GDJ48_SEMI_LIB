@@ -22,7 +22,7 @@
 	keyProperty="notice_id"
 	parameterType="com.gdj.lib.dto.BoardDTO">
 		INSERT INTO notice(mb_id,notice_title,notice_content , hit)
-	VALUES(#{mb_id},#{notice_title},#{notice_content}, '0')
+	VALUES(#{mb_id},#{notice_title},#{notice_content}, '1')
 	</insert>
 	
 	<insert id="noticeFileWrite">

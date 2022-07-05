@@ -35,12 +35,12 @@
 			</tr>
 			<tr>
 				<th class="col1">전화번호</th>
-				<td class="col2"><input class="joinInput" type="text" id="joinPhone"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="joinPhone" placeholder="ex) 01012345678"/></td>
 				<td class="col3">※ 숫자만 입력하세요.</td>
 			</tr>
 			<tr>
 				<th class="col1">이메일</th>
-				<td class="col2"><input class="joinInput" type="text" id="email"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="email" placeholder="ex) example@email.com"/></td>
 				<td class="col3"><button class="chkBtn" onclick="overalys()">중복 확인</button></td>
 			</tr>
 		</table>

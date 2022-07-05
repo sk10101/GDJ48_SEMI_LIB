@@ -22,7 +22,7 @@
 	</update>
 	
 	<update id="updateR" parameterType="String">
-		UPDATE reservation SET reason='정상' WHERE b_id = #{param1}
+		UPDATE reservation SET reason='취소' WHERE b_id = #{param1}
 	</update>
 	
 	<insert id="borrowTable" parameterType="String">
