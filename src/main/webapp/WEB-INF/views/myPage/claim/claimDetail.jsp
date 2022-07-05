@@ -42,7 +42,7 @@
 		            </tr>
 		            <tr>
 		                <th>내용</th>
-		                <td class="tableTextLeft" style="height : 200px">${claim.claim_content}</td>
+		                <td class="tableTextLeft" style="height : 200px; text-align:top;">${claim.claim_content}</td>
 		            </tr>
 		            <c:if test="${claimList.size()>0}">
 		            <tr>
@@ -56,7 +56,7 @@
 	            	</c:if>
 		        </table>
 		        <br/>
-		        <hr style="height: 1px !important; background:#333; width: 90% !important; margin:0 5% 0 5%;"/>
+		        <hr style="height: 1px !important; background:#333; width: 95% !important; margin:0 0 0 5%;"/>
 		        <br/>
 				<table class="claim_table" id="claim_reply">
 				    <tr>
