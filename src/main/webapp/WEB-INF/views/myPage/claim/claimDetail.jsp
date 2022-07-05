@@ -56,7 +56,7 @@
 	            	</c:if>
 		        </table>
 		        <br/>
-		        <hr style="height: 1px !important; background:#333; width: 90% !important; margin:0 5% 0 5%;"/>
+		        <hr style="height: 1px !important; background:#333; width: 95% !important; margin:0 0 0 5%;"/>
 		        <br/>
 				<table class="claim_table" id="claim_reply">
 				    <tr>
