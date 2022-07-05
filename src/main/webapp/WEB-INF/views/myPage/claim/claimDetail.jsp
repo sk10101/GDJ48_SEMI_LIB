@@ -42,7 +42,7 @@
 		            </tr>
 		            <tr>
 		                <th>내용</th>
-		                <td class="tableTextLeft" style="height : 200px">${claim.claim_content}</td>
+		                <td class="tableTextLeft" style="height : 200px; text-align:top;">${claim.claim_content}</td>
 		            </tr>
 		            <c:if test="${claimList.size()>0}">
 		            <tr>
