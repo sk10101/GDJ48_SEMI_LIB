@@ -374,7 +374,7 @@
 	</select>
 	
 	<update id="reserveCancel" >
-		UPDATE reservation SET reason = "정상" 
+		UPDATE reservation SET reason = "취소"
 		WHERE reserve_id = #{param1}
 	</update>
 	
