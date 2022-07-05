@@ -56,6 +56,7 @@ public class KioskController {
 		
 		if (loginId != null) {
 			session.setAttribute("loginId", loginId);
+			session.setAttribute("mb_class", mb_class);
 			if (loginIdSeat == null) {
 				page = "kiosk/main";				
 			} else {
@@ -101,6 +102,7 @@ public class KioskController {
 		
 		String page = "kiosk/borrow";
 		int chkPenalty = service.chkPenalty(loginId);
+		logger.info("이용정지내역 건수 : " + chkPenalty);
 		if(chkPenalty > 0) {
 			page = "kiosk/main";
 			model.addAttribute("msg","연체이력이 존재해 대출서비스를 이용할 수 없습니다.");
