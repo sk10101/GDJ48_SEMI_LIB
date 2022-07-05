@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<th class="col1">전화번호</th>
-				<td class="col2"><input class="joinInput" type="text" id="joinPhone"/></td>
+				<td class="col2"><input class="joinInput" type="text" id="joinPhone" placeholder="ex) 01012345678"/></td>
 				<td class="col3">※ 숫자만 입력하세요.</td>
 			</tr>
 			<tr>
